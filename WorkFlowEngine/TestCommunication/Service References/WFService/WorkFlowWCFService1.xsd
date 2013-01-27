@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WorkFlowService.Help" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WorkFlowService.Help" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="WorkFlowState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Common" />
+      <xs:enumeration value="Manager" />
+      <xs:enumeration value="Done" />
+      <xs:enumeration value="Refuse" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="WorkFlowState" nillable="true" type="tns:WorkFlowState" />
+  <xs:simpleType name="ActivityState">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Create" />
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Revoke" />
+      <xs:enumeration value="Approve" />
+      <xs:enumeration value="Reject" />
+      <xs:enumeration value="Read" />
+      <xs:enumeration value="None" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ActivityState" nillable="true" type="tns:ActivityState" />
+</xs:schema>

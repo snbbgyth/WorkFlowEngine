@@ -34,6 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
+    <Reference IncludeRuntime.Serialization" />
+    <Reference Include="System.ServiceModelm.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
@@ -44,9 +46,54 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <WCFMetadata   <Compile Include="Service References\WFService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compiledata Include="Service References\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CShtemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\WFService\TestCommunication.WFService.ActivityState.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WFService\TestCommunication.WFService.WorkFlowActivityModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WFService\TestCommunication.WFService.WorkFlowState.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WFService\WorkFlowService.wsdl" />
+    <None Include="Service References\WFService\WorkFlowWCFService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WFService\WorkFlowWCFService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WFService\WorkFlowWCFService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WFService\WorkFlowWCFService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\WFService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WFService\WorkFlowWCFService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WFService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WFService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WFService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </NoneoolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

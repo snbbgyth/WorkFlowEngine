@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0ecb40a5-945e-4710-b674-f347b886fb6a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9090/WorkFlowWCFService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WorkFlowWCFService.disco" MetadataType="Disco" ID="86b9fab5-0f37-407f-9817-e89f718183a3" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?disco" />
+    <MetadataFile FileName="WorkFlowWCFService.xsd" MetadataType="Schema" ID="cfc59d81-7344-4423-8452-d7fa66e1b8a1" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd2" />
+    <MetadataFile FileName="WorkFlowWCFService1.xsd" MetadataType="Schema" ID="9273e347-53d7-4202-acd8-2d40cacb986e" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd3" />
+    <MetadataFile FileName="WorkFlowWCFService2.xsd" MetadataType="Schema" ID="388cf7c9-89a7-494a-b231-ac122ad56289" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd0" />
+    <MetadataFile FileName="WorkFlowWCFService3.xsd" MetadataType="Schema" ID="711ffc95-69ef-4f3e-b1c1-cc06928468e5" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd1" />
+    <MetadataFile FileName="WorkFlowService.wsdl" MetadataType="Wsdl" ID="a4a91dd5-4f08-4228-bb48-d778425f6cb4" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
