@@ -8,11 +8,18 @@ namespace WorkFlowService.IDAL
 {
     public interface IUserOperationActivity
     {
-        string CreateUser(string userName, string password);
+        string Crebool CreateUser(string userName, string password);
 
-        string AssignOperationRole(string userName, string workflowState, ActivityState operationActivity);
+        string LoginIn(string userName, string password);
 
+        bool ModifyPassword(string userId, string password);
 
+        bool DeleteUser(string userId);
 
+        bool AssignUserRole(string userId, string workflowState);
+
+        bool ModifyUserRole(string userId, string workflowState);
+
+        bool DeleteUserRole(string userId);
     }
 }
