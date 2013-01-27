@@ -86,12 +86,12 @@ namespace WorkFlowService.DAL
 
         private string GetQueryByIDSql(string id)
         {
-            return string.Format(WFConstants.QueryWorkFlowActivityByIDTags, id);
+           eturn string.Format(WFConstants.QueryWorkFlowActivityByIDTags, id);
         }
 
         public List<WorkFlowActivityModel>  QueryInProgressActivitSqlyByOperatorUserId(string operatorUserId)
         {
-            return new List<WorkFlowActivityModel>() {};
+            retur new List<WorkFlowActivityModel>() {};
         }
 
         public WorkFlowActivityModel QueryByDBHelpInstance.ReadEntityList<WorkFlowActivityModel>(GetQueryByOperatorUserIdSql(operatorUserId));
@@ -114,5 +114,7 @@ DSql(id));
             return string.Format(WFConstants.QueryWorkFlowActivityByAppIDSqlTags, appId);
         }
 
+    }
+}
     }
 }
