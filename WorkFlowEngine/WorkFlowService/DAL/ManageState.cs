@@ -22,7 +22,7 @@ namespace WorkFlowService.DAL
         }
 
 
-        public WorkFlowState GetCurrentState()
+        public WorkFlotate GetCurrentState()
         {
            return WorkFlowState.Manager;
         }
