@@ -14,7 +14,7 @@ using DBHelp;
 using WorkFlowService.IDAL;
 
 
-namespace WorkFlowService.DAL
+namespace WorkowService.DAL
 {
     using Help;
     public class WorkFlowActivityDAL : IDataOperationActivity<WorkFlowActivityModel>
@@ -58,7 +58,7 @@ namespace WorkFlowService.DAL
         }
 
         public int DeleteByID(string id)
-        {
+      {
             return  DBHelpInstance.ExecuteNonQuery(GetDeleteByIDSql(id));
         }
 
