@@ -8,7 +8,8 @@ namusing WorkFlowService.IDAL;
 namespace WorkFlowService.BLL
 {
     using Model;
-    public class UserOperationBLL : IUserOperationActivity
+    publiusing DAL;
+ public class UserOperationBLL : IUserOperationActivity
     {
         public bool CreateUser(string userName, string password)
         {
@@ -31,11 +32,9 @@ namespace WorkFlowService.BLL
 
         public bool DeleteUser(string userId)
         {
-            return DataOperationBLL.Current.Remove<UserInfoModel>(userId) > 0;
-            //Todo: Remove UserRole
-        }
-
-        public bool AssignUserRole(string userId, string workflowState)
+            return DataOperationBLL.CurrDataOperationBLL.Current.Remove<UserInfoModel>(userId);
+            UserRoleInfoDAL.Current.DeleteByUserID(userId);
+            return true;ol AssignUserRole(string userId, string workflowState)
         {
             return
                 DataOperationBLL.Current.Insert(new UserRoleInfoModel
@@ -50,16 +49,19 @@ namespace WorkFlowService.BLL
         public bool ModifyUserRole(string userId, string workflowState)
         {
             throw new NotImplementedException();
+        }var entity = UserRoleInfoDAL.Current.QueryByUserID(userId);
+            entity.OperatorState = workflowState;
+            return DataOperationBLL.Current.Modify(entity) > 0;
         }
 
         public bool DeleteUserRole(string userId)
         {
-            throw new NotImplementedException();
+            return UserRoleInfoDAL.Current.DeleteByUserID(userId) > 0;
         }
 
         public string LoginIn(string userName, string password)
         {
-            throw new NotImplementedException();
+            return UserInfoDAL.Current.Login(userName, password);
         }
     }
 }
