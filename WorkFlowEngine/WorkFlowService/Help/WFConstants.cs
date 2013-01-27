@@ -15,7 +15,7 @@ namespace WorkFlowService.Help
 
         public const string SplitCharacterTag = ";#";
 
-        public const string SqliteFileNameTags = "mydatabase.sqlite";
+        pblic const string SqliteFileNameTags = "mydatabase.sqlite";
 
         #endregion
 

@@ -56,13 +56,12 @@ namespe WorkFlowService.BLL
                                          CreateDateTime = DateTime.Now,
                                          CreateUserId = entity.UserId,
                                          OperatorUserList = entity.UserId+WFConstants.SplitCharacterTag
+           OperatorUserList = entity.UserId+WFConstants.SplitCharacterTag
                                      };
             var currentWorkFlowState = WorkFlowEngineInstance.Execute(WorkFlowState.Common, ActivityState.Submit);
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
             //Todo GetOperaterUser
-            //activityEntity.OperatorUserID +=
-            WorkFlowActivityDalInstance.Insert(activityEntity);
-　DataOperationBLL.CurrentkFlowState;
+            //activityEntity.OperatoerationBLL.CurrentkFlowState;
 
         }
 

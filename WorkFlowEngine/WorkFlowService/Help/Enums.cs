@@ -26,14 +26,26 @@ namespace WorkFlowService.Help
         Refuse 
     }
 
-    public enum Activ[Serializable] ActivityState
+    public enum Activ[Serializable]FlagsAttribute]
+    [Serializable]
+    public enum ActivityState
     {
-        Create,
-        Submit,
-        Revoke,
-        Approve,
-        Reject,
-        Read,
-        None
+        Create = 1,
+        Edit = 2,
+        Resbmit = 4,
+        Submit = 8,
+        Revoke = 16,
+        Approve = 32,
+        Reject = 64,
+        Read = 128,
+        None = 256
+    }
+
+    [Serializable]
+    public enum ActionState
+    {
+        Create = 1,
+        Edit = 2,
+        Delete = 4
     }
 }
