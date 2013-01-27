@@ -53,7 +53,7 @@ namespace WorkFlowService.BLL
             //Todo GetOperaterUser
             //activityEntity.OperatorUserID +=
             WorkFlowActivityDalInstance.Insert(activityEntity);
-            return currentWorkFlowState;
+　DataOperationBLL.CurrentkFlowState;
 
         }
 
