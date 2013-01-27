@@ -1,8 +1,9 @@
 ﻿using System;
+using System.IO;
 
 namespace WorkFlowService.Help
 {
-    public  class WFUntilHelp
+    publicss WFUntilHelp
     {
         public static ActivityState GetActivityStateByName(string activityState)
         {
@@ -26,6 +27,18 @@ namespace WorkFlowService.Help
             if (Enum.TryParse(applicationState, true, out result))
                 return result;
             return ApplicationState.Draft;
+        }
+    }
+}
+
+        private static string RunPath
+        {
+            get { return AppDomain.CurrentDomain.BaseDirectory; }
+        }
+
+        public static string SqliteFilePath
+        {
+            get { return Path.Combine(RunPath, WFConstants.SqliteFileNameTags); }
         }
     }
 }

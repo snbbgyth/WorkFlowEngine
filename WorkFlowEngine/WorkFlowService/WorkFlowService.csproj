@@ -34,6 +34,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <RefeData.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ShareDLL\System.Data.SQLite.dll</HintPath>
+    </Referenceuntime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\WorkFlowEngine.cs" />
+    <Compile Include=DataOperationBLL.cs" /.cs" />
     <Compile Include="BLL\WorkFlowManage.cs" />
     <Compile Include="DAL\WorkFlowActivityDAL.cs" />
     <Compile Include="DAL\CommonState.cs" />
@@ -52,6 +57,7 @@
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\StateMapping.cs" />
     <Compile Include="Help\WFConstants.cs" />
+    <Compile Include="Help\WFUntilTypeNameComparer>
     <Compile Include="Help\WFUntilHelp.cs" />
     <Compile Include="IDAL\IActivity.cs" />
     <Compile Include="IDAL\IActivityState.cs" />
