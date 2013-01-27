@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{75C3B8C2-7FB6-4CBD-90A9-56F8CF69679B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkFlowService</RootNamespace>
+    <AssemblyName>WorkFlowService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\WorkFlowEngine.cs" />
+    <Compile Include="BLL\WorkFlowManage.cs" />
+    <Compile Include="DAL\WorkFlowActivityDAL.cs" />
+    <Compile Include="DAL\CommonState.cs" />
+    <Compile Include="DAL\DoneState.cs" />
+    <Compile Include="DAL\ManageState.cs" />
+    <Compile Include="DAL\RefuseState.cs" />
+    <Compile Include="DAL\WorkFlowActivityLogDAL.cs" />
+    <Compile Include="Help\Enums.cs" />
+    <Compile Include="Help\StateMapping.cs" />
+    <Compile Include="Help\WFConstants.cs" />
+    <Compile Include="Help\WFUntilHelp.cs" />
+    <Compile Include="IDAL\IActivity.cs" />
+    <Compile Include="IDAL\IActivityState.cs" />
+    <Compile Include="IDAL\ICreateDataTableActivity.cs" />
+    <Compile Include="IDAL\IDataOperationActivity.cs" />
+    <Compile Include="IDAL\IStateBase.cs" />
+    <Compile Include="IDAL\IWorkFlowActivity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj">
+      <Project>{9E9AA8F6-1040-475E-80FB-4DC61995DFF0}</Project>
+      <Name>CommonLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBHelp\DBHelp.csproj">
+      <Project>{2722A42C-B518-4321-A788-B22A961BEFB3}</Project>
+      <Name>DBHelp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
