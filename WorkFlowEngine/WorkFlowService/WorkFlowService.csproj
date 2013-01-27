@@ -49,6 +49,8 @@
     <Compile Include=DataOperationBLL.cs" /.cs" />
     <Compile Include="BLL\WorkFlowManage.cs" />
     <Compile Include="DAL\WorkFlowActivityDAL.cs" />
+    <Compile Include=UserInfoDAL.cs" />
+    <Compile Include="DAL\UserRoleInfoDALityDAL.cs" />
     <Compile Include="DAL\CommonState.cs" />
     <Compile Include="DAL\DoneState.cs" />
     <Compile Include="DAL\ManageState.cs" />
@@ -68,6 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    Model\UserInfoModel.cs" />
+    <Compile Include="Model\UserRoleInfoModel</ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj">
       <Project>{9E9AA8F6-1040-475E-80FB-4DC61995DFF0}</Project>
       <Name>CommonLibrary</Name>
@@ -80,8 +85,7 @@
   <ItemGroup>
     <Folder Include="Model\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <Import Project="$(MSBuil /o modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
