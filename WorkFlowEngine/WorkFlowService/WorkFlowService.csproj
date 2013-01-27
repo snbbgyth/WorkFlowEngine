@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BLL\WorkFlowEngine.cs" />
     <Compile Include=DataOperationBLL.cs" /.cs" />
+    <Compile Include="BLUserrationBLL.cs" /.cs" />
     <Compile Include="BLL\WorkFlowManage.cs" />
     <Compile Include="DAL\WorkFlowActivityDAL.cs" />
     <Compile Include=UserInfoDAL.cs" />
