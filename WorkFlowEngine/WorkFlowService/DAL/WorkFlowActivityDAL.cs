@@ -104,3 +104,15 @@ namespace WorkFlowService.DAL
 
     }
 }
+DSql(id));
+            return entityList != null && entityList.Count > 0 ? entitAppId(appId));
+            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
+        }
+
+        private string GetQueryByAppId(string appId)
+        {
+            return string.Format(WFConstants.QueryWorkFlowActivityByAppIDSqlTags, appId);
+        }
+
+    }
+}
