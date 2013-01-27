@@ -42,7 +42,7 @@ namespace WorkFlowService.Help
     }
 
     [Serializable]
-    public enum ActionState
+    public enum Acti[FlagsAttributnum ActionState
     {
         Create = 1,
         Edit = 2,
