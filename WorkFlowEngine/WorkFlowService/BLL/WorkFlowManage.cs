@@ -1,4 +1,13 @@
-﻿using System;
+﻿/********************************************************************************
+** Class Name:   WorkFlowManage 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     WorkFlowManage class
+*********************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using CommonLibrary.Model;
 using WorkFlowService.DAL;
@@ -6,7 +15,7 @@ using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
 
-namespace WorkFlowService.BLL
+namespe WorkFlowService.BLL
 {
     public class WorkFlowManage : IWorkFlowActivity
     {

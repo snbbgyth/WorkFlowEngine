@@ -1,4 +1,13 @@
-﻿using System;
+﻿/********************************************************************************
+** Class Name:   WFUntilHelp 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     WFUntilHelp class
+*********************************************************************************/
+
+using System;
 using System.IO;
 
 namespace WorkFlowService.Help

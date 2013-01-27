@@ -1,4 +1,13 @@
-﻿using WorkFlowService.Help;
+﻿/********************************************************************************
+** Class Name:   ManageState 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     ManageState class
+*********************************************************************************/
+
+using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.DAL

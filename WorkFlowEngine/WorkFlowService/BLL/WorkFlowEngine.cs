@@ -1,4 +1,13 @@
-﻿using WorkFlowService.DAL;
+﻿/********************************************************************************
+** Class Name:   WorkFlowEngine 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     WorkFlowEngine class
+*********************************************************************************/
+
+using WorkFlowService.DAL;
 using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 

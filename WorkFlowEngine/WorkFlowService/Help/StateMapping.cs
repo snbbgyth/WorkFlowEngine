@@ -1,4 +1,13 @@
-﻿using System.Collections.Generic;
+﻿/********************************************************************************
+** Class Name:   StateMapping 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     StateMapping class
+*********************************************************************************/
+
+using System.Collections.Generic;
 using WorkFlowService.DAL;
 using WorkFlowService.IDAL;
 
