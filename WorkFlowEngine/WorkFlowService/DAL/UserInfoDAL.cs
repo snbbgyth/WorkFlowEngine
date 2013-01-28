@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WorkDBHelpsing WorkFlowService.IDAL;
-using WorkFlowService.Model;
+﻿/********************************************************************************
+** Class Name:   UserInfoDAL 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     UserInfoDAL class
+*********************************************************************************/
+
 
 namespace WorkFlowService.DAL
 {
-    public clusing Help;
+
+    using System;
+    using System.Collections.Generic;
+    using DBHelp;
+    using IDAL;
+    using Model;lic clusing Help;
 lic class UserInfoDAL : IDataOperationActivity<UserInfoModel>
     {
         public int Insert(static UserInfoDAL Current

@@ -59,6 +59,7 @@
     <Compile Include="DAL\WorkFlowActivityLogDAL.cs" />
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\StateMapping.cs" />
+    <Compile Include="Help\WFConstanExtension
     <Compile Include="Help\WFConstants.cs" />
     <Compile Include="Help\WFUntilTypeNameComparer>
     <Compile Include="Help\WFUntilHelp.cs" />

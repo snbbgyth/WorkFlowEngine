@@ -1,53 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CommonLibrary.Model;
-using WorkFlowService.IDAL;
-using WorkFlowService.Model;
+﻿
 
 namespace WorkFlowService.DAL
 {
-    public class UserRoleInfoDAL : IDataOperationActivity<UserRoleInfoModel>
+    using Help;
+    using System;
+    using System.Collections.Generic;
+    using DBHelp;
+    using IDAL;
+    using Model;
+ic class UserRoleInfoDAL : IDataOperationActivity<UserRoleInfoModel>
     {
         public int Insert(Ustatic UserRoleInfoDAL Current
         {
             get { return new UserRoleInfoDAL(); }
         }
-blic int Insert(UserRoleInfoModel entity)
+blic int Insertrivate IDBHelp DBHelpInstance
         {
-            throw new NotImplementedException();
+            get { return new SQLiteHelp(); }
         }
 
-        public inint Modify(UserRoleInfoModel entity)
+        public int Insert(UserRoleInfoModel entity)
         {
-            throw new NotImplementedException();
+            return DBHelpInstance.ExecuteNonQuery(GetInsertByEntitySql(entity));
+        }
+
+        private string GetInsertByEntitySql(UserRoleInfoModel entity)
+        {
+            entity.ID = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertUserRoleInfoSqlTags, entity.ID, entity.UserID, entity.OperatorState,
+                                 entity.CreateDateTime, entity.LastUpdateDateTime, Convert.ToInt32(entity.IsDelete));
+        }
+
+        public int Modify(UserRoleInfoModel entity)
+        {
+            return DBHelpInstance.ExecuteNonQuery(GetModifyByEntitySql(entity));
+        }
+
+        private string GetModifyByEntitySql(UserRoleInfoModel entity)
+        {
+            return string.Format(WFConstants.InsertOrReplaceUserRoleInfoSqlTags, entity.ID, entity.UserID, entity.OperatorState,
+                           entity.CreateDateTime, entity.LastUpdateDateTime, Convert.ToInt32(entity.IsDelete));
         }
 
         public int DeleteByID(string id)
         {
-            throw new NotImplementedException();
+            return DBHelpInstance.ExecuteNonQuery(GetDeleteByIDSql(id));
         }
 
-        public List<UserRoleInfoModel> Queint DeleteByUserID(string userID)
+        private string GetDeleteByIDSql(string id)
         {
-            return 0lic List<UserRoleInfoModel> QueryAll()
-        {
-            throw new NotImplementedException();
+            return string.Format(WFConstants.DeleteUserRoleInfoByIDSqlTags, id);
         }
 
-        public UserRoleInfoModel QueryByID(string id)
+        public int DeleteByUserID(string userID)
+        {
+            return DBHelpInstance.ExecuteNonQuery(GetDeleteByUserIDSql(userID));
+        }
+
+        private string GetDeleteByUserIDSql(string userID)
+        {
+            return string.Format(WFConstants.DeleteUserRoleInfoByUserIDTags, userID)st<UserRoleInfoModel> QueryAll()
+        {
+            throw new NotImplementedException()return DBHelpInstance.ReadEntityList<UserRoleInfoModel>(WFConstants.QueryAllUserRoleInfoSqlTags);
+        }
+        ryByID(string id)
         {
             throw new NotImplementedException();
+   var entityList = DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByIDSql(id));
+            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
         }
+
+        private string GetQueryByIDSql(string id)
+        {
+            return string.Format(WFConstants.QueryUserRoleInfoByIDTags, id);
+        }
+
+
+        public List<UserRoleInfoModel> QueryByUserID(string userID)
+        {
+            return DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByUserIDSql(userID));
+            
+        }
+
+        private string GetQueryByUserIDSql(string userID)
+        {
+            return string.Format(WFConstants.QueryUserRoleInfoByUserIDTags, userID);
+        }
+
 
         public int CreateTable()
         {
-         UserRoleInfoModel QueryByUserID(string userID)
-        {
-            return new UserRoleInfoModelCreateTable()
-        {
-            throw new NotImplementedException();
+            return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateUserRoleInfoTableSqlTags);
         }
     }
 }

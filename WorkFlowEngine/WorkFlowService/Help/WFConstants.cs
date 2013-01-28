@@ -94,3 +94,12 @@ namespace WorkFlowService.Help
 
     }
 }
+         public const string QueryUserRoleInfoByUserIDTags = "select * from UserRoleInfo where UserID='{0}'";
+
+         public const string DeleteUserRoleInfoByUserIDTags = "delete from UserRoleInfo where UserID='{0}'";
+
+        #endregion
+
+
+    }
+}

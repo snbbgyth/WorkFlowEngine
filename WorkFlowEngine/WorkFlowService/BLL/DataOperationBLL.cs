@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using WorkFlowService.Help;
+usHelp;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.BLL
@@ -38,7 +38,7 @@ namespace WorkFlowService.BLL
 
         private void InitDataBase()
         {
-            InitDataBaseFile();
+ ublic     InitDataBaseFile();
             InitCreateTable();
             _isInitDataBase = true;
         }

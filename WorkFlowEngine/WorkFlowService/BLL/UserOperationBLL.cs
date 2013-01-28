@@ -9,6 +9,7 @@ namespace WorkFlowService.BLL
 {
     using Model;
     publiusing DAL;
+     using Help;
  public class UserOperationBLL : IUserOperationActivity
     {
         public bool CreateUser(string userName, string password)
@@ -49,8 +50,8 @@ namespace WorkFlowService.BLL
         public bool ModifyUserRole(string userId, string workflowState)
         {
             throw new NotImplementedException();
-        }var entity = UserRoleInfoDAL.Current.QueryByUserID(userId);
-            entity.OperatorState = workflowState;
+        }var entity = List = UserRoleInfoDAL.Current.QueryByUserID(userId);
+            var entity = entityList.First(t => t.OperatorState.CompareEqualIgnoreCase(workflowState)            entity.OperatorState = workflowState;
             return DataOperationBLL.Current.Modify(entity) > 0;
         }
 
