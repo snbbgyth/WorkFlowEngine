@@ -16,6 +16,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCommunication", "TestCommunication\TestCommunication.csproj", "{0F1C7514-AC32-4CB0-85FE-4A6CD2616170}"
 EndProject
 Global
+	GlobalSecProject("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlowHandle", "WorkFlowHandle\WorkFlowHandle.csproj", "{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11lobal
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -87,6 +88,16 @@ Global
 		{0F1C7514-AC32-4CB0-85FE-4A6CD2616170}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = 	{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11perties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution

@@ -7,7 +7,7 @@
 ** Summary：     RefuseState class
 *********************************************************************************/
 
-using WorkFlowService.Help;
+using WorkFlowSCommonLibrary.Help;orkFlowService.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.DAL

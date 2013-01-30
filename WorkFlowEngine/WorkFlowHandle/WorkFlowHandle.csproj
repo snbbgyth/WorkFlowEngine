@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9E9AA8F6-1040-475E-80FB-4DC61995DFF0}</ProjectGuid>
+    <ProjectGuid>{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommonLibrary</RootNamespace>
-    <AssemblyName>CommonLibrary</AssemblyName>
+    <RootNamespace>WorkFlowHandle</RootNamespace>
+    <AssemblyName>WorkFlowHandle</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,14 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\ThreadPoolManage.cs" />
-    <Compile Include="Model\AppInfoModel.cs" />
-    <Compile IncluHelp\EnumsModel.cs" />
-    <Compile Include="Model\WorkFlowActivityLogModel.cs" />
-    <Compile Include="Model\WorkFlowActivityModel.cs" />
+    <Compile Include="Steps\WhileStep.cs" />
+    <Compile Include="BLL\WorkflowExecutionEngine.cs" />
+    <Compile Include="BLL\WorkflowHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\CaseStep.cs" />
+    <Compile Include="Steps\FaultHandler.cs" />
+    <Compile Include="Steps\InvokeStep.cs" />
+    <Compile Include="Steps\OnEventStep.cs" />
+    <Compile Include="Steps\OnMessageStep.cs" />
+    <Compile Include="Steps\PickStep.cs" />
+    <Compile Include="Steps\ReceiveStep.cs" />
+    <Compile Include="Steps\SequenceStep.cs" />
+    <Compile Include="Steps\StepRunnerStep.cs" />
+    <Compile Include="Steps\SwitchStep.cs" />
+    <Compile Include="Steps\WorkflowStep.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj">
+      <Project>{9E9AA8F6-1040-475E-80FB-4DC61995DFF0}</Project>
+      <Name>CommonLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

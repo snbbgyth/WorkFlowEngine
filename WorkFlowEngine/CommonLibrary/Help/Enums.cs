@@ -7,11 +7,10 @@
 ** Summary：     Enums class
 *********************************************************************************/
 
-namespace WorkFlowService.Help
-{
-    using System;
+namespaceusing System;
 
-    [Serializable]    public enum ApplicationState
+namespace CommonLibrary.Help
+{izable]    public enum ApplicationState
     {
         Draft,
         InProgress,
@@ -26,7 +25,7 @@ namespace WorkFlowService.Help
         Refuse 
     }
 
-    public enum Activ[Serializable]FlagsAttribute]
+    public enum Activ[Serializable]Flags]
     [Serializable]
     public enum ActivityState
     {
@@ -42,7 +41,7 @@ namespace WorkFlowService.Help
     }
 
     [Serializable]
-    public enum Acti[FlagsAttributnum ActionState
+    public enum Acti[Flagsum ActionState
     {
         Create = 1,
         Edit = 2,

@@ -7,7 +7,7 @@
 ** Summary：     IActivityState class
 *********************************************************************************/
 
-using WorkFlowService.Help;
+using WorkFlowSCommonLibrary.Help;orkFlowService.Help;
 
 namespace WorkFlowService.IDAL
 {

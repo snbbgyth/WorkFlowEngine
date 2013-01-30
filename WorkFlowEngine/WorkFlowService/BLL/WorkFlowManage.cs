@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using CommonLibrary.Model;
+usinHelpmmonLibrary.Model;
 using WorkFlowService.DAL;
 using WorkFlowService.Help;
 using WorkFlowService.IDAL;
@@ -65,7 +66,7 @@ namespe WorkFlowService.BLL
 
         }
 
-        public List<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId)
+        public List<WorkFlowActivityModel> QueryInProessActivityListByOperatorUserId(string operatorUserId)
         {
             return WorkFlowActivityDalInstance.QueryInProgressActivityByOperatorUserId(operatorUserId);
         }
@@ -100,7 +101,7 @@ namespe WorkFlowService.BLL
 
         private bool CompareIsContain(string source,string value)
         {
-            if (!string.IsNullOrEmpty(source) && source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
+            if (!stringsNullOrEmpty(source) && source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
                 return true;
             return false;
         }

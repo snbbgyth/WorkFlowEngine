@@ -15,6 +15,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using CommonLibrary.Model;
+using WorHelpibrary.Model;
 using WorkFlowService.BLL;
 using WorkFlowService.IDAL;
 using WorkFlowService.Help;
