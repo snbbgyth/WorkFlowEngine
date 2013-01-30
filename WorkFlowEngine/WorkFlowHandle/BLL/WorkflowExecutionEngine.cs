@@ -1,6 +1,6 @@
 ﻿namespace WorkFlowHandle.BLL
 {
-    class WorkflowExecutionEngine
+   public class WorkflowExecutionEngine
     {
     }
 }

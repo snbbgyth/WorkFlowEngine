@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Sconfigurationem.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Steps\WhileStep.cs" />
+    <Compile IncludDAL\ProcessDefinitionEngine.cs" />
+    <Compile Include="Model\StepData.cs" />
+    <Compile Include="Model\WorkflowFileElement.cs" /s" />
     <Compile Include="BLL\WorkflowExecutionEngine.cs" />
     <Compile Include="BLL\WorkflowHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+temGroup /ts" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
