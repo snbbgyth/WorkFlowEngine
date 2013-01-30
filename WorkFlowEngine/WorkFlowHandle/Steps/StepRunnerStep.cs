@@ -5,13 +5,28 @@ using System.Text;
 
 namusing CommonLibrary.Helpnamespace WorkFlowHandle.Steps
 {
-   public abstract class StepRunnerStep:WorkflowStep
+   public  public abstract class StepRunnerStep : WorkflowStep
     {
-    }
-}
-    public override  WorkFlowState Run(string context, string stepId)
+        private List<WorkflowStep> _workflowSteps;
+
+        protected StepRunnerStep( )
+        {
+            _workflowSteps = new List<WorkflowStep>();
+        }
+
+        public overrideFlowState Run(string context, string stepId)
         {
             throw new NotImplementedException();
+        }
+    }
+}
+
+        /// <summary>
+        /// Gets a set of steps defined within this step
+        /// </summary>
+        protected IEnumerable<WorkflowStep> WorkflowSteps
+        {
+            get { return _workflowSteps; }
         }
     }
 }

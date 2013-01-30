@@ -21,3 +21,25 @@ namusing CommonLibrary.Helpnamespace WorkFlowHandle.Steps
         public abstract WorkFlowState Run(string context, string stepId);
     }
 }
+
+
+        /// <summary>
+        /// Determines if this step or any of the enclosed steps
+        /// in the local WorkflowSteps list matches the 
+        /// specified stepId.
+        /// </summary>
+        /// <param name="stepId">String identifying a specific step in a workflow.</param>
+        /// <returns>true if this step or any of the enclosed steps
+        /// in the local WorkflowSteps list matches the 
+        /// specified stepId.  false, otherwise</returns>
+        internal virtual bool HasStep(string stepId)
+        {
+            if (StepId == stepId)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
