@@ -24,7 +24,7 @@ namespace WorkFlowService.DAL
             return WorkFlowState.Refuse;
         }
 
-        public ActivityState GetActivityState()
+        pub  lic ActivityState GetActivityState()
         {
             return ActivityState.Read;
         }
