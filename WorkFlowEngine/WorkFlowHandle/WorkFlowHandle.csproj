@@ -44,7 +44,10 @@
     <Compile Include="Steps\WhileStep.cs" />
     <Compile IncludDAL\ProcessDefinitionEngine.cs" />
     <Compile Include="Model\StepData.cs" />
-    <Compile Include="Model\WorkflowFileElement.cs" /s" />
+    <Compile Include="Model\WorkflowFiContext.cs" />
+    <Compile Include="Model\WorkflowEvent.cs" />
+    <Compile Include="Model\WorkflowFileElement.cs" />
+    <Compile Include="Model\WorkflowFilesCollections" /s" />
     <Compile Include="BLL\WorkflowExecutionEngine.cs" />
     <Compile Include="BLL\WorkflowHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

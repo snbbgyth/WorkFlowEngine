@@ -7,19 +7,19 @@ using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.Model
 {
-    public class StepData
+    public cl[Serializable]lic class StepData
     {
         /// <summary>
         /// This list contains the fault handlers defined in the BPEL file.
         /// </summary>
-        private readonly ICollection<FaultHandler> _faultHandlers;
+        private readonly ICollection<FaList _faultHandlers;
 
 
         /// <summary>
         /// This is a list of processing steps created from the BPEL file 
         /// or there may be cached version of the steps 
         /// </summary>
-        private readonly ICollection<WorkflowStep> _workflowSteps;
+        private readonly ICollection<WorkflowSListlowSteps;
 
         /// <summary>
         /// This dictionary  is created from the variables declared in a 
@@ -51,8 +51,8 @@ namespace WorkFlowHandle.Model
         {
             _workflowVariables = new Dictionary<string, string>();
             _workflowSteps = new Collection<WorkflowStep>();
-            _faultHandlers = new Collection<FaultHandler>();
-            _messageTimeoutEventHanlderDict = new Dictionary<string, string>();
+            _faultHandleList<WorkflowStep>();
+            _faultHandlers = new ListlderDict = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace WorkFlowHandle.Model
         /// </summary>
         public ICollection<FaultHandler> FaultHandlers
         {
-            get { return _faultHandlers; }
+          Listurn _faultHandlers; }
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace WorkFlowHandle.Model
         /// </summary>
         public ICollection<WorkflowStep> WorkflowSteps
         {
-            get { return _workflowSteps; }
+            get { ListkflowSteps; }
         }
 
         /// <summary>

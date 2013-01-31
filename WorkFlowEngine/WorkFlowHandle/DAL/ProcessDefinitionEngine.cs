@@ -150,12 +150,7 @@ namespace WorkFlowHandle.DAL
                     new StepProgressRangeCalculator().Calculate(context.WorkflowSteps, context.ProgressStartPosition, context.ProgressRange);
                 }
 
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Load stepData for specific workflow version
+         on
         /// </summary>
         /// <param name="name">String containing name of workflow to load</param>
         /// <param name="version">String containing version of workflow to load</param>
@@ -249,9 +244,7 @@ namespace WorkFlowHandle.DAL
                         // load list of BPEL files into local collection
                         WorkflowHandlerSettingsConfigSection section = WorkflowHandlerSettings.GetWorkflowHandlerSettingsConfigSection(null);
 
-                        // parse the list of BPEL files into a hash table with the latest version 
-                        // of each workflow and a 2nd table with earlier versions.  
-                        // This allows for default workflows to be quickly located while
+                        // parse the list of BPEL files e quickly located while
                         // still being able to find earlier workflows in the infrequent cases 
                         // where this may be necessaary.
                         this.defaultWorkflows = new System.Collections.Hashtable();
@@ -261,21 +254,11 @@ namespace WorkFlowHandle.DAL
                         {
                             foreach (WorkflowFileElement fileElement in section.WorkflowFiles)
                             {
-                                this.AddNewWorkflow(fileElement);
-                            }
-                        }
+                                this.AddNewWorkflow(fileEleme 
                     }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Adds a new workflow into one of the local workflow tables.
-        /// If this is a newer version of an existing workflow, it is
-        /// placed in the defaultWorkflows table and the older version is
-        /// placed in the olderWorkflows table. 
+                }ting workflow.
         /// </summary>
-        /// <param name="fileElement">Class defining the new workflow to add.  The version
+        /// <param name="name">The name of the m name="fileElement">Class defining the new workflow to add.  The version
         /// member of this class is used to determine the latest version of a workflow.</param>
         private void AddNewWorkflow(WorkflowFileElement fileElement)
         {
@@ -362,12 +345,8 @@ namespace WorkFlowHandle.DAL
                                            : fileElement.FileName;
                         using (Stream stream = (new DataFileReader()).ReadDataFile(this.workflowFolder + fileName))
                         {
-                            doc.Load(stream);
-                        }
-                        rootElement = doc.DocumentElement;
-                        if (!(rootElement.LocalName == "process"))
-                        {
-                            Debug.Fail("LoadNewWorkflow: Could not find process in " + fileElement.FileName);
+                            docstring.Empty;
+                        using (Stream stream = new FileStream(this.workflowFolder + fileName,FileMode.OpenOrCreat;
                             rootElement = null;
                         }
                         else
@@ -433,9 +412,7 @@ namespace WorkFlowHandle.DAL
             {
                 XmlNode currentStep = nodeList[i];
 
-                if (!string.IsNullOrEmpty(currentStep.Prefix))
-                {
-                    currentStep.Prefix = "bpel";
+                if (!string.IsList<FaultHandler> faultHandlers, int startElement, List currentStep.Prefix = "bpel";
                 }
 
                 if (currentStep is System.Xml.XmlComment)
@@ -458,9 +435,10 @@ namespace WorkFlowHandle.DAL
                 {
                     // can't get tool to produce invoke without having it enclosed in a scope.
                     // just ignore scope for now but get the internals as if at the same level.
-                    this.FillStepList(workflowVariables, faultHandlers, 0, workflowStepList, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
-                }
-                else if (currentStep.LocalName == "receive")
+                    this.FillStepList(workflowVariables, faultHandlers, 0, workfl.ToList()                   {
+                        if (attrib.LocalName == "timeout")
+                        {
+                            TimesetTime = attrib.Valame == "receive")
                 {
                     ReceiveStep receiveStep = new ReceiveStep(currentStep.Attributes);
                     workflowStepList.Add(receiveStep);
@@ -567,10 +545,7 @@ namespace WorkFlowHandle.DAL
                 {
                     foreach (XmlNode variableNode in currentStep.ChildNodes)
                     {
-                        if (variableNode.LocalName == "variable")
-                        {
-                            string variableName = null;
-                            string variableType = null;
+ariableType = null;
                             foreach (XmlAttribute variableAttribute in variableNode.Attributes)
                             {
                                 if (variableAttribute.LocalName == "name")

@@ -21,10 +21,10 @@ namusing CommonLibrary.Helpnamespace WorkFlowHandle.Steps
     }
 }
 
-        /// <summary>
+        /// < /// <summary>
         /// Gets a set of steps defined within this step
         /// </summary>
-        protected IEnumerable<WorkflowStep> WorkflowSteps
+        protected IEnumublic List WorkflowSteps
         {
             get { return _workflowSteps; }
         }

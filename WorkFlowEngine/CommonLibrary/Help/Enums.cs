@@ -48,3 +48,33 @@ namespace CommonLibrary.Help
         Delete = 4
     }
 }
+
+
+    public enum EventType
+    {
+        /// <summary>
+        /// Used to specify any event type as criterion
+        /// </summary>
+        Any = 0,
+
+        /// <summary>
+        /// Subworkflow completion event
+        /// </summary>
+        SubWorkflowComplete = 1,
+
+        /// <summary>
+        /// Message event
+        /// </summary>
+        Message = 2,
+
+        /// <summary>
+        /// Timer event
+        /// </summary>
+        Timer = 3,
+
+        /// <summary>
+        /// Cancel event
+        /// </summary>
+        Cancel = 4
+    }
+}
