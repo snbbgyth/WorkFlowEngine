@@ -10,7 +10,7 @@ using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.DAL
 {
-    class ProcessDefinitionEngine
+    class ProcepublicssDefinitionEngine
     {
         /// <summary>
         /// Cache the XmlElement to improve performace.
@@ -155,7 +155,7 @@ namespace WorkFlowHandle.DAL
         }
 
         /// <summary>
-        /// Load stepData for specific workflow version
+        /// Load stepData for specific workflow versi
         /// </summary>
         /// <param name="name">String containing name of workflow to load</param>
         /// <param name="version">String containing version of workflow to load</param>
@@ -439,7 +439,7 @@ namespace WorkFlowHandle.DAL
                 }
                 else if (currentStep.LocalName == "sequence")
                 {
-                    SequenceStep sequenceStep = new SequenceStep(currentStep.Attributes);
+                    SequenceStep sequnew SequenceStep(currentStep.Attributes);
                     workflowStepList.Add(sequenceStep);
                     this.FillStepList(workflowVariables, faultHandlers, 0, sequenceStep.WorkflowSteps.ToList(), currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
