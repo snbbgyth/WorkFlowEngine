@@ -19,7 +19,7 @@ namespace WorkFlowService.BLL
         private IStateBase GetCurrentWorkFlowStateByWorkFlowState(WorkFlowState workFlowState)
         {
             foreach (var iStateBase in StateMapping.Instance.IStateBasesList)
-            {
+           {
                 if (iStateBase.GetCurrentState() == workFlowState) return iStateBase;
             }
             return new CommonState();

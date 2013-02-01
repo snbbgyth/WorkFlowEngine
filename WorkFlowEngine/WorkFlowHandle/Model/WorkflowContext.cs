@@ -232,8 +232,6 @@ namespace WorkFlowHandle.Model
         /// <param name="name">string describing this workflow</param>
         /// <param name="workflowId">unique identifier</param>
         /// <param name="userId">user id for this workflow</param>
-        /// <param name="workflowType">indicates whether to run the workflow inline or on
-        /// a thread</param>
         /// <param name="managerName">String identifing the manager that is starting this workflow.  This string is used
         /// to find a manager to use for message communications.  Workflows starting workflows should
         /// specify the name of the manager that started them.  If non-mananger assemblies are 
@@ -803,8 +801,6 @@ namespace WorkFlowHandle.Model
                     _hasSentCompletionNotification = true;
                 }
             }
-
-       
         }
 
         /// <summary>
@@ -815,8 +811,6 @@ namespace WorkFlowHandle.Model
         {
             if (context == null)
                 return;
-      
-
         }
 
    
@@ -830,7 +824,6 @@ namespace WorkFlowHandle.Model
         public void RunAntiWorkflow(WorkflowContext context)
         {
             if (context == null) return;
- 
         }
 
          /// <summary>

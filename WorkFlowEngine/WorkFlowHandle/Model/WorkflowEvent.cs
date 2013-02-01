@@ -6,7 +6,7 @@ using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Model
 {
-     [Serializable]
+   [Serializable]
    public class WorkflowEvent
     {
         /// <summary>

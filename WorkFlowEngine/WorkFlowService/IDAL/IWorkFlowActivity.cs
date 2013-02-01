@@ -10,9 +10,7 @@
 using System.Collections.Generic;
 using CommonLibrary.Help;
 using CommonLibrary.Model;
-using WorkFlowService.Help;
-
-namespace WorkFlowService.IDAL
+using WorkFlrkFlowService.IDAL
 {
 
     public interface IWorkFlowActivity

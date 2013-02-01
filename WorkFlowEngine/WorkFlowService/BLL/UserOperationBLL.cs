@@ -1,8 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WorkFlowService.IDAL;
+﻿/********************************************************************************
+** Class Name:   UserOperationBLL 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     UserOperationBLL class
+*********************************************************************************/
+
+using System;
+using System.Linqsing WorkFlowService.IDAL;
 
 namespace WorkFlowService.BLL
 {

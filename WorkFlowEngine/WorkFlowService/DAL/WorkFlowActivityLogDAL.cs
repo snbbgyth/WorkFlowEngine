@@ -80,7 +80,6 @@ namespace WorkFlowService.DAL
         {
             var entityList = DBHelpInstance.ReadEntityList<WorkFlowActivityLogModel>(GetQueryByIDSql(id));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
-
         }
 
         private string GetQueryByIDSql(string id)
@@ -98,7 +97,5 @@ namespace WorkFlowService.DAL
             return null;
         }
 
-
- 
     }
 }

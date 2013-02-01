@@ -15,7 +15,7 @@ namespace WorkFlowService.Help
 {
     public class StateMapping
     {
-        public   List<IStateBase>  IStateBasesList;
+        public   List<IStateBase>  StateBasesList;
 
         private  StateMapping()
         {
@@ -29,7 +29,7 @@ namespace WorkFlowService.Help
 
         private  void Init()
         {
-            IStateBasesList = new List<IStateBase>
+            StateBasesList = new List<IStateBase>
                                   {
                                       new CommonState(),
                                       new ManageState(),
