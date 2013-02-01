@@ -7,25 +7,28 @@
 ** Summary：     Enums class
 *********************************************************************************/
 
-namespaceusing System;
+using System;
 
 namespace CommonLibrary.Help
-{izable]    public enum ApplicationState
+{
+    [Serializable]
+    public enum ApplicationState
     {
         Draft,
         InProgress,
         Complete,
     }
 
-    public en[Serializable]lic enum WorkFlowState
+    [Serializable]
+    public enum WorkFlowState
     {
         Common,
         Manager,
         Done,
-        Refuse 
+        Refuse
     }
 
-    public enum Activ[Serializable]Flags]
+    [Flags]
     [Serializable]
     public enum ActivityState
     {
@@ -41,13 +44,13 @@ namespace CommonLibrary.Help
     }
 
     [Serializable]
-    public enum Acti[Flagsum ActionState
+    [Flags]
+    public enum ActionState
     {
         Create = 1,
         Edit = 2,
         Delete = 4
     }
-}
 
 
     public enum EventType

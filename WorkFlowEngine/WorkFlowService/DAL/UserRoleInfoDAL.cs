@@ -8,13 +8,15 @@ namespace WorkFlowService.DAL
     using DBHelp;
     using IDAL;
     using Model;
-ic class UserRoleInfoDAL : IDataOperationActivity<UserRoleInfoModel>
+
+    public class UserRoleInfoDAL : IDataOperationActivity<UserRoleInfoModel>
     {
-        public int Insert(Ustatic UserRoleInfoDAL Current
+        public static UserRoleInfoDAL Current
         {
             get { return new UserRoleInfoDAL(); }
         }
-blic int Insertrivate IDBHelp DBHelpInstance
+
+        private IDBHelp DBHelpInstance
         {
             get { return new SQLiteHelp(); }
         }
@@ -59,14 +61,17 @@ blic int Insertrivate IDBHelp DBHelpInstance
 
         private string GetDeleteByUserIDSql(string userID)
         {
-            return string.Format(WFConstants.DeleteUserRoleInfoByUserIDTags, userID)st<UserRoleInfoModel> QueryAll()
-        {
-            throw new NotImplementedException()return DBHelpInstance.ReadEntityList<UserRoleInfoModel>(WFConstants.QueryAllUserRoleInfoSqlTags);
+            return string.Format(WFConstants.DeleteUserRoleInfoByUserIDTags, userID);
         }
-        ryByID(string id)
+
+        public List<UserRoleInfoModel> QueryAll()
         {
-            throw new NotImplementedException();
-   var entityList = DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByIDSql(id));
+            return DBHelpInstance.ReadEntityList<UserRoleInfoModel>(WFConstants.QueryAllUserRoleInfoSqlTags);
+        }
+
+        public UserRoleInfoModel QueryByID(string id)
+        {
+            var entityList = DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByIDSql(id));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
         }
 
@@ -79,7 +84,7 @@ blic int Insertrivate IDBHelp DBHelpInstance
         public List<UserRoleInfoModel> QueryByUserID(string userID)
         {
             return DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByUserIDSql(userID));
-            
+
         }
 
         private string GetQueryByUserIDSql(string userID)

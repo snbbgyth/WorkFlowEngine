@@ -7,7 +7,7 @@
 ** Summary：     CommonState class
 *********************************************************************************/
 
-using WorkFlowSCommonLibrary.Help;orkFlowService.Help;
+using CommonLibrary.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.DAL

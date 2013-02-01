@@ -8,7 +8,7 @@ namespace WorkFlowService.IDAL
 {
     public interface IUserOperationActivity
     {
-        string Crebool CreateUser(string userName, string password);
+        bool CreateUser(string userName, string password);
 
         string LoginIn(string userName, string password);
 

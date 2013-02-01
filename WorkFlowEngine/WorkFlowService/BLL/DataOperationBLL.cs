@@ -13,8 +13,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-usHelp;
+using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.BLL
@@ -36,9 +35,9 @@ namespace WorkFlowService.BLL
             if (!_isInitDataBase) InitDataBase();
         }
 
-        private void InitDataBase()
+        public void InitDataBase()
         {
- ublic     InitDataBaseFile();
+            InitDataBaseFile();
             InitCreateTable();
             _isInitDataBase = true;
         }

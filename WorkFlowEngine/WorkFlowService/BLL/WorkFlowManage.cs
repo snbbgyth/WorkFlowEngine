@@ -9,14 +9,13 @@
 
 using System;
 using System.Collections.Generic;
+using CommonLibrary.Help;
 using CommonLibrary.Model;
-usinHelpmmonLibrary.Model;
 using WorkFlowService.DAL;
 using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
-
-namespe WorkFlowService.BLL
+namespace WorkFlowService.BLL
 {
     public class WorkFlowManage : IWorkFlowActivity
     {
@@ -27,7 +26,7 @@ namespe WorkFlowService.BLL
 
         private WorkFlowEngine WorkFlowEngineInstance
         {
-            get { return new WorkFlowEngine();}
+            get { return new WorkFlowEngine(); }
         }
 
         public WorkFlowState Execute(AppInfoModel entity)
@@ -41,42 +40,41 @@ namespe WorkFlowService.BLL
             activityEntity.OperatorUserId = entity.UserId;
             activityEntity.OperatorUserList += entity.UserId + WFConstants.SplitCharacterTag;
             activityEntity.LastUpdateDateTime = DateTime.Now;
-           return currentWorkFlowState;
+            return currentWorkFlowState;
         }
 
 
         public WorkFlowState NewWorkFlow(AppInfoModel entity)
         {
             var activityEntity = new WorkFlowActivityModel
-                                     {
-                                         WorkFlowState = WorkFlowState.Common.ToString(),
-                                         // new ActivityId
-                                         OperatorActivity = ActivityState.Submit.ToString(),
-                                         LastUpdateDateTime = DateTime.Now,
-                                         AppId = entity.AppId,
-                                         CreateDateTime = DateTime.Now,
-                                         CreateUserId = entity.UserId,
-                                         OperatorUserList = entity.UserId+WFConstants.SplitCharacterTag
-           OperatorUserList = entity.UserId+WFConstants.SplitCharacterTag
-                                     };
+            {
+                WorkFlowState = WorkFlowState.Common.ToString(),
+                // new ActivityId
+                OperatorActivity = ActivityState.Submit.ToString(),
+                LastUpdateDateTime = DateTime.Now,
+                AppId = entity.AppId,
+                CreateDateTime = DateTime.Now,
+                CreateUserId = entity.UserId,
+                OperatorUserId = entity.UserId,
+                OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag
+            };
             var currentWorkFlowState = WorkFlowEngineInstance.Execute(WorkFlowState.Common, ActivityState.Submit);
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
-            //Todo GetOperaterUser
-            //activityEntity.OperatoerationBLL.CurrentkFlowState;
-
+            DataOperationBLL.Current.Insert(activityEntity);
+            return currentWorkFlowState;
         }
 
-        public List<WorkFlowActivityModel> QueryInProessActivityListByOperatorUserId(string operatorUserId)
+        public List<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId)
         {
             return WorkFlowActivityDalInstance.QueryInProgressActivityByOperatorUserId(operatorUserId);
         }
 
-        public ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId,string userId)
+        public ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId, string userId)
         {
             var activityEntity = WorkFlowActivityDalInstance.QueryByAppId(appId);
             if (CompareIsContain(activityEntity.OperatorUserId, userId))
                 return WorkFlowEngineInstance.GetActivityStateByWorkFlowState(WFUntilHelp.GetWorkFlowStateByName(activityEntity.CurrentWorkFlowState));
-            if(CompareIsContain(activityEntity.OperatorUserList,userId))
+            if (CompareIsContain(activityEntity.OperatorUserList, userId))
                 return ActivityState.Read;
             return ActivityState.None;
         }
@@ -89,19 +87,18 @@ namespe WorkFlowService.BLL
 
         private ApplicationState GetApplicationStateByWorkFlowActivityEntity(WorkFlowActivityModel entity)
         {
-            if(entity==null)
+            if (entity == null)
                 return ApplicationState.Draft;
-            if (WFUntilHelp.GetWorkFlowStateByName( entity.CurrentWorkFlowState) == WorkFlowState.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkFlowState) == WorkFlowState.Refuse)
+            if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkFlowState) == WorkFlowState.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkFlowState) == WorkFlowState.Refuse)
                 return ApplicationState.Complete;
             if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkFlowState) == WorkFlowState.Common && WFUntilHelp.GetActivityStateByName(entity.OperatorActivity) == ActivityState.Revoke)
                 return ApplicationState.Draft;
             return ApplicationState.InProgress;
         }
 
-
-        private bool CompareIsContain(string source,string value)
+        private bool CompareIsContain(string source, string value)
         {
-            if (!stringsNullOrEmpty(source) && source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
+            if (!string.IsNullOrEmpty(source) && source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0)
                 return true;
             return false;
         }

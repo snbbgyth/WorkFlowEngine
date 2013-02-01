@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namusing WorkFlowService.IDAL;
+using WorkFlowService.IDAL;
 
 namespace WorkFlowService.BLL
 {
     using Model;
-    publiusing DAL;
-     using Help;
- public class UserOperationBLL : IUserOperationActivity
+    using DAL;
+    using Help;
+
+    public class UserOperationBLL : IUserOperationActivity
     {
         public bool CreateUser(string userName, string password)
         {
             return DataOperationBLL.Current.Insert(new UserInfoModel
-                                                       {
-                                                           CreateDateTime = DateTime.Now,
-                                                           IsDelete = false,
-                                                           LastUpdateDateTime = DateTime.Now,
-                                                           Password = password,
-                                                           UserName = userName
-                                                       }) > 0;
+            {
+                CreateDateTime = DateTime.Now,
+                IsDelete = false,
+                LastUpdateDateTime = DateTime.Now,
+                Password = password,
+                UserName = userName
+            }) > 0;
         }
 
         public bool ModifyPassword(string userId, string password)
@@ -33,25 +33,28 @@ namespace WorkFlowService.BLL
 
         public bool DeleteUser(string userId)
         {
-            return DataOperationBLL.CurrDataOperationBLL.Current.Remove<UserInfoModel>(userId);
+            DataOperationBLL.Current.Remove<UserInfoModel>(userId);
             UserRoleInfoDAL.Current.DeleteByUserID(userId);
-            return true;ol AssignUserRole(string userId, string workflowState)
+            return true;
+        }
+
+        public bool AssignUserRole(string userId, string workflowState)
         {
             return
                 DataOperationBLL.Current.Insert(new UserRoleInfoModel
-                                                    {
-                                                        CreateDateTime = DateTime.Now,
-                                                        LastUpdateDateTime = DateTime.Now,
-                                                        OperatorState = workflowState,
-                                                        UserID = userId
-                                                    }) > 0;
+                {
+                    CreateDateTime = DateTime.Now,
+                    LastUpdateDateTime = DateTime.Now,
+                    OperatorState = workflowState,
+                    UserID = userId
+                }) > 0;
         }
 
         public bool ModifyUserRole(string userId, string workflowState)
         {
-            throw new NotImplementedException();
-        }var entity = List = UserRoleInfoDAL.Current.QueryByUserID(userId);
-            var entity = entityList.First(t => t.OperatorState.CompareEqualIgnoreCase(workflowState)            entity.OperatorState = workflowState;
+            var entityList = UserRoleInfoDAL.Current.QueryByUserID(userId);
+            var entity = entityList.First(t => t.OperatorState.CompareEqualIgnoreCase(workflowState));
+            entity.OperatorState = workflowState;
             return DataOperationBLL.Current.Modify(entity) > 0;
         }
 

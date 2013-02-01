@@ -15,11 +15,13 @@ namespace WorkFlowService.DAL
     using System.Collections.Generic;
     using DBHelp;
     using IDAL;
-    using Model;lic clusing Help;
-lic class UserInfoDAL : IDataOperationActivity<UserInfoModel>
+    using Model;
+    using Help;
+
+    public class UserInfoDAL : IDataOperationActivity<UserInfoModel>
     {
-        public int Insert(static UserInfoDAL Current
-        { 
+        public static UserInfoDAL Current
+        {
             get { return new UserInfoDAL(); }
         }
 
@@ -59,11 +61,14 @@ lic class UserInfoDAL : IDataOperationActivity<UserInfoModel>
 
         private string GetDeleteByIDSql(string id)
         {
-            return string.Format(WFConstants.DeleteUserInfoByIDSqlTags, idlic List<UserInfoModel> QueryAll()
-        {
-            throw new NotImplementedExceptreturn DBHelpInstance.ReadEntityList<UserInfoModel>(WFConstants.QueryAllUserInfoSqlTags);
+            return string.Format(WFConstants.DeleteUserInfoByIDSqlTags, id);
         }
-        
+
+        public List<UserInfoModel> QueryAll()
+        {
+            return DBHelpInstance.ReadEntityList<UserInfoModel>(WFConstants.QueryAllUserInfoSqlTags);
+        }
+
         public UserInfoModel QueryByID(string id)
         {
             var entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByIDSql(id));
@@ -72,12 +77,13 @@ lic class UserInfoDAL : IDataOperationActivity<UserInfoModel>
 
         private string GetQueryByIDSql(string id)
         {
-            return string.Format(WFConstants.QueryUserInfoByIDTags, ideateTable()
+            return string.Format(WFConstants.QueryUserInfoByIDTags, id);
+        }
+
+        public string Login(string userName, string password)
         {
-        string Login(string userName, string password)
-        {
-            retuvar entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByUserNameAndPasswordSql(userName,password));
-            return  entityList != null && entityList.Count > 0 ? entityList[0].ID : null;
+            var entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByUserNameAndPasswordSql(userName, password));
+            return entityList != null && entityList.Count > 0 ? entityList[0].ID : null;
         }
 
         private string GetQueryByUserNameAndPasswordSql(string userName, string password)

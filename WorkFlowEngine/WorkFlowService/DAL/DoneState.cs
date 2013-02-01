@@ -7,12 +7,13 @@
 ** Summary：     DoneState class
 *********************************************************************************/
 
-using WorkFlowSCommonLibrary.Help;orkFlowService.Help;
+using CommonLibrary.Help;
+using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.DAL
 {
-    public  class DoneState:IStateBase
+    public class DoneState : IStateBase
     {
         public WorkFlowState Execute(ActivityState activityState)
         {
@@ -22,12 +23,12 @@ namespace WorkFlowService.DAL
 
         public WorkFlowState GetCurrentState()
         {
-           return WorkFlowState.Done;
+            return WorkFlowState.Done;
         }
 
         public ActivityState GetActivityState()
         {
-           return ActivityState.Read;
+            return ActivityState.Read;
         }
     }
 }

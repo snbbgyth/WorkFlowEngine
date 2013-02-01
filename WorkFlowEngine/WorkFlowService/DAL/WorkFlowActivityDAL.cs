@@ -13,8 +13,7 @@ using CommonLibrary.Model;
 using DBHelp;
 using WorkFlowService.IDAL;
 
-
-namespace WorkowService.DAL
+namespace WorkFlowService.DAL
 {
     using Help;
     public class WorkFlowActivityDAL : IDataOperationActivity<WorkFlowActivityModel>
@@ -40,7 +39,7 @@ namespace WorkowService.DAL
             return string.Format(WFConstants.InsertWorkFlowActivitySqlTags, entity.ID, entity.AppId,
                                  entity.WorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
                                  entity.OperatorUserId, entity.CreateDateTime, entity.LastUpdateDateTime,
-                                 entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName,Convert.ToInt32(entity.IsDelete));
+                                 entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
         }
 
         public int Modify(WorkFlowActivityModel entity)
@@ -54,12 +53,11 @@ namespace WorkowService.DAL
                               entity.WorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
                               entity.OperatorUserId, entity.CreateDateTime, entity.LastUpdateDateTime,
                               entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
-
         }
 
         public int DeleteByID(string id)
-      {
-            return  DBHelpInstance.ExecuteNonQuery(GetDeleteByIDSql(id));
+        {
+            return DBHelpInstance.ExecuteNonQuery(GetDeleteByIDSql(id));
         }
 
         private string GetDeleteByIDSql(string id)
@@ -81,31 +79,26 @@ namespace WorkowService.DAL
         {
             var entityList = DBHelpInstance.ReadEntityList<WorkFlowActivityModel>(GetQueryByIDSql(id));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
-
         }
 
         private string GetQueryByIDSql(string id)
         {
-           eturn string.Format(WFConstants.QueryWorkFlowActivityByIDTags, id);
+            return string.Format(WFConstants.QueryWorkFlowActivityByIDSqlTags, id);
         }
 
-        public List<WorkFlowActivityModel>  QueryInProgressActivitSqlyByOperatorUserId(string operatorUserId)
+        public List<WorkFlowActivityModel> QueryInProgressActivityByOperatorUserId(string operatorUserId)
         {
-            retur new List<WorkFlowActivityModel>() {};
-        }
-
-        public WorkFlowActivityModel QueryByDBHelpInstance.ReadEntityList<WorkFlowActivityModel>(GetQueryByOperatorUserIdSql(operatorUserId));
+            return DBHelpInstance.ReadEntityList<WorkFlowActivityModel>(GetQueryByOperatorUserIdSql(operatorUserId));
         }
 
         private string GetQueryByOperatorUserIdSql(string operatorUserId)
         {
-            return string.Format(WFConstants.QueryWorkFlowActivityByOperatorUserIDSqlTags, operatorUserId)      return null;
+            return string.Format(WFConstants.QueryWorkFlowActivityByOperatorUserIDSqlTags, operatorUserId);
         }
 
-    }
-}
-DSql(id));
-            return entityList != null && entityList.Count > 0 ? entitAppId(appId));
+        public WorkFlowActivityModel QueryByAppId(string appId)
+        {
+            var entityList = DBHelpInstance.ReadEntityList<WorkFlowActivityModel>(GetQueryByAppId(appId));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
         }
 
@@ -113,8 +106,5 @@ DSql(id));
         {
             return string.Format(WFConstants.QueryWorkFlowActivityByAppIDSqlTags, appId);
         }
-
-    }
-}
     }
 }

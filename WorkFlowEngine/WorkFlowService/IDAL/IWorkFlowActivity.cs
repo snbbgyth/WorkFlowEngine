@@ -8,12 +8,14 @@
 *********************************************************************************/
 
 using System.Collections.Generic;
+using CommonLibrary.Help;
 using CommonLibrary.Model;
-usiHelpommonLibrary.Model;
-using WorkFlowService.Help;amespace WorkFlowService.IDAL
+using WorkFlowService.Help;
+
+namespace WorkFlowService.IDAL
 {
- 
-  public  interface IWorkFlowActivity
+
+    public interface IWorkFlowActivity
     {
         WorkFlowState Execute(AppInfoModel entity);
         WorkFlowState NewWorkFlow(AppInfoModel entity);

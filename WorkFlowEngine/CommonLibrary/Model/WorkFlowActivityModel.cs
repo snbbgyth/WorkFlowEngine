@@ -44,6 +44,4 @@ namespace CommonLibrary.Model
     }
 }
 
-
-    }
-}
+　

@@ -26,12 +26,12 @@ namespace ConsoleWorkFlow
         private static void StartListener()
         {
             //WCF配置信息在App.Config中
-            using (var host = new ServiceHserviceHost = new ServiceHost(typeof(WorkFlowWCFService.WorkFlowService)))
+            using (var serviceHost = new ServiceHost(typeof(WorkFlowWCFService.WorkFlowService)))
             {
                 serviceHost.Open();
                 Console.WriteLine("The server is ready.");
                 DisplayServerInfo(serviceHost);
-           　
+
                 Console.WriteLine("Press the Enter key to terminate the service");
                 Console.ReadLine();
             }

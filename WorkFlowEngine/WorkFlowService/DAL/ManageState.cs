@@ -7,7 +7,8 @@
 ** Summary：     ManageState class
 *********************************************************************************/
 
-using WorkFlowSCommonLibrary.Help;orkFlowService.Help;
+using CommonLibrary.Help;
+using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.DAL
@@ -21,15 +22,14 @@ namespace WorkFlowService.DAL
             return WorkFlowState.Refuse;
         }
 
-
-        public WorkFlotate GetCurrentState()
+        public WorkFlowState GetCurrentState()
         {
-           return WorkFlowState.Manager;
+            return WorkFlowState.Manager;
         }
 
         public ActivityState GetActivityState()
         {
-            return ActivityState.Approve | ActivityState.Reject|ActivityState.Read;
+            return ActivityState.Approve | ActivityState.Reject | ActivityState.Read;
         }
     }
 }

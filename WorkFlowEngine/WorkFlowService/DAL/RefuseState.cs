@@ -7,16 +7,17 @@
 ** Summary：     RefuseState class
 *********************************************************************************/
 
-using WorkFlowSCommonLibrary.Help;orkFlowService.Help;
+using CommonLibrary.Help;
+using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.DAL
 {
-    public class RefuseState:IStateBase
+    public class RefuseState : IStateBase
     {
         public WorkFlowState Execute(ActivityState activityState)
         {
-          return WorkFlowState.Refuse;
+            return WorkFlowState.Refuse;
         }
 
         public WorkFlowState GetCurrentState()
@@ -24,7 +25,7 @@ namespace WorkFlowService.DAL
             return WorkFlowState.Refuse;
         }
 
-        pub  lic ActivityState GetActivityState()
+        public ActivityState GetActivityState()
         {
             return ActivityState.Read;
         }

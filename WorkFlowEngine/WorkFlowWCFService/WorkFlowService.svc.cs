@@ -14,8 +14,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using CommonLibrary.Help;
 using CommonLibrary.Model;
-using WorHelpibrary.Model;
 using WorkFlowService.BLL;
 using WorkFlowService.IDAL;
 using WorkFlowService.Help;
@@ -23,7 +23,8 @@ using WorkFlowService.Help;
 namespace WorkFlowWCFService
 {
 
-    // 注意: 使用�       public class WorkFlowService : IWorkFlowActivity
+    [ServiceContract]
+    public class WorkFlowService : IWorkFlowActivity
     {
         private IWorkFlowActivity WorkFlowEngineInstance
         {

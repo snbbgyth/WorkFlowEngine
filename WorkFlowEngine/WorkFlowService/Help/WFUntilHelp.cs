@@ -9,10 +9,11 @@
 
 using System;
 using System.IO;
+using CommonLibrary.Help;
 
-namespace using CommonLibrary.Helpce WorkFlowService.Help
+namespace WorkFlowService.Help
 {
-    publicss WFUntilHelp
+    public class WFUntilHelp
     {
         public static ActivityState GetActivityStateByName(string activityState)
         {
@@ -37,8 +38,6 @@ namespace using CommonLibrary.Helpce WorkFlowService.Help
                 return result;
             return ApplicationState.Draft;
         }
-    }
-}
 
         private static string RunPath
         {
