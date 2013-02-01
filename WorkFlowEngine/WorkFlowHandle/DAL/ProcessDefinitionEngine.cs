@@ -147,10 +147,15 @@ namespace WorkFlowHandle.DAL
                     cachedFaultHandler.Add(context.Name, context.FaultHandlers);
                     cachedMessageTimeoutHandler.Add(context.Name, context.MessageTimeoutEventHanlderDict);
                     cachedCancelHandler.Add(context.Name, cancelEventHandlerName);
-                    new StepProgressRangeCalculator().Calculate(context.WorkflowSteps, context.ProgressStartPosition, context.ProgressRange);
+
                 }
 
-         on
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Load stepData for specific workflow version
         /// </summary>
         /// <param name="name">String containing name of workflow to load</param>
         /// <param name="version">String containing version of workflow to load</param>
@@ -241,24 +246,27 @@ namespace WorkFlowHandle.DAL
                     // lock.
                     if (this.defaultWorkflows == null)
                     {
-                        // load list of BPEL files into local collection
-                        WorkflowHandlerSettingsConfigSection section = WorkflowHandlerSettings.GetWorkflowHandlerSettingsConfigSection(null);
 
-                        // parse the list of BPEL files e quickly located while
+                        // parse the list of BPEL files into a hash table with the latest version 
+                        // of each workflow and a 2nd table with earlier versions.  
+                        // This allows for default workflows to be quickly located while
                         // still being able to find earlier workflows in the infrequent cases 
                         // where this may be necessaary.
                         this.defaultWorkflows = new System.Collections.Hashtable();
                         this.olderWorkflows = new WorkflowFilesCollection();
 
-                        if (section != null)
-                        {
-                            foreach (WorkflowFileElement fileElement in section.WorkflowFiles)
-                            {
-                                this.AddNewWorkflow(fileEleme 
                     }
-                }ting workflow.
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds a new workflow into one of the local workflow tables.
+        /// If this is a newer version of an existing workflow, it is
+        /// placed in the defaultWorkflows table and the older version is
+        /// placed in the olderWorkflows table. 
         /// </summary>
-        /// <param name="name">The name of the m name="fileElement">Class defining the new workflow to add.  The version
+        /// <param name="fileElement">Class defining the new workflow to add.  The version
         /// member of this class is used to determine the latest version of a workflow.</param>
         private void AddNewWorkflow(WorkflowFileElement fileElement)
         {
@@ -340,13 +348,15 @@ namespace WorkFlowHandle.DAL
                         // Create XML reader for this file
                         // Must be able to have more than one reader active at a time.
                         var doc = new XmlDocument();
-                        var fileName = BaseConfigurationHandler.FileProtectionFlag
-                                           ? fileElement.EncryptedFileName
-                                           : fileElement.FileName;
-                        using (Stream stream = (new DataFileReader()).ReadDataFile(this.workflowFolder + fileName))
+                        var fileName = string.Empty;
+                        using (Stream stream = new FileStream(this.workflowFolder + fileName, FileMode.OpenOrCreate))
                         {
-                            docstring.Empty;
-                        using (Stream stream = new FileStream(this.workflowFolder + fileName,FileMode.OpenOrCreat;
+                            doc.Load(stream);
+                        }
+                        rootElement = doc.DocumentElement;
+                        if (!(rootElement.LocalName == "process"))
+                        {
+                            Debug.Fail("LoadNewWorkflow: Could not find process in " + fileElement.FileName);
                             rootElement = null;
                         }
                         else
@@ -405,14 +415,16 @@ namespace WorkFlowHandle.DAL
         /// steps defined in the BPEL file.</param>
         /// <param name="nodeList">XmlNodeList containing the BPEL data from the BPEL file</param>
         /// <param name="messageTimeoutEventHanlderDict">XmlNodeList containing the BPEL data from the BPEL file</param>
-        private void FillStepList(IDictionary<string, string> workflowVariables, ICollection<FaultHandler> faultHandlers, int startElement, ICollection<WorkflowStep> workflowStepList, XmlNodeList nodeList, Dictionary<string, string> messageTimeoutEventHanlderDict, ref string cancelEventHandlerName)
+        private void FillStepList(IDictionary<string, string> workflowVariables, List<FaultHandler> faultHandlers, int startElement, List<WorkflowStep> workflowStepList, XmlNodeList nodeList, Dictionary<string, string> messageTimeoutEventHanlderDict, ref string cancelEventHandlerName)
         {
             WorkflowStep workflowStep;
             for (int i = startElement; i < nodeList.Count; i++)
             {
                 XmlNode currentStep = nodeList[i];
 
-                if (!string.IsList<FaultHandler> faultHandlers, int startElement, List currentStep.Prefix = "bpel";
+                if (!string.IsNullOrEmpty(currentStep.Prefix))
+                {
+                    currentStep.Prefix = "bpel";
                 }
 
                 if (currentStep is System.Xml.XmlComment)
@@ -429,16 +441,15 @@ namespace WorkFlowHandle.DAL
                 {
                     SequenceStep sequenceStep = new SequenceStep(currentStep.Attributes);
                     workflowStepList.Add(sequenceStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, sequenceStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    this.FillStepList(workflowVariables, faultHandlers, 0, sequenceStep.WorkflowSteps.ToList(), currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "scope")
                 {
                     // can't get tool to produce invoke without having it enclosed in a scope.
                     // just ignore scope for now but get the internals as if at the same level.
-                    this.FillStepList(workflowVariables, faultHandlers, 0, workfl.ToList()                   {
-                        if (attrib.LocalName == "timeout")
-                        {
-                            TimesetTime = attrib.Valame == "receive")
+                    this.FillStepList(workflowVariables, faultHandlers, 0, workflowStepList, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                }
+                else if (currentStep.LocalName == "receive")
                 {
                     ReceiveStep receiveStep = new ReceiveStep(currentStep.Attributes);
                     workflowStepList.Add(receiveStep);
@@ -531,10 +542,7 @@ namespace WorkFlowHandle.DAL
                     workflowStepList.Add(onEventStep);
                     this.FillStepList(workflowVariables, faultHandlers, 0, onEventStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
 
-                    if (onEventStep.EventType == WorkflowEventType.Cancel)
-                    {
-                        cancelEventHandlerName = onEventStep.StepId;
-                    }
+
                 }
                 else if (currentStep.LocalName == "partnerLinks")
                 {
@@ -545,7 +553,10 @@ namespace WorkFlowHandle.DAL
                 {
                     foreach (XmlNode variableNode in currentStep.ChildNodes)
                     {
-ariableType = null;
+                        if (variableNode.LocalName == "variable")
+                        {
+                            string variableName = null;
+                            string variableType = null;
                             foreach (XmlAttribute variableAttribute in variableNode.Attributes)
                             {
                                 if (variableAttribute.LocalName == "name")

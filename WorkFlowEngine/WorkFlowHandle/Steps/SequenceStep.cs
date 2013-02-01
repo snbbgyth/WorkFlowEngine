@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namusing System.Xml;
+using System.Xml;
 
 namespace WorkFlowHandle.Steps
 {
-   public class SequenceStep:StepRunnerStep
+    public class SequenceStep : StepRunnerStep
     {
         /// <summary>
         /// Initializes a new instance of the SequenceStep class

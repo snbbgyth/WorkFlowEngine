@@ -7,19 +7,20 @@ using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.Model
 {
-    public cl[Serializable]lic class StepData
+    [Serializable]
+    public class StepData
     {
         /// <summary>
         /// This list contains the fault handlers defined in the BPEL file.
         /// </summary>
-        private readonly ICollection<FaList _faultHandlers;
+        private readonly List<FaultHandler> _faultHandlers;
 
 
         /// <summary>
         /// This is a list of processing steps created from the BPEL file 
         /// or there may be cached version of the steps 
         /// </summary>
-        private readonly ICollection<WorkflowSListlowSteps;
+        private readonly List<WorkflowStep> _workflowSteps;
 
         /// <summary>
         /// This dictionary  is created from the variables declared in a 
@@ -50,25 +51,25 @@ namespace WorkFlowHandle.Model
         public StepData()
         {
             _workflowVariables = new Dictionary<string, string>();
-            _workflowSteps = new Collection<WorkflowStep>();
-            _faultHandleList<WorkflowStep>();
-            _faultHandlers = new ListlderDict = new Dictionary<string, string>();
+            _workflowSteps = new List<WorkflowStep>();
+            _faultHandlers = new List<FaultHandler>();
+            _messageTimeoutEventHanlderDict = new Dictionary<string, string>();
         }
 
         /// <summary>
         /// Gets the list of fault handlers from the BPEL file
         /// </summary>
-        public ICollection<FaultHandler> FaultHandlers
+        public List<FaultHandler> FaultHandlers
         {
-          Listurn _faultHandlers; }
+            get { return _faultHandlers; }
         }
 
         /// <summary>
         /// Gets the list of Steps from the BPEL file
         /// </summary>
-        public ICollection<WorkflowStep> WorkflowSteps
+        public List<WorkflowStep> WorkflowSteps
         {
-            get { ListkflowSteps; }
+            get { return _workflowSteps; }
         }
 
         /// <summary>

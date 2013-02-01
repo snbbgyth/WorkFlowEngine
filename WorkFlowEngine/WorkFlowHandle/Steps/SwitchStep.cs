@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namusing System.Xml;
+using System.Xml;
 using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
-   public class SwitchStep:StepRunnerStep
+    public class SwitchStep : StepRunnerStep
     {
         /// <summary>
         /// Initializes a new instance of the SwitchStep class
@@ -33,7 +32,7 @@ namespace WorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  Execution starts at first step
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public override WorkFlowState Run(string  context, string stepId)
+        public override WorkFlowState Run(string context, string stepId)
         {
             WorkFlowState currentState = WorkFlowState.Done;
 
@@ -81,7 +80,7 @@ namespace WorkFlowHandle.Steps
         /// <returns>The WorkflowState after execution of the CaseStep.</returns>
         private WorkFlowState RunCase(CaseStep caseStep, ref string context, string stepId)
         {
-            
+
             WorkFlowState currentState = caseStep.Run(context, stepId);
             return currentState;
         }

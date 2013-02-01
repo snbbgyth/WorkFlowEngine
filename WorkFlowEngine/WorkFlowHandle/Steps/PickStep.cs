@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namusing System.Xml;
+using System.Xml;
 using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
-    public class PickStep:StepRunnerStep
+    public class PickStep : StepRunnerStep
     {
         /// <summary>
         /// Initializes a new instance of the PickStep class
@@ -42,8 +41,8 @@ namespace WorkFlowHandle.Steps
             // Check for event first.  Go though the possible OnMessage activities and see if any succeed. 
             // If there is an event to process, we're done.  Only one event per execution (check BPEL spec)
             // If not event, start alarm timer. 
-  
- 
+
+
 
             return state;
         }

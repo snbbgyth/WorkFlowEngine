@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namusing System.Xml;
+using System.Xml;
 using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
-   public class WhileStep:StepRunnerStep
+    public class WhileStep : StepRunnerStep
     {
         /// <summary>
         /// A string containing the condition text
@@ -60,7 +59,7 @@ namespace WorkFlowHandle.Steps
             while (this.IsConditionTrue(context))
             {
                 currentState = base.Run(context, stepId);
-                if  (currentState != WorkFlowState.Done) 
+                if (currentState != WorkFlowState.Done)
                 {
                     return currentState;
                 }
@@ -82,7 +81,7 @@ namespace WorkFlowHandle.Steps
         /// <summary>
         /// Gets progress weight of this step
         /// </summary>
-        public   int ProgressWeight
+        public int ProgressWeight
         {
             get
             {

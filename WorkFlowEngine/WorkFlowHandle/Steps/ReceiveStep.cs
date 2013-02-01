@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namusing System.Xml;
+using System.Xml;
 using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
-    public class ReceiveStep:WorkflowStep
+    public class ReceiveStep : WorkflowStep
     {
         public override WorkFlowState Run(string context, string stepId)
         {
@@ -21,7 +20,7 @@ namespace WorkFlowHandle.Steps
         /// </summary>
         private string variableName;
 
- 
+
 
         /// <summary>
         /// The message name if the eventType is a MessageEvent.
@@ -66,10 +65,10 @@ namespace WorkFlowHandle.Steps
                 }
             }
 
-             
+
             if (this.variableName.Equals("subWorkflowComplete", StringComparison.OrdinalIgnoreCase))
             {
-               
+
             }
             else
             {
@@ -77,6 +76,6 @@ namespace WorkFlowHandle.Steps
                 this._messageName = this.variableName;
             }
         }
- 
+
     }
 }
