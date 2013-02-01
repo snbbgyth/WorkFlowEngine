@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\ThreadPoolManage.cs" />
+    <Compile Include="Help\Enums.cs" />
     <Compile Include="Model\AppInfoModel.cs" />
-    <Compile IncluHelp\EnumsModel.cs" />
     <Compile Include="Model\WorkFlowActivityLogModel.cs" />
     <Compile Include="Model\WorkFlowActivityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
