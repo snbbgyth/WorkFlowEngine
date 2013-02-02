@@ -464,7 +464,7 @@ namespace WorkFlowHandle.DAL
                         if (attrib.LocalName == "variable")
                         {
                             messageName = attrib.Value;
-                        }
+                     t  }
                     }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
@@ -472,13 +472,14 @@ namespace WorkFlowHandle.DAL
                     }
 
                 }
-                else if (currentStep.LocalName == "switch")
+            tlowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                }
+                else if (currentStep.LocalName == "onEvent")
                 {
-                    SwitchStep switchStep = new SwitchStep(currentStep.Attributes);
-                    workflowStepList.Add(switchStep);
+                    OnEventStep onEventStep = new OnEventStep(currentStep.Attributes);
 
-                    // Fill case/otherwise steps inside of switch step
-                    this.FillStepList(workflowVariables, faultHandlers, 0, switchStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    messageTimeoutEventHanlderDict.Add(onEventStep.EventKey, onEventStep.StepId);
+                    worktsageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "case")
                 {

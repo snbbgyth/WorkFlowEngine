@@ -15,7 +15,6 @@ namespace WorkFlowHandle.Model
     {
         #region Class Fields
  
-
         /// <summary>
         /// a flag to identify wheter the whole workflow should wait when it handle cancel event
         /// </summary>
@@ -26,11 +25,6 @@ namespace WorkFlowHandle.Model
         /// the key of the fired event
         /// </summary>
         private string _firedEventKey;
-
- 
-
- 
- 
 
         /// <summary>
         /// A list of workflows that this workflow has started.  This list
@@ -59,9 +53,6 @@ namespace WorkFlowHandle.Model
         /// workflow.  
         /// </summary>
         private string _userId;
-
-  
- 
 
         /// <summary>
         /// the collection of timeout message
@@ -99,8 +90,6 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private bool _isStopExecution;
 
- 
-
         /// <summary>
         /// Gets or sets a dictionary of message name and time out values of the workflow.
         /// It's initialized when workflow load the onMessage/receive node which defined in the bpel file.
@@ -108,11 +97,6 @@ namespace WorkFlowHandle.Model
         /// The timeout value is defined as a property of the onMessage/receive node.
         /// </summary>
         private Dictionary<string, string> _workflowTimeout;
-
-  
-
-
- 
 
         /// <summary>
         /// Gets or sets a value indicating whether an exception has been thrown during workflow
@@ -180,9 +164,7 @@ namespace WorkFlowHandle.Model
         /// when a user is disabled
         /// </summary>
         private bool _isCanRunForDisabledUser;
-
-  
-
+ 
         /// <summary>
         /// Gets or sets id of workflow transaction
         /// </summary>
@@ -209,8 +191,7 @@ namespace WorkFlowHandle.Model
         /// </summary>
         [NonSerialized]
         private WorkflowHandle _workflowHandler;
-
-
+ 
         #endregion
         #endregion Class Fields
 
@@ -247,13 +228,8 @@ namespace WorkFlowHandle.Model
             _name = name;
             _workflowId = workflowId;
             _userId = userId;
-         
             _managerName = managerName;
-           
-
             Initialize();
-
-           
         }
         #endregion
 
@@ -276,8 +252,6 @@ namespace WorkFlowHandle.Model
             get { return _applicationTransactionId; }
             set { _applicationTransactionId = value; }
         }
-
- 
 
         /// <summary>
         /// Gets or sets a CancelEventHandlerName of the workflow. 
@@ -309,7 +283,6 @@ namespace WorkFlowHandle.Model
             set { _isCanRunForDisabledUser = value; }
         }
 
-        
         /// <summary>
         /// Gets or sets the Id of the current workflow step
         /// </summary>
@@ -384,7 +357,6 @@ namespace WorkFlowHandle.Model
                         
                     }
                 }
-
                 return _workflowHandler;
             }
         }
@@ -418,7 +390,6 @@ namespace WorkFlowHandle.Model
             get { return _isCanceled; }
             set { _isCanceled = value; }
         }
- 
 
         /// <summary>
         /// Gets or sets a value indicating whether the workflow steps have been loaded into 
@@ -430,7 +401,6 @@ namespace WorkFlowHandle.Model
             set { _isWorkflowStepsLoaded = value; }
         }
 
-  
         /// <summary>
         /// Gets or sets the DateTime of the last change of CurrentState
         /// </summary>
@@ -449,7 +419,6 @@ namespace WorkFlowHandle.Model
         public virtual string ManagerName
         {
             get { return _managerName; }
-
             set { _managerName = value; }
         }
  
@@ -466,7 +435,6 @@ namespace WorkFlowHandle.Model
                 {
                     LoadExistingWorkflow();
                 }
-
                 return _stepData.MessageTimeoutEventHanlderDict;
             }
         }
@@ -517,8 +485,6 @@ namespace WorkFlowHandle.Model
             set { _progressRange = value; }
         }
 
- 
-
         /// <summary>
         /// Gets or sets a value indicating whether the stop execution flag     
         /// </summary>
@@ -564,7 +530,6 @@ namespace WorkFlowHandle.Model
             get { return _waitForCancel; }
             set { _waitForCancel = value; }
         }
- 
 
         /// <summary>
         /// Gets or sets a dictionary of message name and time out values of the workflow.
