@@ -1,4 +1,13 @@
-﻿using System;
+﻿/********************************************************************************
+** Class Name:   FaultHandler 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     FaultHandler class
+*********************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;

@@ -1,4 +1,13 @@
-﻿using System;
+﻿/********************************************************************************
+** Class Name:   WorkflowContext 
+** Author：      spring yang
+** Create date： 2012-9-1
+** Modify：      spring yang
+** Modify Date： 2012-9-25
+** Summary：     WorkflowContext class
+*********************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -554,7 +563,6 @@ namespace WorkFlowHandle.Model
                 {
                     LoadExistingWorkflow();
                 }
-
                 return _stepData.WorkflowSteps;
             }
         }
@@ -570,7 +578,6 @@ namespace WorkFlowHandle.Model
                 {
                     LoadExistingWorkflow();
                 }
-
                 return _stepData.WorkflowVariables;
             }
         }
@@ -592,8 +599,6 @@ namespace WorkFlowHandle.Model
             get { return _workflowWaitlist; }
             set { _workflowWaitlist = value; }
         }
-
- 
 
         /// <summary>
         /// Utility function to print the workflow name and id
@@ -624,7 +629,6 @@ namespace WorkFlowHandle.Model
             {
                 _cancelWaitEvent = new AutoResetEvent(false);
             }
-
             _cancelWaitEvent.WaitOne();
         }
 
@@ -647,7 +651,6 @@ namespace WorkFlowHandle.Model
         /// <returns>value for the parameter</returns>
         public virtual object GetWorkflowParameter(string parameterName)
         {
- 
             return null;
         }
 
