@@ -258,7 +258,7 @@ namespace WorkFlowHandle.DAL
 
                         // parse the list of BPEL files into a hash table with the latest version 
                         // of each workflow and a 2nd table with earlier versions.  
-                        // This allows for default workflows to be quickly located while
+                        // This allows for default workflows to be quick located while
                         // still being able to find earlier workflows in the infrequent cases 
                         // where this may be necessaary.
                         this.defaultWorkflows = new System.Collections.Hashtable();
@@ -272,7 +272,7 @@ namespace WorkFlowHandle.DAL
         /// <summary>
         /// Adds a new workflow into one of the local workflow tables.
         /// If this is a newer version of an existing workflow, it is
-        /// placed in the defaultWorkflows table and the older version is
+        /// placed in the defaultWorlows table and the older version is
         /// placed in the olderWorkflows table. 
         /// </summary>
         /// <param name="fileElement">Class defining the new workflow to add.  The version
@@ -418,7 +418,7 @@ namespace WorkFlowHandle.DAL
         /// <param name="workflowVariables">Dictionary of workflow variables to populate with any
         /// variables defined in the BPEL file.</param>
         /// <param name="faultHandlers">Collection of FaultHandlers  to populate with any
-        /// fault handlers defined in the BPEL file.</param>
+      /// fault handlers defined in the BPEL file.</param>
         /// <param name="startElement">Integer value representing the starting element in the nodeList.</param>
         /// <param name="workflowStepList">Collection of WorkflowSteps  to populate with any
         /// steps defined in the BPEL file.</param>

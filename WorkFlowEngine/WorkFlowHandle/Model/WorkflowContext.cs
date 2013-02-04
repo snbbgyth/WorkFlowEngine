@@ -243,10 +243,9 @@ namespace WorkFlowHandle.Model
         #endregion
 
         #region Properties
-        /// <summary>
+        //// <summary>
         /// This field is primarily for testing, so a workflow can hold to an anti-workflow it started
-        ///  
-        /// </summary>
+          /// </summary>
         internal string AntiWorkflowId
         {
             get { return (string)GetWorkflowParameter("antiWorkflowId"); }
@@ -299,7 +298,7 @@ namespace WorkFlowHandle.Model
         {
             get { return _currentStepId; }
 
-            set { _currentStepId = value; }
+           set { _currentStepId = value; }
         }
 
         /// <summary>
@@ -682,11 +681,8 @@ namespace WorkFlowHandle.Model
                     AddEvent(userId, workflowEvent);
                 }
  
-            }
-        }
- 
-
-        /// <summary>
+                   }
+        } /// <summary>
         /// Find event message with a specific ID.  Returns null if message not yet
         /// received.
         /// </summary>
@@ -785,9 +781,7 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Run anti workflow. This method depends on breadcrumbs having been stored
         /// during the workflow's execution. If there is no named 
-        /// <see cref="WorkflowHandler.GetAntiWorkflowName"/>, this method does nothing.
-        /// If the <see cref="IBreadCrumbCache"/> cannot be loaded, this method does nothing.
-        /// </summary>
+        /// <see cref=
         /// <param name="context">workflow context</param>
         public void RunAntiWorkflow(WorkflowContext context)
         {

@@ -15,7 +15,6 @@ using System.Reflection;
 using System.Data;
 using System.Configuration;
 using System.Threading;
-using CommonLibrary;
 using CommonLibrary.DAL;
 
 namespace DBHelp
@@ -155,7 +154,7 @@ namespace DBHelp
         /// <param name="parameters">parameter list</param>
         /// <param name="conn">database connection </param>
         /// <returns>data reader</returns>
-        private DbDataReader ExecuteReader(string cmdText, List<DbParameter> parameters, out DbConnection conn)
+        public DbDataReader ExecuteReader(string cmdText, List<DbParameter> parameters, out DbConnection conn)
         {
             conn = GetConnection(ConnectionString);
             conn.Open();
