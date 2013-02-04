@@ -1,0 +1,63 @@
+﻿ 
+<process name="TestStateWorkFlow" targetNamespace="http://BusinessProcessDiagram1" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:Pool="http://mypool" xmlns:tns="http://BusinessProcessDiagram1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <partnerLinks>
+        <partnerLink myRole="provider" name="Pool" partnerLinkType="Pool:PartnerLinkType"/>
+    </partnerLinks>
+    <variables>
+        <variable messageType="Pool:Message" name="Variable"/>
+    </variables>
+    <sequence>
+        <receive createInstance="yes" operation="perform" partnerLink="Pool" portType="Pool:ProviderPortType" variable="Variable"/>
+        <empty name="Common"/>
+        <switch name="EmployeeAction">
+            <case condition="Sumbit">
+                <sequence>
+                    <empty name="Manage"/>
+                </sequence>
+            </case>
+            <case condition="Save">
+                <sequence>
+                    <empty name="Common"/>
+                </sequence>
+            </case>
+			<case condition="Revoke">
+                <sequence>
+                    <empty name="Common"/>
+                </sequence>
+            </case>
+         <!-- <otherwise>
+                <sequence>
+                    <empty name="Task4"/>
+                </sequence>
+            </otherwise>
+	     -->
+        </switch>
+        <empty name="Manage"/>
+		<switch name="ManageAction">
+            <case condition="Approve">
+                <sequence>
+                    <empty name="Done"/>
+                </sequence>
+            </case>
+            <case condition="Reject">
+                <sequence>
+                    <empty name="Refuse"/>
+                </sequence>
+            </case>
+		 <!-- 	<case condition="Revoke">
+                <sequence>
+                    <empty name="Common"/>
+                </sequence>
+            </case>
+            <otherwise>
+                <sequence>
+                    <empty name="Task4"/>
+                </sequence>
+            </otherwise>
+	     -->
+        </switch>
+		<empty name="Done"/>
+		<empty name="Refuse"/>
+        <reply operation="perform" partnerLink="Pool" portType="Pool:ProviderPortType" variable="Variable"/>
+    </sequence>
+</process>
