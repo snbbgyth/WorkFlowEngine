@@ -113,7 +113,6 @@ namespace DBHelp
                         {
                             try
                             {
-                              
                                 command.CommandText = cmdText;
                                 command.Transaction = transaction;
                                 command.ExecuteNonQuery();

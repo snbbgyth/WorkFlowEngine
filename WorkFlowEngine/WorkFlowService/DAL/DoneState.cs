@@ -21,7 +21,7 @@ namespace WorkFlowService.DAL
         }
 
 
-        public WorkFlowState GetCurrentState()
+        public Work        owState GetCurrentState()
         {
             return WorkFlowState.Done;
         }

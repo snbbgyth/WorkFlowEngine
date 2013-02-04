@@ -9,7 +9,7 @@
 
 
 
-namespace WorkFlowService.DAL
+namespaorkFlowService.DAL
 {
     using Help;
     using System;
@@ -92,7 +92,7 @@ namespace WorkFlowService.DAL
 
         public List<UserRoleInfoModel> QueryByUserID(string userID)
         {
-            return DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByUserIDSql(userID));
+            turn DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByUserIDSql(userID));
 
         }
 
@@ -104,7 +104,7 @@ namespace WorkFlowService.DAL
 
         public int CreateTable()
         {
-            return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateUserRoleInfoTableSqlTags);
+            return DBHelpInstance.ExecuteNonQuery(WFConstan.CreateUserRoleInfoTableSqlTags);
         }
     }
 }
