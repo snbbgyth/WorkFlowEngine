@@ -19,7 +19,7 @@ using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.DAL
 {
-    class ProcepublicssDefinitionEngine
+    public class ProcessDefinitionEngine
     {
         /// <summary>
         /// Cache the XmlElement to improve performace.
@@ -448,7 +448,7 @@ namespace WorkFlowHandle.DAL
                 }
                 else if (currentStep.LocalName == "sequence")
                 {
-                    SequenceStep sequnew SequenceStep(currentStep.Attributes);
+                    SequenceStep sequenceStep= new SequenceStep(currentStep.Attributes);
                     workflowStepList.Add(sequenceStep);
                     this.FillStepList(workflowVariables, faultHandlers, 0, sequenceStep.WorkflowSteps.ToList(), currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
@@ -473,7 +473,7 @@ namespace WorkFlowHandle.DAL
                         if (attrib.LocalName == "variable")
                         {
                             messageName = attrib.Value;
-                     t  }
+                      }
                     }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
@@ -481,14 +481,15 @@ namespace WorkFlowHandle.DAL
                     }
 
                 }
-            tlowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
-                }
+               
+                //   tlowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                //}
                 else if (currentStep.LocalName == "onEvent")
                 {
                     OnEventStep onEventStep = new OnEventStep(currentStep.Attributes);
 
                     messageTimeoutEventHanlderDict.Add(onEventStep.EventKey, onEventStep.StepId);
-                    worktsageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                   // worktsageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "case")
                 {

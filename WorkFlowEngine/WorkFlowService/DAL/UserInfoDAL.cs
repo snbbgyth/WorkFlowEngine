@@ -26,7 +26,7 @@ namespace WorkFlowService.DAL
         }
 
 
-        private IDBHelp DBlpInstance
+        private IDBHelp DBHelpInstance
         {
             get { return new SQLiteHelp(); }
         }

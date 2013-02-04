@@ -52,11 +52,12 @@ namespace WorkFlowService.Help
 
         public const string QueryAllWorkFlowActivityLogSqlTags = "select * from WorkFlowActivityLog";
 
-        public const string QueryWorkFlowActivityLogByIDTags = "select * from WorkFlowActivityLog where ID='{0SqlTags = "select * from WorkFlowActivityLog where ID='{0}'";
+        public const string QueryWorkFlowActivityLogByIDTags = "select * from WorkFlowActivityLog where ID='{0}'";
 
         public const string QueryInProgressActivityByLogByUserOperatorIDSqlTags = "select * from WorkFlowActivityLog where OperatorUserId='{0}'";
 
-        public const string QueryWorkFlowActivityLogByAppIdSqlTags = "select * from WorkFlowActivityLog where Appo Table
+        public const string QueryWorkFlowActivityLogByAppIdSqlTags =
+            "select * from WorkFlowActivityLog where AppId='{0}'";
 
         public const string CreateUserInfoTableSqlTags = @"CREATE TABLE [UserInfo] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,UserName varchar(100),Password varchar(100),CreateDateTime datetime,LastUpdateDateTime datetime,IsDelete boolean)";
 

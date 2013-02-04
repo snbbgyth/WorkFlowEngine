@@ -10,9 +10,9 @@
 using System.Collections.Generic;
 using CommonLibrary.Help;
 using CommonLibrary.Model;
-using WorkFlrkFlowService.IDAL
-{
 
+namespace WorkFlowService.IDAL
+{
     public interface IWorkFlowActivity
     {
         WorkFlowState Execute(AppInfoModel entity);
@@ -21,3 +21,4 @@ using WorkFlrkFlowService.IDAL
         ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId, string userId);
     }
 }
+ 
