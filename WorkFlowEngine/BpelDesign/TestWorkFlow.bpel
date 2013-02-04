@@ -25,71 +25,71 @@
 		<receive partnerLink="purchasing" portType="lns:purchaseOrderPT" operation="sendPurchaseOrder" variable="PO" createInstance="yes">
 			<documentation>Receive Purchase Order</documentation>
 		</receive>
-	<flow>
-	<documentation>
-	wsbpel-v2.0-OS 11 April 2007
-	Copyright © OASIS® 1993–2007. All Rights Reserved. OASIS trademark, IPR and other policies apply. Page 20 of 264
-	A parallel flow to handle shipping, invoicing and
-	scheduling
-	</documentation>
-	<links>
-	<link name="ship-to-invoice" />
-	<link name="ship-to-scheduling" />
-	</links>
-	<sequence>
-	<assign>
-	<copy>
-	<from>$PO.customerInfo</from>
-	<to>$shippingRequest.customerInfo</to>
-	</copy>
-	</assign>
-	<invoke partnerLink="shipping" portType="lns:shippingPT" operation="requestShipping" inputVariable="shippingRequest" outputVariable="shippingInfo">
-	<documentation>Decide On Shipper</documentation>
-	<sources>
-	<source linkName="ship-to-invoice" />
-	</sources>
-	</invoke>
-	<receive partnerLink="shipping" portType="lns:shippingCallbackPT" operation="sendSchedule" variable="shippingSchedule">
-	<documentation>Arrange Logistics</documentation>
-	<sources>
-	<source linkName="ship-to-scheduling" />
-	</sources>
-	</receive>
-	</sequence>
-	<sequence>
-	<invoke partnerLink="invoicing" portType="lns:computePricePT" operation="initiatePriceCalculation" inputVariable="PO">
-	<documentation>
-	Initial Price Calculation
-	</documentation>
-	</invoke>
-	<invoke partnerLink="invoicing" portType="lns:computePricePT" operation="sendShippingPrice" inputVariable="shippingInfo">
-	<documentation>
-	Complete Price Calculation
-	</documentation>
-	<targets>
-	<target linkName="ship-to-invoice" />
-	</targets>
-	</invoke>
-	<receive partnerLink="invoicing" portType="lns:invoiceCallbackPT" operation="sendInvoice" variable="Invoice" />
-	</sequence>
-	<sequence>
-	<invoke partnerLink="scheduling" portType="lns:schedulingPT" operation="requestProductionScheduling" inputVariable="PO">
-	<documentation>
-	Initiate Production Scheduling
-	</documentation>
-	</invoke>
-	<invoke partnerLink="scheduling" portType="lns:schedulingPT" operation="sendShippingSchedule" inputVariable="shippingSchedule">
-	<documentation>
-	Complete Production Scheduling
-	</documentation>
-	<targets>
-	<target linkName="ship-to-scheduling" />
-	</targets>
-	</invoke>
-	</sequence>
-	</flow>
-	<reply partnerLink="purchasing" portType="lns:purchaseOrderPT" operation="sendPurchaseOrder" variable="Invoice">
-	<documentation>Invoice Processing</documentation>
-	</reply>
+		<flow>
+			<documentation>
+				wsbpel-v2.0-OS 11 April 2007
+				Copyright © OASIS® 1993–2007. All Rights Reserved. OASIS trademark, IPR and other policies apply. Page 20 of 264
+				A parallel flow to handle shipping, invoicing and
+				scheduling
+			</documentation>
+			<links>
+				<link name="ship-to-invoice" />
+				<link name="ship-to-scheduling" />
+			</links>
+			<sequence>
+			<assign>
+				<copy>
+					<from>$PO.customerInfo</from>
+					<to>$shippingRequest.customerInfo</to>
+				</copy>
+			</assign>
+			<invoke partnerLink="shipping" portType="lns:shippingPT" operation="requestShipping" inputVariable="shippingRequest" outputVariable="shippingInfo">
+				<documentation>Decide On Shipper</documentation>
+				<sources>
+					<source linkName="ship-to-invoice" />
+				</sources>
+			</invoke>
+			<receive partnerLink="shipping" portType="lns:shippingCallbackPT" operation="sendSchedule" variable="shippingSchedule">
+				<documentation>Arrange Logistics</documentation>
+				<sources>
+					<source linkName="ship-to-scheduling" />
+				</sources>
+			</receive>
+			</sequence>
+			<sequence>
+				<invoke partnerLink="invoicing" portType="lns:computePricePT" operation="initiatePriceCalculation" inputVariable="PO">
+					<documentation>
+						Initial Price Calculation
+					</documentation>
+				</invoke>
+				<invoke partnerLink="invoicing" portType="lns:computePricePT" operation="sendShippingPrice" inputVariable="shippingInfo">
+					<documentation>
+						Complete Price Calculation
+					</documentation>
+					<targets>
+					<target linkName="ship-to-invoice" />
+					</targets>
+				</invoke>
+				<receive partnerLink="invoicing" portType="lns:invoiceCallbackPT" operation="sendInvoice" variable="Invoice" />
+				</sequence>
+			<sequence>
+				<invoke partnerLink="scheduling" portType="lns:schedulingPT" operation="requestProductionScheduling" inputVariable="PO">
+					<documentation>
+						Initiate Production Scheduling
+					</documentation>
+				</invoke>
+				<invoke partnerLink="scheduling" portType="lns:schedulingPT" operation="sendShippingSchedule" inputVariable="shippingSchedule">
+					<documentation>
+						Complete Production Scheduling
+					</documentation>
+					<targets>
+						<target linkName="ship-to-scheduling" />
+					</targets>
+				</invoke>
+			</sequence>
+		</flow>
+		<reply partnerLink="purchasing" portType="lns:purchaseOrderPT" operation="sendPurchaseOrder" variable="Invoice">
+			<documentation>Invoice Processing</documentation>
+		</reply>
 	</sequence>
 </process>
