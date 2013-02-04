@@ -94,12 +94,19 @@ namespace WorkFlowService.DAL
 
         private string GetQueryInProgressActivityByOperatorUserIdSql(string operatorUserId)
         {
-            return string.Format(WFConstants.QueryInProgressActivityByUserOperatorIDSqlTags, operatorUserId);
+            return string.Format(WFConstants.QueryInProgressActivityByULogserOperatorIDSqlTags, operatorUserId);
         }
 
         public WorkFlowActivityLogModel QueryByAppId(string appId)
         {
-            return null;
+   
+            var entityList = DBHelpInstance.ReadEntityList<WorkFlowActivityLogModel>(GetQueryByAppIDSql(appId));
+            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
+        }
+
+        private string GetQueryByAppIDSql(string appId)
+        {
+            return string.Format(WFConstants.QueryWorkFlowActivityLogByAppIdSqlTags, appId);
         }
 
     }
