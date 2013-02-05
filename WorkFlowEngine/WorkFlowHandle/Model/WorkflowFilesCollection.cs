@@ -9,6 +9,7 @@
 
 
 using System;
+using Sys
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,13 +18,13 @@ using System.Text;
 
 namespace WorkFlowHandle.Model
 {
-    [ConfigurationCollection(typeof(WorkflowFileElement))]
-    public class WorkflowFilesCollection : ConfigurationElementCollection, ICollection<WorkflowFileElement>
+    [ConfigurationCollection(typeof(WorkflowFileElement))]c class WorkflowFilesCollection : ConfigurationElementCollection, ICollection<WorkflowFileElement>
+    {/// 
     {/// <summary>
         /// The <see cref="WorkflowFileElement"/> at a specified index location.
         /// </summary>
-        /// <param name="index">The index of the <see cref="WorkflowFileElement"/></param>
-        /// <returns>The <see cref="WorkflowFileElement"/> at the specified index; otherwise, a null reference (Nothing in Visual Basic).
+        /// <param name="index">The index of the <see cref="WorkflowFileElement"/></param>// <returns>The <see cref="WorkflowFileElement"/> at the specified index; otherwise, a null reference (Nothing in Visual Basic).
+        /
         /// </returns>
         [ConfigurationProperty("bpelFile")]
         public WorkflowFileElement this[int index]
@@ -34,11 +35,11 @@ namespace WorkFlowHandle.Model
             }
         }
 
-        /// <summary>
-        /// Returns the <see cref="WorkflowFileElement"/> with the specified key. 
+        /// <summary>// Returns the <see cref="WorkflowFileElement"/> with the specified key. 
+        /
         /// </summary>
-        /// <param name="key">The key of the element to return.</param>
-        /// <returns>The <see cref="WorkflowFileElement"/> with the specified key; otherwise, a null reference (Nothing in Visual Basic).
+        /// <param name="key">The key of the element to return.</param>// <returns>The <see cref="WorkflowFileElement"/> with the specified key; otherwise, a null reference (Nothing in Visual Basic).
+        /
         /// </returns>
         [ConfigurationProperty("bpelFile")]
         public new WorkflowFileElement this[string key]
@@ -49,28 +50,28 @@ namespace WorkFlowHandle.Model
             }
         }
 
-        /// <summary>
-        /// Adds a new element to the WorkflowFilesCollection.  When a new workflow file
-        /// is added via this method, it is not a persistent add.  The next time the
-        /// workflow handler is restarted, the list in the configuration file will
+        /// <summary>// Adds a new element to the WorkflowFilesCollection.  When a new workflow file
+        /
+        /// is added via this method, it is not a persistent add.  The next time the// workflow handler is restarted, the list in the configuration file will
+        /
         /// be the only elements populated in the WorkflowFilesCollection.
-        /// </summary>
-        /// <param name="workflowFileElement">Class containing the definition of a new workflow file.</param>
+        /// </summary>// <param name="workflowFileElement">Class containing the definition of a new workflow file.</param>
+        p
         public void Add(WorkflowFileElement workflowFileElement)
         {
             this.BaseAdd(workflowFileElement);
         }
 
-        /// <summary>
-        /// Adds a new element to the WorkflowFilesCollection.  When a new workflow file
-        /// is added via this method, it is not a persistent add.  The next time the
-        /// workflow handler is restarted, the list in the configuration file will
+        /// <summary>// Adds a new element to the WorkflowFilesCollection.  When a new workflow file
+        /
+        /// is added via this method, it is not a persistent add.  The next time the// workflow handler is restarted, the list in the configuration file will
+        /
         /// be the only elements populated in the WorkflowFilesCollection.
         /// </summary>
-        /// <param name="name">string containing the name of the workflow. </param>
-        /// <param name="version">float value indicating the version of the workflow </param>
-        /// <param name="fileName">filename of the BPEL workflow description file</param>
-        /// <param name="encryptedFileName">encrypted file name of the BPEL workflow description file</param>
+        /// <param name="name">string containing the name of the workflow. </param>// <param name="version">float value indicating the version of the workflow </param>
+        /
+        /// <param name="fileName">filename of the BPEL workflow description file</param>// <param name="encryptedFileName">encrypted file name of the BPEL workflow description file</param>
+        p
         public void AddNewElement(string name, float version, string fileName, string encryptedFileName)
         {
             WorkflowFileElement fileElement = new WorkflowFileElement(name, version, fileName, encryptedFileName);
@@ -89,10 +90,10 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Gets the element key for a specified configuration element.
         /// </summary>
-        /// <param name="element">The <see cref="ConfigurationElement"/> to return the key for. </param>
-        /// <returns>An Object that acts as the key for the specified <see cref="ConfigurationElement"/>.
-        /// </returns>
-        protected override object GetElementKey(ConfigurationElement element)
+        /// <param name="element">The <see cref="ConfigurationElement"/> to return the key for. </param>// <returns>An Object that acts as the key for the specified <see cref="ConfigurationElement"/>.
+        /
+        /// </returns>rotected override object GetElementKey(ConfigurationElement element)
+        {
         {
             return ((WorkflowFileElement)element).FileName;
         }
@@ -122,8 +123,8 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Copies the collection to an array
         /// </summary>
-        /// <param name="array">an array of MediaTypeEntry objects</param>
-        /// <param name="arrayIndex">the starting index for placing into the array</param>
+        /// <param name="array">an array of MediaTypeEntry objects</param>// <param name="arrayIndex">the starting index for placing into the array</param>
+        p
         public void CopyTo(WorkflowFileElement[] array, int arrayIndex)
         {
             base.CopyTo(array, arrayIndex);
@@ -172,8 +173,8 @@ namespace WorkFlowHandle.Model
 
         #endregion
 
-        /// <summary>
-        /// Defines methods to manipulate generic collections of <see cref="WorkflowFileElement"/>
+        /// <summary>// Defines methods to manipulate generic collections of <see cref="WorkflowFileElement"/>
+        /
         /// </summary>
         private class WorkflowEnumerator : IEnumerator<WorkflowFileElement>
         {
@@ -191,20 +192,20 @@ namespace WorkFlowHandle.Model
                 this._enumerator = enumerator;
             }
 
-            /// <summary>
-            /// Gets the element in the collection at the current position of the enumerator.
+            /// <summary>   /// Gets the element in the collection at the current position of the enumerator.
+         
             /// </summary>
             /// <value></value>
-            /// <returns>
-            /// The element in the collection at the current position of the enumerator.
+            /// <returns>   /// The element in the collection at the current position of the enumerator.
+         
             /// </returns>
             public WorkflowFileElement Current
             {
                 get { return this._enumerator.Current as WorkflowFileElement; }
             }
 
-            /// <summary>
-            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// <summary>   /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+         
             /// </summary>
             public void Dispose()
             {
@@ -213,12 +214,12 @@ namespace WorkFlowHandle.Model
                 GC.SuppressFinalize(this);
             }
 
-            /// <summary>
-            /// Gets the element in the collection at the current position of the enumerator.
+            /// <summary>   /// Gets the element in the collection at the current position of the enumerator.
+         
             /// </summary>
             /// <value></value>
-            /// <returns>
-            /// The element in the collection at the current position of the enumerator.
+            /// <returns>   /// The element in the collection at the current position of the enumerator.
+         
             /// </returns>
             object IEnumerator.Current
             {
@@ -228,22 +229,22 @@ namespace WorkFlowHandle.Model
             /// <summary>
             /// Advances the enumerator to the next element of the collection.
             /// </summary>
-            /// <returns>
-            /// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            /// <returns>   /// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+         
             /// </returns>
-            /// <exception cref="T:System.InvalidOperationException">
-            /// The collection was modified after the enumerator was created.
+            /// <exception cref="T:System.InvalidOperationException">   /// The collection was modified after the enumerator was created.
+         
             /// </exception>
             public bool MoveNext()
             {
                 return this._enumerator.MoveNext();
             }
 
-            /// <summary>
-            /// Sets the enumerator to its initial position, which is before the first element in the collection.
+            /// <summary>   /// Sets the enumerator to its initial position, which is before the first element in the collection.
+         
             /// </summary>
-            /// <exception cref="T:System.InvalidOperationException">
-            /// The collection was modified after the enumerator was created.
+            /// <exception cref="T:System.InvalidOperationException">   /// The collection was modified after the enumerator was created.
+         
             /// </exception>
             public void Reset()
             {

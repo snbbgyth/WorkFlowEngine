@@ -9,6 +9,7 @@
 
 
 using System;
+using Sys
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ using System.Xml;
 
 namespace WorkFlowHandle.Steps
 {
-    public class CaseStep:StepRunnerStep
+    public class CaseStep : StepRunnerStep
     {
         /// <summary>
         /// A flag indicating whether this case step is the default
@@ -46,7 +47,7 @@ namespace WorkFlowHandle.Steps
             {
                 if (attrib.LocalName == "name")
                 {
-                   // StepId = attrib.Value;
+                    // StepId = attrib.Value;
                 }
                 else if (attrib.LocalName == "condition")
                 {
@@ -66,15 +67,15 @@ namespace WorkFlowHandle.Steps
         public bool IsConditionTrue(string context)
         {
             // The condition statements is used to determine when a step
-            // should be run.  If this is the default step, the step should
-            // always be run, regardless of the state of the condition statement.
+            // should be run.  If this is the default step, the step should   // always be run, regardless of the state of the condition statement.
+         
             if (this.defaultCase)
             {
                 return true;
             }
 
-            return true;
-            //return CompareXPath.IsConditionTrue(this.condition, context);
+            return true;   //return CompareXPath.IsConditionTrue(this.condition, context);
+        }
         }
     }
 }

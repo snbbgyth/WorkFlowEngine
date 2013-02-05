@@ -22,7 +22,7 @@ namespace WorkFlowHandle.Steps
         ///// Identifies whether this step is invoking a Code Activiy Block 
         ///// or another workflow.
         ///// </summary>
-        //private InvokeType type;
+         //private InvokeType type;
 
         /// <summary>
         /// Name of an input variable that is passed to a Code Activity Block. 

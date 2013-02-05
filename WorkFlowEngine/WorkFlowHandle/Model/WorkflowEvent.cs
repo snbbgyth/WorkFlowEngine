@@ -8,6 +8,7 @@
 *********************************************************************************/
 
 using System;
+using Sy
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,8 @@ using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Model
 {
-   [Serializable]
-   public class WorkflowEvent
+    [Serializable]
+    public class WorkflowEvent
     {
         /// <summary>
         /// Unique identifier for the event.
