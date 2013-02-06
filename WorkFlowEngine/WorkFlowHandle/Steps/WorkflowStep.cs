@@ -21,6 +21,9 @@ namespace WorkFlowHandle.Steps
         public string StepId { get; set; }
 
         /// <summary>
+        public string WorkFlowStateName { get; set;}
+
+        public string WorkFlowPartnerLink    /// <summary>
         /// Used to run a workflow step
         /// </summary>
         /// <param name="context">Context for the workflow</param>

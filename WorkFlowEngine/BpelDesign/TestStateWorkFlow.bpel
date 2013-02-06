@@ -1,15 +1,16 @@
 ﻿ 
 <process name="TestStateWorkFlow" targetNamespace="http://BusinessProcessDiagram1" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:Pool="http://mypool" xmlns:tns="http://BusinessProcessDiagram1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <partnerLinks>
-        <partnerLink myRole="provider" name="Pool" partnerLinkType="Pool:PartnerLinkType"/>
-    </partnerLinks>
+   	    <partnerLink name="CommonState" partnerLinkType="lns:CommonState" myRole="EmployeeRole" partnerRole="EmployeeParterRole" />
+        <partnerLink name="ManageState" partnerLinkType="lns:ManageState" myRole="ManageRole" partnerRole="ManageParterRole" />
+		<partnerLink name="DoneState" partnerLinkType="lns:DoneState" myRole="DoneRole" partnerRole="DoneParterRole" />
+        <partnerLink name="RefuseState" partnerLinkType="lns:RefuseState" myRole="RefuseRole" partnerRole="RefuseParterRole"     </partnerLinks>
     <variables>
         <variable messageType="Pool:Message" name="Variable"/>
     </variables>
     <sequence>
-        <receive createInstance="yes" operation="perform" partnerLink="Pool" portType="Pool:ProviderPortType" variable="Variable"/>
-        <empty name="Common"/>
-        <switch name="EmployeeAction">
+            
+		<invoke name="Common" partnerLink="CommonState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage"  <switch name="EmployeeAction">
             <case condition="Sumbit">
                 <sequence>
                     <empty name="Manage"/>
@@ -33,8 +34,7 @@
 	     -->
         </switch>
         <empty name="Manage"/>
-		<switch name="ManageAction">
-            <case condition="Approve">
+		<switch nainvoke name="Manage" partnerLink="ManageState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage"             <case condition="Approve">
                 <sequence>
                     <empty name="Done"/>
                 </sequence>
@@ -58,6 +58,8 @@
         </switch>
 		<empty name="Done"/>
 		<empty name="Refuse"/>
-        <reply operation="perform" partnerLink="Pool" portType="Pool:ProviderPortType" variable="Variable"/>
+        <replinvoke name="Done" partnerLink="DoneState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage" />
+		<invoke name="Refuse" partnerLink="RefuseState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage" />
+ Type="Pool:ProviderPortType" variable="Variable"/>
     </sequence>
 </process>
