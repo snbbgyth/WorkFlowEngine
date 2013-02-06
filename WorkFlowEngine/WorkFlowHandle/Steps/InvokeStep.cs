@@ -43,11 +43,13 @@ namespace WorkFlowHandle.Steps
                 {
                     case "operation":
                     case "name":
-        
-                        WorkFlowStateName.Value;
+
+                        WorkFlowStateName = attrib.Value;
                         break;
-                    case "portType":artnerLink":
-                        WorkFlowPartnerLink.Value;
+                  
+                        
+                    case  "partnerLink":
+                        WorkFlowPartnerLink =attrib.Value ;
                         break;
                     case "portType":
                         switch (attrib.Value)
