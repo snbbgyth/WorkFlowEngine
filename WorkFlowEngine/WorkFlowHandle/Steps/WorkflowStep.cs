@@ -17,13 +17,10 @@ namespace WorkFlowHandle.Steps
 {
     public abstract class WorkflowStep
     {
-
+         
         public string StepId { get; set; }
 
-        /// <summary>
-        public string WorkFlowStateName { get; set;}
-
-        public string WorkFlowPartnerLink { get; set; }   /// <summary>
+       /// <summary>
         /// Used to run a workflow step
         /// </summary>
         /// <param name="context">Context for the workflow</param>

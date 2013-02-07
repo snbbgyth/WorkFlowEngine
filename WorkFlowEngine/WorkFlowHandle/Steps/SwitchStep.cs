@@ -16,9 +16,11 @@ using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
+    public class Switcusing Model;
     public class SwitchStep : StepRunnerStep
     {
-        /// <summary>
+        public SwitchContextModel SwitchContext { get; set; }
+ry>
         /// Initializes a new instance of the SwitchStep class
         /// </summary>
         /// <param name="attributes">Xml attributes from the BPEL file</param>
@@ -30,7 +32,7 @@ namespace WorkFlowHandle.Steps
                 if (attrib.LocalName == "name")
                 {
                     StepId = attrib.Value;
-                }
+       SwitchContext.Name  }
             }
         }
 

@@ -17,8 +17,12 @@ using System.Xml;
 
 namespace WorkFlowHandle.Steps
 {
+    using Model;
+
     public class CaseStep : StepRunnerStep
     {
+        public CaseContextModel CaseContext { get; set; }
+
         /// <summary>
         /// A flag indicating whether this case step is the default
         /// case for a switch statement.
@@ -47,11 +51,11 @@ namespace WorkFlowHandle.Steps
             {
                 if (attrib.LocalName == "name")
                 {
-                    // StepId = attrib.Value;
+                    CaseContext.Name=attrib.Name;
                 }
                 else if (attrib.LocalName == "condition")
                 {
-                    this.condition = attrib.Value;
+                    CaseContext.Condition= attrib.Value;
                 }
             }
         }

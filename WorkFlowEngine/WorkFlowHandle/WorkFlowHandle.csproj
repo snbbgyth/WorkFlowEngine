@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\ProcessDefinitionEngine.cs" />
+    <Compile Include="Model\CaseContextModel.cs" />
+    <Compile Include="Model\InvokeContextModel.cs" />
+    <Compile Include="Model\SequenceContextModel.cs" />
     <Compile Include="Model\StepData.cs" />
+    <Compile Include="Model\SwitchContextModel.cs" />
     <Compile Include="Model\WorkflowContext.cs" />
     <Compile Include="Model\WorkflowEvent.cs" />
     <Compile Include="Model\WorkflowFileElement.cs" />

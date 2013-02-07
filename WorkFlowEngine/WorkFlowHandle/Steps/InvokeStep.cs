@@ -16,18 +16,12 @@ using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
+    using Model;
    public class InvokeStep:StepRunnerStep
-    {
-        ///// <summary>
-        ///// Identifies whether this step is invoking a Code Activiy Block 
-        ///// or another workflow.
-        ///// </summary>
-         //private InvokeType type;
-
-        /// <summary>
-        /// Name of an input variable that is passed to a Code Activity Block. 
-        /// </summary>
-        private string inputVariable;
+   {
+        public InvokeContextModel InvokeContext { get; set; }
+       
+ 
 
         /// <summary>
         /// Initializes a new instance of the InvokeStep class
@@ -39,39 +33,26 @@ namespace WorkFlowHandle.Steps
            // this.type = InvokeType.Unknown;
             foreach (XmlAttribute attrib in attributes)
             {
-                switch (attrib.LocalName)
+                switch (attrib.LocalName.ToLower())
                 {
                     case "operation":
-                    case "name":
-
-                        WorkFlowStateName = attrib.Value;
+                        InvokeContext.Operation = attrib.Value;
                         break;
-                  
-                        
+                    case "name":
+                        InvokeContext.Name = attrib.Value;
+                        break;
                     case  "partnerLink":
-                        WorkFlowPartnerLink =attrib.Value ;
+                        InvokeContext.PartnerLink = attrib.Value;
                         break;
                     case "portType":
-                        switch (attrib.Value)
-                        {
-                            case "FamActivityServiceSoap":
-                               // this.type = InvokeType.Activity;
-                                break;
-                            case "FamWorkflowServiceSoap":
-                              //  this.type = InvokeType.Workflow;
-                                break;
-                        }
+                        InvokeContext.PortType = attrib.Value;
                         break;
                     case "inputVariable":
-                        this.inputVariable = attrib.Value;
+                        InvokeContext.InputVariable = attrib.Value;
                         break;
                 }
             }
-
-            //if (this.type == InvokeType.Unknown)
-            //{
-            //    this.type = InvokeType.Activity;   // default value
-            //}
+ 
         }
 
         /// <summary>

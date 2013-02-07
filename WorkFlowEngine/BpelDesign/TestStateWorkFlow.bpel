@@ -6,25 +6,25 @@
 		<partnerLink name="DoneState" partnerLinkType="lns:DoneState" myRole="DoneRole" partnerRole="DoneParterRole" />
         <partnerLink name="RefuseState" partnerLinkType="lns:RefuseState" myRole="RefuseRole" partnerRole="RefuseParterRole"     </partnerLinks>
     <variables>
-        <variable messageType="Pool:Message" name="Variable"/>
-    </variables>
+        <variable messageType="Pool:Messxsd:string" name="EmployeeOperation"/>
+		<variable messageType="xsd:string" name="ManageOperation"/>
+		<variable messageType="xsd:string" name="RemarkMessag</variables>
     <sequence>
             
-		<invoke name="Common" partnerLink="CommonState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage"  <switch name="EmployeeAction">
+		<invoke name="Common" partnerLink="CommonState" portType="FamAEmployeeAction" operation="StateOperation" inputVariable="EmployeeOperationswitch name="EmployeeAction">
             <case condition="Sumbit">
                 <sequence>
-                    <empty name="Manage"/>
-                </sequence>
-            </case>
-            <case condition="Save">
+                    <empty name="Mana<invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation"  </case>
+            <case condition="Reject">
                 <sequence>
-                    <empty name="Common"/>
-                </sequence>
+         Save">
+                <sequence>
+                   <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" quence>
             </case>
 			<case condition="Revoke">
                 <sequence>
                     <empty name="Common"/>
-                </sequence>
+    <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" e>
             </case>
          <!-- <otherwise>
                 <sequence>
@@ -34,16 +34,14 @@
 	     -->
         </switch>
         <empty name="Manage"/>
-		<switch nainvoke name="Manage" partnerLink="ManageState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage"             <case condition="Approve">
+		<switch nainvoke name="Manage" partnerLink="ManageState" portType="FamAManageAction" operation="StateOperation" inputVariable="ManageOperation          <case condition="Approve">
                 <sequence>
                     <empty name="Done"/>
-                </sequence>
-            </case>
+                </se<invoke name="Done" partnerLink="DoneState" portType="None" operation="StateOperation" inputVariable="RemarkMessage"  </case>
             <case condition="Reject">
                 <sequence>
                     <empty name="Refuse"/>
-                </sequence>
-            </case>
+                </seque<invoke name="Refuse" partnerLink="RefuseState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" se>
 		 <!-- 	<case condition="Revoke">
                 <sequence>
                     <empty name="Common"/>
@@ -58,8 +56,7 @@
         </switch>
 		<empty name="Done"/>
 		<empty name="Refuse"/>
-        <replinvoke name="Done" partnerLink="DoneState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage" />
-		<invoke name="Refuse" partnerLink="RefuseState" portType="FamActivityServiceSoap" operation="DetermineIfDifferentDrive" inputVariable="OriginalRequestMessage" />
- Type="Pool:ProviderPortType" variable="Variable"/>
+        <replinvoke name="Done" partnerLink="DoneState" portType="FamANone" operation="StateOperation" inputVariable="RemarkMessage" />
+		<invoke name="Refuse" partnerLink="RefuseState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />
     </sequence>
 </process>
