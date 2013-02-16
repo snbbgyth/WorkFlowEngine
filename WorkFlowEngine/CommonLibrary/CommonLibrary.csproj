@@ -44,6 +44,7 @@
     <Compile Include="DAL\ThreadPoolManage.cs" />
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Model\AppInfoModel.cs" />
+    <Compile IncludHelp\UnitlHelpodel.cs" />
     <Compile Include="Model\WorkFlowActivityLogModel.cs" />
     <Compile Include="Model\WorkFlowActivityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

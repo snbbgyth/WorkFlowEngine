@@ -40,19 +40,7 @@ namespace WorkFlowService.Help
         }
 
         private static string RunPath
-        {
- /// <summary>
-        /// Get enum type by data base type 
-        /// </summary>
-        /// <param name="datenumType">Enum type</param>
-        /// <returns>Enum type </returns>
-        public static T GetEnumTypeByDataBaseType<T>(string enum where T:  struct 
-        {
-            return (from sqlSourceType in Enum.GetNames(typeof(T))
-                    where string.Compare(sqlSourceType, dataBaseenumringComparison.OrdinalIgnoreCase) == 0
-                    select (T)Enum.Parse(typeof(T), sqlSourceType)).FirstOrDefault()ring RunPath
-        {
-            get { return AppDomain.CurrentDomain.BaseDirectory; }
+               get { return AppDomain.CurrentDomain.BaseDirectory; }
         }
 
         public static string SqliteFilePath

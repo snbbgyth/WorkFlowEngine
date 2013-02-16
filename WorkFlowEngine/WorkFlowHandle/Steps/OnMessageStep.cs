@@ -52,18 +52,17 @@ namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
         public WorkFlowState Run(string context, string stepId)
-        {
-            WorkflowContext rrentState = this.receiveStep.Run(context, stepId);
+    string     WorkflowContext rrentState = this.receiveStep.Run(context, stepId);
             if (currentState != WorkFlowState.Done)
             {
-                // Have the event so run
+                // Have the event so run.ToString()
                 return base.Run(context, null);
             }
 
             // Check the workflow name whether in the continueworkflowList, If in the list, then don't report error status, continue running the workflow
             if (currentState == WorkFlowState.Manager)
             {
-                return base.Run(context, null);
+                return base.Run(context, null);.ToString()
             }
             return currentState;
         }

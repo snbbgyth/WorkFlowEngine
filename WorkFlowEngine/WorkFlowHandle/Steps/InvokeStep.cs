@@ -67,11 +67,9 @@ namespace WorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  This
         /// parameter is ignored for the Invoke step.</param>
         /// <returns>State of the workflow after executing the invoke step.</returns>
-        public   WorkFoverride  WorkFlowState Run(WorkflowContext context, string stepId)
+        public   WorkFoverride  string Run(WorkflowContext context, string stepId)
         {
-                  
-
-                  return WorkFlowState.Manager;
+            return  InvokeContext.Name;
         }
 
  

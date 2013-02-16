@@ -43,11 +43,9 @@ ry>
         /// <param name="stepId">Step at which to start execution.  Execution starts at first step
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public override WorkFlowState Run(string context, string stepId)
+        public override WorkFlowState Run(string context, string stepIdstring Run(WorkflowContext context, string stepId)
         {
-      WorkflowContextWorkFlowState currentState = WorkFlowState.Done;
-
-            foreach (WorkflowStep step in WorkflowSteps)
+            var currentState = WorkFlowState.Done.ToString()flowSteps)
             {
                 // Go through each step in order until one is found with a valid condition.
                 CaseStep caseStep = step as CaseStep;
@@ -79,7 +77,7 @@ ry>
         }
 
         /// <summary>
-        /// Runs the provided CaseStep.  The CaseStep requires a reference to 
+        /// Runs the provided CaseStep.  The.ToString() CaseStep requires a reference to 
         /// an instance of the currently executing WorkflowExecutionEngine
         /// to run.
         /// </summary>
@@ -92,8 +90,7 @@ ry>
         private WorkFlowState RunCase(CaseStep caseStep, ref string context, string stepId)
         {
 
-            WorkFlowState currentState = caseStep.RWorkflowContexttext, stepId);
-            return currentState;
-        }
-    }
-}
+      string RunCase(CaseStep caseStep, ref WorkflowContext context, string stepId)
+        {
+
+            var}

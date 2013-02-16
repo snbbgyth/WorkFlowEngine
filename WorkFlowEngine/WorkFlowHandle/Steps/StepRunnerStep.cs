@@ -24,9 +24,9 @@ namespace Worusing WorkFlowHandle.ModelWorkFlowHandle.Steps
             _workflowSteps = new List<WorkflowStep>();
         }
 
-        public override WorkFlowState Run(string context, string steWorkflowContext context, string stepId)
+        public override WorkFlowState Run(string cstringg steWorkflowContext context, string stepId)
         {
-          return WorkFlowState.Managersummary>
+          return WorkFlowState.Managersu.ToString()mmary>
         /// Gets a set of steps defined within this step
         /// </summary>
         public List<WorkflowStep> WorkflowSteps

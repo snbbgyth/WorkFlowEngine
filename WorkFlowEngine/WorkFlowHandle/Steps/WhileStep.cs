@@ -52,26 +52,27 @@ namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
         public override WorkFlowState Run(string context, string stepId)
+    string Run(WorkflowContext context, string stepId)
         {
-            WorkflowContextowState currentState = WorkFlowState.Done;
-            if (!String.IsNullOrEmpty(stepId))
-            {
+            var currentState = WorkFlowState.Done.ToString()      {
                 // we must be restarting after an event
                 // execute from where we left off and then perform while logic as normal
                 currentState = base.Run(context, stepId);
                 if (currentState != WorkFlowState.Done)
                 {
                     return currentState;
-                }
+.ToString()       }
             }
 
-            while (this.IsConditionTrue(context))
-            {
-                currentState = base.Run(context, stepId);
+            return currentState;
+        }
+
+        /// <summary>
+        /// evaluate t currentState = base.Run(context, stepId);
                 if (currentState != WorkFlowState.Done)
                 {
                     return currentState;
-                }
+         .ToString()       }
             }
 
             return currentState;

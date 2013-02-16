@@ -27,7 +27,7 @@ namespace WorkFlowHandle.Steps
         /// <param name="context">Context for the workflow</param>
         /// <param name="stepId">Step at which to start execution.  Ignored</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public abstract WorkFlowState Run(WorkflowContext context, string stepId);
+        public abstract Workstring(WorkflowContext context, string stepId);
 
 
         /// <summary>

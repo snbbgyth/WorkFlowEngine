@@ -44,7 +44,7 @@ namespace WorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  Execution starts at first step
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public override WorkFlowState Run(WorkflowContext workflowContext, string stepId)
+        public override Worstringn(WorkflowContext workflowContext, string stepId)
         {
             WorkFlowState state = WorkFlowState.Done;
 
@@ -55,6 +55,7 @@ namespace WorkFlowHandle.Steps
 
 
             return state;
+ .ToString();
         }
     }
 }

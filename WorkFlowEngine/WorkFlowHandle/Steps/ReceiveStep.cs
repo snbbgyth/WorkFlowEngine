@@ -18,7 +18,7 @@ namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
 {
     public class ReceiveStep : WorkflowStep
     {
-        public override WorkFlowState Run(string context, striWorkflowContext workflowCd)
+        public override WorkFlowState Run(ststring striWorkflowContext workflowCd)
         {
             throw new NotImplementedException();
         }
