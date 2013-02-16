@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CommonLibrary.Help;
+using WorkFlowHandle.Model;
 
 namespace WorkFlowHandle.Steps
 {
@@ -26,7 +27,7 @@ namespace WorkFlowHandle.Steps
         /// <param name="context">Context for the workflow</param>
         /// <param name="stepId">Step at which to start execution.  Ignored</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public abstract WorkFlowState Run(string context, string stepId);
+        public abstract WorkFlowState Run(WorkflowContext context, string stepId);
 
 
         /// <summary>

@@ -45,7 +45,7 @@ ry>
         /// <returns>State of the workflow after executing the steps.</returns>
         public override WorkFlowState Run(string context, string stepId)
         {
-            WorkFlowState currentState = WorkFlowState.Done;
+      WorkflowContextWorkFlowState currentState = WorkFlowState.Done;
 
             foreach (WorkflowStep step in WorkflowSteps)
             {
@@ -92,7 +92,7 @@ ry>
         private WorkFlowState RunCase(CaseStep caseStep, ref string context, string stepId)
         {
 
-            WorkFlowState currentState = caseStep.Run(context, stepId);
+            WorkFlowState currentState = caseStep.RWorkflowContexttext, stepId);
             return currentState;
         }
     }

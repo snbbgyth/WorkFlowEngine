@@ -44,12 +44,12 @@ namespace WorkFlowService.Help
  /// <summary>
         /// Get enum type by data base type 
         /// </summary>
-        /// <param name="dataBaseType">sql source type</param>
-        /// <returns>SqlSourceType</returns>
-        public static T GetEnumTypeByDataBaseType<T>(string dataBaseType) where T:  struct 
+        /// <param name="datenumType">Enum type</param>
+        /// <returns>Enum type </returns>
+        public static T GetEnumTypeByDataBaseType<T>(string enum where T:  struct 
         {
             return (from sqlSourceType in Enum.GetNames(typeof(T))
-                    where string.Compare(sqlSourceType, dataBaseType, StringComparison.OrdinalIgnoreCase) == 0
+                    where string.Compare(sqlSourceType, dataBaseenumringComparison.OrdinalIgnoreCase) == 0
                     select (T)Enum.Parse(typeof(T), sqlSourceType)).FirstOrDefault()ring RunPath
         {
             get { return AppDomain.CurrentDomain.BaseDirectory; }

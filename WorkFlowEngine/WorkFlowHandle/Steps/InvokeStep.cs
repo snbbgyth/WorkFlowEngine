@@ -17,7 +17,7 @@ using CommonLibrary.Help;
 namespace WorkFlowHandle.Steps
 {
     using Model;
-   public class InvokeStep:StepRunnerStep
+   public class InvokeStep:SWorkflowtep
    {
         public InvokeContextModel InvokeContext { get; set; }
        
@@ -51,6 +51,8 @@ namespace WorkFlowHandle.Steps
                         InvokeContext.InputVariable = attrib.Value;
                         break;
                 }
+         default:                  break;
+                }
             }
  
         }
@@ -65,9 +67,9 @@ namespace WorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  This
         /// parameter is ignored for the Invoke step.</param>
         /// <returns>State of the workflow after executing the invoke step.</returns>
-        public   WorkFlowState Run(string  context, string stepId)
+        public   WorkFoverride  WorkFlowState Run(WorkflowContext context, string stepId)
         {
- 
+                  
 
                   return WorkFlowState.Manager;
         }

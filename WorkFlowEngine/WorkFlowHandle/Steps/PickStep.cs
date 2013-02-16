@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
+using WorkFlowHandle.Model;
 
 namespace WorkFlowHandle.Steps
 {
@@ -43,7 +44,7 @@ namespace WorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  Execution starts at first step
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public override WorkFlowState Run(string context, string stepId)
+        public override WorkFlowState Run(WorkflowContext workflowContext, string stepId)
         {
             WorkFlowState state = WorkFlowState.Done;
 

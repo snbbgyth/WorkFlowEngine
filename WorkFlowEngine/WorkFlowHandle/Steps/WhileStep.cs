@@ -14,7 +14,7 @@ using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
 
-namespace WorkFlowHandle.Steps
+namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
 {
     public class WhileStep : StepRunnerStep
     {
@@ -53,7 +53,7 @@ namespace WorkFlowHandle.Steps
         /// <returns>State of the workflow after executing the steps.</returns>
         public override WorkFlowState Run(string context, string stepId)
         {
-            WorkFlowState currentState = WorkFlowState.Done;
+            WorkflowContextowState currentState = WorkFlowState.Done;
             if (!String.IsNullOrEmpty(stepId))
             {
                 // we must be restarting after an event
@@ -88,7 +88,7 @@ namespace WorkFlowHandle.Steps
             return true;
         }
         /// <summary>
-        /// Gets progress weight of this step
+  WorkflowContext/// Gets progress weight of this step
         /// </summary>
         public int ProgressWeight
         {

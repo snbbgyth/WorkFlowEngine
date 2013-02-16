@@ -14,11 +14,11 @@ using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
 
-namespace WorkFlowHandle.Steps
+namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
 {
     public class ReceiveStep : WorkflowStep
     {
-        public override WorkFlowState Run(string context, string stepId)
+        public override WorkFlowState Run(string context, striWorkflowContext workflowCd)
         {
             throw new NotImplementedException();
         }

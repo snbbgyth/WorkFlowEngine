@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using CommonLibrary.Help;
 
-namespace WorkFlowHandle.Steps
+namespace Worusing WorkFlowHandle.ModelWorkFlowHandle.Steps
 {
     public abstract class StepRunnerStep : WorkflowStep
     {
@@ -24,14 +24,9 @@ namespace WorkFlowHandle.Steps
             _workflowSteps = new List<WorkflowStep>();
         }
 
-        public override WorkFlowState Run(string context, string stepId)
+        public override WorkFlowState Run(string context, string steWorkflowContext context, string stepId)
         {
-            throw new NotImplementedException();
-        }
-
-
-
-        /// <summary>
+          return WorkFlowState.Managersummary>
         /// Gets a set of steps defined within this step
         /// </summary>
         public List<WorkflowStep> WorkflowSteps

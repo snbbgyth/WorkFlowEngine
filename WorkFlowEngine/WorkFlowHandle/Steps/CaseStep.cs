@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
@@ -68,7 +69,7 @@ namespace WorkFlowHandle.Steps
         /// workflow parameters which are likely used in determining
         /// whether the case condition is met.</param>
         /// <returns>True if condition is met, false otherwise</returns>
-        public bool IsConditionTrue(string context)
+        public bool IsConditionTrue(WorkflowContext context)
         {
             // The condition statements is used to determine when a step
             // should be run.  If this is the default step, the step should   // always be run, regardless of the state of the condition statement.
@@ -80,6 +81,11 @@ namespace WorkFlowHandle.Steps
 
             return true;   //return CompareXPath.IsConditionTrue(this.condition, context);
         }
+        }
+
+        public   WorkFlowState Run(string context, string stepId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

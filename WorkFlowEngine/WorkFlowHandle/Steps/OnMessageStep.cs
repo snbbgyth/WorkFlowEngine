@@ -14,7 +14,7 @@ using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
 
-namespace WorkFlowHandle.Steps
+namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
 {
     public class OnMessageStep : StepRunnerStep
     {
@@ -53,7 +53,7 @@ namespace WorkFlowHandle.Steps
         /// <returns>State of the workflow after executing the steps.</returns>
         public WorkFlowState Run(string context, string stepId)
         {
-            var currentState = this.receiveStep.Run(context, stepId);
+            WorkflowContext rrentState = this.receiveStep.Run(context, stepId);
             if (currentState != WorkFlowState.Done)
             {
                 // Have the event so run
