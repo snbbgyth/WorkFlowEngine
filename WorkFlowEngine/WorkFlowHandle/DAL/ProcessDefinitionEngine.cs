@@ -156,7 +156,6 @@ namespace WorkFlowHandle.DAL
                     cachedFaultHandler.Add(context.Name, context.FaultHandlers);
                     cachedMessageTimeoutHandler.Add(context.Name, context.MessageTimeoutEventHanlderDict);
                     cachedCancelHandler.Add(context.Name, cancelEventHandlerName);
-
                 }
 
                 return true;
@@ -263,7 +262,6 @@ namespace WorkFlowHandle.DAL
                         // where this may be necessaary.
                         this.defaultWorkflows = new System.Collections.Hashtable();
                         this.olderWorkflows = new WorkflowFilesCollection();
-
                     }
                 }
             }
@@ -463,27 +461,24 @@ namespace WorkFlowHandle.DAL
                     ReceiveStep receiveStep = new ReceiveStep(currentStep.Attributes);
                     workflowStepList.Add(receiveStep);
                     string messageName = String.Empty;
-                    string TimesetTime = String.Empty;
+                    string timesetTime = String.Empty;
                     foreach (XmlAttribute attrib in currentStep.Attributes)
                     {
                         if (attrib.LocalName == "timeout")
                         {
-                            TimesetTime = attrib.Value;
+                            timesetTime = attrib.Value;
                         }
                         if (attrib.LocalName == "variable")
                         {
                             messageName = attrib.Value;
-                      }
+                        }
                     }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
-                        timeoutParameters.Add(messageName, TimesetTime);
+                        timeoutParameters.Add(messageName, timesetTime);
                     }
 
                 }
-               
-                //   tlowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
-                //}
                 else if (currentStep.LocalName == "onEvent")
                 {
                     OnEventStep onEventStep = new OnEventStep(currentStep.Attributes);

@@ -245,14 +245,7 @@ namespace WorkFlowHandle.Model
 
         #region Properties
 
-        /// <summary>/// This field is primarily for testing, so a workflow can hold to an anti-workflow it started
-          
-        /// </summary>
-        internal string AntiWorkflowId
-        {
-            get { return (string)GetWorkflowParameter("antiWorkflowId"); }
-            set { SetWorkflowParameter("antiWorkflowId", value); }
-        }
+   
 
         /// <summary>
         /// Gets or sets id of workflow transaction

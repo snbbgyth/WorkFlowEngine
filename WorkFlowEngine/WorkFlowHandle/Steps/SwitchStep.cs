@@ -30,7 +30,7 @@ ry>
             foreach (XmlAttribute attrib in attributes)
             {
                 if (attrib.LocalName == "name")
-                 {
+                {
                     StepId = attrib.Value;
        SwitchContext.Name  }
             }
