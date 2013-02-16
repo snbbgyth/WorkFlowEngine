@@ -9,7 +9,7 @@
 
 using System;
 using System.IO;
-using CommonLibrary.Help;
+using CommonLibraSystem.LinqmmonLibrary.Help;
 
 namespace WorkFlowService.Help
 {
@@ -40,6 +40,17 @@ namespace WorkFlowService.Help
         }
 
         private static string RunPath
+        {
+ /// <summary>
+        /// Get enum type by data base type 
+        /// </summary>
+        /// <param name="dataBaseType">sql source type</param>
+        /// <returns>SqlSourceType</returns>
+        public static T GetEnumTypeByDataBaseType<T>(string dataBaseType) where T:  struct 
+        {
+            return (from sqlSourceType in Enum.GetNames(typeof(T))
+                    where string.Compare(sqlSourceType, dataBaseType, StringComparison.OrdinalIgnoreCase) == 0
+                    select (T)Enum.Parse(typeof(T), sqlSourceType)).FirstOrDefault()ring RunPath
         {
             get { return AppDomain.CurrentDomain.BaseDirectory; }
         }

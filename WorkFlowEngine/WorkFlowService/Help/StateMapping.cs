@@ -27,7 +27,7 @@ namespace WorkFlowService.Help
             get { return new StateMapping(); }
         }
 
-        private  void Init()
+        private void Init()
         {
             StateBasesList = new List<IStateBase>
                                   {
@@ -35,7 +35,6 @@ namespace WorkFlowService.Help
                                       new ManageState(),
                                       new DoneState(),
                                       new RefuseState()
-
                                   };
         }
     }
