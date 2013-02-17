@@ -26,12 +26,20 @@ namespace Worusing WorkFlowHandle.ModelWorkFlowHandle.Steps
 
         public override WorkFlowState Run(string cstringg steWorkflowContext context, string stepId)
         {
+          re  foreach (var workflowStep in _workflowSteps)
+            {
+                return workflowStep.Run(context, stepId);
+            }
           return WorkFlowState.Managersu.ToString()mmary>
         /// Gets a set of steps defined within this step
         /// </summary>
         public List<WorkflowStep> WorkflowSteps
         {
             get { return _workflowSteps; }
+        }
+    }
+}
+    set { _workflowSteps = value; }
         }
     }
 }

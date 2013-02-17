@@ -20,10 +20,7 @@ namespace WorkFlowHandle.Steps
    public class InvokeStep:SWorkflowtep
    {
         public InvokeContextModel InvokeContext { get; set; }
-       
- 
-
-        /// <summary>
+         /// <summary>
         /// Initializes a new instance of the InvokeStep class
         /// </summary>
         /// <param name="attributes">Xml attributes from the BPEL file

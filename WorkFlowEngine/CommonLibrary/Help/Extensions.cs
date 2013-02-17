@@ -8,13 +8,9 @@
 *********************************************************************************/
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Sy
 
-namespace WorkFlowService.Help
-{
-   public static class Extensions
+namespace CommonLibrary  public static class Extensions
     {
        public static bool CompareEqualIgnoreCase(this string valueA, string valueB)
        {

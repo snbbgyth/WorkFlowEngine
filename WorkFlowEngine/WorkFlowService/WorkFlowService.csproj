@@ -58,8 +58,7 @@
     <Compile Include="DAL\RefuseState.cs" />
     <Compile Include="DAL\WorkFlowActivityLogDAL.cs" />
     <Compile Include="Help\Extensions.cs" />
-    <Compile Include="Help\StateMapping.cs" />
-    <Compile Include="Help\TypeNameComparer.cs" />
+    <Compile Include="Help\StateMapping.crer.cs" />
     <Compile Include="Help\WFConstants.cs" />
     <Compile Include="Help\WFUntilHelp.cs" />
     <Compile Include="IDAL\IActivity.cs" />

@@ -228,8 +228,6 @@ namespace WorkFlowHandle.Model
         
         /// starting workflows, the manager name of
         /// the manager they are running for must be used.</param>
-        /// <param name="completionNotification">contains data on who to notify when the
-        /// workflow completes (including on error or on cancellation)</param>
         public WorkflowContext(string name,
             string workflowId,
             string userId,
@@ -243,9 +241,7 @@ namespace WorkFlowHandle.Model
         }
         #endregion
 
-        #region Properties
-
-   
+        #region Public Properties
 
         /// <summary>
         /// Gets or sets id of workflow transaction

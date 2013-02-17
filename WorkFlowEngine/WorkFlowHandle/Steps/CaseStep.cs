@@ -83,9 +83,13 @@ namespace WorkFlowHandle.Steps
         }
         }
 
-        public   WorkFlowState Run(string context, string stepId)
+        public  override  string Run(WorkflowContext workflowContext, string stepId)
         {
-            throw new NotImplementedException();
+            foreach (var workflowStep in WorkflowSteps)
+            {
+                return workflowStep.Run(workflowContext, stepId);
+            }
+            return string.Empty;
         }
     }
 }

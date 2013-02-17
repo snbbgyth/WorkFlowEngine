@@ -56,16 +56,22 @@ ry>
                         // Used to run workflow from switch step begin.
                         if (stepId == StepId)
                         {
-                            currentState = this.RunCase(caseStep, ref context, stepId);
-                        }
-                        // we must be restarting for some reason,  find the case where we last stopped.
-                        if (step.HasStep(stepId))
-                        {
-                            currentState = this.RunCase(caseStep, ref context, stepId);
+                  caseStep.CaseContext.Condition.CompareEqualIgnoreCaserentState = this.RunCase(caseStep, ref context, stepId);
                             break;
                         }
                     }
-                    else if (caseStep.IsConditionTrue(context))
+           n,  find the case where we last stopped.
+                        if (step.HasStep(stepId))
+                        {
+               //if (step.HasStep(stepId))
+                        //{
+                        //             break;
+                    }
+                }
+            }
+
+            re//    break;
+                        //onTrue(context))
                     {
                         currentState = this.RunCase(caseStep, ref context, stepId);
                         break;
