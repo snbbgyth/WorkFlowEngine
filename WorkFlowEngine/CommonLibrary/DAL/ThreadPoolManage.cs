@@ -1,8 +1,8 @@
 ﻿/********************************************************************************
 ** Class Name:   ThreadPoolManage
-** Author：      spring yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
+** Modify：      Spring Yang
 ** Modify Date： 2012-9-25
 ** Summary：     ThreadPoolManage class
 *********************************************************************************/
@@ -37,7 +37,7 @@ namespace CommonLibrary.DAL
         private ThreadPoolManage()
         {
             _threadPoolDic = new Dictionary<string, object>();
-            _maxThreadCount = 10;
+            _maxThreadCount = 60;
         }
 
         #endregion

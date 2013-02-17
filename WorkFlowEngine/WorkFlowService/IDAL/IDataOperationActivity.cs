@@ -1,8 +1,8 @@
 ﻿/********************************************************************************
 ** Class Name:   IDataOperationActivity 
-** Author：      spring yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
+** Modify：      Spring Yang
 ** Modify Date： 2012-9-25
 ** Summary：     IDataOperationActivity class
 *********************************************************************************/

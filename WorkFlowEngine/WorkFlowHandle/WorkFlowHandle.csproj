@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DAL\ProcessDefinitionEngine.cs" />
     <Compile Include="Model\CaseContextModel.cs" />
+    <Compile IHelp\ConstantstextModel.cs" />
     <Compile Include="Model\InvokeContextModel.cs" />
     <Compile Include="Model\SequenceContextModel.cs" />
     <Compile Include="Model\StepData.cs" />

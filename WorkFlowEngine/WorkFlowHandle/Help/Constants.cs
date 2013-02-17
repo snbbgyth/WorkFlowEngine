@@ -1,10 +1,10 @@
 ﻿/********************************************************************************
-** Class Name:   ICreateDataTableActivity 
+** Class Name:   ProcessDefinitionEngine 
 ** Author：      Spring Yang
 ** Create date： 2012-9-1
 ** Modify：      Spring Yang
 ** Modify Date： 2012-9-25
-** Summary：     ICreateDataTableActivity class
+** Summary：     ProcessDefinitionEngine class
 *********************************************************************************/
 
 using System;
@@ -12,10 +12,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WorkFlowService.IDAL
+namespace WorkFlowHandle.Help
 {
-    public interface ICreateDataTableActivity
-    {
-        int CreateTable();
-    }
+   public class Constants
+   {
+
+       public const string BpelFileFolderTags = "{0}BPEL{0}";
+   }
 }

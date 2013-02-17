@@ -1,8 +1,8 @@
 ﻿/********************************************************************************
 ** Class Name:   ProcessDefinitionEngine 
-** Author：      spring yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
+** Modify：      Spring Yang
 ** Modify Date： 2012-9-25
 ** Summary：     ProcessDefinitionEngine class
 *********************************************************************************/
@@ -19,6 +19,7 @@ using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.DAL
 {
+    using Help;
     public class ProcessDefinitionEngine
     {
         /// <summary>
@@ -77,6 +78,13 @@ namespace WorkFlowHandle.DAL
         /// </summary>
         private Dictionary<string, string> timeoutParameters = new Dictionary<string, string>();
 
+
+        public ProcessDefinitionEngine Current
+        {
+            get { return new ProcessDefinitionEngine(); }
+        }
+
+
         /// <summary>
         /// Gets or sets a HashTable of parameters used to communicate data between the
         /// various code blocks and execution steps in the workflow
@@ -100,8 +108,9 @@ namespace WorkFlowHandle.DAL
         {
             // Temp for now - hard code the folder.
             this.workflowFolder = AppDomain.CurrentDomain.BaseDirectory;
-            this.workflowFolder += string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}BPEL{0}", Path.DirectorySeparatorChar);
+            this.workflowFolder += string.Format(System.Globalization.CultureInfo.InvariantCulture, Constants.BpelFileFolderTags, Path.DirectorySeparatorChar);
         }
+
 
         /// <summary>
         /// Loads latest version of a workflow from given workflow name.  
@@ -113,7 +122,7 @@ namespace WorkFlowHandle.DAL
         {
             lock (this.lockObject)
             {
-                XmlElement rootElement = this.LoadWorkflowFile(context.Name, context.Version);
+                XmlElement rootElement = this.LoadWorkflowFile(context.WorkflowName, context.Version);
                 if (rootElement == null)
                 {
                     return false;
@@ -126,25 +135,25 @@ namespace WorkFlowHandle.DAL
                 // a load on its own.
                 context.IsWorkflowStepsLoaded = true;
 
-                if (cachedWorkflowSteps.ContainsKey(context.Name) && cachedFaultHandler.ContainsKey(context.Name) && cachedMessageTimeoutHandler.ContainsKey(context.Name) && cachedCancelHandler.ContainsKey(context.Name))
+                if (cachedWorkflowSteps.ContainsKey(context.WorkflowName) && cachedFaultHandler.ContainsKey(context.WorkflowName) && cachedMessageTimeoutHandler.ContainsKey(context.WorkflowName) && cachedCancelHandler.ContainsKey(context.WorkflowName))
                 {
                     this.FillVariableList(context.WorkflowVariables, childList);
-                    foreach (FaultHandler handler in cachedFaultHandler[context.Name])
+                    foreach (FaultHandler handler in cachedFaultHandler[context.WorkflowName])
                     {
                         context.FaultHandlers.Add(handler);
                     }
 
-                    foreach (WorkflowStep step in cachedWorkflowSteps[context.Name])
+                    foreach (WorkflowStep step in cachedWorkflowSteps[context.WorkflowName])
                     {
                         context.WorkflowSteps.Add(step);
                     }
 
-                    foreach (var dict in cachedMessageTimeoutHandler[context.Name])
+                    foreach (var dict in cachedMessageTimeoutHandler[context.WorkflowName])
                     {
                         context.MessageTimeoutEventHanlderDict.Add(dict.Key, dict.Value);
                     }
 
-                    context.CancelEventHandlerName = cachedCancelHandler[context.Name];
+                    context.CancelEventHandlerName = cachedCancelHandler[context.WorkflowName];
                 }
                 else
                 {
@@ -152,10 +161,10 @@ namespace WorkFlowHandle.DAL
                     string cancelEventHandlerName = string.Empty;
                     this.FillStepList(context.WorkflowVariables, context.FaultHandlers, 0, context.WorkflowSteps, childList, context.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                     context.CancelEventHandlerName = cancelEventHandlerName;
-                    cachedWorkflowSteps.Add(context.Name, context.WorkflowSteps);
-                    cachedFaultHandler.Add(context.Name, context.FaultHandlers);
-                    cachedMessageTimeoutHandler.Add(context.Name, context.MessageTimeoutEventHanlderDict);
-                    cachedCancelHandler.Add(context.Name, cancelEventHandlerName);
+                    cachedWorkflowSteps.Add(context.WorkflowName, context.WorkflowSteps);
+                    cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
+                    cachedMessageTimeoutHandler.Add(context.WorkflowName, context.MessageTimeoutEventHanlderDict);
+                    cachedCancelHandler.Add(context.WorkflowName, cancelEventHandlerName);
                 }
 
                 return true;

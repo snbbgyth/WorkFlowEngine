@@ -56,7 +56,7 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Name of the workflow described by this WorkflowContext.
         /// </summary>
-        private string _name;
+        private string _workflowName;
 
         /// <summary>/// Locutus User Id string for the user associated with this
         
@@ -145,13 +145,7 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private readonly object _eventLock = new object();
 
-        /// <summary>/// Identifies the manager that is starting this workflow.  This string is used
-        
-        /// to find a manager to use for message communications.  Workflows starting workflows should/// specify the name of the manager that started them.  If non-mananger assemblies are 
-        starting i
-        /// workflows, the manager name of the manager they are running for must be used.
-        /// </summary>
-        private string _managerName;
+ 
 
         /// <summary>
         /// Gets or sets the Id of the current workflow step
@@ -222,21 +216,13 @@ namespace WorkFlowHandle.Model
         /// </summary>
         /// <param name="name">string describing this workflow</param>
         /// <param name="workflowId">unique identifier</param>
-        /// <param name="userId">user id for this workflow</param>/// <param name="managerName">String identifing the manager that is starting this workflow.  This string is used
-        
-        /// to find a manager to use for message communications.  Workflows starting workflows should/// specify the name of the manager that started them.  If non-mananger assemblies are 
-        
-        /// starting workflows, the manager name of
-        /// the manager they are running for must be used.</param>
         public WorkflowContext(string name,
-            string workflowId,
-            string userId,
-            string managerName)
+            string workflowId)
         {
-            _name = name;
+            _workflowName = name;
             _workflowId = workflowId;
-            _userId = userId;
-            _managerName = managerName;
+            //_userId = userId;
+             
             Initialize();
         }
         #endregion
@@ -350,7 +336,7 @@ namespace WorkFlowHandle.Model
                 if (_workflowHandler == null)
                 {            // temp lock - need real on eif this is the fix.
         
-                    lock (_name)
+                    lock (_workflowName)
                     {
 
                     }
@@ -407,18 +393,7 @@ namespace WorkFlowHandle.Model
             get { return _lastStateChange; }
             set { _lastStateChange = value; }
         }
-
-        /// <summary>/// Gets or sets a string identifing the manager that is starting this workflow.  This string is used
-        
-        /// to find a manager to use for message communications.  Workflows starting workflows should/// specify the name of the manager that started them.  If non-mananger assemblies are 
-        starting 
-        /// workflows, the manager name of the manager they are running for must be used.
-        /// </summary>
-        public virtual string ManagerName
-        {
-            get { return _managerName; }
-            set { _managerName = value; }
-        }
+ 
 
         /// <summary>
         /// Gets the workflow step id by event name from dict.
@@ -440,13 +415,14 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Gets or sets the name of the BPEL workflow
         /// </summary>
-        public virtual string Name
+        public virtual string WorkflowName
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _workflowName; }
+            set { _workflowName = value; }
         }
 
-        /// <summary>/// Gets or sets a value indicating whether an exception has been thrown during workflow
+        /// <summary>
+        /// Gets  value indicating whether an exception has been thrown during workflow
         
         /// execution and the fault handling logic has been started.  
         /// </summary>
@@ -596,7 +572,7 @@ namespace WorkFlowHandle.Model
         /// <returns>A string containing the workflow name and Id.</returns>
         public string WorkflowLogId
         {
-            get { return " Workflow " + Name + " : " + Id; }
+            get { return " Workflow " + WorkflowName + " : " + Id; }
         }
         #endregion
 

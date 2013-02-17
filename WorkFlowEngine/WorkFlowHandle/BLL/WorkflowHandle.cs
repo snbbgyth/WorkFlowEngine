@@ -7,11 +7,28 @@
 ** Summary：     WorkflowHandle class
 *********************************************************************************/
 
+namespaceusing System;
+
 namespace WorkFlowHandle.BLL
 {
-    pu
-{
+    using Model;
+    using DAL;
+
     public class WorkflowHandle
     {
+        private static ProcessDefinitionEngine _workflowProcessDefinition;
+
+        public WorkflowHandle()
+        {
+            _workflowProcessDefinition = new ProcessDefinitionEngine();
+        }
+
+        public string Run(string workflowName, string currentState, string actionName)
+        {
+            var onContext = new WorkflowContext(workflowName, Guid.NewGuid().ToString());
+            _workflowProcessDefinition.LoadNewWorkflow(onContext);
+            return string.Empty;
+        }
+
     }
 }
