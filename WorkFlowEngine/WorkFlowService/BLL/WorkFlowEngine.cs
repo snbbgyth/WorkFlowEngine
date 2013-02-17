@@ -11,6 +11,8 @@ using CommonLibrary.Help;
 using WorkFlowService.DAL;
 using WorkFlowService.Help;
 using WorkFlowService.IDAL;
+using WorkFlowHandle.BLL;
+
 
 namespace WorkFlowService.BLL
 {
@@ -19,15 +21,15 @@ namespace WorkFlowService.BLL
         private IStateBase GetCurrentWorkFlowStateByWorkFlowState(WorkFlowState workFlowState)
         {
             foreach (var iStateBase in StateMapping.Instance.StateBasesList)
-           {
+            {
                 if (iStateBase.GetCurrentState() == workFlowState) return iStateBase;
             }
             return new CommonState();
         }
 
-        public WorkFlowState Execute(WorkFlowState workFlowState, ActivityState activityState)
+        public string Execute(string workflowName, string currentState, ActivityState activityState)
         {
-            return GetCurrentWorkFlowStateByWorkFlowState(workFlowState).Execute(activityState);
+            return string.Empty;// GetCurrentWorkFlowStateByWorkFlowState(workFlowState).Execute(activityState);
         }
 
         public ActivityState GetActivityStateByWorkFlowState(WorkFlowState workFlowState)

@@ -30,11 +30,11 @@ namespace WorkFlowService.BLL
             get { return new WorkFlowEngine(); }
         }
 
-        public WorkFlowState Execute(AppInfoModel entity)
+        public string Execute(AppInfoModel entity)
         {
             var activityEntity = WorkFlowActivityDalInstance.QueryByAppId(entity.AppId);
             var currentWorkFlowState =
-                WorkFlowEngineInstance.Execute(WFUntilHelp.GetWorkFlowStateByName(activityEntity.CurrentWorkFlowState),
+                WorkFlowEngineInstance.Execute(entity.WorkflowName, activityEntity.CurrentWorkFlowState,
                                                WFUntilHelp.GetActivityStateByName(entity.ActivityState));
             activityEntity.WorkFlowState = activityEntity.CurrentWorkFlowState;
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
@@ -45,7 +45,7 @@ namespace WorkFlowService.BLL
         }
 
 
-        public WorkFlowState NewWorkFlow(AppInfoModel entity)
+        public string NewWorkFlow(AppInfoModel entity)
         {
             var activityEntity = new WorkFlowActivityModel
             {
@@ -59,7 +59,7 @@ namespace WorkFlowService.BLL
                 OperatorUserId = entity.UserId,
                 OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag
             };
-            var currentWorkFlowState = WorkFlowEngineInstance.Execute(WorkFlowState.Common, ActivityState.Submit);
+            var currentWorkFlowState = WorkFlowEngineInstance.Execute(entity.WorkflowName, WorkFlowState.Common.ToString(), ActivityState.Submit);
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
             DataOperationBLL.Current.Insert(activityEntity);
             return currentWorkFlowState;

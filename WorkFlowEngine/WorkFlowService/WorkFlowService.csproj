@@ -83,7 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp  <ProjectReference Include="..\WorkFlowHandle\WorkFlowHandle.csproj">
+      <Project>{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}</Project>
+      <Name>WorkFlowHandle$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

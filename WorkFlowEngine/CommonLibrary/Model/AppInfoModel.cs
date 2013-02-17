@@ -19,9 +19,12 @@ namespace CommonLibrary.Model
         [DataMember]
         public string UserId { get; set; }
         [DataMember]
-        public string TableName { get; set; }
+        public string WorkflowName { get; set; }
         [DataMember]
         public string ActivityState { get; set; }
+
+
+
 
     }
 }
