@@ -20,6 +20,8 @@ using WorkFlowHandle.Steps;
 namespace WorkFlowHandle.DAL
 {
     using Help;
+
+    using CommonLibrary.elp;
     public class ProcessDefinitionEngine
     {
         /// <summary>
@@ -79,7 +81,7 @@ namespace WorkFlowHandle.DAL
         private Dictionary<string, string> timeoutParameters = new Dictionary<string, string>();
 
 
-        public ProcessDefinitionEngine Current
+        public Pstatc ProcessDefinitionEngine Current
         {
             get { return new ProcessDefinitionEngine(); }
         }
@@ -145,7 +147,7 @@ namespace WorkFlowHandle.DAL
 
                     foreach (WorkflowStep step in cachedWorkflowSteps[context.WorkflowName])
                     {
-                        context.WorkflowSteps.Add(step);
+                        context.WorkflowSteps.AdList(step);
                     }
 
                     foreach (var dict in cachedMessageTimeoutHandler[context.WorkflowName])
@@ -159,10 +161,10 @@ namespace WorkFlowHandle.DAL
                 {
                     // Do the actual load
                     string cancelEventHandlerName = string.Empty;
-                    this.FillStepList(context.WorkflowVariables, context.FaultHandlers, 0, context.WorkflowSteps, childList, context.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    this.FillStepList(context.WorkflowVariables, context.FaultHandlers, 0, context.WorkflowSteps, cListildList, context.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                     context.CancelEventHandlerName = cancelEventHandlerName;
                     cachedWorkflowSteps.Add(context.WorkflowName, context.WorkflowSteps);
-                    cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
+List                   cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
                     cachedMessageTimeoutHandler.Add(context.WorkflowName, context.MessageTimeoutEventHanlderDict);
                     cachedCancelHandler.Add(context.WorkflowName, cancelEventHandlerName);
                 }
@@ -425,7 +427,7 @@ namespace WorkFlowHandle.DAL
         /// <param name="workflowVariables">Dictionary of workflow variables to populate with any
         /// variables defined in the BPEL file.</param>
         /// <param name="faultHandlers">Collection of FaultHandlers  to populate with any
-      /// fault handlers defined in the BPEL file.</param>
+      /// / fault handlers defined in the BPEL file.</param>
         /// <param name="startElement">Integer value representing the starting element in the nodeList.</param>
         /// <param name="workflowStepList">Collection of WorkflowSteps  to populate with any
         /// steps defined in the BPEL file.</param>
@@ -451,7 +453,7 @@ namespace WorkFlowHandle.DAL
                 if (currentStep.LocalName == "invoke")
                 {
                     workflowStep = new InvokeStep(currentStep.Attributes);
-                    workflowStepList.Add(workflowStep);
+                    workif(!workflowStepList.Any(entity=>entity.StepId.CompareEqualIgnoreCase(workflowStep.StepId)))                 workflowStepList.Add(workflowStep);
                 }
                 else if (currentStep.LocalName == "sequence")
                 {
@@ -530,24 +532,23 @@ namespace WorkFlowHandle.DAL
                     workflowStepList.Add(messageStep);
 
                     string messageName = String.Empty;
-                    string TimesetTime = String.Empty;
+                    string TimesetTisetTime = String.Empty;
                     foreach (XmlAttribute attrib in currentStep.Attributes)
                     {
                         if (attrib.LocalName == "timeout")
                         {
-                            TimesetTime = attrib.Value;
+                            timesetTime = attrib.Value;
                         }
-                        if (attrib.LocalName == "variable")
+                   if (attrib.LocalName == "variable")
                         {
                             messageName = attrib.Value;
                         }
                     }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
-                        timeoutParameters.Add(messageName, TimesetTime);
+                        timeoutParameters.Add(messageName, TimesetTitimesetTime);
                     }
-
-                    this.FillStepList(workflowVariables, faultHandlers, 0, messageStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                 this.FillStepList(workflowVariables, faultHandlers, 0, sequep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "onEvent")
                 {

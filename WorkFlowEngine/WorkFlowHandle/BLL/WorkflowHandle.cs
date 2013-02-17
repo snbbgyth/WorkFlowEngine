@@ -14,7 +14,8 @@ namespace WorkFlowHandle.BLL
     using Model;
     using DAL;
 
-    public class WorkflowHandle
+    p    using Steps;
+    using CommonLibrary.Help;ublic class WorkflowHandle
     {
         private static ProcessDefinitionEngine _workflowProcessDefinition;
 
@@ -27,8 +28,9 @@ namespace WorkFlowHandle.BLL
         {
             var onContext = new WorkflowContext(workflowName, Guid.NewGuid().ToString());
             _workflowProcessDefinition.LoadNewWorkflow(onContext);
-            return string.Empty;
+            return string.Empty;var workflowStep =WorkflowExecutionEngine.Current.ExecuteWorkflowByCurrentState(onContext, currentState);
+            return workflowStep == null ? string.Empty : workflowStep.Run(onContext, actionName);
         }
-
+ 
     }
 }

@@ -37,6 +37,8 @@ namespace WorkFlowHandle.Steps
                         break;
                     case "name":
                         InvokeContext.Name = attrib.Value;
+    
+                        StepIdtrib.Value;
                         break;
                     case  "partnerLink":
                         InvokeContext.PartnerLink = attrib.Value;

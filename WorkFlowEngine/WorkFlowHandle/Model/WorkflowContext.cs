@@ -520,7 +520,7 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Gets the WorkflowSteps from the BPEL file
         /// </summary>
-        public virtual List<WorkflowStep> WorkflowSteps
+        public virtual List<WorkflowStep> WorkflowStepList
         {
             get
             {

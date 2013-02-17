@@ -1,9 +1,8 @@
 ﻿/********************************************************************************
 ** Class Name:   OnEventStep 
-** Author：      spring yang
+** Author：      spSpring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
-** Modify Date： 2012-9-25
+** Modify：      Spring Y** Modify Date： 2012-9-25
 ** Summary：     OnEventStep class
 *********************************************************************************/
 
