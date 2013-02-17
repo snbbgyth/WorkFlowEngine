@@ -27,9 +27,9 @@ namespace WorkFlowService.BLL
             return new CommonState();
         }
 
-        public string Execute(string workflowName, string currentState, ActivityState activityState)
+        public string Execute(string workflowName, string currentState, ActivitySstring activityState)
         {
-            return string.Empty;// GetCurrentWorkFlowStateByWorkFlowState(workFlowState).Execute(activityState);
+            return WorkflowHandle.Instance.Run(workflowName,currentState,activityState)entWorkFlowStateByWorkFlowState(workFlowState).Execute(activityState);
         }
 
         public ActivityState GetActivityStateByWorkFlowState(WorkFlowState workFlowState)

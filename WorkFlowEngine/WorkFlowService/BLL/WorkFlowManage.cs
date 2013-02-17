@@ -35,7 +35,7 @@ namespace WorkFlowService.BLL
             var activityEntity = WorkFlowActivityDalInstance.QueryByAppId(entity.AppId);
             var currentWorkFlowState =
                 WorkFlowEngineInstance.Execute(entity.WorkflowName, activityEntity.CurrentWorkFlowState,
-                                               WFUntilHelp.GetActivityStateByName(entity.ActivityState));
+                                               entity.ActivityState );
             activityEntity.WorkFlowState = activityEntity.CurrentWorkFlowState;
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
             activityEntity.OperatorUserId = entity.UserId;
@@ -59,7 +59,7 @@ namespace WorkFlowService.BLL
                 OperatorUserId = entity.UserId,
                 OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag
             };
-            var currentWorkFlowState = WorkFlowEngineInstance.Execute(entity.WorkflowName, WorkFlowState.Common.ToString(), ActivityState.Submit);
+            var currentWorkFlowState = WorkFlowEngineInstance.Execute(entity.WorkflowName, WorkFlowState.Common.ToString(), ActivityState.Submit.ToString());
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
             DataOperationBLL.Current.Insert(activityEntity);
             return currentWorkFlowState;
