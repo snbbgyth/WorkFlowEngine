@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="DAL\ProcessDefinitionEngine.cs" />
     <Compile Include="Help\Constants.cs" />
+    <Compile Include="Help\UnitlHelp.cs" />
     <Compile Include="Model\CaseContextModel.cs" />
-    <Compile InHelp\UnitlHelpextModel.cs" />
     <Compile Include="Model\InvokeContextModel.cs" />
     <Compile Include="Model\SequenceContextModel.cs" />
     <Compile Include="Model\StepData.cs" />
@@ -53,8 +53,8 @@
     <Compile Include="Model\WorkflowEvent.cs" />
     <Compile Include="Model\WorkflowFileElement.cs" />
     <Compile Include="Model\WorkflowFilesCollection.cs" />
+    <Compile Include="Model\WorkflowHandlerSettingsConfigSection.cs" />
     <Compile Include="Steps\WhileStep.cs" />
-    <Compile Include="BLL\WorkfModel\WorkflowHandlerSettingsConfigSs" />
     <Compile Include="BLL\WorkflowExecutionEngine.cs" />
     <Compile Include="BLL\WorkflowHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

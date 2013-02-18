@@ -265,16 +265,25 @@ namespace WorkFlowHandle.DAL
                     if (this.defaultWorkflows == null)
                     {
 
+
+                        // load list of BPEL files into local collection
+                        WorkflowHandlerSettingsConfigSection section = UnitlHelp.GetWorkflowHandlerSettingsConfigSection();
+
                         // parse the list of BPEL files into a hash table with the latest version 
                         // of each workflow and a 2nd table with earlier versions.  
-                        // This allows for default workflows to be quick located while
-             
-                        // load list of BPEL files into local collection
-                        WorkflowHandlerSettingsConfigSection section = UnitlHelp.GetWorkflowHandlerSettingsConfigSection(); located while
+                        // This allows for default workflows to be quickly located while
                         // still being able to find earlier workflows in the infrequent cases 
                         // where this may be necessaary.
                         this.defaultWorkflows = new System.Collections.Hashtable();
-           ly             this.olderWorkflows = new WorkflowFilesCollection();
+                        this.olderWorkflows = new WorkflowFilesCollection();
+
+                        if (section != null)
+                        {
+                            foreach (WorkflowFileElement fileElement in section.WorkflowFiles)
+                            {
+                                this.AddNewWorkflow(fileElement);
+                            }
+                        }
                     }
                 }
             }
@@ -283,12 +292,8 @@ namespace WorkFlowHandle.DAL
         /// <summary>
         /// Adds a new workflow into one of the local workflow tables.
         /// If this is a newer version of an existing workflow, it is
-        /// placed in the defaultWorlow
-                        if (section != null)
-                        {
-                            foreach (WorkflowFileElement fileElement in section.WorkflowFiles)
-                            {
-                                this.AddNewWorkflow(fileElementflows table. 
+        /// placed in the defaultWorlows table and the older version is
+        /// placed in the olderWorkflows table. 
         /// </summary>
         /// <param name="fileElement">Class defining the new workflow to add.  The version
         /// member of this class is used to determine the latest version of a workflow.</param>
@@ -372,14 +377,14 @@ namespace WorkFlowHandle.DAL
                         // Create XML reader for this file
                         // Must be able to have more than one reader active at a time.
                         var doc = new XmlDocument();
-                        var fileName = string.Empty;
+                        var fileName = fileElement.FileName;
                         using (Stream stream = new FileStream(this.workflowFolder + fileName, FileMode.OpenOrCreate))
                         {
                             doc.Load(stream);
                         }
                         rootElement = doc.DocumentElement;
                         if (!(rootElement.LocalName == "process"))
-    fileElement.FileName        {
+                        {
                             Debug.Fail("LoadNewWorkflow: Could not find process in " + fileElement.FileName);
                             rootElement = null;
                         }

@@ -35,7 +35,7 @@ namespace WorkFlowService.BLL
             var activityEntity = WorkFlowActivityDalInstance.QueryByAppId(entity.AppId);
             var currentWorkFlowState =
                 WorkFlowEngineInstance.Execute(entity.WorkflowName, activityEntity.CurrentWorkFlowState,
-                                               entity.ActivityState );
+                                               entity.ActivityState);
             activityEntity.WorkFlowState = activityEntity.CurrentWorkFlowState;
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
             activityEntity.OperatorUserId = entity.UserId;

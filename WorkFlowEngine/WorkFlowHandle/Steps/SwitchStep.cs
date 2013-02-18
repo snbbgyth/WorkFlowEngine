@@ -1,8 +1,9 @@
 ﻿/********************************************************************************
 ** Class Name:   SwitchStep 
-** Author：      spSpring Yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      Spring Y** Modify Date： 2012-9-25
+** Modify：      Spring Yang
+** Modify Date： 2012-9-25
 ** Summary：     SwitchStep class
 *********************************************************************************/
 
@@ -91,8 +92,8 @@ namespace WorkFlowHandle.Steps
         /// <returns>The WorkflowState after execution of the CaseStep.</returns>
         private string RunCase(CaseStep caseStep, ref WorkflowContext context, string stepId)
         {
-
             var currentState = caseStep.Run(context, stepId);
-            return currentState        }
+            return currentState;
+        }
     }
 }
