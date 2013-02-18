@@ -18,16 +18,16 @@ namespace WorkFlowHandle.Steps
 {
     public abstract class WorkflowStep
     {
-         
+
         public string StepId { get; set; }
 
-       /// <summary>
+        /// <summary>
         /// Used to run a workflow step
         /// </summary>
         /// <param name="context">Context for the workflow</param>
         /// <param name="stepId">Step at which to start execution.  Ignored</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public abstract Workstring(WorkflowContext context, string stepId);
+        public abstract string Run(WorkflowContext context, string stepId);
 
 
         /// <summary>

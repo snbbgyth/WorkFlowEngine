@@ -13,8 +13,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
+using WorkFlowHandle.Model;
 
-namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
+namespace WorkFlowHandle.Steps
 {
     public class WhileStep : StepRunnerStep
     {
@@ -51,28 +52,27 @@ namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  Execution starts at first step
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public override WorkFlowState Run(string context, string stepId)
-    string Run(WorkflowContext context, string stepId)
+        public override string Run(WorkflowContext context, string stepId)
         {
-            var currentState = WorkFlowState.Done.ToString()      {
+            var currentState = WorkFlowState.Done.ToString();
+            if (!String.IsNullOrEmpty(stepId))
+            {
                 // we must be restarting after an event
                 // execute from where we left off and then perform while logic as normal
                 currentState = base.Run(context, stepId);
-                if (currentState != WorkFlowState.Done)
+                if (currentState != WorkFlowState.Done.ToString())
                 {
                     return currentState;
-.ToString()       }
+                }
             }
 
-            return currentState;
-        }
-
-        /// <summary>
-        /// evaluate t currentState = base.Run(context, stepId);
-                if (currentState != WorkFlowState.Done)
+            while (this.IsConditionTrue(context))
+            {
+                currentState = base.Run(context, stepId);
+                if (currentState != WorkFlowState.Done.ToString())
                 {
                     return currentState;
-         .ToString()       }
+                }
             }
 
             return currentState;
@@ -84,12 +84,12 @@ namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
         /// </summary>
         /// <param name="context">WorkflowContext of executing workflow</param>
         /// <returns>True if condition is met, false otherwise</returns>
-        public bool IsConditionTrue(string context)
+        public bool IsConditionTrue(WorkflowContext context)
         {
             return true;
         }
         /// <summary>
-  WorkflowContext/// Gets progress weight of this step
+        /// Gets progress weight of this step
         /// </summary>
         public int ProgressWeight
         {

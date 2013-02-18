@@ -1,14 +1,13 @@
 ﻿/********************************************************************************
 ** Class Name:   WorkflowContext 
-** Author：      spring yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
+** Modify：      Spring Yang
 ** Modify Date： 2012-9-25
 ** Summary：     WorkflowContext class
 *********************************************************************************/
 
 using System;
-using Sy
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,8 +24,8 @@ namespace WorkFlowHandle.Model
     {
         #region Class Fields
 
-        /// <summary>/// a flag to identify wheter the whole workflow should wait when it handle cancel event
-        
+        /// <summary>
+        /// a flag to identify wheter the whole workflow should wait when it handle cancel event
         /// </summary>
         [NonSerialized]
         private AutoResetEvent _cancelWaitEvent;
@@ -58,8 +57,8 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private string _workflowName;
 
-        /// <summary>/// Locutus User Id string for the user associated with this
-        
+        /// <summary>
+        /// Locutus User Id string for the user associated with this
         /// workflow.  
         /// </summary>
         private string _userId;
@@ -74,9 +73,9 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private ICollection<string> _processedMessages;
 
-        /// <summary>/// Gets or sets the workflow status indicating the workflow is addressed canceled and wait for handling the event 
-        /// It's set true when this workflow is addressed cancled,but the proper operation to handle cancel event has not been done.
-        
+        /// <summary>
+        /// Gets or sets the workflow status indicating the workflow is addressed canceled and wait for handling the event 
+        /// It's set true when this workflow is addressed cancled,but the proper operation to handle cancel event has not been done.
         /// </summary>
         private bool _waitForCancel;
 
@@ -85,8 +84,8 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private bool _isCanceled;
 
-        /// <summary>/// Gets or sets a value indicating whether [handle cancel event].
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether [handle cancel event].
         /// </summary>
         private bool _isHandleCancelEvent;
 
@@ -95,21 +94,21 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private bool _isEventHandlerUnfound;
 
-        /// <summary>/// Gets or sets a value indicating whether the stop execution flag     
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether the stop execution flag     
         /// </summary>
         private bool _isStopExecution;
 
-        /// <summary>/// Gets or sets a dictionary of message name and time out values of the workflow.
-        
-        /// It's initialized when workflow load the onMessage/receive node which defined in the bpel file./// It stores the message name and time out values of the current workflow.
-        
+        /// <summary>
+        /// Gets or sets a dictionary of message name and time out values of the workflow.
+        /// It's initialized when workflow load the onMessage/receive node which defined in the bpel file.
+        /// It stores the message name and time out values of the current workflow.
         /// The timeout value is defined as a property of the onMessage/receive node.
         /// </summary>
         private Dictionary<string, string> _workflowTimeout;
 
-        /// <summary>/// Gets or sets a value indicating whether an exception has been thrown during workflow
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether an exception has been thrown during workflow
         /// execution and the fault handling logic has been started.  
         /// </summary>
         private bool _isProcessingFault;
@@ -145,7 +144,7 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private readonly object _eventLock = new object();
 
- 
+
 
         /// <summary>
         /// Gets or sets the Id of the current workflow step
@@ -157,8 +156,8 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private string _version = String.Empty;
 
-        /// <summary>/// Gets or sets a value indicating whether the workflow steps have been loaded into 
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether the workflow steps have been loaded into 
         /// this workflow context
         /// </summary>
         private bool _isWorkflowStepsLoaded;
@@ -200,8 +199,8 @@ namespace WorkFlowHandle.Model
         #endregion Class Fields
 
         #region Constructors
-        /// <summary>/// Initializes a new instance of the WorkflowContext class
-        
+        /// <summary>
+        /// Initializes a new instance of the WorkflowContext class
         /// This is a no argument constructor required by NHibernate.  This constructor
         /// gets called when NHibernate is creating a Workflow Context from
         /// saved data.  NHibernate will only fill in the _persistantData.
@@ -211,8 +210,8 @@ namespace WorkFlowHandle.Model
             Initialize();
         }
 
-        /// <summary>/// Initializes a new instance of the WorkflowContext class
-        
+        /// <summary>
+        /// Initializes a new instance of the WorkflowContext class
         /// </summary>
         /// <param name="name">string describing this workflow</param>
         /// <param name="workflowId">unique identifier</param>
@@ -222,7 +221,7 @@ namespace WorkFlowHandle.Model
             _workflowName = name;
             _workflowId = workflowId;
             //_userId = userId;
-             
+
             Initialize();
         }
         #endregion
@@ -279,8 +278,8 @@ namespace WorkFlowHandle.Model
 
         /// <summary>
         /// Gets or sets a value indicating whether [event handler unfound].
-        /// </summary>/// <value><c>true</c> if [event handler unfound]; otherwise, <c>false</c>.</value>
-        
+        /// </summary>
+        /// <value><c>true</c> if [event handler unfound]; otherwise, <c>false</c>.</value>
         public virtual bool EventHandlerUnfound
         {
             get { return _isEventHandlerUnfound; }
@@ -316,8 +315,8 @@ namespace WorkFlowHandle.Model
             set { _firedEventKey = value; }
         }
 
-        /// <summary>/// Gets or sets a value indicating whether [handle cancel event].
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether [handle cancel event].
         /// </summary>
         /// <value><c>true</c> if [handle cancel event]; otherwise, <c>false</c>.</value>
         public virtual bool HandleCancelEvent
@@ -334,8 +333,8 @@ namespace WorkFlowHandle.Model
             get
             {
                 if (_workflowHandler == null)
-                {            // temp lock - need real on eif this is the fix.
-        
+                {
+                    // temp lock - need real on eif this is the fix.
                     lock (_workflowName)
                     {
 
@@ -375,8 +374,8 @@ namespace WorkFlowHandle.Model
             set { _isCanceled = value; }
         }
 
-        /// <summary>/// Gets or sets a value indicating whether the workflow steps have been loaded into 
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether the workflow steps have been loaded into 
         /// this workflow context
         /// </summary>
         public virtual bool IsWorkflowStepsLoaded
@@ -393,12 +392,12 @@ namespace WorkFlowHandle.Model
             get { return _lastStateChange; }
             set { _lastStateChange = value; }
         }
- 
+
 
         /// <summary>
         /// Gets the workflow step id by event name from dict.
-        /// It's initialized when LoadNewWorkflow. /// It's used to find the proepr step id of the workflow when an timeout event occurs
-        
+        /// It's initialized when LoadNewWorkflow. 
+        /// It's used to find the proepr step id of the workflow when an timeout event occurs
         /// </summary>
         public virtual Dictionary<string, string> MessageTimeoutEventHanlderDict
         {
@@ -422,8 +421,7 @@ namespace WorkFlowHandle.Model
         }
 
         /// <summary>
-        /// Gets  value indicating whether an exception has been thrown during workflow
-        
+        /// Gets or sets a value indicating whether an exception has been thrown during workflow
         /// execution and the fault handling logic has been started.  
         /// </summary>
         public virtual bool ProcessingFault
@@ -459,8 +457,8 @@ namespace WorkFlowHandle.Model
             set { _progressRange = value; }
         }
 
-        /// <summary>/// Gets or sets a value indicating whether the stop execution flag     
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether the stop execution flag     
         /// </summary>
         public virtual bool StopExecution
         {
@@ -495,9 +493,9 @@ namespace WorkFlowHandle.Model
             set { _version = value; }
         }
 
-        /// <summary>/// Gets or sets the workflow status indicating the workflow is addressed canceled and wait for handling the event 
-        /// It's set true when this workflow is addressed cancled,but the proper operation to handle cancel event has not been done.
-        
+        /// <summary>
+        /// Gets or sets the workflow status indicating the workflow is addressed canceled and wait for handling the event 
+        /// It's set true when this workflow is addressed cancled,but the proper operation to handle cancel event has not been done.
         /// </summary>
         public virtual bool WaitForCancel
         {
@@ -505,13 +503,13 @@ namespace WorkFlowHandle.Model
             set { _waitForCancel = value; }
         }
 
-        /// <summary>/// Gets or sets a dictionary of message name and time out values of the workflow.
-        
-        /// It's initialized when workflow load the onMessage/receive node which defined in the bpel file./// It stores the message name and time out values of the current workflow.
-        
+        /// <summary>
+        /// Gets or sets a dictionary of message name and time out values of the workflow.
+        /// It's initialized when workflow load the onMessage/receive node which defined in the bpel file.
+        /// It stores the message name and time out values of the current workflow.
         /// The timeout value is defined as a property of the onMessage/receive node.
-        /// </summary>public virtual Dictionary<string, string> WorkflowTimeout
-        
+        /// </summary>
+        public virtual Dictionary<string, string> WorkflowTimeout
         {
             get { return _workflowTimeout; }
             set { _workflowTimeout = value; }
@@ -547,15 +545,15 @@ namespace WorkFlowHandle.Model
             }
         }
 
-        /// <summary>/// Gets or sets a dictionary of workflows that have been started by this workflow
-        
+        /// <summary>
+        /// Gets or sets a dictionary of workflows that have been started by this workflow
         /// and this workflow needs to wait for all to complete before it is completed.  This
         /// may be due to some action that needs
         /// to be taken when each one completes or may be due to wanting to only
         /// notify on completion when all actions have been completed.
         /// The key is the string ID of
-        /// the workflow that has been started.  The value is the number of the Workflow Step /// that needs to be executed once the workflow has been completed.  This
-        
+        /// the workflow that has been started.  The value is the number of the Workflow Step 
+        /// that needs to be executed once the workflow has been completed.  This
         /// WorkflowStep could be any step type.  For example a sequence step would
         /// result in a set of steps being performed.
         /// </summary>
@@ -599,13 +597,13 @@ namespace WorkFlowHandle.Model
 
         /// <summary>
         /// Returns the value of a workflow variable.
-        /// </summary>/// <param name="variableName">identifer for the variable</param>
-        
+        /// </summary>
+        /// <param name="variableName">identifer for the variable</param>
         /// <returns>value of the workflow variable</returns>
         public virtual string GetWorkflowVariable(string variableName)
         {
-            string variable;    _stepData.WorkflowVariables.TryGetValue(variableName, out variable);
-        
+            string variable;
+            _stepData.WorkflowVariables.TryGetValue(variableName, out variable);
             return variable;
         }
 
@@ -622,9 +620,9 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Sets the value of a workflow parameter
         /// </summary>
-        /// <param name="parameterName">name of the desired parameter</param>/// <param name="parameterData">value of the parameter</param>
-        public virtual void SetWorkflowParameter(string parameterName, object parameterData)
-        
+        /// <param name="parameterName">name of the desired parameter</param>
+        /// <param name="parameterData">value of the parameter</param>
+        public virtual void SetWorkflowParameter(string parameterName, object parameterData)
         {
 
         }
@@ -641,29 +639,28 @@ namespace WorkFlowHandle.Model
                 return;
             }
             lock (_eventLock)
-            {        if (workflowEvent.EventType != EventType.Timer && workflowEvent.EventType != EventType.Cancel)
-        
+            {
+                if (workflowEvent.EventType != EventType.Timer && workflowEvent.EventType != EventType.Cancel)
                 {
                     AddEvent(userId, workflowEvent);
                 }
             }
         }
 
-        /// <summary>/// Find event message with a specific ID.  Returns null if message not yet
-        
+        /// <summary>
+        /// Find event message with a specific ID.  Returns null if message not yet
         /// received.
         /// </summary>
         /// <param name="userId">The locutus userId</param>
-        /// <param name="eventType">requested event type to get</param>/// <param name="messageName">requested messageName, only used if eventType is message</param>
-        
-        /// <returns>Requested workflow event or null, if none found</returns>public virtual WorkflowEvent GetEventById(string userId, EventType eventType, string messageName)
-        
+        /// <param name="eventType">requested event type to get</param>
+        /// <param name="messageName">requested messageName, only used if eventType is message</param>
+        /// <returns>Requested workflow event or null, if none found</returns>
+        public virtual WorkflowEvent GetEventById(string userId, EventType eventType, string messageName)
         {
             WorkflowEvent workflowEvent;
             lock (_eventLock)
             {
-       // workflowEvent = Handler.WorkflowEventStore.GetEvent(userId, Id, eventType, messageName);
-        
+                // workflowEvent = Handler.WorkflowEventStore.GetEvent(userId, Id, eventType, messageName);
             }
 
             return new WorkflowEvent();
@@ -698,16 +695,16 @@ namespace WorkFlowHandle.Model
 
         /// <summary>
         /// <para>
-        /// This function is called to do any notifications necessary when a workflow completes. /// it will notify the registered component and remove the workflow context from the 
-        
+        /// This function is called to do any notifications necessary when a workflow completes. 
+        /// it will notify the registered component and remove the workflow context from the 
         /// context store.
         /// </para>
         /// <para>
         /// A workflow is completed when the status is complete and it is not waiting for any
         /// other workflows to complete.
         /// </para>
-        /// <para>/// This method is where anti-workflows are triggered. They are triggered if the
-        
+        /// <para>
+        /// This method is where anti-workflows are triggered. They are triggered if the
         /// workflow is the main workflow and the <see cref="LastException"/> property is
         /// non-<c>null</c>.
         /// </para>
@@ -719,9 +716,9 @@ namespace WorkFlowHandle.Model
                 return;
             }
 
-            // Only send this notificaiton once.    // Only notify if this workflow isn't waiting for other workflows to complete
-            if (_hasSentCompletionNotification || (WorkflowWaitlist.Count > 0 && !IsWorkflowAndChildenComplete(Id)))
-        
+            // Only send this notificaiton once.
+            // Only notify if this workflow isn't waiting for other workflows to complete
+            if (_hasSentCompletionNotification || (WorkflowWaitlist.Count > 0 && !IsWorkflowAndChildenComplete(Id)))
             {
                 return;
             }
@@ -737,8 +734,8 @@ namespace WorkFlowHandle.Model
 
         /// <summary>
         /// Remove workflow and all its subworkflow from list
-        /// </summary>/// <param name="context">the conext associated with the workflow.</param>
-        
+        /// </summary>
+        /// <param name="context">the conext associated with the workflow.</param>
         private void RemoveWorkflowAndSubWorkflows(WorkflowContext context)
         {
             if (context == null)
@@ -766,8 +763,8 @@ namespace WorkFlowHandle.Model
         }
 
 
-        /// <summary>/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
         {

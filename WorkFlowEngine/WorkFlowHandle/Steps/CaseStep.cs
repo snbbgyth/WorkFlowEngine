@@ -1,15 +1,14 @@
 ﻿/********************************************************************************
 ** Class Name:   CaseStep 
-** Author：      spring yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
+** Modify：      Spring Yang
 ** Modify Date： 2012-9-25
 ** Summary：     CaseStep class
 *********************************************************************************/
 
 
 using System;
-using Sys
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,11 +51,11 @@ namespace WorkFlowHandle.Steps
             {
                 if (attrib.LocalName == "name")
                 {
-                    CaseContext.Name=attrib.Name;
+                    CaseContext.Name = attrib.Name;
                 }
                 else if (attrib.LocalName == "condition")
                 {
-                    CaseContext.Condition= attrib.Value;
+                    CaseContext.Condition = attrib.Value;
                 }
             }
         }
@@ -72,18 +71,18 @@ namespace WorkFlowHandle.Steps
         public bool IsConditionTrue(WorkflowContext context)
         {
             // The condition statements is used to determine when a step
-            // should be run.  If this is the default step, the step should   // always be run, regardless of the state of the condition statement.
-         
+            // should be run.  If this is the default step, the step should
+            // always be run, regardless of the state of the condition statement.
             if (this.defaultCase)
             {
                 return true;
             }
 
-            return true;   //return CompareXPath.IsConditionTrue(this.condition, context);
-        }
+            return true;
+            //return CompareXPath.IsConditionTrue(this.condition, context);
         }
 
-        public  override  string Run(WorkflowContext workflowContext, string stepId)
+        public override string Run(WorkflowContext workflowContext, string stepId)
         {
             foreach (var workflowStep in WorkflowSteps)
             {

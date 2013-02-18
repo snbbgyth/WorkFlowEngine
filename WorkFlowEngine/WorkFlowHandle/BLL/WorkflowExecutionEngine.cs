@@ -1,22 +1,22 @@
 ﻿/********************************************************************************
 ** Class Name:   WorkflowExecutionEngine 
-** Author：      spring yang
-** Create date： 2012-93-1-1
-** Modify：      spring yang
-** Modify Date： 2013-2-17ummary：     WorkflowExecutionEngine class
+** Author：      Spring Yang
+** Create date： 2013-1-1
+** Modify：      Spring Yang
+** Modify Date： 2013-2-17
+** Summary：     WorkflowExecutionEngine class
 *********************************************************************************/
 
-namespace Wusing CommonLibrary.Help;
+using CommonLibrary.Help;
 using WorkFlowHandle.Model;
-using WorkFlowHandle.Steps;ce WorkFlowHandle.BLL
-{
-   pub
+using WorkFlowHandle.Steps;
+
+namespace WorkFlowHandle.BLL
 {
     public class WorkflowExecutionEngine
     {
-    }
 
-        public static  WorkflowExecutionEngine Current
+        public static WorkflowExecutionEngine Current
         {
             get { return new WorkflowExecutionEngine(); }
         }

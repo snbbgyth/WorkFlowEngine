@@ -32,15 +32,18 @@ namespace WorkFlowWCFService
         }
 
         [OperationContract]
-        public WorkFlowState Execute(AppInfoModelstring    {
+        public string Execute(AppInfoModel entity)
+        {
             return WorkFlowEngineInstance.Execute(entity);
         }
 
         [OperationContract]
-        public WorkFlowState NewWorkFlow(AppInfoModel estring NewWorkFlow          return WorkFlowEngineInstance.Execute(entity);
+        public string NewWorkFlow(AppInfoModel entity)
+        {
+            return WorkFlowEngineInstance.NewWorkFlow(entity);
         }
 
-        perationContract]
+        [OperationContract]
         public List<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId)
         {
             return WorkFlowEngineInstance.QueryInProgressActivityListByOperatorUserId(operatorUserId);

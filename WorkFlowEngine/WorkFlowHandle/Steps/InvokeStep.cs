@@ -17,17 +17,18 @@ using CommonLibrary.Help;
 namespace WorkFlowHandle.Steps
 {
     using Model;
-   public class InvokeStep:SWorkflowtep
-   {
+    public class InvokeStep : WorkflowStep
+    {
         public InvokeContextModel InvokeContext { get; set; }
-         /// <summary>
+
+        /// <summary>
         /// Initializes a new instance of the InvokeStep class
         /// </summary>
         /// <param name="attributes">Xml attributes from the BPEL file
         /// when invoking execution of workflow activities</param>
         public InvokeStep(XmlAttributeCollection attributes)
         {
-           // this.type = InvokeType.Unknown;
+            // this.type = InvokeType.Unknown;
             foreach (XmlAttribute attrib in attributes)
             {
                 switch (attrib.LocalName.ToLower())
@@ -37,10 +38,9 @@ namespace WorkFlowHandle.Steps
                         break;
                     case "name":
                         InvokeContext.Name = attrib.Value;
-    
-                        StepIdtrib.Value;
+                        StepId = attrib.Value;
                         break;
-                    case  "partnerLink":
+                    case "partnerLink":
                         InvokeContext.PartnerLink = attrib.Value;
                         break;
                     case "portType":
@@ -49,11 +49,11 @@ namespace WorkFlowHandle.Steps
                     case "inputVariable":
                         InvokeContext.InputVariable = attrib.Value;
                         break;
-                }
-         default:                  break;
+                    default:
+                        break;
                 }
             }
- 
+
         }
 
         /// <summary>
@@ -66,12 +66,12 @@ namespace WorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  This
         /// parameter is ignored for the Invoke step.</param>
         /// <returns>State of the workflow after executing the invoke step.</returns>
-        public   WorkFoverride  string Run(WorkflowContext context, string stepId)
+        public override string Run(WorkflowContext context, string stepId)
         {
-            return  InvokeContext.Name;
+            return InvokeContext.Name;
         }
 
- 
-     
+
+
     }
 }

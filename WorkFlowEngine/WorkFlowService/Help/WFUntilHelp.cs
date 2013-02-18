@@ -9,7 +9,8 @@
 
 using System;
 using System.IO;
-using CommonLibraSystem.LinqmmonLibrary.Help;
+using System.Linq;
+using CommonLibrary.Help;
 
 namespace WorkFlowService.Help
 {
@@ -39,8 +40,11 @@ namespace WorkFlowService.Help
             return ApplicationState.Draft;
         }
 
+
+
         private static string RunPath
-               get { return AppDomain.CurrentDomain.BaseDirectory; }
+        {
+            get { return AppDomain.CurrentDomain.BaseDirectory; }
         }
 
         public static string SqliteFilePath

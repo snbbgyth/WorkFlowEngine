@@ -16,11 +16,12 @@ using CommonLibrary.Help;
 
 namespace WorkFlowHandle.Steps
 {
-    public class Switcusing Model;
+    using Model;
     public class SwitchStep : StepRunnerStep
     {
         public SwitchContextModel SwitchContext { get; set; }
-ry>
+
+        /// <summary>
         /// Initializes a new instance of the SwitchStep class
         /// </summary>
         /// <param name="attributes">Xml attributes from the BPEL file</param>
@@ -31,21 +32,23 @@ ry>
             {
                 if (attrib.LocalName == "name")
                 {
-                    StepId = attrib.Value;
-       SwitchContext.Name  }
+                    SwitchContext.Name = attrib.Value;
+                    StepId = attrib.Name;
+                }
             }
         }
-
-        /   StepId = attrib.Nam        }
 
         /// <summary>
         /// Executes the SwitchStep.  
         /// </summary>
         /// <param name="context">Context for the workflow to run</param>
-        /// <param name="stepId">Step at which to start execution.  ExecutionAction namerkflow after executing the steps.</returns>
-        public override WorkFlowState Run(string context, string stepIdstring Run(WorkflowContext context, string stepId)
+        /// <param name="stepId">Action name</param>
+        /// <returns>State of the workflow after executing the steps.</returns>
+        public override string Run(WorkflowContext context, string stepId)
         {
-            var currentState = WorkFlowState.Done.ToString()flowSteps)
+            var currentState = WorkFlowState.Done.ToString();
+
+            foreach (WorkflowStep step in WorkflowSteps)
             {
                 // Go through each step in order until one is found with a valid condition.
                 CaseStep caseStep = step as CaseStep;
@@ -54,24 +57,18 @@ ry>
                     if (!String.IsNullOrEmpty(stepId))
                     {
                         // Used to run workflow from switch step begin.
-                        if (stepId == StepId)
+                        if (caseStep.CaseContext.Condition.CompareEqualIgnoreCase(stepId))
                         {
-                  caseStep.CaseContext.Condition.CompareEqualIgnoreCaserentState = this.RunCase(caseStep, ref context, stepId);
-                            break;
+                            currentState = this.RunCase(caseStep, ref context, stepId);
                         }
-                    }
-           n,  find the case where we last stopped.
-                        if (step.HasStep(stepId))
-                        {
-               //if (step.HasStep(stepId))
+                        // we must be restarting for some reason,  find the case where we last stopped.
+                        //if (step.HasStep(stepId))
                         //{
-                        //             break;
+                        //    currentState = this.RunCase(caseStep, ref context, stepId);
+                        //    break;
+                        //}
                     }
-                }
-            }
-
-            re//    break;
-                        //onTrue(context))
+                    else if (caseStep.IsConditionTrue(context))
                     {
                         currentState = this.RunCase(caseStep, ref context, stepId);
                         break;
@@ -83,7 +80,7 @@ ry>
         }
 
         /// <summary>
-        /// Runs the provided CaseStep.  The.ToStStep requires a reference to 
+        /// Runs the provided CaseStep.  The CaseStep requires a reference to 
         /// an instance of the currently executing WorkflowExecutionEngine
         /// to run.
         /// </summary>
@@ -93,10 +90,11 @@ ry>
         /// non null when a workflow has previously run and is restarteing.  The stepId
         /// is used to determine where to restart execution.</param>
         /// <returns>The WorkflowState after execution of the CaseStep.</returns>
-        private WorkFlowState RunCase(CaseStep caseStep, ref string context, string stepId)
+        private string RunCase(CaseStep caseStep, ref WorkflowContext context, string stepId)
         {
 
-      string RunCase(CaseStep caseStep, ref WorkflowContext context, string stepId)
-        {
-
-            var}
+            var currentState = caseStep.Run(context, stepId);
+            return currentState;
+        }
+    }
+}

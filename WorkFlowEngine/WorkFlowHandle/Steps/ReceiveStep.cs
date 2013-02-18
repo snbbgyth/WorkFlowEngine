@@ -13,12 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
+using WorkFlowHandle.Model;
 
-namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
+namespace WorkFlowHandle.Steps
 {
     public class ReceiveStep : WorkflowStep
     {
-        public override WorkFlowState Run(ststring striWorkflowContext workflowCd)
+        public override string Run(WorkflowContext workflowContext, string stepId)
         {
             throw new NotImplementedException();
         }

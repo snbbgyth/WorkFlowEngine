@@ -20,8 +20,7 @@ using WorkFlowHandle.Steps;
 namespace WorkFlowHandle.DAL
 {
     using Help;
-
-    using CommonLibrary.elp;
+    using CommonLibrary.Help;
     public class ProcessDefinitionEngine
     {
         /// <summary>
@@ -81,7 +80,7 @@ namespace WorkFlowHandle.DAL
         private Dictionary<string, string> timeoutParameters = new Dictionary<string, string>();
 
 
-        public Pstatc ProcessDefinitionEngine Current
+        public static ProcessDefinitionEngine Current
         {
             get { return new ProcessDefinitionEngine(); }
         }
@@ -147,7 +146,7 @@ namespace WorkFlowHandle.DAL
 
                     foreach (WorkflowStep step in cachedWorkflowSteps[context.WorkflowName])
                     {
-                        context.WorkflowSteps.AdList(step);
+                        context.WorkflowStepList.Add(step);
                     }
 
                     foreach (var dict in cachedMessageTimeoutHandler[context.WorkflowName])
@@ -161,10 +160,10 @@ namespace WorkFlowHandle.DAL
                 {
                     // Do the actual load
                     string cancelEventHandlerName = string.Empty;
-                    this.FillStepList(context.WorkflowVariables, context.FaultHandlers, 0, context.WorkflowSteps, cListildList, context.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    this.FillStepList(context.WorkflowVariables, context.FaultHandlers, 0, context.WorkflowStepList, childList, context.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                     context.CancelEventHandlerName = cancelEventHandlerName;
-                    cachedWorkflowSteps.Add(context.WorkflowName, context.WorkflowSteps);
-List                   cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
+                    cachedWorkflowSteps.Add(context.WorkflowName, context.WorkflowStepList);
+                    cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
                     cachedMessageTimeoutHandler.Add(context.WorkflowName, context.MessageTimeoutEventHanlderDict);
                     cachedCancelHandler.Add(context.WorkflowName, cancelEventHandlerName);
                 }
@@ -427,7 +426,7 @@ List                   cachedFaultHandler.Add(context.WorkflowName, context.Faul
         /// <param name="workflowVariables">Dictionary of workflow variables to populate with any
         /// variables defined in the BPEL file.</param>
         /// <param name="faultHandlers">Collection of FaultHandlers  to populate with any
-      /// / fault handlers defined in the BPEL file.</param>
+        /// fault handlers defined in the BPEL file.</param>
         /// <param name="startElement">Integer value representing the starting element in the nodeList.</param>
         /// <param name="workflowStepList">Collection of WorkflowSteps  to populate with any
         /// steps defined in the BPEL file.</param>
@@ -453,11 +452,12 @@ List                   cachedFaultHandler.Add(context.WorkflowName, context.Faul
                 if (currentStep.LocalName == "invoke")
                 {
                     workflowStep = new InvokeStep(currentStep.Attributes);
-                    workif(!workflowStepList.Any(entity=>entity.StepId.CompareEqualIgnoreCase(workflowStep.StepId)))                 workflowStepList.Add(workflowStep);
+                    if (!workflowStepList.Any(entity => entity.StepId.CompareEqualIgnoreCase(workflowStep.StepId)))
+                        workflowStepList.Add(workflowStep);
                 }
                 else if (currentStep.LocalName == "sequence")
                 {
-                    SequenceStep sequenceStep= new SequenceStep(currentStep.Attributes);
+                    SequenceStep sequenceStep = new SequenceStep(currentStep.Attributes);
                     workflowStepList.Add(sequenceStep);
                     this.FillStepList(workflowVariables, faultHandlers, 0, sequenceStep.WorkflowSteps.ToList(), currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
@@ -495,7 +495,7 @@ List                   cachedFaultHandler.Add(context.WorkflowName, context.Faul
                     OnEventStep onEventStep = new OnEventStep(currentStep.Attributes);
 
                     messageTimeoutEventHanlderDict.Add(onEventStep.EventKey, onEventStep.StepId);
-                   // worktsageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    // worktsageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "case")
                 {
@@ -532,23 +532,24 @@ List                   cachedFaultHandler.Add(context.WorkflowName, context.Faul
                     workflowStepList.Add(messageStep);
 
                     string messageName = String.Empty;
-                    string TimesetTisetTime = String.Empty;
+                    string timesetTime = String.Empty;
                     foreach (XmlAttribute attrib in currentStep.Attributes)
                     {
                         if (attrib.LocalName == "timeout")
                         {
                             timesetTime = attrib.Value;
                         }
-                   if (attrib.LocalName == "variable")
+                        if (attrib.LocalName == "variable")
                         {
                             messageName = attrib.Value;
                         }
                     }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
-                        timeoutParameters.Add(messageName, TimesetTitimesetTime);
+                        timeoutParameters.Add(messageName, timesetTime);
                     }
-                 this.FillStepList(workflowVariables, faultHandlers, 0, sequep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+
+                    this.FillStepList(workflowVariables, faultHandlers, 0, messageStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "onEvent")
                 {

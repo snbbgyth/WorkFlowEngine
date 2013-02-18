@@ -43,9 +43,9 @@
   <ItemGroup>
     <Compile Include="DAL\ThreadPoolManage.cs" />
     <Compile Include="Help\Enums.cs" />
+    <Compile Include="Help\Extensions.cs" />
+    <Compile Include="Help\UnitlHelp.cs" />
     <Compile Include="Model\AppInfoModel.cs" />
-    <Compile IncludHelp\ExtensionModel.cs" />
-    <Compile IncludHelp\UnitlHelpodel.cs" />
     <Compile Include="Model\WorkFlowActivityLogModel.cs" />
     <Compile Include="Model\WorkFlowActivityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

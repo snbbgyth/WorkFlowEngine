@@ -12,8 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CommonLibrary.Help;
+using WorkFlowHandle.Model;
 
-namespace Worusing WorkFlowHandle.ModelWorkFlowHandle.Steps
+namespace WorkFlowHandle.Steps
 {
     public abstract class StepRunnerStep : WorkflowStep
     {
@@ -24,22 +25,24 @@ namespace Worusing WorkFlowHandle.ModelWorkFlowHandle.Steps
             _workflowSteps = new List<WorkflowStep>();
         }
 
-        public override WorkFlowState Run(string cstringg steWorkflowContext context, string stepId)
+        public override string Run(WorkflowContext context, string stepId)
         {
-          re  foreach (var workflowStep in _workflowSteps)
+            foreach (var workflowStep in _workflowSteps)
             {
                 return workflowStep.Run(context, stepId);
             }
-          return WorkFlowState.Managersu.ToString()mmary>
+            return WorkFlowState.Manager.ToString();
+        }
+
+
+
+        /// <summary>
         /// Gets a set of steps defined within this step
         /// </summary>
         public List<WorkflowStep> WorkflowSteps
         {
             get { return _workflowSteps; }
-        }
-    }
-}
-    set { _workflowSteps = value; }
+            set { _workflowSteps = value; }
         }
     }
 }

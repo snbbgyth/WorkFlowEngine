@@ -15,11 +15,12 @@ using System.Xml;
 
 namespace WorkFlowHandle.Steps
 {
-    public class Sequusing Model;
+    using Model;
     public class SequenceStep : StepRunnerStep
     {
         public SequenceContextModel SequenceContext { get; set; }
-ary>
+
+        /// <summary>
         /// Initializes a new instance of the SequenceStep class
         /// </summary>
         /// <param name="attributes">The XML attributes associated with the
@@ -33,8 +34,7 @@ ary>
                 {
                     if (attrib.LocalName == "name")
                     {
-                        StepId = attrib.Value;
-           equenceContext.Name=attrib.Name;
+                        SequenceContext.Name = attrib.Name;
                         break;
                     }
                 }

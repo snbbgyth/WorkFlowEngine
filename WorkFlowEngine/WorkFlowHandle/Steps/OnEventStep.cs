@@ -1,8 +1,9 @@
 ﻿/********************************************************************************
 ** Class Name:   OnEventStep 
-** Author：      spSpring Yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      Spring Y** Modify Date： 2012-9-25
+** Modify：      Spring Yang
+** Modify Date： 2012-9-25
 ** Summary：     OnEventStep class
 *********************************************************************************/
 
@@ -14,7 +15,7 @@ using System.Xml;
 
 namespace WorkFlowHandle.Steps
 {
-   public  class OnEventStep:StepRunnerStep
+    public class OnEventStep : StepRunnerStep
     {
         public string EventKey { get; set; }
 
@@ -23,7 +24,7 @@ namespace WorkFlowHandle.Steps
         /// </summary>
         /// <param name="attributes">Xml attributes from the BPEL file</param>
         public OnEventStep(XmlAttributeCollection attributes)
-        { 
+        {
             // read attributes
             foreach (XmlAttribute attrib in attributes)
             {
@@ -36,21 +37,21 @@ namespace WorkFlowHandle.Steps
                         switch (attrib.Value)
                         {
                             case "messageTimeout":
-                              //  EventType = WorkflowEventType.Timeout;
+                                //  EventType = WorkflowEventType.Timeout;
                                 break;
                             case "cancel":
-                               // EventType = WorkflowEventType.Cancel;
+                                // EventType = WorkflowEventType.Cancel;
                                 break;
                             default:
-                               // var ex = ErrorAndExceptionService.CreateLocutusException(this, "E67.01", null);
-                               // throw ex;
+                                // var ex = ErrorAndExceptionService.CreateLocutusException(this, "E67.01", null);
+                                // throw ex;
                                 return;
                         }
                         break;
                     case "variable":
                         if (string.IsNullOrEmpty(attrib.Value))
                         {
-                            
+
                         }
                         EventKey = attrib.Value;
                         break;

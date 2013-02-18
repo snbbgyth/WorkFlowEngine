@@ -13,8 +13,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
+using WorkFlowHandle.Model;
 
-namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
+namespace WorkFlowHandle.Steps
 {
     public class OnMessageStep : StepRunnerStep
     {
@@ -51,18 +52,19 @@ namespace Workusing WorkFlowHandle.ModelorkFlowHandle.Steps
         /// <param name="stepId">Step at which to start execution.  Execution starts at first step
         /// if this is null or an empty string.</param>
         /// <returns>State of the workflow after executing the steps.</returns>
-        public WorkFlowState Run(string context, string stepId)
-    string     WorkflowContext rrentState = this.receiveStep.Run(context, stepId);
-            if (currentState != WorkFlowState.Done)
+        public string Run(WorkflowContext context, string stepId)
+        {
+            var currentState = this.receiveStep.Run(context, stepId);
+            if (currentState != WorkFlowState.Done.ToString())
             {
-                // Have the event so run.ToString()
+                // Have the event so run
                 return base.Run(context, null);
             }
 
             // Check the workflow name whether in the continueworkflowList, If in the list, then don't report error status, continue running the workflow
-            if (currentState == WorkFlowState.Manager)
+            if (currentState == WorkFlowState.Manager.ToString())
             {
-                return base.Run(context, null);.ToString()
+                return base.Run(context, null);
             }
             return currentState;
         }
