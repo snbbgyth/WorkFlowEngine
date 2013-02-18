@@ -45,7 +45,7 @@
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\Extensions.cs" />
     <Compile Include="Help\UnitlHelp.cs" />
-    <Compile Include="Model\AppInfoModel.cs" />
+    <Compile Include="Model\ACommonppInfoModel.cs" />
     <Compile Include="Model\WorkFlowActivityLogModel.cs" />
     <Compile Include="Model\WorkFlowActivityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

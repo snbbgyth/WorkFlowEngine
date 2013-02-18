@@ -5,7 +5,7 @@
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CommonLibrary.Model" />
-      <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WorkFlowService.Help" />
+      <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/CommonLibrary.Help" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="WorkFlowService_Execute_InputMessage">

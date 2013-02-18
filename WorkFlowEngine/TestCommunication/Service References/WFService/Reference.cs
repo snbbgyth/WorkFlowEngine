@@ -29,10 +29,10 @@ namespace TestCommunication.WFService {
         private string AppIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TableNameField;
+        private string UserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserIdField;
+        private string WorkflowNameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -71,19 +71,6 @@ namespace TestCommunication.WFService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TableName {
-            get {
-                return this.TableNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TableNameField, value) != true)) {
-                    this.TableNameField = value;
-                    this.RaisePropertyChanged("TableName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string UserId {
             get {
                 return this.UserIdField;
@@ -96,6 +83,19 @@ namespace TestCommunication.WFService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WorkflowName {
+            get {
+                return this.WorkflowNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WorkflowNameField, value) != true)) {
+                    this.WorkflowNameField = value;
+                    this.RaisePropertyChanged("WorkflowName");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -104,23 +104,6 @@ namespace TestCommunication.WFService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WorkFlowState", Namespace="http://schemas.datacontract.org/2004/07/WorkFlowService.Help")]
-    public enum WorkFlowState : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Common = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Manager = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Done = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Refuse = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -361,29 +344,36 @@ namespace TestCommunication.WFService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ActivityState", Namespace="http://schemas.datacontract.org/2004/07/WorkFlowService.Help")]
+    [System.FlagsAttribute()]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ActivityState", Namespace="http://schemas.datacontract.org/2004/07/CommonLibrary.Help")]
     public enum ActivityState : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Create = 0,
+        Create = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Submit = 1,
+        Edit = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Revoke = 2,
+        Resbmit = 4,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Approve = 3,
+        Submit = 8,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Reject = 4,
+        Revoke = 16,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Read = 5,
+        Approve = 32,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 6,
+        Reject = 64,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Read = 128,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 256,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -391,10 +381,10 @@ namespace TestCommunication.WFService {
     public interface WorkFlowService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/Execute", ReplyAction="http://tempuri.org/WorkFlowService/ExecuteResponse")]
-        TestCommunication.WFService.WorkFlowState Execute(TestCommunication.WFService.AppInfoModel entity);
+        string Execute(TestCommunication.WFService.AppInfoModel entity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/NewWorkFlow", ReplyAction="http://tempuri.org/WorkFlowService/NewWorkFlowResponse")]
-        TestCommunication.WFService.WorkFlowState NewWorkFlow(TestCommunication.WFService.AppInfoModel entity);
+        string NewWorkFlow(TestCommunication.WFService.AppInfoModel entity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/QueryInProgressActivityListByOperatorUserId", ReplyAction="http://tempuri.org/WorkFlowService/QueryInProgressActivityListByOperatorUserIdRes" +
             "ponse")]
@@ -432,11 +422,11 @@ namespace TestCommunication.WFService {
                 base(binding, remoteAddress) {
         }
         
-        public TestCommunication.WFService.WorkFlowState Execute(TestCommunication.WFService.AppInfoModel entity) {
+        public string Execute(TestCommunication.WFService.AppInfoModel entity) {
             return base.Channel.Execute(entity);
         }
         
-        public TestCommunication.WFService.WorkFlowState NewWorkFlow(TestCommunication.WFService.AppInfoModel entity) {
+        public string NewWorkFlow(TestCommunication.WFService.AppInfoModel entity) {
             return base.Channel.NewWorkFlow(entity);
         }
         

@@ -4,8 +4,8 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ActivityState" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AppId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TableName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkflowName" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AppInfoModel" nillable="true" type="tns:AppInfoModel" />

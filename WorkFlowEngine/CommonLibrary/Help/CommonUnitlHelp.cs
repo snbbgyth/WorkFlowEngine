@@ -14,7 +14,7 @@ using System.Text;
 
 namespace CommonLibrary.Help
 {
-   public  class UnitlHelp
+   public  class CommonUnitlHelp
     {
        /// <summary>
        /// Get enum type by data base type 
