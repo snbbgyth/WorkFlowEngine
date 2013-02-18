@@ -1,30 +1,33 @@
 ﻿ 
 <process name="TestStateWorkFlow" targetNamespace="http://BusinessProcessDiagram1" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:Pool="http://mypool" xmlns:tns="http://BusinessProcessDiagram1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <partnerLinks>
-   	    <partnerLink name="CommonState" partnerLinkType="lns:CommonState" myRole="EmployeeRole" partnerRole="EmployeeParterRole" />
+	    <partnerLink name="CommonState" partnerLinkType="lns:CommonState" myRole="EmployeeRole" partnerRole="EmployeeParterRole" />
         <partnerLink name="ManageState" partnerLinkType="lns:ManageState" myRole="ManageRole" partnerRole="ManageParterRole" />
 		<partnerLink name="DoneState" partnerLinkType="lns:DoneState" myRole="DoneRole" partnerRole="DoneParterRole" />
-        <partnerLink name="RefuseState" partnerLinkType="lns:RefuseState" myRole="RefuseRole" partnerRole="RefuseParterRole"     </partnerLinks>
+        <partnerLink name="RefuseState" partnerLinkType="lns:RefuseState" myRole="RefuseRole" partnerRole="RefuseParterRole" />
+    </partnerLinks>
     <variables>
-        <variable messageType="Pool:Messxsd:string" name="EmployeeOperation"/>
+        <variable messageType="xsd:string" name="EmployeeOperation"/>
 		<variable messageType="xsd:string" name="ManageOperation"/>
-		<variable messageType="xsd:string" name="RemarkMessag</variables>
-    <sequence>
-            
-		<invoke name="Common" partnerLink="CommonState" portType="FamAEmployeeAction" operation="StateOperation" inputVariable="EmployeeOperationswitch name="EmployeeAction">
+		<variable messageType="xsd:string" name="RemarkMessage"/>
+    </variables>
+    <sequence>     
+		<invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" />
+        <switch name="EmployeeAction">
             <case condition="Sumbit">
                 <sequence>
-                    <empty name="Mana<invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation"  </case>
-            <case condition="Reject">
+                   <invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation" />
+                </sequence>
+            </case>
+            <case condition="Save">
                 <sequence>
-         Save">
-                <sequence>
-                   <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" quence>
+                   <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" />
+                </sequence>
             </case>
 			<case condition="Revoke">
                 <sequence>
-                    <empty name="Common"/>
-    <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" e>
+                   <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" />
+                </sequence>
             </case>
          <!-- <otherwise>
                 <sequence>
@@ -33,15 +36,18 @@
             </otherwise>
 	     -->
         </switch>
-        <empty name="Manage"/>
-		<switch nainvoke name="Manage" partnerLink="ManageState" portType="FamAManageAction" operation="StateOperation" inputVariable="ManageOperation          <case condition="Approve">
+        <invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation" />
+		<switch name="ManageAction">
+            <case condition="Approve">
                 <sequence>
-                    <empty name="Done"/>
-                </se<invoke name="Done" partnerLink="DoneState" portType="None" operation="StateOperation" inputVariable="RemarkMessage"  </case>
+                   <invoke name="Done" partnerLink="DoneState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />
+                </sequence>
+            </case>
             <case condition="Reject">
                 <sequence>
-                    <empty name="Refuse"/>
-                </seque<invoke name="Refuse" partnerLink="RefuseState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" se>
+                   <invoke name="Refuse" partnerLink="RefuseState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />
+                </sequence>
+            </case>
 		 <!-- 	<case condition="Revoke">
                 <sequence>
                     <empty name="Common"/>
@@ -54,9 +60,7 @@
             </otherwise>
 	     -->
         </switch>
-		<empty name="Done"/>
-		<empty name="Refuse"/>
-        <replinvoke name="Done" partnerLink="DoneState" portType="FamANone" operation="StateOperation" inputVariable="RemarkMessage" />
+		<invoke name="Done" partnerLink="DoneState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />
 		<invoke name="Refuse" partnerLink="RefuseState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />
     </sequence>
 </process>
