@@ -29,6 +29,9 @@ namespace TestCommunication.WFService {
         private string AppIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CurrentStateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -66,6 +69,19 @@ namespace TestCommunication.WFService {
                 if ((object.ReferenceEquals(this.AppIdField, value) != true)) {
                     this.AppIdField = value;
                     this.RaisePropertyChanged("AppId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CurrentState {
+            get {
+                return this.CurrentStateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrentStateField, value) != true)) {
+                    this.CurrentStateField = value;
+                    this.RaisePropertyChanged("CurrentState");
                 }
             }
         }
@@ -134,6 +150,9 @@ namespace TestCommunication.WFService {
         private string CurrentWorkFlowStateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ForeWorkFlowStateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -150,9 +169,6 @@ namespace TestCommunication.WFService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OperatorUserListField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string WorkFlowStateField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -243,6 +259,19 @@ namespace TestCommunication.WFService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ForeWorkFlowState {
+            get {
+                return this.ForeWorkFlowStateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ForeWorkFlowStateField, value) != true)) {
+                    this.ForeWorkFlowStateField = value;
+                    this.RaisePropertyChanged("ForeWorkFlowState");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string ID {
             get {
                 return this.IDField;
@@ -320,19 +349,6 @@ namespace TestCommunication.WFService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string WorkFlowState {
-            get {
-                return this.WorkFlowStateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.WorkFlowStateField, value) != true)) {
-                    this.WorkFlowStateField = value;
-                    this.RaisePropertyChanged("WorkFlowState");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -349,7 +365,7 @@ namespace TestCommunication.WFService {
     public enum ActivityState : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Create = 1,
+        Save = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Edit = 2,

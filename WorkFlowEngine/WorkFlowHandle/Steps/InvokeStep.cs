@@ -28,6 +28,7 @@ namespace WorkFlowHandle.Steps
         /// when invoking execution of workflow activities</param>
         public InvokeStep(XmlAttributeCollection attributes)
         {
+            InvokeContext = new InvokeContextModel();
             // this.type = InvokeType.Unknown;
             foreach (XmlAttribute attrib in attributes)
             {
@@ -40,13 +41,13 @@ namespace WorkFlowHandle.Steps
                         InvokeContext.Name = attrib.Value;
                         StepId = attrib.Value;
                         break;
-                    case "partnerLink":
+                    case "partnerlink":
                         InvokeContext.PartnerLink = attrib.Value;
                         break;
-                    case "portType":
+                    case "porttype":
                         InvokeContext.PortType = attrib.Value;
                         break;
-                    case "inputVariable":
+                    case "inputvariable":
                         InvokeContext.InputVariable = attrib.Value;
                         break;
                     default:

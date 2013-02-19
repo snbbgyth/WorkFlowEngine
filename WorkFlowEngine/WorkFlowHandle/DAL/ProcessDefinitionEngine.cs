@@ -461,9 +461,9 @@ namespace WorkFlowHandle.DAL
                     continue;
                 }
 
-                if (currentStep.LocalName == "invoke")
+          ke")
                 {
-                    workflowStep = new InvokeStep(currentStep.Attributes);
+                    workflowStep = new InvokeStep(currentStepWorkflowStep workflowStep;keStep(currentStep.Attributes);
                     if (!workflowStepList.Any(entity => entity.StepId.CompareEqualIgnoreCase(workflowStep.StepId)))
                         workflowStepList.Add(workflowStep);
                 }
@@ -471,14 +471,14 @@ namespace WorkFlowHandle.DAL
                 {
                     SequenceStep sequenceStep = new SequenceStep(currentStep.Attributes);
                     workflowStepList.Add(sequenceStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, sequenceStep.WorkflowSteps.ToList(), currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    this.FillStepList(workflowVariables, f//aultHandlers, 0, sequenceStep.WorkflowSteps.ToList(), currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancentHandlerName);
                 }
                 else if (currentStep.LocalName == "scope")
                 {
                     // can't get tool to produce invoke without having it enclosed in a scope.
                     // just ignore scope for now but get the internals as if at the same level.
-                    this.FillStepList(workflowVariables, faultHandlers, 0, workflowStepList, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
-                }
+                    this.FillStepList(workflowVariables, faultHandlers, 0, workflowS                  string variableName = null;
+                            string variabl             }
                 else if (currentStep.LocalName == "receive")
                 {
                     ReceiveStep receiveStep = new ReceiveStep(currentStep.Attributes);
@@ -495,29 +495,31 @@ namespace WorkFlowHandle.DAL
                         {
                             messageName = attrib.Value;
                         }
-                    }
+                  T }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
                         timeoutParameters.Add(messageName, timesetTime);
                     }
 
                 }
-                else if (currentStep.LocalName == "onEvent")
-                {
-                    OnEventStep onEventStep = new OnEventStep(currentStep.Attributes);
+                else if (currentSteTimesetTi          OnEventStep onEventStep = new OnEventStep(currentStep.AttonEventStep = new OnEventStep(currentStep.Attributes);
 
                     messageTimeoutEventHanlderDict.Add(onEventStep.EventKey, onEventStep.StepId);
                     // worktsageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "case")
+           TimesetTime);     else
                 {
-                    CaseStep caseStep = new CaseStep(currentStep.Attributes, false);
-                    workflowStepList.Add(caseStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, caseStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
-                }
-                else if (currentStep.LocalName == "otherwise")
+                    Debug.Fail("Unhandled " + currentStep.Name + " switch")
                 {
-                    CaseStep caseStep = new CaseStep(currentStep.Attributes, true);
+                    SwitchStep switchStep = new Switch        if (attrib.LocalName == "variable")
+                        {
+  switchStep);
+
+                    // Fill case/otherwise steps inside of switch stepkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref canceswitch "onMessage")
+                {
+                    OnMessageStep messageStep = new OnMessageStep(currentStep.Attributes);
+                    workflowStepList.Add(messageStep)tStep.Attributes, true);
                     workflowStepList.Add(caseStep);
                     this.FillStepList(workflowVariables, faultHandlers, 0, caseStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
                 }
@@ -627,9 +629,8 @@ namespace WorkFlowHandle.DAL
 
         /// <summary>
         /// Fill the WorkflowVariable and Handler field in workflow context. The workflowSteps will not be load from the bpel in this method.
-        /// For the workflowSteps may be cached.
-        /// </summary>
-        /// <param name="workflowVariables">Dictionary of workflow variables to populate with any
+  workflowStepList.Add(faultHandler);
+    lowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cance>Dictionary of workflow variables to populate with any
         /// variables defined in the BPEL file.</param>
         /// <param name="nodeList">XmlNodeList containing the BPEL data from the BPEL file</param>
         private void FillVariableList(IDictionary<string, string> workflowVariables, XmlNodeList nodeList)

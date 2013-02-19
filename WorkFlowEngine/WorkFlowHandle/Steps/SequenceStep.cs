@@ -27,6 +27,7 @@ namespace WorkFlowHandle.Steps
         /// Sequence Step in the BPEL file.</param>
         public SequenceStep(XmlAttributeCollection attributes)
         {
+            SequenceContext = new SequenceContextModel();
             // read attributes
             if (attributes != null)
             {
@@ -34,7 +35,7 @@ namespace WorkFlowHandle.Steps
                 {
                     if (attrib.LocalName == "name")
                     {
-                        SequenceContext.Name = attrib.Name;
+                        SequenceContext.Name = attrib.Value;
                         break;
                     }
                 }

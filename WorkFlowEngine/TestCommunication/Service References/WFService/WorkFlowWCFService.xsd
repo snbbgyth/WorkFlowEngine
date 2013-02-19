@@ -4,6 +4,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ActivityState" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AppId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CurrentState" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WorkflowName" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -23,13 +24,13 @@
       <xs:element minOccurs="0" name="CreateDateTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreateUserId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CurrentWorkFlowState" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ForeWorkFlowState" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsDelete" type="xs:boolean" />
       <xs:element minOccurs="0" name="LastUpdateDateTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="OperatorActivity" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OperatorUserId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OperatorUserList" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="WorkFlowState" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WorkFlowActivityModel" nillable="true" type="tns:WorkFlowActivityModel" />

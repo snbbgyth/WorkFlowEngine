@@ -7,21 +7,40 @@
 ** Summary：     WorkFlowActivityDAL class
 *********************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using CommonLibrary.Model;
-using DBHelp;
-using WorkFlowService.IDAL;
-
 namespace WorkFlowService.DAL
 {
+    using System;
+    using System.Collections.Generic;
+    using CommonLibrary.Model;
+    using DBHelp;
+    using IDAL;
+    using CommonLibrary.Help;
     using Help;
     public class WorkFlowActivityDAL : IDataOperationActivity<WorkFlowActivityModel>
     {
+        #region Private Variable
+
+        private IDBHelp _dbHelpInstance;
+
+        #endregion
+
+        #region Private Property
+
         private IDBHelp DBHelpInstance
         {
-            get { return new SQLiteHelp(); }
+            get
+            {
+                if (_dbHelpInstance == null)
+                {
+                    _dbHelpInstance = new SQLiteHelp();
+                    _dbHelpInstance.ConnectionString = string.Format(WFConstants.SQLiteConnectionString,
+                                                                   WFUntilHelp.SqliteFilePath);
+                }
+                return _dbHelpInstance;
+            }
         }
+
+        #endregion
 
         public int CreateTable()
         {
@@ -37,8 +56,8 @@ namespace WorkFlowService.DAL
         {
             entity.ID = Guid.NewGuid().ToString();
             return string.Format(WFConstants.InsertWorkFlowActivitySqlTags, entity.ID, entity.AppId,
-                                 entity.WorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
-                                 entity.OperatorUserId, entity.CreateDateTime, entity.LastUpdateDateTime,
+                                 entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
+                                 entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                                  entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
         }
 
@@ -50,8 +69,8 @@ namespace WorkFlowService.DAL
         private string GetModifySqlByEntity(WorkFlowActivityModel entity)
         {
             return string.Format(WFConstants.InsertOrReplaceWorkFlowActivitySqlTags, entity.ID, entity.AppId,
-                              entity.WorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
-                              entity.OperatorUserId, entity.CreateDateTime, entity.LastUpdateDateTime,
+                              entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
+                              entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                               entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
         }
 

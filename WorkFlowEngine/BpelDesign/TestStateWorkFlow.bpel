@@ -14,7 +14,7 @@
     <sequence>     
 		<invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" />
         <switch name="EmployeeAction">
-            <case condition="Sumbit">
+            <case condition="Submit">
                 <sequence>
                    <invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation" />
                 </sequence>

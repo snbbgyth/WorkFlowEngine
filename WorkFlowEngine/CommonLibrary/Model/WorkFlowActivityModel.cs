@@ -20,7 +20,7 @@ namespace CommonLibrary.Model
         [DataMember]
         public string AppId { get; set; }
         [DataMember]
-        public string WorkFlowState { get; set; }
+        public string ForeWorkFlowState { get; set; }
         [DataMember]
         public string OperatorActivity { get; set; }
         [DataMember]

@@ -27,7 +27,7 @@ namespace WorkFlowHandle.Steps
         /// <param name="attributes">Xml attributes from the BPEL file</param>
         public SwitchStep(XmlAttributeCollection attributes)
         {
-            // set name attribute - only one we care about for now
+            // set name attribute - only SwitchContext = new SwitchContextModel();ribute - only one we care about for now
             foreach (XmlAttribute attrib in attributes)
             {
                 if (attrib.LocalName == "name")
@@ -35,8 +35,7 @@ namespace WorkFlowHandle.Steps
                     SwitchContext.Name = attrib.Value;
                     StepId = attrib.Name;
                 }
-            }
-        }
+           Valu        }
 
         /// <summary>
         /// Executes the SwitchStep.  

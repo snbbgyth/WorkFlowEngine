@@ -44,6 +44,7 @@ namespace WorkFlowHandle.Steps
         public CaseStep(XmlAttributeCollection attributes, bool defaultCase)
             : base()
         {
+            CaseContext = new CaseContextModel();
             this.defaultCase = defaultCase;
 
             // read attributes

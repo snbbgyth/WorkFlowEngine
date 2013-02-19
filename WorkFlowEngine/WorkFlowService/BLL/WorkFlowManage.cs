@@ -34,14 +34,14 @@ namespace WorkFlowService.BLL
         {
             var activityEntity = WorkFlowActivityDalInstance.QueryByAppId(entity.AppId);
             var currentWorkFlowState =
-                WorkFlowEngineInstance.Execute(entity.WorkflowName, activityEntity.CurrentWorkFlowState,
-                                               entity.ActivityState);
-            activityEntity.WorkFlowState = activityEntity.CurrentWorkFlowState;
+                WorkFlowEngineInstance.Execute(entity.WorkflowName, activityEntity.CurrentWorkFlentity.Current                         entity.ActivityState);
+            activityEntity.WorkFlowState = activityEntity.ForeCurrentWorkFlowState;
             activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
-            activityEntity.OperatorUserId = entity.UserId;
+            activitratorUserId = entity.UserId;
             activityEntity.OperatorUserList += entity.UserId + WFConstants.SplitCharacterTag;
             activityEntity.LastUpdateDateTime = DateTime.Now;
             return currentWorkFlowState;
+       activityEntity.ApplicationState = currentWorkFlowStatewState;
         }
 
 
@@ -49,19 +49,20 @@ namespace WorkFlowService.BLL
         {
             var activityEntity = new WorkFlowActivityModel
             {
-                WorkFlowState = WorkFlowState.Common.ToString(),
+                WorkFlowState = WorkFlowState.Common.ToStrinForeWorkFlowState = entity.CurrentState,
                 // new ActivityId
-                OperatorActivity = ActivityState.Submit.ToString(),
-                LastUpdateDateTime = DateTime.Now,
+                OperatorActivity =entity.ActivityStatee.Now,
                 AppId = entity.AppId,
                 CreateDateTime = DateTime.Now,
                 CreateUserId = entity.UserId,
                 OperatorUserId = entity.UserId,
                 OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag
             };
-            var currentWorkFlowState = WorkFlowEngineInstance.Execute(entity.WorkflowName, WorkFlowState.Common.ToString(), ActivityState.Submit.ToString());
-            activityEntity.CurrentWorkFlowState = currentWorkFlowState.ToString();
-            DataOperationBLL.Current.Insert(activityEntity);
+            var currentWorkFlowState,
+                = WorkFlowEngineInstance.Execute(entity.WorkflowName, WorkFlowState.Common.ToString(), ActivityState.Submit.ToString());
+            activityentity.ActivityStateurrentWorkFlowState.ToString();
+            DataOperationBLL.Current.Inser;
+            activityEntity.ApplicationState = currentWorkFlowStatentity);
             return currentWorkFlowState;
         }
 

@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WorkflowService\WorkflowServiceTest.cs" />
+    <Compile Include="WorkflowService\TestStateWorkFlowTest.cs" />
     <Compile Include="Common\BaseActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\WFService\Reference.cs">

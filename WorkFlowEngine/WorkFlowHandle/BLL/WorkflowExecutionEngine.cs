@@ -7,6 +7,7 @@
 ** Summary：     WorkflowExecutionEngine class
 *********************************************************************************/
 
+using System.Linq;
 using CommonLibrary.Help;
 using WorkFlowHandle.Model;
 using WorkFlowHandle.Steps;
@@ -23,14 +24,17 @@ namespace WorkFlowHandle.BLL
 
         public WorkflowStep ExecuteWorkflowByCurrentState(WorkflowContext context, string currentState)
         {
-            var workflowStep =
-                context.WorkflowStepList.Find(entity => entity.StepId.CompareEqualIgnoreCase(currentState));
-            var invokeStep = workflowStep as InvokeStep;
-            if (invokeStep == null) return null;
-            return
-                context.WorkflowStepList.Find(
-                    entity => entity.StepId.CompareEqualIgnoreCase(invokeStep.InvokeContext.PortType));
-
+ 
+            return (from stepRunnerStep in context.WorkflowStepList.OfType<StepRunnerStep>()
+                    let subStep =
+                        stepRunnerStep.WorkflowSteps.Find(entity => entity.StepId.CompareEqualIgnoreCase(currentState))
+                    let invokeStep = subStep as InvokeStep
+                    where invokeStep != null
+                    select
+                        stepRunnerStep.WorkflowSteps.Find(
+                            entity => entity.StepId.CompareEqualIgnoreCase(invokeStep.InvokeContext.PortType)))
+                .FirstOrDefault();
+  
         }
     }
 }

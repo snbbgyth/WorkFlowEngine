@@ -31,7 +31,7 @@ namespace CommonLibrary.Help
     [Serializable]
     public enum ActivityState
     {
-        Create = 1,
+        Save = 1,
         Edit = 2,
         Resbmit = 4,
         Submit = 8,

@@ -22,5 +22,8 @@ namespace CommonLibrary.Model
         public string WorkflowName { get; set; }
         [DataMember]
         public string ActivityState { get; set; }
+        [DataMember]
+        public string CurrentState { get; set; }
+
     }
 }

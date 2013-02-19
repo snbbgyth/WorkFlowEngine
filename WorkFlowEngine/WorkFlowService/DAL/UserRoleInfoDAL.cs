@@ -17,6 +17,7 @@ namespace WorkFlowService.DAL
     using DBHelp;
     using IDAL;
     using Model;
+    using CommonLibrary.Help;
 
     public class UserRoleInfoDAL : IDataOperationActivity<UserRoleInfoModel>
     {
@@ -24,11 +25,29 @@ namespace WorkFlowService.DAL
         {
             get { return new UserRoleInfoDAL(); }
         }
+        #region Private Variable
+
+        private IDBHelp _dbHelpInstance;
+
+        #endregion
+
+        #region Private Property
 
         private IDBHelp DBHelpInstance
         {
-            get { return new SQLiteHelp(); }
+            get
+            {
+                if (_dbHelpInstance == null)
+                {
+                    _dbHelpInstance = new SQLiteHelp();
+                    _dbHelpInstance.ConnectionString = string.Format(WFConstants.SQLiteConnectionString,
+                                                                     WFUntilHelp.SqliteFilePath);
+                }
+                return _dbHelpInstance;
+            }
         }
+
+        #endregion
 
         public int Insert(UserRoleInfoModel entity)
         {
@@ -39,7 +58,7 @@ namespace WorkFlowService.DAL
         {
             entity.ID = Guid.NewGuid().ToString();
             return string.Format(WFConstants.InsertUserRoleInfoSqlTags, entity.ID, entity.UserID, entity.OperatorState,
-                                 entity.CreateDateTime, entity.LastUpdateDateTime, Convert.ToInt32(entity.IsDelete));
+                                 entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         public int Modify(UserRoleInfoModel entity)
