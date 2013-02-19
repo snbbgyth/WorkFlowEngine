@@ -59,37 +59,53 @@ namespace WorkFlowService.Help
         public const string QueryWorkFlowActivityLogByAppIdSqlTags =
             "select * from WorkFlowActivityLog where AppId='{0}'";
 
-        public const string CreateUserInfoTableSqlTags = @"CREATE TABLE [UserInfo] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,UserName varchar(100),Password varchar(100),CreateDateTime datetime,LastUpdateDateTime datetime,IsDelete boolean)";
+ 
+        #endregion
 
-        public const string InsertUserInfoSqlTags = @"Insert into UserInfo(ID,UserName,Password, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+        #region UserInfo Table
+      public const string CreateUserInfoTableSqlTags = @"CREATE TABLE [UserInfo] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,UserName varchar(100),Password varchar(100),CreateDateTime datetime,LastUpdateDateTime datetime,IsDelete boolean)";
 
-        public const string InsertOrReplaceUserInfoSqlTags = @"Insert or replace into UserInfo(ID,UserName,Password, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+ 
+      public const string InsertUserInfoSqlTags = @"Insert into UserInfo(ID,UserName,Password, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+
+ 
+      public const string InsertOrReplaceUserInfoSqlTags = @"Insert or replace into UserInfo(ID,UserName,Password, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+
+ 
 
         public const string DeleteUserInfoByIDSqlTags = "delete from UserInfo where ID='{0}'";
+      public const string QueryAllUserInfoSqlTags = "select * from UserInfo";
 
-        public const string QueryAllUserInfoSqlTags = "select * from UserInfo";
+ 
 
         public const string QueryUserInfoByIDTags = "select * from UserInfo where ID='{0}'";
+      public const string QueryUserInfoByUserNameAndPasswordTags = "select * from UserInfo where UserName='{0}' and Password='{1}'";
 
-        public const string QueryUserInfoByUserNameAndPasswordTags = "select * from UserInfo where UserName='{0}' and Password='{1}'";
+ 
 
         #endregion
 
         #region UserRoleInfo Table
+      public const string CreateUserRoleInfoTableSqlTags = @"CREATE TABLE [UserRoleInfo] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,UserID varchar(50),OperatorState varchar(100),CreateDateTime datetime,LastUpdateDateTime datetime,IsDelete boolean)";
 
-        public const string CreateUserRoleInfoTableSqlTags = @"CREATE TABLE [UserRoleInfo] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,UserID varchar(50),OperatorState varchar(100),CreateDateTime datetime,LastUpdateDateTime datetime,IsDelete boolean)";
+ 
+      public const string InsertUserRoleInfoSqlTags = @"Insert into UserRoleInfo(ID,UserID,OperatorState, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
 
-        public const string InsertUserRoleInfoSqlTags = @"Insert into UserRoleInfo(ID,UserID,OperatorState, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+ 
+      public const string InsertOrReplaceUserRoleInfoSqlTags = @"Insert or replace into UserRoleInfo(ID,UserID,OperatorState, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
 
-        public const string InsertOrReplaceUserRoleInfoSqlTags = @"Insert or replace into UserRoleInfo(ID,UserID,OperatorState, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+ 
+      public const string DeleteUserRoleInfoByIDSqlTags = "delete from UserRoleInfo where ID='{0}'";
 
-        public const string DeleteUserRoleInfoByIDSqlTags = "delete from UserRoleInfo where ID='{0}'";
+ 
 
         public const string QueryAllUserRoleInfoSqlTags = "select * from UserRoleInfo";
+      public const string QueryUserRoleInfoByIDTags = "select * from UserRoleInfo where ID='{0}'";
 
-        public const string QueryUserRoleInfoByIDTags = "select * from UserRoleInfo where ID='{0}'";
+ 
+      public const string QueryUserRoleInfoByUserIDTags = "select * from UserRoleInfo where UserID='{0}'";
 
-        public const string QueryUserRoleInfoByUserIDTags = "select * from UserRoleInfo where UserID='{0}'";
+ 
 
         public const string DeleteUserRoleInfoByUserIDTags = "delete from UserRoleInfo where UserID='{0}'";
 
