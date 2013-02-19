@@ -40,8 +40,6 @@ namespace WorkFlowService.Help
             return ApplicationState.Draft;
         }
 
-
-
         private static string RunPath
         {
             get { return AppDomain.CurrentDomain.BaseDirectory; }
