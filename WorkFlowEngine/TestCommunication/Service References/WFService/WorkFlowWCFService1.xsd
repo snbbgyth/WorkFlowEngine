@@ -6,7 +6,7 @@
         <xs:restriction base="xs:string">
           <xs:enumeration value="Save" />
           <xs:enumeration value="Edit" />
-          <xs:enumeration value="Resbmit" />
+          <xs:enumeration value="Resubmit" />
           <xs:enumeration value="Submit" />
           <xs:enumeration value="Revoke" />
           <xs:enumeration value="Approve" />

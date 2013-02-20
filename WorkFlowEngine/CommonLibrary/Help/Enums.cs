@@ -33,13 +33,13 @@ namespace CommonLibrary.Help
     {
         Save = 1,
         Edit = 2,
-        Resbmit = 4,
+        Resubmit = 4,
         Submit = 8,
         Revoke = 16,
         Approve = 32,
         Reject = 64,
         Read = 128,
-        None = 256
+        Forward = 256
     }
 
     [Serializable]

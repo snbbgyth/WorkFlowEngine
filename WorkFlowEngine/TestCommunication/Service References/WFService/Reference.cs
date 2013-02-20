@@ -371,7 +371,7 @@ namespace TestCommunication.WFService {
         Edit = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Resbmit = 4,
+        Resubmit = 4,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Submit = 8,

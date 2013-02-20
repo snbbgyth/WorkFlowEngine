@@ -28,7 +28,8 @@ namespace TestCommunication.WorkflowService
                                     ActivityState = ActivityState.Submit.ToString(),
                                     AppId = "001",
                                     WorkflowName = "TestStateWorkFlow",
-                                    UserId = "001"
+                                    UserId = "001",
+                                    CurrentState = "Common"
                                 };
            var result= WfServiceInstance.NewWorkFlow(appEntity);
            Assert.AreEqual(result, "Manage");  
@@ -128,6 +129,43 @@ namespace TestCommunication.WorkflowService
             };
             var revokeResult = WfServiceInstance.Execute(commonEntity);
             Assert.AreEqual(revokeResult, "Common");
+        }
+
+        [Test]
+        public void TestResubmitWorkflow()
+        {
+            var appEntity = new AppInfoModel
+            {
+                ActivityState = ActivityState.Submit.ToString(),
+                AppId = "007",
+                WorkflowName = "TestStateWorkFlow",
+                UserId = "007",
+                CurrentState = "Common"
+            };
+            var result = WfServiceInstance.NewWorkFlow(appEntity);
+            Assert.AreEqual(result, "Manage");
+
+            var commonEntity = new AppInfoModel
+            {
+                ActivityState = ActivityState.Revoke.ToString(),
+                AppId = "007",
+                WorkflowName = "TestStateWorkFlow",
+                UserId = "007",
+                CurrentState = "Common"
+            };
+            var revokeResult = WfServiceInstance.Execute(commonEntity);
+            Assert.AreEqual(revokeResult, "Common");
+
+            var resubmitEntity = new AppInfoModel
+            {
+                ActivityState = ActivityState.Resubmit.ToString(),
+                AppId = "007",
+                WorkflowName = "TestStateWorkFlow",
+                UserId = "007",
+                CurrentState = "Common"
+            };
+            var lastResult = WfServiceInstance.Execute(resubmitEntity);
+            Assert.AreEqual(lastResult, "Manage");
         }
     }
 }

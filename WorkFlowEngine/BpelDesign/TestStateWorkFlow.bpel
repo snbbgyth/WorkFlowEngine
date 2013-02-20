@@ -19,6 +19,11 @@
                    <invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation" />
                 </sequence>
             </case>
+			<case condition="Resubmit">
+                <sequence>
+                   <invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation" />
+                </sequence>
+            </case>
             <case condition="Save">
                 <sequence>
                    <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" />
