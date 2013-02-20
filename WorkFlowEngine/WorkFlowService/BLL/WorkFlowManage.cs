@@ -79,7 +79,7 @@ namespace WorkFlowService.BLL
                 return WorkFlowEngineInstance.GetActivityStateByWorkFlowState(WFUntilHelp.GetWorkFlowStateByName(activityEntity.CurrentWorkFlowState));
             if (CompareIsContain(activityEntity.OperatorUserList, userId))
                 return ActivityState.Read;
-            return ActivityState.None;
+            return ActivityState.Read;
         }
 
         public ApplicationState GetApplicationStateByAppId(string appId)
