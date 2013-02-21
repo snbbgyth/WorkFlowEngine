@@ -1,10 +1,10 @@
 ﻿/********************************************************************************
-** Class Name:   UserRoleInfoDAL 
-** Author：      spring yang
+** Class Name:   RoleInfoDAL 
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
+** Modify：      Spring Yang
 ** Modify Date： 2012-9-25
-** Summary：     UserRoleInfoDAL class
+** Summary：     RoleInfoDAL class
 *********************************************************************************/
 
 
@@ -19,11 +19,11 @@ namespace WorkFlowService.DAL
     using Model;
     using CommonLibrary.Help;
 
-    public class UserRoleInfoDAL : IDataOperationActivity<UserRoleInfoModel>
+    public class RoleInfoDAL : IDataOperationActivity<RoleInfoModel>
     {
-        public static UserRoleInfoDAL Current
+        public static RoleInfoDAL Current
         {
-            get { return new UserRoleInfoDAL(); }
+            get { return new RoleInfoDAL(); }
         }
         #region Private Variable
 
@@ -49,26 +49,26 @@ namespace WorkFlowService.DAL
 
         #endregion
 
-        public int Insert(UserRoleInfoModel entity)
+        public int Insert(RoleInfoModel entity)
         {
             return DBHelpInstance.ExecuteNonQuery(GetInsertByEntitySql(entity));
         }
 
-        private string GetInsertByEntitySql(UserRoleInfoModel entity)
+        private string GetInsertByEntitySql(RoleInfoModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertUserRoleInfoSqlTags, entity.ID, entity.UserID, entity.OperatorState,
+            return string.Format(WFConstants.InsertUserRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
-        public int Modify(UserRoleInfoModel entity)
+        public int Modify(RoleInfoModel entity)
         {
             return DBHelpInstance.ExecuteNonQuery(GetModifyByEntitySql(entity));
         }
 
-        private string GetModifyByEntitySql(UserRoleInfoModel entity)
+        private string GetModifyByEntitySql(RoleInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceUserRoleInfoSqlTags, entity.ID, entity.UserID, entity.OperatorState,
+            return string.Format(WFConstants.InsertOrReplaceUserRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
                            entity.CreateDateTime, entity.LastUpdateDateTime, Convert.ToInt32(entity.IsDelete));
         }
 
@@ -82,42 +82,46 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.DeleteUserRoleInfoByIDSqlTags, id);
         }
 
+
+        //Todo: now is wrong
         public int DeleteByUserID(string userID)
         {
             return DBHelpInstance.ExecuteNonQuery(GetDeleteByUserIDSql(userID));
         }
 
+        //Todo: now is wrong
         private string GetDeleteByUserIDSql(string userID)
         {
-            return string.Format(WFConstants.DeleteUserRoleInfoByUserIDTags, userID);
+            return string.Format(WFConstants.DeleteUserRoleInfoByUserIDSqlTags, userID);
         }
 
-        public List<UserRoleInfoModel> QueryAll()
+        public List<RoleInfoModel> QueryAll()
         {
-            return DBHelpInstance.ReadEntityList<UserRoleInfoModel>(WFConstants.QueryAllUserRoleInfoSqlTags);
+            return DBHelpInstance.ReadEntityList<RoleInfoModel>(WFConstants.QueryAllUserRoleInfoSqlTags);
         }
 
-        public UserRoleInfoModel QueryByID(string id)
+        public RoleInfoModel QueryByID(string id)
         {
-            var entityList = DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByIDSql(id));
+            var entityList = DBHelpInstance.ReadEntityList<RoleInfoModel>(GetQueryByIDSql(id));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
         }
 
         private string GetQueryByIDSql(string id)
         {
-            return string.Format(WFConstants.QueryUserRoleInfoByIDTags, id);
+            return string.Format(WFConstants.QueryUserRoleInfoByIDSqlTags, id);
         }
 
-
-        public List<UserRoleInfoModel> QueryByUserID(string userID)
+        //Todo: now is wrong
+        public List<RoleInfoModel> QueryByUserID(string userID)
         {
-            return  DBHelpInstance.ReadEntityList<UserRoleInfoModel>(GetQueryByUserIDSql(userID));
+            return  DBHelpInstance.ReadEntityList<RoleInfoModel>(GetQueryByUserIDSql(userID));
 
         }
 
+        //Todo: now is wrong
         private string GetQueryByUserIDSql(string userID)
         {
-            return string.Format(WFConstants.QueryUserRoleInfoByUserIDTags, userID);
+            return string.Format(WFConstants.QueryUserRoleInfoByUserIDSqlTags, userID);
         }
 
 

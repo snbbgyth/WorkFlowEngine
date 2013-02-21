@@ -49,14 +49,18 @@
     <Compile Include="BLL\UserOperationBLL.cs" />
     <Compile Include="BLL\WorkFlowEngine.cs" />
     <Compile Include="BLL\WorkFlowManage.cs" />
+    <Compile Include="DAL\OperationActionInfoDAL.cs" />
+    <Compile Include="DAL\RelationDAL.cs" />
+    <Compile Include="DAL\UserGroupDAL.cs" />
     <Compile Include="DAL\UserInfoDAL.cs" />
-    <Compile Include="DAL\UserRoleInfoDAL.cs" />
+    <Compile Include="DAL\RoleInfoDAL.cs" />
     <Compile Include="DAL\WorkFlowActivityDAL.cs" />
     <Compile Include="DAL\CommonState.cs" />
     <Compile Include="DAL\DoneState.cs" />
     <Compile Include="DAL\ManageState.cs" />
     <Compile Include="DAL\RefuseState.cs" />
     <Compile Include="DAL\WorkFlowActivityLogDAL.cs" />
+    <Compile Include="DAL\WorkflowStateInfoDAL.cs" />
     <Compile Include="Help\StateMapping.cs" />
     <Compile Include="Help\TypeNameComparer.cs" />
     <Compile Include="Help\WFConstants.cs" />
@@ -68,8 +72,12 @@
     <Compile Include="IDAL\IStateBase.cs" />
     <Compile Include="IDAL\IUserOperationActivity.cs" />
     <Compile Include="IDAL\IWorkFlowActivity.cs" />
+    <Compile Include="Model\OperationActionInfoModel.cs" />
+    <Compile Include="Model\RelationModel.cs" />
+    <Compile Include="Model\UserGroupModel.cs" />
     <Compile Include="Model\UserInfoModel.cs" />
-    <Compile Include="Model\UserRoleInfoModel.cs" />
+    <Compile Include="Model\RoleInfoModel.cs" />
+    <Compile Include="Model\WorkflowStateInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

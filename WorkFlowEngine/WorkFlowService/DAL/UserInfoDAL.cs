@@ -1,16 +1,15 @@
 ﻿/********************************************************************************
 ** Class Name:   UserInfoDAL 
-** Author：      spring yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      spring yang
-** Modify Date： 2012-9-25
+** Modify：      Spring Yang
+** Modify Date： 2013-2-21
 ** Summary：     UserInfoDAL class
 *********************************************************************************/
 
 
 namespace WorkFlowService.DAL
 {
-
     using System;
     using System.Collections.Generic;
     using DBHelp;
@@ -25,7 +24,6 @@ namespace WorkFlowService.DAL
         {
             get { return new UserInfoDAL(); }
         }
-
 
         #region Private Variable
 
@@ -59,7 +57,7 @@ namespace WorkFlowService.DAL
         private string GetInsertSqlByEntitySql(UserInfoModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertUserInfoSqlTags, entity.ID, entity.UserName, entity.Password,
+            return string.Format(WFConstants.InsertUserInfoSqlTags, entity.ID, entity.UserName,entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
@@ -70,7 +68,7 @@ namespace WorkFlowService.DAL
 
         private string GetModifyByEntitySql(UserInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceUserInfoSqlTags, entity.ID, entity.UserName, entity.Password,
+            return string.Format(WFConstants.InsertOrReplaceUserInfoSqlTags, entity.ID, entity.UserName,entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
@@ -114,6 +112,17 @@ namespace WorkFlowService.DAL
         public int CreateTable()
         {
             return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateUserInfoTableSqlTags);
+        }
+
+        public UserInfoModel QueryByUserName(string userName)
+        {
+            var entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByUserNameSql(userName));
+            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
+        }
+
+        private string GetQueryByUserNameSql(string userName)
+        {
+            return string.Format(WFConstants.QueryUserInfoByUserNameSqlTags, userName);
         }
     }
 }

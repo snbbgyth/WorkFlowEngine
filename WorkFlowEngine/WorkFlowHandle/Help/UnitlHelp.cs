@@ -11,9 +11,7 @@ namespace WorkFlowHandle.Help
     {
        public static WorkflowHandlerSettingsConfigSection GetWorkflowHandlerSettingsConfigSection()
        {
-
-
-           WorkflowHandlerSettingsConfigSection configSection = ConfigurationManager.GetSection("workflowHandlerSettings") as WorkflowHandlerSettingsConfigSection;
+           var configSection = ConfigurationManager.GetSection("workflowHandlerSettings") as WorkflowHandlerSettingsConfigSection;
            return configSection;
        }
     }

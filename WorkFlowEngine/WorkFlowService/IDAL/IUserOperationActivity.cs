@@ -17,7 +17,7 @@ namespace WorkFlowService.IDAL
 {
     public interface IUserOperationActivity
     {
-        bool CreateUser(string userName, string password);
+        bool CreateUser(string userName, string userDisplayName,string password);
 
         string LoginIn(string userName, string password);
 
@@ -25,9 +25,9 @@ namespace WorkFlowService.IDAL
 
         bool DeleteUser(string userId);
 
-        bool AssignUserRole(string userId, string workflowState);
+        bool AssignUserGroupRole(string userId, string workflowState);
 
-        bool ModifyUserRole(string userId, string workflowState);
+        bool ModifyUserInUserGroup(string userId, string workflowState);
 
         bool DeleteUserRole(string userId);
     }

@@ -19,9 +19,11 @@ namespace WorkFlowService.BLL
     using DAL;
     using Help;
 
-    public class UserOperationBLL : IUserOperationActivity
+    public class UserOperationBLL //: IUserOperationActivity
     {
-        public bool CreateUser(string userName, string password)
+        #region User operation
+
+        public bool CreateUser(string userName,string userDisplayName, string password)
         {
             return DataOperationBLL.Current.Insert(new UserInfoModel
             {
@@ -29,52 +31,79 @@ namespace WorkFlowService.BLL
                 IsDelete = false,
                 LastUpdateDateTime = DateTime.Now,
                 Password = password,
-                UserName = userName
+                UserName = userName,
+                UserDisplayName = userDisplayName
             }) > 0;
         }
 
-        public bool ModifyPassword(string userId, string password)
+        public bool ModifyPasswordByUserID(string userId, string password)
         {
             var entity = DataOperationBLL.Current.QueryByEID<UserInfoModel>(userId);
             entity.Password = password;
             return DataOperationBLL.Current.Modify(entity) > 0;
         }
 
-        public bool DeleteUser(string userId)
+        public bool ModifyPasswordByUserName(string userName, string password)
         {
-            DataOperationBLL.Current.Remove<UserInfoModel>(userId);
-            UserRoleInfoDAL.Current.DeleteByUserID(userId);
-            return true;
-        }
-
-        public bool AssignUserRole(string userId, string workflowState)
-        {
-            return
-                DataOperationBLL.Current.Insert(new UserRoleInfoModel
-                {
-                    CreateDateTime = DateTime.Now,
-                    LastUpdateDateTime = DateTime.Now,
-                    OperatorState = workflowState,
-                    UserID = userId
-                }) > 0;
-        }
-
-        public bool ModifyUserRole(string userId, string workflowState)
-        {
-            var entityList = UserRoleInfoDAL.Current.QueryByUserID(userId);
-            var entity = entityList.First(t => t.OperatorState.CompareEqualIgnoreCase(workflowState));
-            entity.OperatorState = workflowState;
+            var entity = UserInfoDAL.Current.QueryByUserName(userName); 
+            entity.Password = password;
             return DataOperationBLL.Current.Modify(entity) > 0;
         }
 
-        public bool DeleteUserRole(string userId)
+        public bool DeleteUserByUserID(string userId)
         {
-            return UserRoleInfoDAL.Current.DeleteByUserID(userId) > 0;
+            DataOperationBLL.Current.Remove<UserInfoModel>(userId);
+           // RoleInfoDAL.Current.DeleteByUserID(userId);
+           // Todo: delete userID in realtion table.
+            return true;
         }
 
         public string LoginIn(string userName, string password)
         {
             return UserInfoDAL.Current.Login(userName, password);
         }
+
+        #endregion
+
+        #region User relation UserGroup Type enqual 1
+
+        public bool AddUserInUserGroup(string userId, string userGroupId)
+        {
+            return
+                RelationDAL.Current.Insert(new RelationModel
+                                               {
+                                                   ChildNodeID = userId,
+                                                   CreateDateTime = DateTime.Now,
+                                                   LastUpdateDateTime = DateTime.Now,
+                                                   ParentNodeID = userGroupId,
+                                                   Type = 1
+                                               })>0;
+        }
+
+
+
+        #endregion
+
+        #region UserGroup relation RoleInfo
+
+        public bool AssignUserGroupRole(string userGroupId, string roleID)
+        {
+            return
+                DataOperationBLL.Current.Insert(new RelationModel()
+                {
+                    ChildNodeID = userGroupId,
+                    ParentNodeID = roleID,
+                    Type = 2,
+                    CreateDateTime = DateTime.Now,
+                    LastUpdateDateTime = DateTime.Now,
+                }) > 0;
+        }
+
+        public bool DeleteUserGroupRole(string userId)
+        {
+            return RoleInfoDAL.Current.DeleteByUserID(userId) > 0;
+        }
+
+        #endregion
     }
 }

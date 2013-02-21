@@ -42,6 +42,7 @@ namespace WorkFlowService.BLL
             activityEntity.OperatorUserList += entity.UserId + WFConstants.SplitCharacterTag;
             activityEntity.LastUpdateDateTime = DateTime.Now;
             activityEntity.ApplicationState = currentWorkFlowState;
+            DataOperationBLL.Current.Modify(activityEntity);
             return currentWorkFlowState;
         }
 
