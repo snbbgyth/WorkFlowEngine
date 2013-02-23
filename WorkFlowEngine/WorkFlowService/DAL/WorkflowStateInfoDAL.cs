@@ -101,5 +101,17 @@ namespace WorkFlowService.DAL
         {
             return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateWorkflowStateInfoTableSqlTags);
         }
+
+        public WorkflowStateInfoModel QueryByWorkflowNameAndStateNodeName(string workflowName, string stateNodeName)
+        {
+            var entityList = DBHelpInstance.ReadEntityList<WorkflowStateInfoModel>(GetQueryByWorkflowNameAndStateNodeNameSql(workflowName,stateNodeName));
+            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
+        }
+
+        private string GetQueryByWorkflowNameAndStateNodeNameSql(string workflowName, string stateNodeName)
+        {
+            return string.Format(WFConstants.QueryWorkflowStateInfoByWorkflowNameAndStateNodeNameSqlTags, workflowName,
+                                 stateNodeName);
+        }
     }
 }

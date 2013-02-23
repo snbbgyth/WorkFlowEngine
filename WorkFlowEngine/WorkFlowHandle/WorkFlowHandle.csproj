@@ -44,6 +44,7 @@
     <Compile Include="DAL\ProcessDefinitionEngine.cs" />
     <Compile Include="Help\Constants.cs" />
     <Compile Include="Help\UnitlHelp.cs" />
+    <Compile Include="IDAL\IWorkflowHandle.cs" />
     <Compile Include="Model\CaseContextModel.cs" />
     <Compile Include="Model\InvokeContextModel.cs" />
     <Compile Include="Model\SequenceContextModel.cs" />

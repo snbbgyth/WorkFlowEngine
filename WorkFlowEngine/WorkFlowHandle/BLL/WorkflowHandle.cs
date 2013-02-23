@@ -8,13 +8,16 @@
 *********************************************************************************/
 
 using System;
+using System.Collections.Generic;
+using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.BLL
 {
     using Model;
     using DAL;
+    using IDAL;
 
-    public class WorkflowHandle
+    public class WorkflowHandle:IWorkflowHandle
     {
         private static ProcessDefinitionEngine _workflowProcessDefinition;
 
@@ -27,7 +30,7 @@ namespace WorkFlowHandle.BLL
 
         private static readonly object SyncObj = new object();
 
-        public static WorkflowHandle Instance
+        public static IWorkflowHandle Instance
         {
             get
             {
@@ -42,10 +45,23 @@ namespace WorkFlowHandle.BLL
 
         public string Run(string workflowName, string currentState, string actionName)
         {
-            var onContext = new WorkflowContext(workflowName, Guid.NewGuid().ToString());
-            _workflowProcessDefinition.LoadNewWorkflow(onContext);
+            var onContext = GetWorkflowContextByWorkflowName(workflowName);
             var workflowStep = WorkflowExecutionEngine.Current.ExecuteWorkflowByCurrentState(onContext, currentState);
             return workflowStep == null ? string.Empty : workflowStep.Run(onContext, actionName);
+        }
+
+
+        private WorkflowContext GetWorkflowContextByWorkflowName(string workflowName)
+        {
+            var onContext = new WorkflowContext(workflowName, Guid.NewGuid().ToString());
+            _workflowProcessDefinition.LoadNewWorkflow(onContext);
+            return onContext;
+        }
+
+        public List<WorkflowStep> GetInvokeStepByWorkflowName(string workflowName)
+        {
+            var onContext = GetWorkflowContextByWorkflowName(workflowName);
+            return onContext.WorkflowStepList.FindAll(entity => entity is InvokeStep);
         }
 
     }

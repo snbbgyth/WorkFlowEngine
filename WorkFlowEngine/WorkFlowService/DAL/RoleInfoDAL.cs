@@ -57,7 +57,7 @@ namespace WorkFlowService.DAL
         private string GetInsertByEntitySql(RoleInfoModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertUserRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
+            return string.Format(WFConstants.InsertRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
@@ -68,7 +68,7 @@ namespace WorkFlowService.DAL
 
         private string GetModifyByEntitySql(RoleInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceUserRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
+            return string.Format(WFConstants.InsertOrReplaceRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
                            entity.CreateDateTime, entity.LastUpdateDateTime, Convert.ToInt32(entity.IsDelete));
         }
 
@@ -79,7 +79,7 @@ namespace WorkFlowService.DAL
 
         private string GetDeleteByIDSql(string id)
         {
-            return string.Format(WFConstants.DeleteUserRoleInfoByIDSqlTags, id);
+            return string.Format(WFConstants.DeleteRoleInfoByIDSqlTags, id);
         }
 
 
@@ -92,12 +92,12 @@ namespace WorkFlowService.DAL
         //Todo: now is wrong
         private string GetDeleteByUserIDSql(string userID)
         {
-            return string.Format(WFConstants.DeleteUserRoleInfoByUserIDSqlTags, userID);
+            return string.Format(WFConstants.DeleteRoleInfoByUserIDSqlTags, userID);
         }
 
         public List<RoleInfoModel> QueryAll()
         {
-            return DBHelpInstance.ReadEntityList<RoleInfoModel>(WFConstants.QueryAllUserRoleInfoSqlTags);
+            return DBHelpInstance.ReadEntityList<RoleInfoModel>(WFConstants.QueryAllRoleInfoSqlTags);
         }
 
         public RoleInfoModel QueryByID(string id)
@@ -108,7 +108,7 @@ namespace WorkFlowService.DAL
 
         private string GetQueryByIDSql(string id)
         {
-            return string.Format(WFConstants.QueryUserRoleInfoByIDSqlTags, id);
+            return string.Format(WFConstants.QueryRoleInfoByIDSqlTags, id);
         }
 
         //Todo: now is wrong
@@ -121,13 +121,26 @@ namespace WorkFlowService.DAL
         //Todo: now is wrong
         private string GetQueryByUserIDSql(string userID)
         {
-            return string.Format(WFConstants.QueryUserRoleInfoByUserIDSqlTags, userID);
+            return string.Format(WFConstants.QueryRoleInfoByUserIDSqlTags, userID);
         }
 
 
         public int CreateTable()
         {
-            return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateUserRoleInfoTableSqlTags);
+            return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateRoleInfoTableSqlTags);
         }
+
+        public RoleInfoModel QueryByRoleName(string roleName)
+        {
+            var entityList = DBHelpInstance.ReadEntityList<RoleInfoModel>(GetQueryByRoleNameSql(roleName));
+            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
+        }
+
+        private string GetQueryByRoleNameSql(string roleName)
+        {
+            return string.Format(WFConstants.QueryRoleInfoByRoleNameSqlTags, roleName);
+
+        }
+
     }
 }

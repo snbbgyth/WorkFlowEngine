@@ -86,21 +86,23 @@ namespace WorkFlowService.Help
 
         #region RoleInfo Table
 
-        public const string CreateUserRoleInfoTableSqlTags = @"CREATE TABLE [RoleInfo] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,RoleName varchar(200),RoleDisplayName varchar(500),CreateDateTime datetime,LastUpdateDateTime datetime,IsDelete boolean)";
+        public const string CreateRoleInfoTableSqlTags = @"CREATE TABLE [RoleInfo] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,RoleName varchar(200),RoleDisplayName varchar(500),CreateDateTime datetime,LastUpdateDateTime datetime,IsDelete boolean)";
 
-        public const string InsertUserRoleInfoSqlTags = @"Insert into UserRoleInfo(ID,RoleName,RoleDisplayName, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+        public const string InsertRoleInfoSqlTags = @"Insert into RoleInfo(ID,RoleName,RoleDisplayName, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
 
-        public const string InsertOrReplaceUserRoleInfoSqlTags = @"Insert or replace into UserRoleInfo(ID,RoleName,RoleDisplayName, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
+        public const string InsertOrReplaceRoleInfoSqlTags = @"Insert or replace into RoleInfo(ID,RoleName,RoleDisplayName, CreateDateTime,LastUpdateDateTime ,IsDelete)values('{0}','{1}','{2}',datetime('{3}'),datetime('{4}') ,{5})";
 
-        public const string DeleteUserRoleInfoByIDSqlTags = "delete from UserRoleInfo where ID='{0}'";
+        public const string DeleteRoleInfoByIDSqlTags = "delete from RoleInfo where ID='{0}'";
 
-        public const string QueryAllUserRoleInfoSqlTags = "select * from UserRoleInfo";
+        public const string QueryAllRoleInfoSqlTags = "select * from RoleInfo";
 
-        public const string QueryUserRoleInfoByIDSqlTags = "select * from UserRoleInfo where ID='{0}'";
+        public const string QueryRoleInfoByIDSqlTags = "select * from RoleInfo where ID='{0}'";
 
-        public const string QueryUserRoleInfoByUserIDSqlTags = "select * from UserRoleInfo where UserID='{0}'";
+        public const string QueryRoleInfoByUserIDSqlTags = "select * from RoleInfo where UserID='{0}'";
 
-        public const string DeleteUserRoleInfoByUserIDSqlTags = "delete from UserRoleInfo where UserID='{0}'";
+        public const string DeleteRoleInfoByUserIDSqlTags = "delete from RoleInfo where UserID='{0}'";
+
+        public const string QueryRoleInfoByRoleNameSqlTags = "select * from RoleInfo where RoleName='{0}'";
 
         #endregion
 
@@ -162,6 +164,8 @@ namespace WorkFlowService.Help
 
         public const string QueryUserGroupByIDSqlTags = "select * from UserGroup where ID='{0}'";
 
+        public const string QueryUserGroupByGroupNameSqlTags = "select * from UserGroup where GroupName='{0}'";
+
         #endregion
 
         #region UserGroup Table
@@ -177,6 +181,8 @@ namespace WorkFlowService.Help
         public const string QueryAllWorkflowStateInfoSqlTags = "select * from WorkflowStateInfo";
 
         public const string QueryWorkflowStateInfoByIDSqlTags = "select * from WorkflowStateInfo where ID='{0}'";
+
+        public const string QueryWorkflowStateInfoByWorkflowNameAndStateNodeNameSqlTags = "select * from WorkflowStateInfo where WorkflowName='{0}' and StateNodeName='{1}'";
 
         #endregion
     }

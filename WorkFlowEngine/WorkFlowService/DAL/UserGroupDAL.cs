@@ -101,5 +101,16 @@ namespace WorkFlowService.DAL
         {
             return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateUserGroupTableSqlTags);
         }
+
+        public UserGroupModel QueryByGroupName(string groupName)
+        {
+            var entityList = DBHelpInstance.ReadEntityList<UserGroupModel>(GetQueryByGroupNameSql(groupName));
+            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
+        }
+
+        private string GetQueryByGroupNameSql(string groupName)
+        {
+            return string.Format(WFConstants.QueryUserGroupByGroupNameSqlTags, groupName);
+        }
     }
 }

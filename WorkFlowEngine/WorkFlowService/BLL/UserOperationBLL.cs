@@ -23,7 +23,7 @@ namespace WorkFlowService.BLL
     {
         #region User operation
 
-        public bool CreateUser(string userName,string userDisplayName, string password)
+        public bool CreateUser(string userName, string userDisplayName, string password)
         {
             return DataOperationBLL.Current.Insert(new UserInfoModel
             {
@@ -45,7 +45,7 @@ namespace WorkFlowService.BLL
 
         public bool ModifyPasswordByUserName(string userName, string password)
         {
-            var entity = UserInfoDAL.Current.QueryByUserName(userName); 
+            var entity = UserInfoDAL.Current.QueryByUserName(userName);
             entity.Password = password;
             return DataOperationBLL.Current.Modify(entity) > 0;
         }
@@ -53,8 +53,9 @@ namespace WorkFlowService.BLL
         public bool DeleteUserByUserID(string userId)
         {
             DataOperationBLL.Current.Remove<UserInfoModel>(userId);
-           // RoleInfoDAL.Current.DeleteByUserID(userId);
-           // Todo: delete userID in realtion table.
+            DeleteUserAllUserGroup(userId);
+            DeleteUserAllRole(userId);
+
             return true;
         }
 
@@ -62,6 +63,7 @@ namespace WorkFlowService.BLL
         {
             return UserInfoDAL.Current.Login(userName, password);
         }
+
 
         #endregion
 
@@ -77,19 +79,34 @@ namespace WorkFlowService.BLL
                                                    LastUpdateDateTime = DateTime.Now,
                                                    ParentNodeID = userGroupId,
                                                    Type = 1
-                                               })>0;
+                                               }) > 0;
         }
 
+        public bool DeleteUserInUserGroup(string userId, string userGroupId)
+        {
+            return RelationDAL.Current.DeleteByChildNodeIDAndParentNodeIDAndType(userId, userGroupId, 1) > 0;
+        }
+
+        public int DeleteUserAllUserGroup(string userId)
+        {
+            return RelationDAL.Current.DeleteByChildNodeIDAndType(userId, 1);
+        }
+
+        public bool ModifyUserInUserGroup(string userId, string oldUserGroupId, string newUserGroupId)
+        {
+            DeleteUserInUserGroup(userId, oldUserGroupId);
+            return AddUserInUserGroup(userId, newUserGroupId);
+        }
 
 
         #endregion
 
-        #region UserGroup relation RoleInfo
+        #region UserGroup relation RoleInfo Type enqual 2
 
-        public bool AssignUserGroupRole(string userGroupId, string roleID)
+        public bool AddUserGroupRole(string userGroupId, string roleID)
         {
             return
-                DataOperationBLL.Current.Insert(new RelationModel()
+                DataOperationBLL.Current.Insert(new RelationModel
                 {
                     ChildNodeID = userGroupId,
                     ParentNodeID = roleID,
@@ -99,9 +116,137 @@ namespace WorkFlowService.BLL
                 }) > 0;
         }
 
-        public bool DeleteUserGroupRole(string userId)
+        public int DeleteUserGroupAllRole(string userGroupId)
         {
-            return RoleInfoDAL.Current.DeleteByUserID(userId) > 0;
+            return RelationDAL.Current.DeleteByChildNodeIDAndType(userGroupId, 2);
+        }
+
+        public bool DeleteUserGroupRole(string userGroupId, string roleId)
+        {
+            return RelationDAL.Current.DeleteByChildNodeIDAndParentNodeIDAndType(userGroupId, roleId, 2) > 0;
+        }
+
+        public bool ModifyUserGroupRole(string userGoupId, string oldRoleId, string newRoleId)
+        {
+            DeleteUserGroupRole(userGoupId, oldRoleId);
+            return AddUserGroupRole(userGoupId, newRoleId);
+        }
+
+        #endregion
+
+        #region OperationActionInfo Relation RoleInfo Type enqual 3
+
+        public bool AddOperationActionInRole(string operationActionId, string roleId)
+        {
+           return RelationDAL.Current.Insert(new RelationModel
+                                           {
+                                               ChildNodeID = operationActionId,
+                                               ParentNodeID = roleId,
+                                               Type = 3,
+                                               CreateDateTime = DateTime.Now,
+                                               LastUpdateDateTime = DateTime.Now
+                                           })>0;
+        }
+
+        public int DeleteRoleAllOperationAction(string roleId)
+        {
+            return RelationDAL.Current.DeleteByParentNodeIDAndType(roleId, 3);
+        }
+
+        public bool DeleteRoleOperationAction(string roleId, string operationActionId)
+        {
+            return RelationDAL.Current.DeleteByChildNodeIDAndParentNodeIDAndType(operationActionId, roleId, 3)>0;
+        }
+
+        #endregion
+
+        #region WorkflowStateInfo relation RoleInfo Type enqual 4
+
+        public bool AddWorkflowStateInRole(string workflowStateId, string roleId)
+        {
+            return
+                RelationDAL.Current.Insert(new RelationModel
+                                               {
+                                                   ChildNodeID = workflowStateId,
+                                                   ParentNodeID = roleId,
+                                                   Type = 4,
+                                                   CreateDateTime = DateTime.Now,
+                                                   LastUpdateDateTime = DateTime.Now
+                                               }) > 0;
+        }
+
+        /// <summary>
+        /// Role relation workflow state is pair 1
+        /// </summary>
+        /// <param name="roleId">roleId</param>
+        /// <returns>execute count</returns>
+        public int DeleteRoleWorkflowState(string roleId)
+        {
+            return RelationDAL.Current.DeleteByParentNodeIDAndType(roleId, 4);
+        }
+
+        public bool ModifyRoleWorkflowState(string roleId, string newWorkflowStateId)
+        {
+            DeleteRoleWorkflowState(roleId);
+            return AddWorkflowStateInRole(newWorkflowStateId, roleId);
+        }
+
+        #endregion
+
+        #region UserInfo relation RoleInfo Type enqual 5
+
+        public bool AddUserRole(string userId, string roleId)
+        {
+            return
+                RelationDAL.Current.Insert(new RelationModel
+                                               {
+                                                   ChildNodeID = userId,
+                                                   ParentNodeID = roleId,
+                                                   Type = 5,
+                                                   CreateDateTime = DateTime.Now,
+                                                   LastUpdateDateTime = DateTime.Now
+                                               }) > 0;
+        }
+
+        public int DeleteUserAllRole(string userId)
+        {
+            return RelationDAL.Current.DeleteByChildNodeIDAndType(userId, 5);
+        }
+
+        public bool DeleteUserRole(string userId, string roleId)
+        {
+            return RelationDAL.Current.DeleteByChildNodeIDAndParentNodeIDAndType(userId, roleId, 5)>0;
+        }
+
+        public bool ModifyUserRole(string userId, string oldRoleId, string newRoleId)
+        {
+              DeleteUserRole(userId, oldRoleId);
+           return AddUserRole(userId, newRoleId);
+        }
+
+        #endregion
+
+        #region Query operation
+
+        public UserInfoModel QueryUserInfoByUserName(string userName)
+        {
+            return UserInfoDAL.Current.QueryByUserName(userName);
+        }
+
+        public UserGroupModel QueryUserGroupByGroupName(string groupName)
+        {
+            return UserGroupDAL.Current.QueryByGroupName(groupName);
+        }
+
+        public RoleInfoModel QueryRoleInfoByRoleName(string roleName)
+        {
+            return RoleInfoDAL.Current.QueryByRoleName(roleName);
+        }
+
+        public WorkflowStateInfoModel QueryWorkflowStateInfoByWorkflowNameAndStateNodeName(string workflowName,
+                                                                                           string stateNodeName)
+        {
+            return WorkflowStateInfoDAL.Current.QueryByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
         }
 
         #endregion
