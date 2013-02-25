@@ -32,14 +32,17 @@ namespace WorkFlowService.BLL
 
         public DataOperationBLL()
         {
-            if (!_isInitDataBase) InitDataBase();
+            InitDataBase();
         }
 
         public void InitDataBase()
         {
-            InitDataBaseFile();
-            InitCreateTable();
-            _isInitDataBase = true;
+            if (!_isInitDataBase)
+            {
+                InitDataBaseFile();
+                InitCreateTable();
+                _isInitDataBase = true;
+            }
         }
 
         private void InitDataBaseFile()

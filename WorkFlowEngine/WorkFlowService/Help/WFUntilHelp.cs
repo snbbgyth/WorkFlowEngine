@@ -14,8 +14,10 @@ using CommonLibrary.Help;
 
 namespace WorkFlowService.Help
 {
-    public class WFUntilHelp
+    public static class WFUntilHelp
     {
+        public static string UserId { get; set; }
+
         public static ActivityState GetActivityStateByName(string activityState)
         {
             ActivityState result;

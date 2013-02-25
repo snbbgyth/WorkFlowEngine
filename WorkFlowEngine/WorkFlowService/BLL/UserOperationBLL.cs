@@ -22,6 +22,20 @@ namespace WorkFlowService.BLL
 
     public class UserOperationBLL //: IUserOperationActivity
     {
+        #region Public Get New Instance
+
+        public static UserOperationBLL Current
+        {
+            get { return new UserOperationBLL(); }
+        }
+
+        public UserOperationBLL()
+        {
+            DataOperationBLL.Current.InitDataBase();
+        }
+
+        #endregion
+
         #region User operation
 
         public bool CreateUser(string userName, string userDisplayName, string password)
