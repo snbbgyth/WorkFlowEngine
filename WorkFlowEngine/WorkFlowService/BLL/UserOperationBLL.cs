@@ -8,6 +8,7 @@
 *********************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLibrary.Help;
 using WorkFlowService.IDAL;
@@ -247,6 +248,25 @@ namespace WorkFlowService.BLL
                                                                                            string stateNodeName)
         {
             return WorkflowStateInfoDAL.Current.QueryByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
+        }
+
+        public IEnumerable<OperationActionInfoModel> QueryOperationActionByRoleId(string roleId)
+        {
+            var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 3);
+            return relationList.Select(relationModel => OperationActionInfoDAL.Current.QueryByID(relationModel.ChildNodeID));
+        }
+
+        public RoleInfoModel QueryRoleInfoByWorkflowStateId(string workflowStateId)
+        {
+            var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(workflowStateId, 4);
+            var relationEntity=relationList!=null&&relationList.Count>0?relationList.First():null;
+            return relationEntity!=null ? RoleInfoDAL.Current.QueryByID(relationEntity.ParentNodeID) : null;
+        }
+
+        public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowStateId(string workflowStateId)
+        {
+            var roleInfoEntity = QueryRoleInfoByWorkflowStateId(workflowStateId);
+            return roleInfoEntity!=null? QueryOperationActionByRoleId(roleInfoEntity.ID):null;
         }
 
         #endregion
