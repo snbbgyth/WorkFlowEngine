@@ -68,7 +68,7 @@ namespace WorkFlowService.BLL
             return GetActivityByType<T>().DeleteByID(id);
         }
 
-        public T QueryByEID<T>(tring id)
+        public T QueryByID<T>(string id)
         {
             return GetActivityByType<T>().QueryByID(id);
         }
