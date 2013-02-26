@@ -77,9 +77,8 @@
     </ApplicationDefinition>
     <Compile Include="SettingForm\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
-    <Page Include="LoginWindow.xaml">
-      <SubType>Designer</SubType>
+    </ComViewUserWindow.xaml.cs">
+      <DependentUpon>ViewUserWindow   <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
@@ -100,11 +99,11 @@
     <Page Include="SettingForm\Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    <ViewUser</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    ype>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

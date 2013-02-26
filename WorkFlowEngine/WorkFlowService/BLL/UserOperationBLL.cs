@@ -53,7 +53,7 @@ namespace WorkFlowService.BLL
 
         public bool ModifyPasswordByUserID(string userId, string password)
         {
-            var entity = DataOperationBLL.Current.QueryByEID<UserInfoModel>(userId);
+            var entity = DataOperationBLL.Current.QueryByEID<UserInfoModel>userId);
             entity.Password = password;
             return DataOperationBLL.Current.Modify(entity) > 0;
         }
@@ -248,7 +248,14 @@ namespace WorkFlowService.BLL
             return UserInfoDAL.Current.QueryByUserName(userName);
         }
 
-        public UserGroupModel QueryUserGroupByGroupName(string groupName)
+        public UserGroupModel QueList<UserInfoModel> QueryAllUserInfoByUserGroupId(string userGroupId)
+        {
+            var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(userGroupId, 1);
+            return relationList != null && relationList.Count > 0
+                       ? relationList.Select(entity => UserInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                       : null;
+        }
+erGroupModel QueryUserGroupByGroupName(string groupName)
         {
             return UserGroupDAL.Current.QueryByGroupName(groupName);
         }
