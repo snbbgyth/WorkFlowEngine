@@ -14,9 +14,10 @@ using System.Windows.Shapes;
 
 namespace WorkflowSetting.SettingForm
 {
-    /// <summary>
-  using WorkFlowService.BLL;
+    
+    using WorkFlowService.BLL;
     using WorkFlowService.Model;
+
     /// <summary>
     /// Window1.xaml 的交互逻辑
     /// </summary>
@@ -25,12 +26,20 @@ namespace WorkflowSetting.SettingForm
         public ViewUserWindow()
         {
             InitializeComponent();
+            InitData();
         }
 
         private void InitData()
         {
             DgUserList.ItemsSource = DataOperationBLL.Current.QueryAll<UserInfoModel>();
 
+        }
+
+        private void BtnAddUserClick(object sender, RoutedEventArgs e)
+        {
+ 
+            var addUserWindow = new OperationUserWindow();
+            addUserWindow.Show();
         }
     }
 }
