@@ -28,20 +28,22 @@ namespace WorkflowSetting.SettingForm
             InitializeComponent();
         }
 
-        public OperationUserWindow(UserInfoModel entity):this()
+        public OperationUserWindow(UserInfoModel entity)
+            : this()
         {
             BtnOperator.Content = "Modify";
         }
 
         private void InitData(UserInfoModel entity)
         {
-            
+            TxtUserName.Text = entity.UserName;
+            TxtUserDisplayName.Text = entity.UserDisplayName;
         }
 
-        private void BtnOTxtUserName.Text = entity.UserName;
-            TxtUserDisplayName.Text = entity.UserDisplayName;peratorClick(object sender, RoutedEventArgs e)
+        private void BtnOperatorClick(object sender, RoutedEventArgs e)
         {
-            if (!TxtPassword.Text.Trim().CompareEqualIgnoreCase(TxtConfPassword.Equals(TxtConfimPassword.Password = "Please input same password.";
+            if (!TxtPassword.Password.Equals(TxtConfimPassword.Password))
+                LblErrorMessage.Content = "Please input same password.";
             DataOperationBLL.Current.Insert(GetUserInfoEntity());
             LblErrorMessage.Content = "Create user sucessfully.";
         }
@@ -49,18 +51,18 @@ namespace WorkflowSetting.SettingForm
         private UserInfoModel GetUserInfoEntity()
         {
             return new UserInfoModel
-                       {
-                           CreateDateTime = DateTime.Now,
-                           LastUpdateDateTime = DateTime.Now,
-                           Password = TxtPassword.Text.Trim(),
-                           UserDisplayNamPasswordDisplayName.Text.Trim(),
-                           UserName = TxtUserName.Text
-                       };
+            {
+                CreateDateTime = DateTime.Now,
+                LastUpdateDateTime = DateTime.Now,
+                Password = TxtPassword.Password,
+                UserDisplayName = TxtUserDisplayName.Text.Trim(),
+                UserName = TxtUserName.Text
+            };
         }
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
-             Close();
+            Close();
         }
     }
 }

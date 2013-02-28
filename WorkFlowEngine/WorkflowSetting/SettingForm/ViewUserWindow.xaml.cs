@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 namespace WorkflowSetting.SettingForm
 {
-    
+
     using WorkFlowService.BLL;
     using WorkFlowService.Model;
 
@@ -31,26 +31,23 @@ namespace WorkflowSetting.SettingForm
 
         private void InitData()
         {
- 
             //DgUserList.Items.Clear();
-                    DgUserList.ItemsSource = DataOperationBLL.Current.QueryAll<UserInfoModel>();
 
-                  }
+            DgUserList.ItemsSource = DataOperationBLL.Current.QueryAll<UserInfoModel>();
+
+        }
 
         private void BtnAddUserClick(object sender, RoutedEventArgs e)
         {
- 
+
             var addUserWindow = new OperationUserWindow();
             addUserWindow.Show();
         }
-    }
-}
-
 
         private void BtnRelationUserGroup(object sender, RoutedEventArgs e)
         {
-         
+
         }
-        
+
     }
 }
