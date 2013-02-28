@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace WorkflowSetting
 {
+    using SettingForm;
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
@@ -23,6 +24,13 @@ namespace WorkflowSetting
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnShowViewUserClick(object sender, RoutedEventArgs e)
+        {
+            var viewUserWindow = new ViewUserWindow();
+            viewUserWindow.Show();
+            
         }
     }
 }

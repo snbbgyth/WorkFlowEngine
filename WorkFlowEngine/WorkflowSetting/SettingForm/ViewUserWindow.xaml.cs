@@ -31,9 +31,11 @@ namespace WorkflowSetting.SettingForm
 
         private void InitData()
         {
-            DgUserList.ItemsSource = DataOperationBLL.Current.QueryAll<UserInfoModel>();
+ 
+            //DgUserList.Items.Clear();
+                    DgUserList.ItemsSource = DataOperationBLL.Current.QueryAll<UserInfoModel>();
 
-        }
+                  }
 
         private void BtnAddUserClick(object sender, RoutedEventArgs e)
         {
@@ -41,5 +43,14 @@ namespace WorkflowSetting.SettingForm
             var addUserWindow = new OperationUserWindow();
             addUserWindow.Show();
         }
+    }
+}
+
+
+        private void BtnRelationUserGroup(object sender, RoutedEventArgs e)
+        {
+         
+        }
+        
     }
 }

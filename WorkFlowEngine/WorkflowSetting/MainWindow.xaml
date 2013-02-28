@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Button Content="ShowViewUserWindow" Name ="BtnShowViewUser"  HorizontalAlignment="Left" Margin="32,122,0,0" VerticalAlignment="Top" Width="150" Height="29" Click="BtnShowViewUserClick"/>
+
     </Grid>
 </Window>

@@ -1,18 +1,20 @@
 ﻿<Window x:Class="WorkflowSetting.SettingForm.OperationUserWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddUserWindow" Height="365" Width="445">
+        Title="AddOperationrWindow" Height="365" Width="445">
     <Grid>
         <Label Content="UserName:" HorizontalAlignment="Left" Margin="74,66,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="176,66,0,0" TextWrapping="Wrap" Name="TxtUserName" VerticalAlignment="Top" Width="164"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="80,130,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="176,130,0,0" TextWrapping="Wrap" Name="TxtPassword" VerticalAlignment="Top" Width="164"/>
-        <Label Content="Confirm Password:" HorizontalAlignment="Left" Margin="30,161,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="176,161,0,0" TextWrapping="Wrap" Name="TxtConfirmPassword" VerticalAlignment="Top" Width="164"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="176,66,0,0" TextWrapping="Wrap" Name="TxtUserName" VerticTabIndex="1Alignment="Top" Width="164"/>
         <Label Content="User Display Name:" HorizontalAlignment="Left" Margin="25,99,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="28" Margin="176,97,0,0" TextWrapping="Wrap" Name="TxtUserDisplayName" VerticalAlignment="Top" Width="164"/>
-        <Button Content="Create" HorizontalAlignment="Left" Name="BtnOperator" Margin="119,228,0,0" VerticalAlignment="Top" Width="75" Click="BtnOperatorClick"/>
-        <Label  Name="LblErrorMessage"   HorizontalAlignment="Left" Margin="96,204,0,0" VerticalAlignment="Top" Foreground="#FFF30606" RenderTransformOrigin="0.6,0.5"/>
+        <TextBox HorizontalAlignment="Left" Height="28" Margin="176,97,0,0" TextWrapping="Wrap" Name="TxtUserDisplayName" VerticalAligTabIndex="2icalAlignment="Top" Width="164"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="80,130,0,0" VerticalAlignment="Top"/>
+        <TextBox tent="Confirm Password:" HorizontalAlignment="Left" Margin="30,161,0,0" VerticalAlignment="Top"/>
+        <TextBox Hot="Create" HorizontalAlignment="Left" Name="BtnOperator" Margin="119,228,0,0" VerticalAlignment="Top" Width="75" Click="BtnOperatorClick"/>
+        <L TabIndex="5Label  Name="LblErrorMessage"   HorizontalAlignment="Left" Margin="96,204,0,0" Verti192Alignment="Top" Foreground="#FFF30606" RenderTransformOrigin="0.6,0.5"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Name="BtnCancel" Margin="236,227,0,0" VerticalAlignment="Top" Width="75" Click="BtnCancelClick"/>
+    </Grid>
+ TabIndex="6"/>
+        <PasswordBox Name="TxtPassword" HorizontalAlignment="Left" Margin="176,130,0,0" VerticalAlignment="Top" TabIndex="3" Width="164" Height="26"/>
+        <PasswordBox Name="TxtConfimPassword" HorizontalAlignment="Left" Margin="176,161,0,0" VerticalAlignment="Top" TabIndex="4" Height="26" Width="164"/>
     </Grid>
 </Window>

@@ -29,15 +29,15 @@ namespace WorkflowSetting
 
         private void BtnOkClick(object sender, RoutedEventArgs e)
         {
-           var userId = UserOperationBLL.Current.LoginIn(TxtUserName.Text.Trim(), TxtPassword.Text.Trim());
-
+            var userId = UserOperationBLL.Current.LoginIn(TxtUserName.Text.Trim(), TxtPassword.Text.Trim());
             if (!string.IsNullOrEmpty(userId))
                 WFUntilHelp.UserId = userId;
             else
-             LblErrorMessage.Content ="User name or password error.";
+                LblErrorMessage.Content = "User name or password error.";
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
         }
-
- 
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {

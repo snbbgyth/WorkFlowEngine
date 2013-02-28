@@ -38,10 +38,10 @@ namespace WorkflowSetting.SettingForm
             
         }
 
-        private void BtnOperatorClick(object sender, RoutedEventArgs e)
+        private void BtnOTxtUserName.Text = entity.UserName;
+            TxtUserDisplayName.Text = entity.UserDisplayName;peratorClick(object sender, RoutedEventArgs e)
         {
-            if (!TxtPassword.Text.Trim().CompareEqualIgnoreCase(TxtConfirmPassword.Text.Trim()))
-                LblErrorMessage.Content = "Please input same password.";
+            if (!TxtPassword.Text.Trim().CompareEqualIgnoreCase(TxtConfPassword.Equals(TxtConfimPassword.Password = "Please input same password.";
             DataOperationBLL.Current.Insert(GetUserInfoEntity());
             LblErrorMessage.Content = "Create user sucessfully.";
         }
@@ -53,7 +53,7 @@ namespace WorkflowSetting.SettingForm
                            CreateDateTime = DateTime.Now,
                            LastUpdateDateTime = DateTime.Now,
                            Password = TxtPassword.Text.Trim(),
-                           UserDisplayName = TxtUserDisplayName.Text.Trim(),
+                           UserDisplayNamPasswordDisplayName.Text.Trim(),
                            UserName = TxtUserName.Text
                        };
         }
