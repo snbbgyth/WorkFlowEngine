@@ -78,12 +78,14 @@
     <Compile Include="SettingForm\OperationUserWindow.xaml.cs">
       <DependentUpon>OperationUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingForm\SelectUserGroupWindow.xaml.cs">
+      <DependentUpon>SelectUserGroupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm\UserRelationUserGroupWindow.xaml.cs">
+      <DependentUpon>UserRelationUserGroupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingForm\ViewUserWindow.xaml.cs">
-      <DependentUpon>ViewUserWindow.xaml</DependentUponSelectUserGroupWindow.xaml.cs">
-      <DependentUpon>SelectUserGroupendentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubSettingForm\UserRelationUserGroupWindow.xaml.cs">
-      <DependentUpon>UserRelationUserGroupendentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubependentUpon>
+      <DependentUpon>ViewUserWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
@@ -108,18 +110,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SettingForm\SelectUserGroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\UserRelationUserGroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingForm\ViewUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    <SelectUserGroup </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    <Page Include="SettingForm\UserRelationUserGroup </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-  ild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
