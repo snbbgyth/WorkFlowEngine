@@ -13,97 +13,45 @@ namespace WorkFlowService.DAL
 
     using System;
     using System.Collections.Generic;
-    using DBHelp;
     using Help;
-    using IDAL;
     using CommonLibrary.Help;
     using CommonLibrary.Model;
-    public class WorkFlowActivityLogDAL : IDataOperationActivity<WorkFlowActivityLogModel>
+    public class WorkFlowActivityLogDAL : DataOperationActivityBase<WorkFlowActivityLogModel>
     {
-        #region Private Variable
-
-        private IDBHelp _dbHelpInstance;
-
-        #endregion
-
-        #region Private Property
-
-        private IDBHelp DBHelpInstance
+        public static WorkFlowActivityLogDAL Current
         {
-            get
-            {
-                if (_dbHelpInstance == null)
-                {
-                    _dbHelpInstance = new SQLiteHelp();
-                    _dbHelpInstance.ConnectionString = string.Format(WFConstants.SQLiteConnectionString,
-                                                                   WFUntilHelp.SqliteFilePath);
-                }
-                return _dbHelpInstance;
-            }
+            get { return new WorkFlowActivityLogDAL(); }
         }
 
-        #endregion
-
-        public int CreateTable()
-        {
-            return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateWorkFlowActivityLogTableSqlTags);
-        }
-
-        public int Insert(WorkFlowActivityLogModel entity)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetInsertSqlByEntity(entity));
-        }
-
-        private string GetInsertSqlByEntity(WorkFlowActivityLogModel entity)
+        protected override string GetInsertByEntitySql(WorkFlowActivityLogModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertWorkFlowActivityLogSqlTags, entity.ID, entity.AppId,
+            return string.Format(WFConstants.InsertWorkFlowActivityLogSqlTags, entity.ID, entity.AppId,entity.WorkflowName,
                                  entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
                                  entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                                  entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete),entity.OldID);
         }
-
-        public int Modify(WorkFlowActivityLogModel entity)
+ 
+        protected override string GetModifyByEntitySql(WorkFlowActivityLogModel entity)
         {
-            return DBHelpInstance.ExecuteNonQuery(GetModifySqlByEntity(entity));
-        }
-
-        private string GetModifySqlByEntity(WorkFlowActivityLogModel entity)
-        {
-            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivityLogSqlTags, entity.ID, entity.AppId,
+            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivityLogSqlTags, entity.ID, entity.AppId,entity.WorkflowName,
                               entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
                               entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                               entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete),entity.OldID);
 
         }
-
-        public int DeleteByID(string id)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetDeleteByIDSql(id));
-        }
-
-        private string GetDeleteByIDSql(string id)
+ 
+        protected override string GetDeleteByIDSql(string id)
         {
             return string.Format(WFConstants.DeleteWorkFlowActivityLogByIDSqlTags, id);
         }
-
-        public List<WorkFlowActivityLogModel> QueryAll()
-        {
-            return DBHelpInstance.ReadEntityList<WorkFlowActivityLogModel>(GetQueryAllSql());
-        }
-
-        private string GetQueryAllSql()
+ 
+        protected override string GetQueryAllSql()
         {
             return WFConstants.QueryAllWorkFlowActivityLogSqlTags;
         }
-
-        public WorkFlowActivityLogModel QueryByID(string id)
-        {
-            var entityList = DBHelpInstance.ReadEntityList<WorkFlowActivityLogModel>(GetQueryByIDSql(id));
-            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
-        }
-
-        private string GetQueryByIDSql(string id)
+ 
+        protected override string GetQueryByIDSql(string id)
         {
             return string.Format(WFConstants.QueryWorkFlowActivityLogByIDTags, id);
         }
@@ -120,7 +68,6 @@ namespace WorkFlowService.DAL
 
         public WorkFlowActivityLogModel QueryByAppId(string appId)
         {
-   
             var entityList = DBHelpInstance.ReadEntityList<WorkFlowActivityLogModel>(GetQueryByAppIDSql(appId));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
         }
@@ -129,6 +76,15 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.QueryWorkFlowActivityLogByAppIdSqlTags, appId);
         }
+ 
+        protected override WorkFlowActivityLogModel NullResult()
+        {
+            return null;
+        }
 
+        protected override string GetCreateTableSql()
+        {
+            return WFConstants.CreateWorkFlowActivityLogTableSqlTags;
+        }
     }
 }

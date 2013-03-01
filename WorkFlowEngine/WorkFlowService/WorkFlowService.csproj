@@ -52,6 +52,7 @@
     <Compile Include="BLL\UserOperationBLL.cs" />
     <Compile Include="BLL\WorkFlowEngine.cs" />
     <Compile Include="BLL\WorkFlowManage.cs" />
+    <Compile Include="DAL\DataOperationActivityBase.cs" />
     <Compile Include="DAL\OperationActionInfoDAL.cs" />
     <Compile Include="DAL\RelationDAL.cs" />
     <Compile Include="DAL\UserGroupDAL.cs" />

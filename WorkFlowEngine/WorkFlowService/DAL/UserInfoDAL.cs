@@ -11,89 +11,36 @@
 namespace WorkFlowService.DAL
 {
     using System;
-    using System.Collections.Generic;
-    using DBHelp;
-    using IDAL;
     using Model;
     using Help;
     using CommonLibrary.Help;
 
-    public class UserInfoDAL : IDataOperationActivity<UserInfoModel>
+    public class UserInfoDAL : DataOperationActivityBase<UserInfoModel>
     {
         public static UserInfoDAL Current
         {
             get { return new UserInfoDAL(); }
         }
 
-        #region Private Variable
-
-        private IDBHelp _dbHelpInstance;
-
-        #endregion
-
-        #region Private Property
-
-        private IDBHelp DBHelpInstance
-        {
-            get
-            {
-                if (_dbHelpInstance == null)
-                {
-                    _dbHelpInstance = new SQLiteHelp();
-                    _dbHelpInstance.ConnectionString = string.Format(WFConstants.SQLiteConnectionString,
-                                                                     WFUntilHelp.SqliteFilePath);
-                }
-                return _dbHelpInstance;
-            }
-        }
-
-        #endregion
-
-        public int Insert(UserInfoModel entity)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetInsertSqlByEntitySql(entity));
-        }
-
-        private string GetInsertSqlByEntitySql(UserInfoModel entity)
+        protected override string GetInsertByEntitySql(UserInfoModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
             return string.Format(WFConstants.InsertUserInfoSqlTags, entity.ID, entity.UserName,entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
-        public int Modify(UserInfoModel entity)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetModifyByEntitySql(entity));
-        }
-
-        private string GetModifyByEntitySql(UserInfoModel entity)
+        protected override string GetModifyByEntitySql(UserInfoModel entity)
         {
             return string.Format(WFConstants.InsertOrReplaceUserInfoSqlTags, entity.ID, entity.UserName,entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
-        public int DeleteByID(string id)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetDeleteByIDSql(id));
-        }
-
-        private string GetDeleteByIDSql(string id)
+        protected override string GetDeleteByIDSql(string id)
         {
             return string.Format(WFConstants.DeleteUserInfoByIDSqlTags, id);
         }
 
-        public List<UserInfoModel> QueryAll()
-        {
-            return DBHelpInstance.ReadEntityList<UserInfoModel>(WFConstants.QueryAllUserInfoSqlTags);
-        }
-
-        public UserInfoModel QueryByID(string id)
-        {
-            var entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByIDSql(id));
-            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
-        }
-
-        private string GetQueryByIDSql(string id)
+        protected override string GetQueryByIDSql(string id)
         {
             return string.Format(WFConstants.QueryUserInfoByIDTags, id);
         }
@@ -108,12 +55,7 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.QueryUserInfoByUserNameAndPasswordTags, userName, password);
         }
-
-        public int CreateTable()
-        {
-            return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateUserInfoTableSqlTags);
-        }
-
+ 
         public UserInfoModel QueryByUserName(string userName)
         {
             var entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByUserNameSql(userName));
@@ -123,6 +65,21 @@ namespace WorkFlowService.DAL
         private string GetQueryByUserNameSql(string userName)
         {
             return string.Format(WFConstants.QueryUserInfoByUserNameSqlTags, userName);
+        }
+
+        protected override UserInfoModel NullResult()
+        {
+            return null;
+        }
+
+        protected override string GetCreateTableSql()
+        {
+            return WFConstants.CreateUserInfoTableSqlTags;
+        }
+
+        protected override string GetQueryAllSql()
+        {
+            return WFConstants.QueryAllUserInfoSqlTags;
         }
     }
 }

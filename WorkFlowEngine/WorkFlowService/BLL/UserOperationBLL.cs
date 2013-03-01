@@ -7,18 +7,15 @@
 ** Summary：     UserOperationBLL class
 *********************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using CommonLibrary.Help;
-using WorkFlowService.IDAL;
 
 
 namespace WorkFlowService.BLL
 {
     using Model;
     using DAL;
-    using Help;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class UserOperationBLL //: IUserOperationActivity
     {
@@ -256,6 +253,14 @@ namespace WorkFlowService.BLL
                        : null;
         }
 
+        public List<UserGroupModel> QueryAllUserGroupByUserId(string userId)
+        {
+            var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 1);
+            return relationList != null && relationList.Count > 0
+                       ? relationList.Select(entity => UserGroupDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
+                       : null;
+        }
+
         public UserGroupModel QueryUserGroupByGroupName(string groupName)
         {
             return UserGroupDAL.Current.QueryByGroupName(groupName);
@@ -283,6 +288,15 @@ namespace WorkFlowService.BLL
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(workflowStateId, 4);
             var relationEntity = relationList != null && relationList.Count > 0 ? relationList.First() : null;
             return relationEntity != null ? RoleInfoDAL.Current.QueryByID(relationEntity.ParentNodeID) : null;
+        }
+
+        public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowNameAndStateNodeName(
+            string workflowName, string stateNodeName)
+        {
+            var entity = QueryWorkflowStateInfoByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
+            if (entity != null)
+                return QueryOperationActionByWorkflowStateId(entity.ID);
+            return null;
         }
 
         public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowStateId(string workflowStateId)

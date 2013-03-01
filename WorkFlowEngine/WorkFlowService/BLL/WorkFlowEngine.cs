@@ -8,6 +8,7 @@
 *********************************************************************************/
 
 using System;
+using System.Linq;
 using CommonLibrary.Help;
 using WorkFlowHandle.Steps;
 using WorkFlowService.DAL;
@@ -83,9 +84,12 @@ namespace WorkFlowService.BLL
           return  WorkflowStateInfoDAL.Current.QueryByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
         }
 
-        public ActivityState GetActivityStateByWorkFlowState(WorkFlowState workFlowState)
+        public ActivityState GetActivityStateByWorkflowNameAndWorkflowState(string workflowName, string workFlowState)
         {
-            return GetCurrentWorkFlowStateByWorkFlowState(workFlowState).GetActivityState();
+            var entityList = UserOperationBLL.Current.QueryOperationActionByWorkflowNameAndStateNodeName(workflowName,
+                                                                                                         workFlowState);
+            return entityList.Aggregate(ActivityState.Read, (current, entity) => current | WFUntilHelp.GetActivityStateByName(entity.ActionName));
+            
         }
     }
 }

@@ -79,7 +79,11 @@
       <DependentUpon>OperationUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\ViewUserWindow.xaml.cs">
-      <DependentUpon>ViewUserWindow.xaml</DependentUpon>
+      <DependentUpon>ViewUserWindow.xaml</DependentUponSelectUserGroupWindow.xaml.cs">
+      <DependentUpon>SelectUserGroupendentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubSettingForm\UserRelationUserGroupWindow.xaml.cs">
+      <DependentUpon>UserRelationUserGroupendentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubependentUpon>
     </Compile>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
@@ -107,6 +111,15 @@
     <Page Include="SettingForm\ViewUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    <SelectUserGroup </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    <Page Include="SettingForm\UserRelationUserGroup </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+  ild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

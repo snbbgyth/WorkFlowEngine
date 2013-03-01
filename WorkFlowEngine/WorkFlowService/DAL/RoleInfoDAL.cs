@@ -14,74 +14,33 @@ namespace WorkFlowService.DAL
     using Help;
     using System;
     using System.Collections.Generic;
-    using DBHelp;
-    using IDAL;
     using Model;
     using CommonLibrary.Help;
 
-    public class RoleInfoDAL : IDataOperationActivity<RoleInfoModel>
+    public class RoleInfoDAL : DataOperationActivityBase<RoleInfoModel>
     {
         public static RoleInfoDAL Current
         {
             get { return new RoleInfoDAL(); }
         }
-        #region Private Variable
 
-        private IDBHelp _dbHelpInstance;
-
-        #endregion
-
-        #region Private Property
-
-        private IDBHelp DBHelpInstance
-        {
-            get
-            {
-                if (_dbHelpInstance == null)
-                {
-                    _dbHelpInstance = new SQLiteHelp();
-                    _dbHelpInstance.ConnectionString = string.Format(WFConstants.SQLiteConnectionString,
-                                                                     WFUntilHelp.SqliteFilePath);
-                }
-                return _dbHelpInstance;
-            }
-        }
-
-        #endregion
-
-        public int Insert(RoleInfoModel entity)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetInsertByEntitySql(entity));
-        }
-
-        private string GetInsertByEntitySql(RoleInfoModel entity)
+        protected override string GetInsertByEntitySql(RoleInfoModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
             return string.Format(WFConstants.InsertRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
-        public int Modify(RoleInfoModel entity)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetModifyByEntitySql(entity));
-        }
-
-        private string GetModifyByEntitySql(RoleInfoModel entity)
+        protected override string GetModifyByEntitySql(RoleInfoModel entity)
         {
             return string.Format(WFConstants.InsertOrReplaceRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
                            entity.CreateDateTime, entity.LastUpdateDateTime, Convert.ToInt32(entity.IsDelete));
         }
 
-        public int DeleteByID(string id)
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetDeleteByIDSql(id));
-        }
-
-        private string GetDeleteByIDSql(string id)
+        protected override string GetDeleteByIDSql(string id)
         {
             return string.Format(WFConstants.DeleteRoleInfoByIDSqlTags, id);
         }
-
 
         //Todo: now is wrong
         public int DeleteByUserID(string userID)
@@ -95,18 +54,7 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.DeleteRoleInfoByUserIDSqlTags, userID);
         }
 
-        public List<RoleInfoModel> QueryAll()
-        {
-            return DBHelpInstance.ReadEntityList<RoleInfoModel>(WFConstants.QueryAllRoleInfoSqlTags);
-        }
-
-        public RoleInfoModel QueryByID(string id)
-        {
-            var entityList = DBHelpInstance.ReadEntityList<RoleInfoModel>(GetQueryByIDSql(id));
-            return entityList != null && entityList.Count > 0 ? entityList[0] : null;
-        }
-
-        private string GetQueryByIDSql(string id)
+        protected override string GetQueryByIDSql(string id)
         {
             return string.Format(WFConstants.QueryRoleInfoByIDSqlTags, id);
         }
@@ -123,12 +71,7 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.QueryRoleInfoByUserIDSqlTags, userID);
         }
-
-
-        public int CreateTable()
-        {
-            return DBHelpInstance.ExecuteNonQuery(WFConstants.CreateRoleInfoTableSqlTags);
-        }
+ 
 
         public RoleInfoModel QueryByRoleName(string roleName)
         {
@@ -142,5 +85,19 @@ namespace WorkFlowService.DAL
 
         }
 
+        protected override RoleInfoModel NullResult()
+        {
+            return null;
+        }
+
+        protected override string GetCreateTableSql()
+        {
+            return WFConstants.CreateRoleInfoTableSqlTags;
+        }
+
+        protected override string GetQueryAllSql()
+        {
+            return WFConstants.QueryAllRoleInfoSqlTags;
+        }
     }
 }

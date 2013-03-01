@@ -23,11 +23,11 @@ namespace WorkFlowService.Help
 
         #region WorkFlowActivity Table
 
-        public const string CreateWorkFlowActivityTableSqlTags = @"CREATE TABLE [WorkFlowActivity] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,AppId varchar(50),ForeWorkFlowState varchar(50),OperatorActivity varchar(50),CurrentWorkFlowState varchar(50),OperatorUserId varchar(50),CreateDateTime datetime,LastUpdateDateTime datetime,CreateUserId varchar(50),OperatorUserList varchar(2000),ApplicationState varchar(50),AppName varchar(200),IsDelete boolean)";
+        public const string CreateWorkFlowActivityTableSqlTags = @"CREATE TABLE [WorkFlowActivity] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,AppId varchar(50),WorkflowName varchar(200), ForeWorkFlowState varchar(50),OperatorActivity varchar(50),CurrentWorkFlowState varchar(50),OperatorUserId varchar(50),CreateDateTime datetime,LastUpdateDateTime datetime,CreateUserId varchar(50),OperatorUserList varchar(2000),ApplicationState varchar(50),AppName varchar(200),IsDelete boolean)";
 
-        public const string InsertWorkFlowActivitySqlTags = @"Insert into WorkFlowActivity(ID,AppId,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete)values('{0}','{1}','{2}','{3}','{4}','{5}',datetime('{6}'),datetime('{7}'),'{8}','{9}','{10}','{11}',{12})";
+        public const string InsertWorkFlowActivitySqlTags = @"Insert into WorkFlowActivity(ID,AppId,WorkflowName,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete)values('{0}','{1}','{2}','{3}','{4}','{5}','{6}',datetime('{7}'),datetime('{8}'),'{9}','{10}','{11}','{12}',{13})";
 
-        public const string InsertOrReplaceWorkFlowActivitySqlTags = @"Insert or replace into WorkFlowActivity(ID,AppId,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete)values('{0}','{1}','{2}','{3}','{4}','{5}',datetime('{6}'),datetime('{7}'),'{8}','{9}','{10}','{11}',{12})";
+        public const string InsertOrReplaceWorkFlowActivitySqlTags = @"Insert or replace into WorkFlowActivity(ID,AppId,WorkflowName,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete)values('{0}','{1}','{2}','{3}','{4}','{5}','{6}',datetime('{7}'),datetime('{8}'),'{9}','{10}','{11}','{12}',{13})";
 
         public const string DeleteWorkFlowActivityByIDSqlTags = "delete from WorkFlowActivity where ID='{0}'";
 
@@ -44,11 +44,11 @@ namespace WorkFlowService.Help
 
         #region WorkFlowActivityLog Table
 
-        public const string CreateWorkFlowActivityLogTableSqlTags = @"CREATE TABLE [WorkFlowActivityLog] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,OldID varchar(50) ,AppId varchar(50),ForeWorkFlowState varchar(50),OperatorActivity varchar(50),CurrentWorkFlowState varchar(50),OperatorUserId varchar(50),CreateDateTime datetime,LastUpdateDateTime datetime,CreateUserId varchar(50),OperatorUserList varchar(2000),ApplicationState varchar(50),AppName varchar(200),IsDelete boolean)";
+        public const string CreateWorkFlowActivityLogTableSqlTags = @"CREATE TABLE [WorkFlowActivityLog] (ID varchar(50) NOT NULL PRIMARY KEY UNIQUE,OldID varchar(50) ,AppId varchar(50),WorkflowName, ForeWorkFlowState varchar(50),OperatorActivity varchar(50),CurrentWorkFlowState varchar(50),OperatorUserId varchar(50),CreateDateTime datetime,LastUpdateDateTime datetime,CreateUserId varchar(50),OperatorUserList varchar(2000),ApplicationState varchar(50),AppName varchar(200),IsDelete boolean)";
 
-        public const string InsertWorkFlowActivityLogSqlTags = @"Insert into WorkFlowActivityLog(ID,AppId,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete,OldID)values('{0}','{1}','{2}','{3}','{4}','{5}',datetime('{6}'),datetime('{7}'),'{8}','{9}','{10}','{11}',{12},'{13}')";
+        public const string InsertWorkFlowActivityLogSqlTags = @"Insert into WorkFlowActivityLog(ID,AppId,WorkflowName,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete,OldID)values('{0}','{1}','{2}','{3}','{4}','{5}','{6}',datetime('{7}'),datetime('{8}'),'{9}','{10}','{11}','{12}',{13},'{14}')";
 
-        public const string InsertOrReplaceWorkFlowActivityLogSqlTags = @"Insert or replace into WorkFlowActivityLog(ID,AppId,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete,OldID)values('{0}','{1}','{2}','{3}','{4}','{5}',datetime('{6}'),datetime('{7}'),'{8}','{9}','{10}','{11}',{12},'{13}')";
+        public const string InsertOrReplaceWorkFlowActivityLogSqlTags = @"Insert or replace into WorkFlowActivityLog(ID,AppId,WorkflowName,ForeWorkFlowState,OperatorActivity,CurrentWorkFlowState,OperatorUserId,CreateDateTime,LastUpdateDateTime,CreateUserId,OperatorUserList,ApplicationState,AppName,IsDelete,OldID)values('{0}','{1}','{2}','{3}','{4}','{5}','{6}',datetime('{7}'),datetime('{8}'),'{9}','{10}','{11}','{12}',{13},'{14}')";
 
         public const string DeleteWorkFlowActivityLogByIDSqlTags = "delete from WorkFlowActivityLog where ID='{0}'";
 
