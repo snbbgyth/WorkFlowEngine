@@ -21,7 +21,7 @@ namespace WorkFlowService.BLL
     {
         public string Execute(AppInfoModel entity)
         {
-            var activityEntity =WorkFlowActivityDAL.Current.QueryByAppId(entity.AppId);
+            var activityEntity = WorkFlowActivityDAL.Current.QueryByAppId(entity.AppId);
             var currentWorkFlowState =
                 WorkFlowEngine.Current.Execute(entity.WorkflowName, entity.CurrentState,
                                                entity.ActivityState);
@@ -52,9 +52,9 @@ namespace WorkFlowService.BLL
                 WorkflowName = entity.WorkflowName,
                 OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag,
             };
-            vWorkFlowEngine.Current.InitWorkflowState(entity.WorkflowName);
+            WorkFlowEngine.Current.InitWorkflowState(entity.WorkflowName);
             var currentWorkFlowState = WorkFlowEngine.Current.Execute(entity.WorkflowName, WorkFlowState.Common.ToString(), entity.ActivityState);
-            activityEntity.CurrentWorkFfowState = currentWorkFlowState;
+            activityEntity.CurrentWorkflowState = currentWorkFlowState;
             activityEntity.ApplicationState = currentWorkFlowState;
             DataOperationBLL.Current.Insert(activityEntity);
             return currentWorkFlowState;
@@ -69,7 +69,7 @@ namespace WorkFlowService.BLL
         {
             var activityEntity = WorkFlowActivityDAL.Current.QueryByAppId(appId);
             if (CompareIsContain(activityEntity.OperatorUserId, userId))
-                return WorkFlowEngine.Current.GetActivityStateByWorkConditon(activityEntity.WorkflowName, activityEntity.CurrentWorkftate);
+                return WorkFlowEngine.Current.GetActivityStateByConditon(activityEntity.WorkflowName, activityEntity.CurrentWorkflowState);
             if (CompareIsContain(activityEntity.OperatorUserList, userId))
                 return ActivityState.Read;
             return ActivityState.Read;
@@ -85,9 +85,9 @@ namespace WorkFlowService.BLL
         {
             if (entity == null)
                 return ApplicationState.Draft;
-            if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkFlowSfate) == WorkFlowState.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkFlowSfate) == WorkFlowState.Refuse)
+            if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Refuse)
                 return ApplicationState.Complete;
-            if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkFlowSfate) == WorkFlowState.Common && WFUntilHelp.GetActivityStateByName(entity.OperatorActivity) == ActivityState.Revoke)
+            if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Common && WFUntilHelp.GetActivityStateByName(entity.OperatorActivity) == ActivityState.Revoke)
                 return ApplicationState.Draft;
             return ApplicationState.InProgress;
         }

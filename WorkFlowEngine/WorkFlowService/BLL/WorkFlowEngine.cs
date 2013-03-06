@@ -74,12 +74,12 @@ namespace WorkFlowService.BLL
                 if (roleInfoEntity == null)
                 {
                     roleInfoEntity = new RoleInfoModel
-                                         {
-                                             CreateDateTime = DateTime.Now,
-                                             LastUpdateDateTime = DateTime.Now,
-                                             RoleDisplayName = partnerLink.MyRole,
-                                             RoleName = partnerLink.MyRole
-                                         };
+                    {
+                        CreateDateTime = DateTime.Now,
+                        LastUpdateDateTime = DateTime.Now,
+                        RoleDisplayName = partnerLink.MyRole,
+                        RoleName = partnerLink.MyRole
+                    };
                     DataOperationBLL.Current.Insert(roleInfoEntity);
 
                 }
@@ -105,15 +105,15 @@ namespace WorkFlowService.BLL
             if (workflowStateEntity == null)
             {
                 workflowStateEntity = new WorkflowStateInfoModel
-                                          {
-                                              ID = Guid.NewGuid().ToString(),
-                                              CreateDateTime = DateTime.Now,
-                                              LastUpdateDateTime = DateTime.Now,                                             StateNodeName = workflowStep.StepId,
- 
-                                              StateNodeDisplayName = workflowStep.StepId,
-                                              WorkflowName = workflowName,                                             WorkflowDisplayName = workflowName
- 
-                                          };
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    CreateDateTime = DateTime.Now,
+                    LastUpdateDateTime = DateTime.Now,
+                    StateNodeName = workflowStep.StepId,
+                    StateNodeDisplayName = workflowStep.StepId,
+                    WorkflowName = workflowName,
+                    WorkflowDisplayName = workflowName
+                };
             }
             else
             {
@@ -121,7 +121,7 @@ namespace WorkFlowService.BLL
                 workflowStateEntity.StateNodeDisplayName = workflowStep.StepId;
                 //Todo: modify workflowStateInfo 
             }
-          DataOperationBLL.Current.Modify(workflowStateEntity);
+            DataOperationBLL.Current.Modify(workflowStateEntity);
         }
 
         public WorkflowStateInfoModel GetWorkflowStateInfoByCondition(string workflowName, string stateNodeName)
@@ -129,11 +129,11 @@ namespace WorkFlowService.BLL
             return UserOperationBLL.Current.QueryWorkflowStateInfoByCondition(workflowName, stateNodeName);
         }
 
-        public ActivityState GetActivityStateByConditontring workflowName, string workFlowState)
+        public ActivityState GetActivityStateByConditon(string workflowName, string workFlowState)
         {
-            var entityList = UserOperationBLL.Current.QueryOperationActionByWorkCondition(workflowName,FlowState);
+            var entityList = UserOperationBLL.Current.QueryOperationActionByCondition(workflowName, workFlowState);
             return entityList.Aggregate(ActivityState.Read, (current, entity) => current | WFUntilHelp.GetActivityStateByName(entity.ActionName));
-       
+
         }
     }
 }

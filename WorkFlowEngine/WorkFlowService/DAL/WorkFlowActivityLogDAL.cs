@@ -26,32 +26,31 @@ namespace WorkFlowService.DAL
         protected override string GetInsertByEntitySql(WorkFlowActivityLogModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertWorkFlowActivityLogSqlTags, entity.ID, entity.AppId,entity.WorkflowName,
-                                 entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowStatflowState,
-                        entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
-                              entity.Cr.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete),entity.OldID);
-
+            return string.Format(WFConstants.InsertWorkFlowActivityLogSqlTags, entity.ID, entity.AppId, entity.WorkflowName,
+                                 entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkflowState,
+                                 entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
+                                 entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete), entity.OldID);
         }
- 
+
         protected override string GetModifyByEntitySql(WorkFlowActivityLogModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivityLogSqlTags, entity.ID, entity.AppId,entity.WorkflowName,
-                              entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkFlowStatef
+            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivityLogSqlTags, entity.ID, entity.AppId, entity.WorkflowName,
+                              entity.ForeWorkFlowState, entity.OperatorActivity, entity.CurrentWorkflowState,
                               entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
-                              entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete),entity.OldID);
+                              entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete), entity.OldID);
 
         }
- 
+
         protected override string GetDeleteByIDSql(string id)
         {
             return string.Format(WFConstants.DeleteWorkFlowActivityLogByIDSqlTags, id);
         }
- 
+
         protected override string GetQueryAllSql()
         {
             return WFConstants.QueryAllWorkFlowActivityLogSqlTags;
         }
- 
+
         protected override string GetQueryByIDSql(string id)
         {
             return string.Format(WFConstants.QueryWorkFlowActivityLogByIDTags, id);
@@ -77,7 +76,7 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.QueryWorkFlowActivityLogByAppIdSqlTags, appId);
         }
- 
+
         protected override WorkFlowActivityLogModel NullResult()
         {
             return null;

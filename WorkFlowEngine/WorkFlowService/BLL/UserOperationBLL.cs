@@ -271,10 +271,11 @@ namespace WorkFlowService.BLL
             return RoleInfoDAL.Current.QueryByRoleName(roleName);
         }
 
-        public WorkflowStateInfoModel QueryWorkflowStateInfoByWorkflowNameAndStateNodeName(string workflowName,
+        public WorkflowStateInfoModel QueryWorkflowStateInfoByCondition(string workflowName,
                                                                                            string stateNodeName)
         {
-            return WorkflowStateInfoDAL.Current.QueryByWorkflowNameAndStateNodeName(workflowNCondition }
+            return WorkflowStateInfoDAL.Current.QueryByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
+        }
 
         public IEnumerable<OperationActionInfoModel> QueryOperationActionByRoleId(string roleId)
         {
@@ -289,15 +290,17 @@ namespace WorkFlowService.BLL
             return relationEntity != null ? RoleInfoDAL.Current.QueryByID(relationEntity.ParentNodeID) : null;
         }
 
-        public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowNameAndStateNodeName(
+        public IEnumerable<OperationActionInfoModel> QueryOperationActionByCondition(
             string workflowName, string stateNodeName)
         {
-            var entity = QueryWorkflowStateInfoByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
+            var entity = QueryWorkflowStateInfoByCondition(workflowName, stateNodeName);
             if (entity != null)
-                return QueryOperationActionByWorkfCondition       return null;
+                return QueryOperationActionByWorkflowStateId(entity.ID);
+            return null;
         }
 
-        public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowStateCondition       {
+        public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowStateId(string workflowStateId)
+        {
             var roleInfoEntity = QueryRoleInfoByWorkflowStateId(workflowStateId);
             return roleInfoEntity != null ? QueryOperationActionByRoleId(roleInfoEntity.ID) : null;
         }

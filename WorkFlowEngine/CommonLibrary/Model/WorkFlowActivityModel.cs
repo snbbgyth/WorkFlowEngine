@@ -26,9 +26,9 @@ namespace CommonLibrary.Model
         [DataMember]
         public string OperatorActivity { get; set; }
         [DataMember]
-        public string CurrentWorkFlowState { get; set; }
+        public string CurrentWorkflowState { get; set; }
         [DataMember]
-        public string OperatorAcerId { get; set; }
+        public string OperatorUserId { get; set; }
         [DataMember]
         public DateTime? CreateDateTime { get; set; }
         [DataMember]
@@ -46,4 +46,3 @@ namespace CommonLibrary.Model
     }
 }
 
-　

@@ -24,8 +24,8 @@ namespace WorkFlowService.DAL
         protected override string GetInsertByEntitySql(WorkFlowActivityModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertWorkFlowActivitySqlTags, entity.ID, entity.AppId,entity.WorkflowName,
-                                 entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkFlowStatf,
+            return string.Format(WFConstants.InsertWorkFlowActivitySqlTags, entity.ID, entity.AppId, entity.WorkflowName,
+                                 entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkflowState,
                                  entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                                  entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
         }
@@ -33,9 +33,9 @@ namespace WorkFlowService.DAL
 
         protected override string GetModifyByEntitySql(WorkFlowActivityModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivitySqlTags, entity.ID, entity.AppId,entity.WorkflowName,
-                              entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
-f                             entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
+            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivitySqlTags, entity.ID, entity.AppId, entity.WorkflowName,
+                              entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkflowState,
+                              entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                               entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
         }
 
