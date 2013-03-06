@@ -25,7 +25,7 @@ namespace WorkFlowService.DAL
         {
             entity.ID = Guid.NewGuid().ToString();
             return string.Format(WFConstants.InsertWorkFlowActivitySqlTags, entity.ID, entity.AppId,entity.WorkflowName,
-                                 entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
+                                 entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkFlowStatf,
                                  entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                                  entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
         }
@@ -35,7 +35,7 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.InsertOrReplaceWorkFlowActivitySqlTags, entity.ID, entity.AppId,entity.WorkflowName,
                               entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkFlowState,
-                              entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
+f                             entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                               entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
         }
 

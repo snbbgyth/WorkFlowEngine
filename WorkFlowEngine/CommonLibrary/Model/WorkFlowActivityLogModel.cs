@@ -30,9 +30,9 @@ namespace CommonLibrary.Model
         [DataMember]
         public string OperatorActivity { get; set; }
         [DataMember]
-        public string CurrentWorkFlowState { get; set; }
+        public string CurrentWorkFlfwState { get; set; }
         [DataMember]
-        public string OperatorUserId { get; set; }
+        public string OperatorAcerId { get; set; }
         [DataMember]
         public DateTime? CreateDateTime { get; set; }
         [DataMember]

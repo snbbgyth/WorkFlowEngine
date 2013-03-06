@@ -506,6 +506,8 @@ namespace DBHelp
             return parameter;
         }
 
+        public abstract DbParameter GetDbParameter(string key, string dateType, object value, int size = 0);
+
         /// <summary>
         /// Get Dictionary list by string list
         /// </summary>

@@ -35,6 +35,11 @@ namespace DBHelp
             return new SQLiteParameter(key, value);
         }
 
+        public override DbParameter GetDbParameter(string key, string dateType, object value, int size = 0)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override SqlSourceType DataSqlSourceType
         {
             get { return SqlSourceType.SQLite; }

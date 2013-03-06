@@ -6,7 +6,7 @@
         <ListView Name="LvGroupInfo" HorizontalAlignment="Left" Height="400" Margin="85,41,0,0"   VerticalAlignment="Top" Width="600">
             <ListView.View>
                 <GridView >
-                    <GridViewColumn Header="GroupId"  Width="200">
+                       <GridViewColumn Header="GroupId"  Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding ID}" Visibility="Hidden" Name="TxtGroupId"></TextBlock>
@@ -16,7 +16,9 @@
                     <GridViewColumn Header="Group Name" Width="200" DisplayMemberBinding="{Binding GroupName}"/>
                     <GridViewColumn Header="Group Display Name" Width="200" DisplayMemberBinding="{Binding GroupDisplayName}"/>
 
+                 
                 </GridView>
+            
             </ListView.View>
         </ListView>
     </Grid>

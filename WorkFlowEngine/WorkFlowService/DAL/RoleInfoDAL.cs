@@ -34,10 +34,10 @@ namespace WorkFlowService.DAL
         protected override string GetModifyByEntitySql(RoleInfoModel entity)
         {
             return string.Format(WFConstants.InsertOrReplaceRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
-                           entity.CreateDateTime, entity.LastUpdateDateTime, Convert.ToInt32(entity.IsDelete));
+                           entity.CreateDateTime, entitertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
-        protected override string GetDeleteByIDSql(string id)
+        protected override string GetModifyBDSql(string id)
         {
             return string.Format(WFConstants.DeleteRoleInfoByIDSqlTags, id);
         }

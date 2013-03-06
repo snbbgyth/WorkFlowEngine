@@ -94,6 +94,17 @@ namespace DBHelp
         DbParameter GetDbParameter(string key, object value, ParameterDirection direction);
 
         /// <summary>
+        ///  Get data base parameter by parameter name and parameter value
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="dateType"></param>
+        /// <param name="value"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        DbParameter GetDbParameter(string key, string dateType, object value, int size = 0);
+
+
+        /// <summary>
         /// Read entity list by  store procedure
         /// </summary>
         /// <typeparam name="T">entity</typeparam>

@@ -51,7 +51,7 @@ namespace WorkFlowHandle.BLL
         }
 
 
-        private WorkflowContext GetWorkflowContextByWorkflowName(string workflowName)
+        public WorkflowContext GetWorkflowContextByWorkflowName(string workflowName)
         {
             var onContext = new WorkflowContext(workflowName, Guid.NewGuid().ToString());
             _workflowProcessDefinition.LoadNewWorkflow(onContext);

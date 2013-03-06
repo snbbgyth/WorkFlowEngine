@@ -24,7 +24,6 @@ namespace WorkFlowHandle.BLL
 
         public WorkflowStep ExecuteWorkflowByCurrentState(WorkflowContext context, string currentState)
         {
- 
             return (from stepRunnerStep in context.WorkflowStepList.OfType<StepRunnerStep>()
                     let subStep =
                         stepRunnerStep.WorkflowSteps.Find(entity => entity.StepId.CompareEqualIgnoreCase(currentState))

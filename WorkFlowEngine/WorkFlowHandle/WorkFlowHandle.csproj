@@ -50,6 +50,7 @@
     <Compile Include="IDAL\IWorkflowHandle.cs" />
     <Compile Include="Model\CaseContextModel.cs" />
     <Compile Include="Model\InvokeContextModel.cs" />
+    <Compile Include="Model\PartnerLinkModel.cs" />
     <Compile Include="Model\SequenceContextModel.cs" />
     <Compile Include="Model\StepData.cs" />
     <Compile Include="Model\SwitchContextModel.cs" />
@@ -81,7 +82,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -530,6 +530,14 @@ namespace WorkFlowHandle.Model
             }
         }
 
+        private List<PartnerLinkModel> _partnerLinkList; 
+
+        public List<PartnerLinkModel> PartnerLinkList
+        {
+            get { return _partnerLinkList; }
+            set { _partnerLinkList = value; }
+        }
+
         /// <summary>
         /// Gets the WorkflowVariables from BPEL file
         /// </summary>
@@ -803,6 +811,7 @@ namespace WorkFlowHandle.Model
             _timeoutMessages = new Collection<string>();
             _processedMessages = new Collection<string>();
             _cancelWaitEvent = new AutoResetEvent(false);
+            _partnerLinkList=new List<PartnerLinkModel>();
         }
 
         /// <summary>

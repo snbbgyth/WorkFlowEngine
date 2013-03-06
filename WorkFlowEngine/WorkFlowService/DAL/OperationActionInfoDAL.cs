@@ -15,48 +15,56 @@ namespace WorkFlowService.DAL
     using Model;
 
     public class OperationActionInfoDAL : DataOperationActivityBase<OperationActionInfoModel>
+    
     {
-       public static OperationActionInfoDAL Current
-       {
-           get { return new OperationActionInfoDAL(); }
-       }
+        public static OperationActionInfoDAL Current
+        {
+            get { return new OperationActionInfoDAL(); }
+        }
 
         protected override string GetInsertByEntitySql(OperationActionInfoModel entity)
-       {
-           entity.ID = Guid.NewGuid().ToString();
-           return string.Format(WFConstants.InsertOperationActionInfoSqlTags, entity.ID, entity.ActionName, entity.ActionDisplayName,
-                                entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
-       }
+        {
+            entity.ID = Guid.NewGuid().ToString();
+     return string.Format(WFConstants.InsertOperationActionInfoSqlTags, entity.ID, entity.ActionName, entity.ActionDisplayName,
+      
+                          entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
+      
+        }
 
         protected override string GetModifyByEntitySql(OperationActionInfoModel entity)
-       {
-           return string.Format(WFConstants.InsertOrReplaceOperationActionInfoSqlTags, entity.ID, entity.ActionName, entity.ActionDisplayName, 
-                                entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
-       }
+        {
+   return string.Format(WFConstants.InsertOrReplaceOperationActionInfoSqlTags, entity.ID, entity.ActionName, entity.ActionDisplayName, 
+       
+                          entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
+      
+        }
 
         protected override string GetDeleteByIDSql(string id)
-       {
-           return string.Format(WFConstants.DeleteOperationActionInfoByIDSqlTags, id);
-       }
+        {
+            return string.Format(WFConstants.DeleteOperationActionInfoByIDSqlTags, id);
+        }
 
         protected override string GetQueryByIDSql(string id)
-       {
-           return string.Format(WFConstants.QueryOperationActionInfoByIDSqlTags, id);
+        {
+ turn string.Format(WFConstants.QueryOperationActionInfoByIDSqlTags, id);
        }
+
+  
+        }
 
         protected override OperationActionInfoModel NullResult()
-       {
-           return null;
-       }
+        {
+            return null;
+        }
 
         protected override string GetCreateTableSql()
-       {
-           return WFConstants.CreateOperationActionInfoTableSqlTags;
-       }
+        {
+            return WFConstants.CreateOperationActionInfoTableSqlTags;
+        }
 
         protected override string GetQueryAllSql()
-       {
-           return WFConstants.QueryAllOperationActionInfoSqlTags;
-       }
+        {
+            return WFConstants.QueryAllOperationActionInfoSqlTags;
+        }
     }
 }

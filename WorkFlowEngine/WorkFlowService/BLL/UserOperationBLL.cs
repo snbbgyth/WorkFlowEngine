@@ -274,8 +274,7 @@ namespace WorkFlowService.BLL
         public WorkflowStateInfoModel QueryWorkflowStateInfoByWorkflowNameAndStateNodeName(string workflowName,
                                                                                            string stateNodeName)
         {
-            return WorkflowStateInfoDAL.Current.QueryByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
-        }
+            return WorkflowStateInfoDAL.Current.QueryByWorkflowNameAndStateNodeName(workflowNCondition }
 
         public IEnumerable<OperationActionInfoModel> QueryOperationActionByRoleId(string roleId)
         {
@@ -295,12 +294,10 @@ namespace WorkFlowService.BLL
         {
             var entity = QueryWorkflowStateInfoByWorkflowNameAndStateNodeName(workflowName, stateNodeName);
             if (entity != null)
-                return QueryOperationActionByWorkflowStateId(entity.ID);
-            return null;
+                return QueryOperationActionByWorkfCondition       return null;
         }
 
-        public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowStateId(string workflowStateId)
-        {
+        public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowStateCondition       {
             var roleInfoEntity = QueryRoleInfoByWorkflowStateId(workflowStateId);
             return roleInfoEntity != null ? QueryOperationActionByRoleId(roleInfoEntity.ID) : null;
         }

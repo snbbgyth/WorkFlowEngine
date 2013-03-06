@@ -92,7 +92,7 @@ namespace WorkFlowService.BLL
         {
             var types = GetExecutingTypes();
             var typeList =
-                types.Where(t => new List<Type>(t.GetInterfaces()).Contains(typeof(ICreateDataTableActivity)) && !t.IsInterface).ToList();
+                types.Where(t => new List<Type>(t.GetInterfaces()).Contains(typeof(ICreateDataTableActivity)) && !t.IsInterface)&&!t.IsAbstract.ToList();
 
             typeList.ForEach(eType =>
             {

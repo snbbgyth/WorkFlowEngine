@@ -38,6 +38,12 @@ namespace DBHelp
         {
             return new SqlParameter(key, value);
         }
+
+        public override DbParameter GetDbParameter(string key, string dateType, object value, int size = 0)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
     }
 }

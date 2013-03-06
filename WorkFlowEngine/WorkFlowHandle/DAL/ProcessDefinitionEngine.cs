@@ -26,29 +26,33 @@ namespace WorkFlowHandle.DAL
         /// <summary>
         /// Cache the XmlElement to improve performace.
         /// </summary>
-        private IDictionary<WorkflowFileElement, XmlElement> cachedElements = new Dictionary<WorkflowFileElement, XmlElement>();
+        private IDictionary<WorkflowFileElement, XmlElement> _cachedElements = new Dictionary<WorkflowFileElement, XmlElement>();
 
         /// <summary>
         /// Cache the WorkflowStep to improve performace.
         /// </summary>
-        private IDictionary<string, ICollection<WorkflowStep>> cachedWorkflowSteps = new Dictionary<string, ICollection<WorkflowStep>>();
+        private IDictionary<string, ICollection<WorkflowStep>> _cachedWorkflowSteps = new Dictionary<string, ICollection<WorkflowStep>>();
 
         /// <summary>
         /// Cache the FaultHandler to improve performace.
         /// </summary>
-        private IDictionary<string, ICollection<FaultHandler>> cachedFaultHandler = new Dictionary<string, ICollection<FaultHandler>>();
+        private IDictionary<string, ICollection<FaultHandler>> _cachedFaultHandler = new Dictionary<string, ICollection<FaultHandler>>();
 
         /// <summary>
         /// Cache the FaultHandler to improve performace.
         /// </summary>
-        private IDictionary<string, Dictionary<string, string>> cachedMessageTimeoutHandler = new Dictionary<string, Dictionary<string, string>>();
+        private IDictionary<string, Dictionary<string, string>> _cachedMessageTimeoutHandler = new Dictionary<string, Dictionary<string, string>>();
 
         /// <summary>
         /// Cache the FaultHandler to improve performace.
         /// </summary>
-        private IDictionary<string, string> cachedCancelHandler = new Dictionary<string, string>();
+        private IDictionary<string, string> _cachedCancelHandler = new Dictionary<string, string>();
 
-        /// <summary>
+        private IDictionary<string, Dictionary<string, string>> _cachedVariables = new Dictionary<string, Dictionary<string, string>>();
+
+        private IDictionary<string, List<PartnerLinkModel>> _cachedPartnerLinks =new Dictionary<string, List<PartnerLinkModel>>(); 
+
+        /// <summary> 
         /// contains string of folder containing BPEL files
         /// </summary>
         private string workflowFolder;
@@ -136,36 +140,48 @@ namespace WorkFlowHandle.DAL
                 // a load on its own.
                 context.IsWorkflowStepsLoaded = true;
 
-                if (cachedWorkflowSteps.ContainsKey(context.WorkflowName) && cachedFaultHandler.ContainsKey(context.WorkflowName) && cachedMessageTimeoutHandler.ContainsKey(context.WorkflowName) && cachedCancelHandler.ContainsKey(context.WorkflowName))
+                if (_cachedWorkflowSteps.ContainsKey(context.WorkflowName) && _cachedFaultHandler.ContainsKey(context.WorkflowName) && _cachedMessageTimeoutHandler.ContainsKey(context.WorkflowName) && _cachedCancelHandler.ContainsKey(context.WorkflowName))
                 {
-                    this.FillVariableList(context.WorkflowVariables, childList);
-                    foreach (FaultHandler handler in cachedFaultHandler[context.WorkflowName])
+                    //this.FillVariableList(context.WorkflowVariables, childList);
+                    foreach (FaultHandler handler in _cachedFaultHandler[context.WorkflowName])
                     {
                         context.FaultHandlers.Add(handler);
                     }
 
-                    foreach (WorkflowStep step in cachedWorkflowSteps[context.WorkflowName])
+                    foreach (WorkflowStep step in _cachedWorkflowSteps[context.WorkflowName])
                     {
                         context.WorkflowStepList.Add(step);
                     }
 
-                    foreach (var dict in cachedMessageTimeoutHandler[context.WorkflowName])
+                    foreach (var dict in _cachedMessageTimeoutHandler[context.WorkflowName])
                     {
                         context.MessageTimeoutEventHanlderDict.Add(dict.Key, dict.Value);
                     }
 
-                    context.CancelEventHandlerName = cachedCancelHandler[context.WorkflowName];
+                    foreach (var cachedVariable in _cachedVariables[context.WorkflowName])
+                    {
+                        context.WorkflowVariables.Add(cachedVariable.Key, cachedVariable.Value);
+                    }
+
+                    foreach (var cachedPartnerLink in _cachedPartnerLinks[context.WorkflowName])
+                    {
+                        context.PartnerLinkList.Add(cachedPartnerLink);
+                    }
+
+                    context.CancelEventHandlerName = _cachedCancelHandler[context.WorkflowName];
                 }
                 else
                 {
                     // Do the actual load
                     string cancelEventHandlerName = string.Empty;
-                    this.FillStepList(context.WorkflowVariables, context.FaultHandlers, 0, context.WorkflowStepList, childList, context.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    this.FillStepList(context,context.WorkflowStepList, 0, childList, ref cancelEventHandlerName);
                     context.CancelEventHandlerName = cancelEventHandlerName;
-                    cachedWorkflowSteps.Add(context.WorkflowName, context.WorkflowStepList);
-                    cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
-                    cachedMessageTimeoutHandler.Add(context.WorkflowName, context.MessageTimeoutEventHanlderDict);
-                    cachedCancelHandler.Add(context.WorkflowName, cancelEventHandlerName);
+                    _cachedWorkflowSteps.Add(context.WorkflowName, context.WorkflowStepList);
+                    _cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
+                    _cachedMessageTimeoutHandler.Add(context.WorkflowName, context.MessageTimeoutEventHanlderDict);
+                    _cachedCancelHandler.Add(context.WorkflowName, cancelEventHandlerName);
+                    _cachedVariables.Add(context.WorkflowName, context.WorkflowVariables);
+                    _cachedPartnerLinks.Add(context.WorkflowName,context.PartnerLinkList);
                 }
 
                 return true;
@@ -180,20 +196,20 @@ namespace WorkFlowHandle.DAL
         /// <param name="stepData">stepData object that is filled in with steps from 
         /// the specified BPEL workflow</param>
         /// <returns>true if workflow load was successful, false otherwise</returns>
-        public bool LoadExistingWorkflow(string name, string version, StepData stepData)
-        {
-            XmlElement rootElement = this.LoadWorkflowFile(name, version);
-            if (rootElement == null)
-            {
-                return false;
-            }
+        //public bool LoadExistingWorkflow(string name, string version, StepData stepData)
+        //{
+        //    XmlElement rootElement = this.LoadWorkflowFile(name, version);
+        //    if (rootElement == null)
+        //    {
+        //        return false;
+        //    }
 
-            XmlNodeList childList = rootElement.ChildNodes;
-            string cancelEventHandlerName = string.Empty;
-            this.FillStepList(stepData.WorkflowVariables, stepData.FaultHandlers, 0, stepData.WorkflowSteps, childList, stepData.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
-            stepData.CancelEventHandlerName = cancelEventHandlerName;
-            return true;
-        }
+        //    XmlNodeList childList = rootElement.ChildNodes;
+        //    string cancelEventHandlerName = string.Empty;
+        //    this.FillStepList(stepData.WorkflowVariables, stepData.FaultHandlers, 0, stepData.WorkflowSteps, childList, stepData.MessageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+        //    stepData.CancelEventHandlerName = cancelEventHandlerName;
+        //    return true;
+        //}
 
         /// <summary>
         /// Adds a new workflow bpel file to the list of known workflows.  This could be
@@ -301,8 +317,8 @@ namespace WorkFlowHandle.DAL
         {
             if (this.defaultWorkflows.ContainsKey(fileElement.Name))
             {
-                WorkflowFileElement defaultItem = this.defaultWorkflows[fileElement.Name] as WorkflowFileElement;
-                if (defaultItem.Version > fileElement.Version)
+                var defaultItem = this.defaultWorkflows[fileElement.Name] as WorkflowFileElement;
+                if (defaultItem != null && defaultItem.Version > fileElement.Version)
                 {
                     // Add new  to older table
                     this.olderWorkflows.Add(fileElement);
@@ -356,7 +372,7 @@ namespace WorkFlowHandle.DAL
 
             // first check the defaultWorkflows table.  The olderWorkflows table is only used is if a 
             // requested version is not found in the defaultWorkflows table.
-            WorkflowFileElement fileElement = this.defaultWorkflows[name] as WorkflowFileElement;
+            var fileElement = this.defaultWorkflows[name] as WorkflowFileElement;
             if (fileElement != null)
             {
                 // found one with the right name, check the version
@@ -368,9 +384,9 @@ namespace WorkFlowHandle.DAL
 
                 if (fileElement != null)
                 {
-                    if (cachedElements.ContainsKey(fileElement))
+                    if (_cachedElements.ContainsKey(fileElement))
                     {
-                        rootElement = cachedElements[fileElement];
+                        rootElement = _cachedElements[fileElement];
                     }
                     else
                     {
@@ -383,14 +399,14 @@ namespace WorkFlowHandle.DAL
                             doc.Load(stream);
                         }
                         rootElement = doc.DocumentElement;
-                        if (!(rootElement.LocalName == "process"))
+                        if (rootElement != null && !(rootElement.LocalName == "process"))
                         {
                             Debug.Fail("LoadNewWorkflow: Could not find process in " + fileElement.FileName);
                             rootElement = null;
                         }
                         else
                         {
-                            cachedElements.Add(fileElement, rootElement);
+                            _cachedElements.Add(fileElement, rootElement);
                         }
                     }
                 }
@@ -435,187 +451,151 @@ namespace WorkFlowHandle.DAL
         /// <summary>
         /// Fill the various structures with step data from the BPEL XML file
         /// </summary>
-        /// <param name="workflowVariables">Dictionary of workflow variables to populate with any
-        /// variables defined in the BPEL file.</param>
-        /// <param name="faultHandlers">Collection of FaultHandlers  to populate with any
-        /// fault handlers defined in the BPEL file.</param>
+        /// <param name="workflowContext"> workflowcontextModel class</param>
         /// <param name="startElement">Integer value representing the starting element in the nodeList.</param>
-        /// <param name="workflowStepList">Collection of WorkflowSteps  to populate with any
-        /// steps defined in the BPEL file.</param>
         /// <param name="nodeList">XmlNodeList containing the BPEL data from the BPEL file</param>
-        /// <param name="messageTimeoutEventHanlderDict">XmlNodeList containing the BPEL data from the BPEL file</param>
-        private void FillStepList(IDictionary<string, string> workflowVariables, List<FaultHandler> faultHandlers, int startElement, List<WorkflowStep> workflowStepList, XmlNodeList nodeList, Dictionary<string, string> messageTimeoutEventHanlderDict, ref string cancelEventHandlerName)
+        /// <param name="cancelEventHandlerName">cancelEventHandlerName</param>
+        private void FillStepList(WorkflowContext workflowContext, List<WorkflowStep> workflowStepList, int startElement, XmlNodeList nodeList, ref string cancelEventHandlerName)
         {
             for (int i = startElement; i < nodeList.Count; i++)
             {
-                WorkflowStep workflowStep;
-                XmlNode currentStep = nodeList[i];
+                var currentStep = nodeList[i];
 
                 if (!string.IsNullOrEmpty(currentStep.Prefix))
                 {
                     currentStep.Prefix = "bpel";
                 }
 
-                if (currentStep is System.Xml.XmlComment)
+                if (currentStep is XmlComment)
                 {
                     continue;
                 }
 
                 if (currentStep.LocalName == "invoke")
                 {
-                    workflowStep = new InvokeStep(currentStep.Attributes);
-                    // if (!workflowStepList.Any(entity => entity.StepId.CompareEqualIgnoreCase(workflowStep.StepId)))
+                    var workflowStep = new InvokeStep(currentStep.Attributes);
                     workflowStepList.Add(workflowStep);
                 }
                 else if (currentStep.LocalName == "sequence")
                 {
-                    SequenceStep sequenceStep = new SequenceStep(currentStep.Attributes);
+                    var sequenceStep = new SequenceStep(currentStep.Attributes);
                     workflowStepList.Add(sequenceStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, sequenceStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, sequenceStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "scope")
                 {
                     // can't get tool to produce invoke without having it enclosed in a scope.
                     // just ignore scope for now but get the internals as if at the same level.
-                    this.FillStepList(workflowVariables, faultHandlers, 0, workflowStepList, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,workflowStepList, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "receive")
                 {
-                    ReceiveStep receiveStep = new ReceiveStep(currentStep.Attributes);
+                    var receiveStep = new ReceiveStep(currentStep.Attributes);
                     workflowStepList.Add(receiveStep);
                     string messageName = String.Empty;
-                    string TimesetTime = String.Empty;
-                    foreach (XmlAttribute attrib in currentStep.Attributes)
-                    {
-                        if (attrib.LocalName == "timeout")
+                    string timesetTime = String.Empty;
+                    if (currentStep.Attributes != null)
+                        foreach (XmlAttribute attrib in currentStep.Attributes)
                         {
-                            TimesetTime = attrib.Value;
+                            if (attrib.LocalName == "timeout")
+                            {
+                                timesetTime = attrib.Value;
+                            }
+                            if (attrib.LocalName == "variable")
+                            {
+                                messageName = attrib.Value;
+                            }
                         }
-                        if (attrib.LocalName == "variable")
-                        {
-                            messageName = attrib.Value;
-                        }
-                    }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
-                        timeoutParameters.Add(messageName, TimesetTime);
+                        timeoutParameters.Add(messageName, timesetTime);
                     }
                 }
                 else if (currentStep.LocalName == "switch")
                 {
-                    SwitchStep switchStep = new SwitchStep(currentStep.Attributes);
+                    var switchStep = new SwitchStep(currentStep.Attributes);
                     workflowStepList.Add(switchStep);
 
                     // Fill case/otherwise steps inside of switch step
-                    this.FillStepList(workflowVariables, faultHandlers, 0, switchStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,switchStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "case")
                 {
-                    CaseStep caseStep = new CaseStep(currentStep.Attributes, false);
+                    var caseStep = new CaseStep(currentStep.Attributes, false);
                     workflowStepList.Add(caseStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, caseStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,caseStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "otherwise")
                 {
-                    CaseStep caseStep = new CaseStep(currentStep.Attributes, true);
+                    var caseStep = new CaseStep(currentStep.Attributes, true);
                     workflowStepList.Add(caseStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, caseStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,caseStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "while")
                 {
-                    WhileStep whileStep = new WhileStep(currentStep.Attributes);
+                    var whileStep = new WhileStep(currentStep.Attributes);
                     workflowStepList.Add(whileStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, whileStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,whileStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "pick")
                 {
-                    PickStep pickStep = new PickStep(currentStep.Attributes);
+                    var pickStep = new PickStep(currentStep.Attributes);
                     workflowStepList.Add(pickStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, pickStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,pickStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "eventHandlers")
                 {
                     //we will handle this section as same as handl scope
-                    this.FillStepList(workflowVariables, faultHandlers, 0, workflowStepList, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,workflowStepList, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "onMessage")
                 {
-                    OnMessageStep messageStep = new OnMessageStep(currentStep.Attributes);
+                    var messageStep = new OnMessageStep(currentStep.Attributes);
                     workflowStepList.Add(messageStep);
 
                     string messageName = String.Empty;
                     string timesetTime = String.Empty;
-                    foreach (XmlAttribute attrib in currentStep.Attributes)
-                    {
-                        if (attrib.LocalName == "timeout")
+                    if (currentStep.Attributes != null)
+                        foreach (XmlAttribute attrib in currentStep.Attributes)
                         {
-                            timesetTime = attrib.Value;
+                            if (attrib.LocalName == "timeout")
+                            {
+                                timesetTime = attrib.Value;
+                            }
+                            if (attrib.LocalName == "variable")
+                            {
+                                messageName = attrib.Value;
+                            }
                         }
-                        if (attrib.LocalName == "variable")
-                        {
-                            messageName = attrib.Value;
-                        }
-                    }
                     if (!timeoutParameters.ContainsKey(messageName))
                     {
                         timeoutParameters.Add(messageName, timesetTime);
                     }
 
-                    this.FillStepList(workflowVariables, faultHandlers, 0, messageStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                    FillStepList(workflowContext,messageStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "onEvent")
                 {
-                    OnEventStep onEventStep = new OnEventStep(currentStep.Attributes);
-
-                    messageTimeoutEventHanlderDict.Add(onEventStep.EventKey, onEventStep.StepId);
+                    var onEventStep = new OnEventStep(currentStep.Attributes);
+                    workflowContext.MessageTimeoutEventHanlderDict.Add(onEventStep.EventKey, onEventStep.StepId);
                     workflowStepList.Add(onEventStep);
-                    this.FillStepList(workflowVariables, faultHandlers, 0, onEventStep.WorkflowSteps, currentStep.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
-
-
+                    FillStepList(workflowContext,onEventStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "partnerLinks")
                 {
-                    // ignore this for now
-                    continue;
+                    FillPartnerLinkList(workflowContext, currentStep);
                 }
                 else if (currentStep.LocalName == "variables")
                 {
-                    foreach (XmlNode variableNode in currentStep.ChildNodes)
-                    {
-                        if (variableNode.LocalName == "variable")
-                        {
-                            string variableName = null;
-                            string variableType = null;
-                            foreach (XmlAttribute variableAttribute in variableNode.Attributes)
-                            {
-                                if (variableAttribute.LocalName == "name")
-                                {
-                                    variableName = variableAttribute.Value;
-                                }
-                                else if (variableAttribute.LocalName == "messageType")
-                                {
-                                    variableType = variableAttribute.Value;
-                                }
-                                else if (variableAttribute.LocalName == "type")
-                                {
-                                    variableType = variableAttribute.Value;
-                                }
-                            }
-
-                            if ((variableName != null) && (variableType != null))
-                            {
-                                workflowVariables.Add(variableName, variableType);
-                            }
-                        }
-                    }
+                    FillVariableList(workflowContext, currentStep);
                 }
                 else if (currentStep.LocalName == "faultHandlers")
                 {
                     foreach (XmlNode childNode in currentStep.ChildNodes)
                     {
-                        FaultHandler faultHandler = new FaultHandler(childNode);
+                        var faultHandler = new FaultHandler(childNode);
                         workflowStepList.Add(faultHandler);
-                        this.FillStepList(workflowVariables, faultHandlers, 0, faultHandler.WorkflowSteps, childNode.ChildNodes, messageTimeoutEventHanlderDict, ref cancelEventHandlerName);
+                        FillStepList(workflowContext,faultHandler.WorkflowSteps, 0, childNode.ChildNodes, ref cancelEventHandlerName);
                     }
                 }
                 else
@@ -629,22 +609,20 @@ namespace WorkFlowHandle.DAL
         /// Fill the WorkflowVariable and Handler field in workflow context. The workflowSteps will not be load from the bpel in this method.
         /// For the workflowSteps may be cached.
         /// </summary>
-        /// <param name="workflowVariables">Dictionary of workflow variables to populate with any
+        /// <param name="workflowContext">Dictionary of workflow variables to populate with any
         /// variables defined in the BPEL file.</param>
-        /// <param name="nodeList">XmlNodeList containing the BPEL data from the BPEL file</param>
-        private void FillVariableList(IDictionary<string, string> workflowVariables, XmlNodeList nodeList)
+        /// <param name="currentStep">XmlNode containing the BPEL data from the BPEL file</param>
+        private void FillVariableList(WorkflowContext workflowContext, XmlNode currentStep)
         {
-            for (int i = 0; i < nodeList.Count; i++)
+            if (currentStep.LocalName == "variables")
             {
-                XmlNode currentStep = nodeList[i];
-                if (currentStep.LocalName == "variables")
+                foreach (XmlNode variableNode in currentStep.ChildNodes)
                 {
-                    foreach (XmlNode variableNode in currentStep.ChildNodes)
+                    if (variableNode.LocalName == "variable")
                     {
-                        if (variableNode.LocalName == "variable")
-                        {
-                            string variableName = null;
-                            string variableType = null;
+                        string variableName = null;
+                        string variableType = null;
+                        if (variableNode.Attributes != null)
                             foreach (XmlAttribute variableAttribute in variableNode.Attributes)
                             {
                                 if (variableAttribute.LocalName == "name")
@@ -660,14 +638,53 @@ namespace WorkFlowHandle.DAL
                                     variableType = variableAttribute.Value;
                                 }
                             }
-                            if ((variableName != null) && (variableType != null))
-                            {
-                                workflowVariables.Add(variableName, variableType);
-                            }
+                        if ((variableName != null) && (variableType != null))
+                        {
+                            workflowContext.WorkflowVariables.Add(variableName, variableType);
                         }
                     }
                 }
             }
+        }
+
+        private void FillPartnerLinkList(WorkflowContext workflowContext, XmlNode currentStep)
+        {
+            if (currentStep.LocalName == "partnerLinks")
+            {
+                foreach (XmlNode variableNode in currentStep.ChildNodes)
+                {
+                    if (variableNode.LocalName == "partnerLink")
+                    {
+                        var partnerLinkEntity = new PartnerLinkModel();
+                        if (variableNode.Attributes != null)
+                            foreach (XmlAttribute variableAttribute in variableNode.Attributes)
+                            {
+                                if (variableAttribute.LocalName == "name")
+                                {
+                                  partnerLinkEntity.Name = variableAttribute.Value;
+                                }
+                                else if (variableAttribute.LocalName == "partnerLinkType")
+                                {
+                                  partnerLinkEntity.PartnerLinkType = variableAttribute.Value;
+                                }
+                                else if (variableAttribute.LocalName == "myRole")
+                                {
+                                    partnerLinkEntity.MyRole = variableAttribute.Value;
+                                }
+                                else if (variableAttribute.LocalName == "partnerRole")
+                                {
+                                    partnerLinkEntity.PartnerRole = variableAttribute.Value;
+                                }
+                            }
+                        if (!string.IsNullOrEmpty(partnerLinkEntity.Name))
+                        {
+                            workflowContext.PartnerLinkList.Add(partnerLinkEntity);
+                        }
+                    }
+                }
+            }
+
+
         }
     }
 }

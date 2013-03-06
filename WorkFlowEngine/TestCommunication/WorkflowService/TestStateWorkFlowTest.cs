@@ -7,6 +7,8 @@
 ** Summary：     TestStateWorkFlowTest class
 *********************************************************************************/
 
+using System.Threading;
+
 namespace TestCommunication.WorkflowService
 {
     using Common;
@@ -33,6 +35,7 @@ namespace TestCommunication.WorkflowService
                                 };
            var result= WfServiceInstance.NewWorkFlow(appEntity);
            Assert.AreEqual(result, "Manage");  
+
         }
 
 
