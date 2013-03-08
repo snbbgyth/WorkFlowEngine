@@ -16,7 +16,6 @@ namespace WorkFlowHandle.Help
 {
    public class Constants
    {
-
        public const string BpelFileFolderTags = "{0}BPEL{0}";
    }
 }

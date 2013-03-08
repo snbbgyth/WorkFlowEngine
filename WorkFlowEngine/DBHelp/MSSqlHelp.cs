@@ -25,6 +25,7 @@ namespace DBHelp
         {
             return new SqlConnection(connectionString);
         }
+
         #endregion
 
         #region Public Mehtod

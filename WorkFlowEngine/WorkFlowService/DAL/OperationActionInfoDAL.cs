@@ -43,12 +43,7 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.QueryOperationActionInfoByIDSqlTags, id);
         }
-
-        protected override OperationActionInfoModel NullResult()
-        {
-            return null;
-        }
-
+ 
         protected override string GetCreateTableSql()
         {
             return WFConstants.CreateOperationActionInfoTableSqlTags;

@@ -81,12 +81,10 @@ namespace WorkFlowService.DAL
 
         protected abstract T NullResult();
 
-        protected abstract string GetQueryByIDSql(string id);
- 
+  default(T);
+        }
 
-        public int CreateTable()
-        {
-            return DBHelpInstance.ExecuteNonQuery(GetCreateTableSql());
+        protected abstract string GetQueryByIDSql(string id);e.ExecuteNonQuery(GetCreateTableSql());
         }
 
         protected abstract string GetCreateTableSql();

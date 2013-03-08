@@ -61,12 +61,7 @@ namespace WorkFlowService.DAL
             return WFConstants.QueryAllWorkflowStateInfoSqlTags;
         }
 
-        protected override WorkflowStateInfoModel NullResult()
-        {
-            return null;
-        }
-
-        protected override string GetCreateTableSql()
+        protec verride string GetCreateTableSql()
         {
             return WFConstants.CreateWorkflowStateInfoTableSqlTags;
         }

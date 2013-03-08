@@ -55,12 +55,7 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.QueryUserGroupByGroupNameSqlTags, groupName);
         }
 
-        protected override UserGroupModel NullResult()
-        {
-            return null;
-        }
-
-        protected override string GetCreateTableSql()
+        prote override string GetCreateTableSql()
         {
             return WFConstants.CreateUserGroupTableSqlTags;
         }

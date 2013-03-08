@@ -67,12 +67,7 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.QueryUserInfoByUserNameSqlTags, userName);
         }
 
-        protected override UserInfoModel NullResult()
-        {
-            return null;
-        }
-
-        protected override string GetCreateTableSql()
+        pro d override string GetCreateTableSql()
         {
             return WFConstants.CreateUserInfoTableSqlTags;
         }

@@ -84,12 +84,7 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.QueryRoleInfoByRoleNameSqlTags, roleName);
 
         }
-
-        protected override RoleInfoModel NullResult()
-        {
-            return null;
-        }
-
+ 
         protected override string GetCreateTableSql()
         {
             return WFConstants.CreateRoleInfoTableSqlTags;

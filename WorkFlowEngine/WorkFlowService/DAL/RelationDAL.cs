@@ -36,19 +36,19 @@ namespace WorkFlowService.DAL
         }
 
 
-        protected override string GetDeleteByIDSql(string id)
+       rotected override string GetDeleteByIDSql(string id)
         {
             return string.Format(WFConstants.DeleteRelationByIDSqlTags, id);
         }
 
 
-        protected override string GetQueryByIDSql(string id)
+        prected override string GetQueryByIDSql(string id)
         {
             return string.Format(WFConstants.QueryRelationByIDSqlTags, id);
         }
  
 
-        public RelationModel QueryByChildNodeIDAndParentNodeIDAndType(string childNodeID, string parentNodeID, int type)
+        plic RelationModel QueryByChildNodeIDAndParentNodeIDAndType(string childNodeID, string parentNodeID, int type)
         {
             var entityList =DBHelpInstance.ReadEntityList<RelationModel>(GetQueryByChildNodeIDAndParentNodeIDAndTypeSql(
                     childNodeID, parentNodeID, type));
@@ -113,12 +113,7 @@ namespace WorkFlowService.DAL
                                  parentNodeID, type);
         }
 
-        protected override RelationModel NullResult()
-        {
-            return null;
-        }
-
-        protected override string GetCreateTableSql()
+        prot  override string GetCreateTableSql()
         {
             return WFConstants.CreateRelationTableSqlTags;
         }
