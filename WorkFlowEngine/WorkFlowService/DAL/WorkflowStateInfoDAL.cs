@@ -20,25 +20,25 @@ namespace WorkFlowService.DAL
         {
             get { return new WorkflowStateInfoDAL(); }
         }
- 
+
         protected override string GetInsertByEntitySql(WorkflowStateInfoModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
             return string.Format(WFConstants.InsertWorkflowStateInfoSqlTags, entity.ID, entity.WorkflowName, entity.WorkflowDisplayName, entity.StateNodeName, entity.StateNodeDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
- 
+
         protected override string GetModifyByEntitySql(WorkflowStateInfoModel entity)
         {
             return string.Format(WFConstants.InsertOrReplaceWorkflowStateInfoSqlTags, entity.ID, entity.WorkflowName, entity.WorkflowDisplayName, entity.StateNodeName, entity.StateNodeDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
- 
+
         protected override string GetDeleteByIDSql(string id)
         {
             return string.Format(WFConstants.DeleteWorkflowStateInfoByIDSqlTags, id);
         }
- 
+
         protected override string GetQueryByIDSql(string id)
         {
             return string.Format(WFConstants.QueryWorkflowStateInfoByIDSqlTags, id);
@@ -46,7 +46,7 @@ namespace WorkFlowService.DAL
 
         public WorkflowStateInfoModel QueryByWorkflowNameAndStateNodeName(string workflowName, string stateNodeName)
         {
-            var entityList = DBHelpInstance.ReadEntityList<WorkflowStateInfoModel>(GetQueryByWorkflowNameAndStateNodeNameSql(workflowName,stateNodeName));
+            var entityList = DBHelpInstance.ReadEntityList<WorkflowStateInfoModel>(GetQueryByWorkflowNameAndStateNodeNameSql(workflowName, stateNodeName));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
         }
 
@@ -55,13 +55,13 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.QueryWorkflowStateInfoByWorkflowNameAndStateNodeNameSqlTags, workflowName,
                                  stateNodeName);
         }
- 
+
         protected override string GetQueryAllSql()
         {
             return WFConstants.QueryAllWorkflowStateInfoSqlTags;
         }
 
-        protec verride string GetCreateTableSql()
+        protected override string GetCreateTableSql()
         {
             return WFConstants.CreateWorkflowStateInfoTableSqlTags;
         }

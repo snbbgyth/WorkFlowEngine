@@ -25,13 +25,13 @@ namespace WorkFlowService.DAL
         protected override string GetInsertByEntitySql(UserInfoModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertUserInfoSqlTags, entity.ID, entity.UserName,entity.UserDisplayName, entity.Password,
+            return string.Format(WFConstants.InsertUserInfoSqlTags, entity.ID, entity.UserName, entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(UserInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceUserInfoSqlTags, entity.ID, entity.UserName,entity.UserDisplayName, entity.Password,
+            return string.Format(WFConstants.InsertOrReplaceUserInfoSqlTags, entity.ID, entity.UserName, entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
@@ -55,7 +55,7 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.QueryUserInfoByUserNameAndPasswordTags, userName, password);
         }
- 
+
         public UserInfoModel QueryByUserName(string userName)
         {
             var entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByUserNameSql(userName));
@@ -67,7 +67,7 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.QueryUserInfoByUserNameSqlTags, userName);
         }
 
-        pro d override string GetCreateTableSql()
+        protected override string GetCreateTableSql()
         {
             return WFConstants.CreateUserInfoTableSqlTags;
         }

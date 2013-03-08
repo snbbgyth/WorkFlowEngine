@@ -74,7 +74,7 @@ namespace WorkFlowService.DAL
         {
             return string.Format(WFConstants.QueryWorkFlowActivityByAppIDSqlTags, appId);
         }
- 
+
         protected override string GetCreateTableSql()
         {
             return WFConstants.CreateWorkFlowActivityTableSqlTags;

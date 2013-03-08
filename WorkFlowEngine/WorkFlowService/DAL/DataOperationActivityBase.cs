@@ -32,10 +32,10 @@ namespace WorkFlowService.DAL
                 if (_dbHelpInstance == null)
                 {
                     _dbHelpInstance = new SQLiteHelp
-                                          {
-                                              ConnectionString = string.Format(WFConstants.SQLiteConnectionString,
-                                                                               WFUntilHelp.SqliteFilePath)
-                                          };
+                    {
+                        ConnectionString = string.Format(WFConstants.SQLiteConnectionString,
+                                                         WFUntilHelp.SqliteFilePath)
+                    };
                 }
                 return _dbHelpInstance;
             }
@@ -49,7 +49,7 @@ namespace WorkFlowService.DAL
         }
 
         protected abstract string GetInsertByEntitySql(T entity);
- 
+
 
         public int Modify(T entity)
         {
@@ -64,27 +64,26 @@ namespace WorkFlowService.DAL
         }
 
         protected abstract string GetDeleteByIDSql(string id);
- 
+
 
         public List<T> QueryAll()
         {
             return DBHelpInstance.ReadEntityList<T>(GetQueryAllSql());
         }
 
-        protected abstract string  GetQueryAllSql();
+        protected abstract string GetQueryAllSql();
 
         public T QueryByID(string id)
         {
             var entityList = DBHelpInstance.ReadEntityList<T>(GetQueryByIDSql(id));
-            return entityList != null && entityList.Count > 0 ? entityList[0] : NullResult();
+            return entityList != null && entityList.Count > 0 ? entityList[0] : default(T);
         }
 
-        protected abstract T NullResult();
+        protected abstract string GetQueryByIDSql(string id);
 
-  default(T);
-        }
-
-        protected abstract string GetQueryByIDSql(string id);e.ExecuteNonQuery(GetCreateTableSql());
+        public int CreateTable()
+        {
+            return DBHelpInstance.ExecuteNonQuery(GetCreateTableSql());
         }
 
         protected abstract string GetCreateTableSql();

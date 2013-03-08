@@ -25,44 +25,41 @@ namespace WorkFlowService.DAL
         protected override string GetInsertByEntitySql(RelationModel entity)
         {
             entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertRelationSqlTags, entity.ID, entity.ChildNodeID, entity.ParentNodeID,entity.Type,
+            return string.Format(WFConstants.InsertRelationSqlTags, entity.ID, entity.ChildNodeID, entity.ParentNodeID, entity.Type,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(RelationModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceRelationSqlTags, entity.ID, entity.ChildNodeID, entity.ParentNodeID,entity.Type,
+            return string.Format(WFConstants.InsertOrReplaceRelationSqlTags, entity.ID, entity.ChildNodeID, entity.ParentNodeID, entity.Type,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
-
-       rotected override string GetDeleteByIDSql(string id)
+        protected override string GetDeleteByIDSql(string id)
         {
             return string.Format(WFConstants.DeleteRelationByIDSqlTags, id);
         }
 
-
-        prected override string GetQueryByIDSql(string id)
+        protected override string GetQueryByIDSql(string id)
         {
             return string.Format(WFConstants.QueryRelationByIDSqlTags, id);
         }
- 
 
-        plic RelationModel QueryByChildNodeIDAndParentNodeIDAndType(string childNodeID, string parentNodeID, int type)
+        public RelationModel QueryByChildNodeIDAndParentNodeIDAndType(string childNodeID, string parentNodeID, int type)
         {
-            var entityList =DBHelpInstance.ReadEntityList<RelationModel>(GetQueryByChildNodeIDAndParentNodeIDAndTypeSql(
+            var entityList = DBHelpInstance.ReadEntityList<RelationModel>(GetQueryByChildNodeIDAndParentNodeIDAndTypeSql(
                     childNodeID, parentNodeID, type));
             return entityList != null && entityList.Count > 0 ? entityList[0] : null;
         }
 
         private string GetQueryByChildNodeIDAndParentNodeIDAndTypeSql(string childNodeID, string parentNodeID, int type)
         {
-            return string.Format(WFConstants.QueryRelationByChildNodeIDAndParentNodeIDAndTypeSqlTags,childNodeID,parentNodeID,type);
+            return string.Format(WFConstants.QueryRelationByChildNodeIDAndParentNodeIDAndTypeSqlTags, childNodeID, parentNodeID, type);
         }
 
         public List<RelationModel> QueryByChildNodeIDAndType(string childNodeID, int type)
         {
-           return DBHelpInstance.ReadEntityList<RelationModel>(GetQueryByChildNodeIDAndTypeSql(childNodeID, type));
+            return DBHelpInstance.ReadEntityList<RelationModel>(GetQueryByChildNodeIDAndTypeSql(childNodeID, type));
         }
 
         private string GetQueryByChildNodeIDAndTypeSql(string childNodeID, int type)
@@ -72,7 +69,7 @@ namespace WorkFlowService.DAL
 
         public List<RelationModel> QueryByParentNodeIDAndType(string parentNodeID, int type)
         {
-            return DBHelpInstance.ReadEntityList<RelationModel>(GetQueryByParentNodeIDAndTypeSql(parentNodeID, type)); 
+            return DBHelpInstance.ReadEntityList<RelationModel>(GetQueryByParentNodeIDAndTypeSql(parentNodeID, type));
         }
 
         private string GetQueryByParentNodeIDAndTypeSql(string parentNodeID, int type)
@@ -82,7 +79,7 @@ namespace WorkFlowService.DAL
 
         public int DeleteByChildNodeIDAndType(string childNodeID, int type)
         {
-            return DBHelpInstance.ExecuteNonQuery(GetDeleteByChildNodeIDAndTypeSql(childNodeID,type));
+            return DBHelpInstance.ExecuteNonQuery(GetDeleteByChildNodeIDAndTypeSql(childNodeID, type));
         }
 
         private string GetDeleteByChildNodeIDAndTypeSql(string childNodeID, int type)
@@ -113,7 +110,7 @@ namespace WorkFlowService.DAL
                                  parentNodeID, type);
         }
 
-        prot  override string GetCreateTableSql()
+        protected override string GetCreateTableSql()
         {
             return WFConstants.CreateRelationTableSqlTags;
         }
