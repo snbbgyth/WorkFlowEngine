@@ -73,9 +73,9 @@ namespace WorkFlowService.BLL
             return GetActivityByType<T>().QueryByID(id);
         }
 
-        public List<T> QueryAll<T>()
+        public IList<T> QueryAll<T>()
         {
-            return GetActivityByTypeI<T>().QueryAll();
+            return GetActivityByType<T>().QueryAll();
         }
 
         private IDataOperationActivity<T> GetActivityByType<T>()
@@ -104,17 +104,17 @@ namespace WorkFlowService.BLL
                     }
                     catch (SQLiteException ex)
                     {
-                        if (ex.ErrorCode == 1) return;
+                        if (ex.ErrorCode == 1)
+                        {
+
+                        }
 
                     }
 
             });
         }
 
-        private IEnumerable<Type> GetEx
-                        {
-                            
-                        }ypes()
+        private IEnumerable<Type> GetExecutingTypes()
         {
             var assembly = Assembly.GetExecutingAssembly();
             return assembly.GetTypes();
