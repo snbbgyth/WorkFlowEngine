@@ -44,7 +44,7 @@ namespace WorkFlowWCFService
         }
 
         [OperationContract]
-        public List<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId)
+        public IList<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId)
         {
             return WorkFlowEngineInstance.QueryInProgressActivityListByOperatorUserId(operatorUserId);
         }

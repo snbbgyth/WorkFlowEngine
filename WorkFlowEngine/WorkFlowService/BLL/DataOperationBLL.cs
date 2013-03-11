@@ -75,7 +75,7 @@ namespace WorkFlowService.BLL
 
         public List<T> QueryAll<T>()
         {
-            return GetActivityByType<T>().QueryAll();
+            return GetActivityByTypeI<T>().QueryAll();
         }
 
         private IDataOperationActivity<T> GetActivityByType<T>()
@@ -111,7 +111,10 @@ namespace WorkFlowService.BLL
             });
         }
 
-        private IEnumerable<Type> GetExecutingTypes()
+        private IEnumerable<Type> GetEx
+                        {
+                            
+                        }ypes()
         {
             var assembly = Assembly.GetExecutingAssembly();
             return assembly.GetTypes();

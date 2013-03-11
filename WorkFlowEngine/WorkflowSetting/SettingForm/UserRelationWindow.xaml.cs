@@ -20,12 +20,15 @@ namespace WorkflowSetting.SettingForm
     /// <summary>
     /// UserRelationUserGroupWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class UserRelationUserGroupWindow : WindWindow : Window
+    public partial class UserRelationWindow : Window
     {
-        public UserRelation       InitializeComponent();
+        public UserRelationWindow()
+        {
+            InitializeComponent();
         }
 
-        public UserRelationUserGroupWindow(string userId)
+        public UserRelationWindow(string userId)
+            : this()
         {
             var userInfoEntity = DataOperationBLL.Current.QueryByID<UserInfoModel>(userId);
 
@@ -36,13 +39,9 @@ namespace WorkflowSetting.SettingForm
             TxtUserId.Text = entity.ID;
             TxtUserName.Text = entity.UserName;
             TxtUserDisplayName.Text = entity.UserDisplayName;
-            LvUserGroupName.Items.Clear();
-         ClearDataBinding();
-            ExistUueryAllUserGroupByUserId(entity.ID);
-            LvUserGroupName.ItemsSource = userGroupList;
-        }
-
-        private ExistUserGroupList;
+            ClearDataBinding();
+            ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByUserId(entity.ID);
+            LvUserGroupName.ItemsSource = ExistUserGroupList;
             ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserId(entity.ID);
             LvUserRole.ItemsSource = ExistRoleInfoList;
 
@@ -55,7 +54,7 @@ namespace WorkflowSetting.SettingForm
         }
 
         private List<RoleInfoModel> ExistRoleInfoList { get; set; }
-        private List<UserGroupModel> ExistUserGroupList { get; set; } 
+        private List<UserGroupModel> ExistUserGroupList { get; set; }
 
         private void BtnModifyClick(object sender, RoutedEventArgs e)
         {
@@ -83,7 +82,7 @@ namespace WorkflowSetting.SettingForm
         {
             var userRoleList = LvUserGroupName.ItemsSource as List<RoleInfoModel>;
             if (userRoleList == null) return;
-            var entityList = userRoleList.Where(entity =>ExistRoleInfoList.Any(t => t.ID != entity.ID));
+            var entityList = userRoleList.Where(entity => ExistRoleInfoList.Any(t => t.ID != entity.ID));
             foreach (var entity in entityList)
             {
                 UserOperationBLL.Current.AddUserInUserGroup(TxtUserId.Text, entity.ID);
@@ -92,12 +91,11 @@ namespace WorkflowSetting.SettingForm
             foreach (var entity in removeList)
             {
                 UserOperationBLL.Current.DeleteUserInUserGroup(TxtUserId.Text, entity.ID);
-            }pClick(object sender, RoutedEventArgs e)
-        {
-
+            }
         }
-    }
-}
+
+        private void BtnAddUserGroupClick(object sender, RoutedEventArgs e)
+        {
             //TODO: Add user to user group from SelectUserGroupWindow
         }
 

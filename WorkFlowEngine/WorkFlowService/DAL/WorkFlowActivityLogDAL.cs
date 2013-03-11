@@ -56,7 +56,7 @@ namespace WorkFlowService.DAL
             return string.Format(WFConstants.QueryWorkFlowActivityLogByIDTags, id);
         }
 
-        public List<WorkFlowActivityLogModel> QueryInProgressActivityByOperatorUserId(string operatorUserId)
+        public List<WorkFlowActivityLogModel> QueryInProgressActivIityByOperatorUserId(string operatorUserId)
         {
             return DBHelpInstance.ReadEntityList<WorkFlowActivityLogModel>(GetQueryInProgressActivityByOperatorUserIdSql(operatorUserId));
         }

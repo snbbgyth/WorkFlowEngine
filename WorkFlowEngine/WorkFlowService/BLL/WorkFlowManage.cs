@@ -60,7 +60,7 @@ namespace WorkFlowService.BLL
             return currentWorkFlowState;
         }
 
-        public List<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId)
+        public List<WorkFlowActivityModel> QueryInProgressActivityListIByOperatorUserId(string operatorUserId)
         {
             return WorkFlowActivityDAL.Current.QueryInProgressActivityByOperatorUserId(operatorUserId);
         }

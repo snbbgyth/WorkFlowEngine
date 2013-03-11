@@ -8,7 +8,6 @@
 *********************************************************************************/
 
 using CommonLibrary.Help;
-using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.DAL
