@@ -1,4 +1,4 @@
-﻿<Window x:Class="WorkflowSetting.SettingForm.UserRelationUserGroupWindow"
+﻿<Window x:Class="WorkflowSetting.SettingForm.UserRelationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="UserRelationUserGroupWindow" Height="800" Width="500">
@@ -25,7 +25,22 @@
         </ListView>
         <Label Content="User Group Name:" HorizontalAlignment="Left" Margin="25,152,0,0" VerticalAlignment="Top"/>
         <Button Content="AddUserGroup" Name="BtnAddUserGroup" HorizontalAlignment="Left" Margin="165,275,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserGroupClick"/>
-        <Button Content="Modify" Name ="BtnModify"  HorizontalAlignment="Left" Margin="104,337,0,0" VerticalAlignment="Top" Width="75" Click="BtnModifyClick"/>
+        <Button Content="Modify" Name ="BtnModify"  HorizontalAlignment="Left" Margin="104,337,0,0" VerticalAlignme13,522,0,0" VerticalAlignment="Top" Width="75" Click="BtnModifyClick"/>
+        <Label Content="User Role Name:" HorizontalAlignment="Left" Margin="36,336,0,0" VerticalAlignment="Top"/>
+        <ListView Name="LvUserRole" HorizontalAlignment="Left" Height="100" Margin="165,336,0,0" VerticalAlignment="Top" Width="200    <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="Group Name" WiRole Name" Width="200" DisplayMemberBinding="{Binding RoleName}"/>
+                    <GridViewColumn Header="RoleId">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+              <TextBlock Text="{Binding ID}" Visibility="Hidden" Name="TxtGroupId"></TextBloRoleId"></TextBlock>
+                            </DataTemplate>
+    </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="User GroupButton Content="BtnAddRole" HorizontalAlignment="Left" Margin="165,458,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddRoleClick"/>
 
     </Grid>
 </Window>

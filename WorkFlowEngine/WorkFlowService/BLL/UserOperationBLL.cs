@@ -261,6 +261,46 @@ namespace WorkFlowService.BLL
                        : null;
         }
 
+        public List<UserGroupModel> QueryAllUserGroupByRoleId(string roleId)
+        {
+            var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 2);
+            return relationList != null && relationList.Count > 0
+                        ? relationList.Select(entity => UserGroupDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                        : null;
+        }
+
+        public List<UserInfoModel> QueryAllUserInfoByRoleId(string roleId)
+        {
+            var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 5);
+            return relationList != null && relationList.Count > 0
+                        ? relationList.Select(entity =>UserInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                        : null;
+        }
+
+        public List<OperationActionInfoModel> QueryAllActionInfoByRoleId(string roleId)
+        {
+            var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 3);
+            return relationList != null && relationList.Count > 0
+                        ? relationList.Select(entity =>OperationActionInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                        : null;
+        }
+
+        public List<WorkflowStateInfoModel> QueryAllWorkflowStateByRoleId(string roleId)
+        {
+            var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 4);
+            return relationList != null && relationList.Count > 0
+                        ? relationList.Select(entity =>WorkflowStateInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                        : null;
+        }
+
+        public List<RoleInfoModel> QueryAllUserRoleByUserId(string userId)
+        {
+            var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 5);
+            return relationList != null && relationList.Count > 0
+                       ? relationList.Select(entity =>RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
+                       : null;
+        }
+
         public UserGroupModel QueryUserGroupByGroupName(string groupName)
         {
             return UserGroupDAL.Current.QueryByGroupName(groupName);

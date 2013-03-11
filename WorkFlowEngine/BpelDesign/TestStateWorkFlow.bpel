@@ -34,12 +34,6 @@
                    <invoke name="Common" partnerLink="CommonState" portType="EmployeeAction" operation="StateOperation" inputVariable="EmployeeOperation" />
                 </sequence>
             </case>
-         <!-- <otherwise>
-                <sequence>
-                    <empty name="Task4"/>
-                </sequence>
-            </otherwise>
-	     -->
         </switch>
         <invoke name="Manage" partnerLink="ManageState" portType="ManageAction" operation="StateOperation" inputVariable="ManageOperation" />
 		<switch name="ManageAction">
@@ -53,17 +47,6 @@
                    <invoke name="Refuse" partnerLink="RefuseState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />
                 </sequence>
             </case>
-		 <!-- 	<case condition="Revoke">
-                <sequence>
-                    <empty name="Common"/>
-                </sequence>
-            </case>
-            <otherwise>
-                <sequence>
-                    <empty name="Task4"/>
-                </sequence>
-            </otherwise>
-	     -->
         </switch>
 		<invoke name="Done" partnerLink="DoneState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />
 		<invoke name="Refuse" partnerLink="RefuseState" portType="None" operation="StateOperation" inputVariable="RemarkMessage" />

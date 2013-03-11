@@ -78,11 +78,20 @@
     <Compile Include="SettingForm\OperationUserWindow.xaml.cs">
       <DependentUpon>OperationUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingForm\RoleRelationWindow.xaml.cs">
+      <DependentUpon>RoleRelationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm\SelectRoleWindow.xaml.cs">
+      <DependentUpon>SelectRoleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingForm\SelectUserGroupWindow.xaml.cs">
       <DependentUpon>SelectUserGroupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\UserRelationUserGroupWindow.xaml.cs">
-      <DependentUpon>UserRelationUserGroupWindow.xaml</DependentUpon>
+    <Compile Include="SettingForm\UserRelationWindow.xaml.cs">
+      <DependentUpon>UserRelationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm\ViewRoleWindow.xaml.cs">
+      <DependentUpon>ViewRoleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\ViewUserWindow.xaml.cs">
       <DependentUpon>ViewUserWindow.xaml</DependentUpon>
@@ -110,11 +119,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SettingForm\RoleRelationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\SelectRoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingForm\SelectUserGroupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingForm\UserRelationUserGroupWindow.xaml">
+    <Page Include="SettingForm\UserRelationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\ViewRoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

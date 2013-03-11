@@ -33,6 +33,7 @@ namespace WorkFlowHandle.Model
         /// same string must be used as the workflow name when starting the workflow.</param>
         /// <param name="version">A float value defining the version of the workflow.</param>
         /// <param name="fileName">A string defining the filename of the workflow.</param>
+        /// <param name="encryptedFileName"></param>
         public WorkflowFileElement(string name, float version, string fileName, string encryptedFileName)
         {
             this.Name = name;
