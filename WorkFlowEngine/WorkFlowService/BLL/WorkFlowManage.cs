@@ -53,8 +53,10 @@ namespace WorkFlowService.BLL
                 OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag,
             };
             WorkFlowEngine.Current.InitWorkflowState(entity.WorkflowName);
-            var currentWorkFlowState = WorkFlowEngine.Current.Execute(entity.WorkflowName, WorkFlowState.Common.ToString(), entity.Activitystring.Empty, entity.ActivityState)tyEntity.CurrentWorkflowState = currentWorkFlowState;
-            activityEntity.OperatorUserId = entit   DataOperationBLL.Current.Insert(activityEntity);
+            var currentWorkFlowState = WorkFlowEngine.Current.Execute(entity.WorkflowName, string.Empty, entity.ActivityState);
+            activityEntity.CurrentWorkflowState = currentWorkFlowState;
+            activityEntity.ApplicationState = currentWorkFlowState;
+            DataOperationBLL.Current.Insert(activityEntity);
             return currentWorkFlowState;
         }
 
@@ -83,11 +85,13 @@ namespace WorkFlowService.BLL
         {
             if (entity == null)
                 return ApplicationState.Draft;
-            if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowS//tate.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Refuse)
-                return ApplicationState.Complete;
-            if (WFUntilHelp.GetWorkFlowStat//    return ApplicationState.Complete;
-            //tate.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFCommon && WFUntilHelp.GetActivityStateByName(entity.OperatorActivity) == ActivityState.Revoke)
-            //        }
+            //if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Refuse)
+            //    return ApplicationState.Complete;
+            //if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Common && WFUntilHelp.GetActivityStateByName(entity.OperatorActivity) == ActivityState.Revoke)
+            //    return ApplicationState.Draft;
+
+            return ApplicationState.InProgress;
+        }
 
         private bool CompareIsContain(string source, string value)
         {
