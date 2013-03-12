@@ -26,13 +26,13 @@ namespace WorkFlowService.Help
             return ActivityState.Read;
         }
 
-        public static WorkFlowState GetWorkFlowStateByName(string workFlowState)
-        {
-            WorkFlowState result;
-            if (Enum.TryParse(workFlowState, true, out result))
-                return result;
-            return WorkFlowState.Common;
-        }
+        //public static WorkFlowState GetWorkFlowStateByName(string workFlowState)
+        //{
+        //    WorkFlowState result;
+        //    if (Enum.TryParse(workFlowState, true, out result))
+        //        return result;
+        //    return WorkFlowState.Common;
+        //}
 
         public static ApplicationState GetApplicationState(string applicationState)
         {

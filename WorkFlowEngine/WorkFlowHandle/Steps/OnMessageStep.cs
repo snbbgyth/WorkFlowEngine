@@ -55,17 +55,17 @@ namespace WorkFlowHandle.Steps
         public string Run(WorkflowContext context, string stepId)
         {
             var currentState = this.receiveStep.Run(context, stepId);
-            if (currentState != WorkFlowState.Done.ToString())
-            {
-                // Have the event so run
-                return base.Run(context, null);
-            }
+            //if (currentState != WorkFlowState.Done.ToString())
+            //{
+            //    // Have the event so run
+            //    return base.Run(context, null);
+            //}
 
-            // Check the workflow name whether in the continueworkflowList, If in the list, then don't report error status, continue running the workflow
-            if (currentState == WorkFlowState.Manager.ToString())
-            {
-                return base.Run(context, null);
-            }
+            //// Check the workflow name whether in the continueworkflowList, If in the list, then don't report error status, continue running the workflow
+            //if (currentState == WorkFlowState.Manager.ToString())
+            //{
+            //    return base.Run(context, null);
+            //}
             return currentState;
         }
     }

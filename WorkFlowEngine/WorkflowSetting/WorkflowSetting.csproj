@@ -75,6 +75,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Help\SettingHelp.cs" />
+    <Compile Include="SettingForm\AddForm\AddUserGroupWindow.xaml.cs">
+      <DependentUpon>AddUserGroupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm\AddForm\AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingForm\OperationUserWindow.xaml.cs">
       <DependentUpon>OperationUserWindow.xaml</DependentUpon>
     </Compile>
@@ -115,6 +122,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SettingForm\AddForm\AddUserGroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\AddForm\AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingForm\OperationUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

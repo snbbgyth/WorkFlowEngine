@@ -46,7 +46,7 @@ namespace WorkFlowHandle.Steps
         /// <returns>State of the workflow after executing the steps.</returns>
         public override string Run(WorkflowContext workflowContext, string stepId)
         {
-            WorkFlowState state = WorkFlowState.Done;
+            //WorkFlowState state = WorkFlowState.Done;
 
             // Check for event first.  Go though the possible OnMessage activities and see if any succeed. 
             // If there is an event to process, we're done.  Only one event per execution (check BPEL spec)
@@ -54,7 +54,7 @@ namespace WorkFlowHandle.Steps
 
 
 
-            return state.ToString();
+            return string.Empty;// state.ToString();
         }
     }
 }

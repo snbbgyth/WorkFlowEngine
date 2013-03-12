@@ -31,7 +31,7 @@ namespace WorkFlowHandle.Steps
             {
                 return workflowStep.Run(context, stepId);
             }
-            return WorkFlowState.Manager.ToString();
+            return string.Empty;
         }
 
 

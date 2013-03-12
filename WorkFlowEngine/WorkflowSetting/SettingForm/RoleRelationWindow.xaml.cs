@@ -16,6 +16,7 @@ namespace WorkflowSetting.SettingForm
 {
     using WorkFlowService.BLL;
     using WorkFlowService.Model;
+    using Help;
 
     /// <summary>
     /// RoleRelationWindow.xaml 的交互逻辑
@@ -25,6 +26,17 @@ namespace WorkflowSetting.SettingForm
         public RoleRelationWindow()
         {
             InitializeComponent();
+        }
+
+        public RoleRelationWindow(RoleInfoModel entity) : this()
+        {
+            InitData(entity);
+        }
+
+        public RoleRelationWindow(string roleId) : this()
+        {
+            var entity = DataOperationBLL.Current.QueryByID<RoleInfoModel>(roleId);
+            InitData(entity);
         }
 
         private void InitData(RoleInfoModel entity)
@@ -52,50 +64,17 @@ namespace WorkflowSetting.SettingForm
 
         private void ModifyUserGroupList()
         {
-            var userGroupList = LvUserGroupName.ItemsSource as List<UserGroupModel>;
-            if (userGroupList == null) return;
-            var entityList = userGroupList.Where(entity => ExistUserGroupList.Any(t => t.ID != entity.ID));
-            foreach (var entity in entityList)
-            {
-                UserOperationBLL.Current.AddUserGroupRole(entity.ID,TxtRoleId.Text);
-            }
-            var removeList = ExistUserGroupList.Where(entity => userGroupList.Any(t => t.ID != entity.ID));
-            foreach (var entity in removeList)
-            {
-                UserOperationBLL.Current.DeleteUserGroupRole(entity.ID, TxtRoleId.Text);
-            }
+            SettingHelp.MoidfyListByCondition(LvUserGroupName, UserOperationBLL.Current.AddUserGroupRole, UserOperationBLL.Current.DeleteUserGroupRole, ExistUserGroupList,null,TxtRoleId.Text);
         }
 
         private void ModifyUserInfoList()
         {
-            var userInfoList =LvUserName.ItemsSource as List<UserInfoModel>;
-            if (userInfoList == null) return;
-            var entityList = userInfoList.Where(entity =>ExistUserInfoList.Any(t => t.ID != entity.ID));
-            foreach (var entity in entityList)
-            {
-                UserOperationBLL.Current.AddUserRole(entity.ID,TxtRoleId.Text);
-            }
-            var removeList = ExistUserInfoList.Where(entity => userInfoList.Any(t => t.ID != entity.ID));
-            foreach (var entity in removeList)
-            {
-                UserOperationBLL.Current.DeleteUserRole( entity.ID,TxtRoleId.Text);
-            }
+            SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserRole, UserOperationBLL.Current.DeleteUserRole, ExistUserInfoList, null, TxtRoleId.Text);
         }
 
         private void ModifyActionListList()
         {
-            var actionInfoList =LvActionName.ItemsSource as List<OperationActionInfoModel>;
-            if (actionInfoList == null) return;
-            var entityList = actionInfoList.Where(entity => ExistActionInfoList.Any(t => t.ID != entity.ID));
-            foreach (var entity in entityList)
-            {
-                UserOperationBLL.Current.AddOperationActionInRole(entity.ID, TxtRoleId.Text);
-            }
-            var removeList = ExistActionInfoList.Where(entity => actionInfoList.Any(t => t.ID != entity.ID));
-            foreach (var entity in removeList)
-            {
-                UserOperationBLL.Current.DeleteRoleOperationAction(TxtRoleId.Text,entity.ID);
-            }
+            SettingHelp.MoidfyListByCondition(LvActionName, UserOperationBLL.Current.AddOperationActionInRole, UserOperationBLL.Current.DeleteOperationActionInRole, ExistActionInfoList, null, TxtRoleId.Text);
         }
 
         private List<UserInfoModel> ExistUserInfoList { get; set; }
@@ -124,6 +103,26 @@ namespace WorkflowSetting.SettingForm
         private void BtnAddActionClick(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnRemoveUserGroupClick(object sender, RoutedEventArgs e)
+        {
+            SettingHelp.RemoveItemByCondition<UserGroupModel>(LvUserGroupName,new List<string>());
+        }
+
+        private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
+        {
+            SettingHelp.RemoveItemByCondition<UserInfoModel>(LvUserName, new List<string>());
+        }
+
+        private void BtnRemoveActionClick(object sender, RoutedEventArgs e)
+        {
+            SettingHelp.RemoveItemByCondition<OperationActionInfoModel>(LvActionName,new List<string>());
         }
     }
 }

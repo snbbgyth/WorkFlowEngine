@@ -165,7 +165,7 @@ namespace WorkFlowService.BLL
             return RelationDAL.Current.DeleteByParentNodeIDAndType(roleId, 3);
         }
 
-        public bool DeleteRoleOperationAction(string roleId, string operationActionId)
+        public bool DeleteOperationActionInRole(string operationActionId, string roleId)
         {
             return RelationDAL.Current.DeleteByChildNodeIDAndParentNodeIDAndType(operationActionId, roleId, 3) > 0;
         }

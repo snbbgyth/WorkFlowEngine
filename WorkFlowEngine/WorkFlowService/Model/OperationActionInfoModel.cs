@@ -11,10 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CommonLibrary.IDAL;
+using WorkFlowService.IDAL;
 
 namespace WorkFlowService.Model
 {
-    public class OperationActionInfoModel
+    public class OperationActionInfoModel:ITableModel
     {
         public string ID { get; set; }
 

@@ -54,28 +54,29 @@ namespace WorkFlowHandle.Steps
         /// <returns>State of the workflow after executing the steps.</returns>
         public override string Run(WorkflowContext context, string stepId)
         {
-            var currentState = WorkFlowState.Done.ToString();
-            if (!String.IsNullOrEmpty(stepId))
-            {
-                // we must be restarting after an event
-                // execute from where we left off and then perform while logic as normal
-                currentState = base.Run(context, stepId);
-                if (currentState != WorkFlowState.Done.ToString())
-                {
-                    return currentState;
-                }
-            }
+            //var currentState = WorkFlowState.Done.ToString();
+            //if (!String.IsNullOrEmpty(stepId))
+            //{
+            //    // we must be restarting after an event
+            //    // execute from where we left off and then perform while logic as normal
+            //    currentState = base.Run(context, stepId);
+            //    if (currentState != WorkFlowState.Done.ToString())
+            //    {
+            //        return currentState;
+            //    }
+            //}
 
-            while (this.IsConditionTrue(context))
-            {
-                currentState = base.Run(context, stepId);
-                if (currentState != WorkFlowState.Done.ToString())
-                {
-                    return currentState;
-                }
-            }
+            //while (this.IsConditionTrue(context))
+            //{
+            //    currentState = base.Run(context, stepId);
+            //    if (currentState != WorkFlowState.Done.ToString())
+            //    {
+            //        return currentState;
+            //    }
+            //}
 
-            return currentState;
+            //return currentState;
+            return string.Empty;
         }
 
         /// <summary>

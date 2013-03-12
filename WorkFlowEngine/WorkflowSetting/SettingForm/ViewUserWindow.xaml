@@ -3,10 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ViewUser" Height= "Auto" Width="Auto">
     <Grid Margin="0,0,0,1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="523*"/>
-            <ColumnDefinition Width="237*"/>
-        </Grid.ColumnDefinitions>
+
         <DataGrid Name="DgUserList" HorizontalGridLinesBrush="#bdbdbd" VerticalGridLinesBrush="#bdbdbd" BorderBrush="White" HeadersVisibility="Column" Background="#dadada"   GridLinesVisibility="All"
                  SelectionUnit="FullRow" AutoGenerateColumns="False" IsReadOnly="True"  Grid.ColumnSpan="2"  >
             <DataGrid.Columns>

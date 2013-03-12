@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="UserRelationUserGroupWindow" Height="800" Width="500">
     <Grid>
-        <Label Content="User ID:" HorizontalAlignment="Left" Margin="87,51,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Name="TxtUserId"  Height="23" Margin="165,51,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="1"/>
-        <Label Content="User Name:" HorizontalAlignment="Left" Margin="65,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.701,0.269"/>
-        <TextBox HorizontalAlignment="Left" Name="TxtUserName" Height="23" Margin="165,82,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="2"/>
-        <Label Content="User Display Name:" HorizontalAlignment="Left" Margin="20,110,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Name="TxtUserDisplayName" Height="23" Margin="165,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="3"/>
-        <ListView HorizontalAlignment="Left" Name="LvUserGroupName" Height="100" Margin="165,152,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
+        <Label Content="User ID:" HorizontalAlignment="Left" Margin="90,63,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtUserId"  Height="23" Margin="168,63,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="1"/>
+        <Label Content="User Name:" HorizontalAlignment="Left" Margin="68,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.701,0.269"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtUserName" Height="23" Margin="168,94,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="2"/>
+        <Label Content="User Display Name:" HorizontalAlignment="Left" Margin="23,122,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtUserDisplayName" Height="23" Margin="168,122,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="3"/>
+        <ListView HorizontalAlignment="Left" Name="LvUserGroupName" Height="100" Margin="168,164,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
             <ListView.View>
                 <GridView >
                     <GridViewColumn Header="Group Name" Width="200" DisplayMemberBinding="{Binding GroupName}"/>
@@ -23,11 +23,11 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Content="User Group Name:" HorizontalAlignment="Left" Margin="25,152,0,0" VerticalAlignment="Top"/>
-        <Button Content="AddUserGroup" Name="BtnAddUserGroup" HorizontalAlignment="Left" Margin="165,275,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserGroupClick"/>
-        <Button Content="Modify" Name ="BtnModify"  HorizontalAlignment="Left" Margin="113,522,0,0" VerticalAlignment="Top" Width="75" Click="BtnModifyClick"/>
-        <Label Content="User Role Name:" HorizontalAlignment="Left" Margin="36,336,0,0" VerticalAlignment="Top"/>
-        <ListView Name="LvUserRole" HorizontalAlignment="Left" Height="100" Margin="165,336,0,0" VerticalAlignment="Top" Width="200">
+        <Label Content="User Group Name:" HorizontalAlignment="Left" Margin="28,164,0,0" VerticalAlignment="Top"/>
+        <Button Content="AddUserGroup" Name="BtnAddUserGroup" HorizontalAlignment="Left" Margin="168,287,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserGroupClick" TabIndex="1"/>
+        <Button Content="Modify" Name ="BtnModify"  HorizontalAlignment="Left" Margin="116,534,0,0" VerticalAlignment="Top" Width="75" Click="BtnModifyClick" TabIndex="5"/>
+        <Label Content="User Role Name:" HorizontalAlignment="Left" Margin="39,348,0,0" VerticalAlignment="Top"/>
+        <ListView Name="LvUserRole" HorizontalAlignment="Left" Height="100" Margin="168,348,0,0" VerticalAlignment="Top" Width="200">
             <ListView.View>
                 <GridView >
                     <GridViewColumn Header="Role Name" Width="200" DisplayMemberBinding="{Binding RoleName}"/>
@@ -41,7 +41,11 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="BtnAddRole" HorizontalAlignment="Left" Margin="165,458,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddRoleClick"/>
+        <Button Content="AddRole" HorizontalAlignment="Left" Margin="168,470,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddRoleClick" IsEnabled="False" TabIndex="3"/>
+        <Label Content="User Information" HorizontalAlignment="Left" Margin="126,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="258,534,0,0" VerticalAlignment="Top" Width="75" Click="BtnCancelClick" TabIndex="6"/>
+        <Button Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="293,287,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserGroupClick" TabIndex="2"/>
+        <Button Name="BtnRemoveRole" Content="RemoveRole" HorizontalAlignment="Left" Margin="293,470,0,0" VerticalAlignment="Top" Width="100" Click="BtnRemoveRoleClick" IsEnabled="False" TabIndex="4"/>
 
     </Grid>
 </Window>

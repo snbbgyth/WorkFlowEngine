@@ -12,10 +12,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using CommonLibrary.IDAL;
 
 namespace CommonLibrary.Model
 {
-    public class WorkFlowActivityLogModel
+    public class WorkFlowActivityLogModel : ITableModel
     {
         [DataMember]
         public string ID { get; set; }

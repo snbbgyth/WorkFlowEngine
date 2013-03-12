@@ -9,11 +9,12 @@
 
 using System;
 using System.Runtime.Serialization;
+using CommonLibrary.IDAL;
 
 namespace CommonLibrary.Model
 {
     [DataContract]
-    public class WorkFlowActivityModel
+    public class WorkFlowActivityModel : ITableModel
     {
         [DataMember]
         public string ID { get; set; }

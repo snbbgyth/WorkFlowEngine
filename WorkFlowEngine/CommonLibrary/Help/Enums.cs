@@ -18,15 +18,6 @@ namespace CommonLibrary.Help
         Complete,
     }
 
-    [Serializable]
-    public enum WorkFlowState
-    {
-        Common,
-        Manager,
-        Done,
-        Refuse
-    }
-
     [Flags]
     [Serializable]
     public enum ActivityState
@@ -50,7 +41,6 @@ namespace CommonLibrary.Help
         Edit = 2,
         Delete = 4
     }
-
 
     public enum EventType
     {

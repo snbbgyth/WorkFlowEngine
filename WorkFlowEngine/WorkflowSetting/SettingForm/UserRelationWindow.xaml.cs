@@ -11,11 +11,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CommonLibrary.IDAL;
 
 namespace WorkflowSetting.SettingForm
 {
     using WorkFlowService.BLL;
     using WorkFlowService.Model;
+    using Help;
 
     /// <summary>
     /// UserRelationUserGroupWindow.xaml 的交互逻辑
@@ -31,7 +33,12 @@ namespace WorkflowSetting.SettingForm
             : this()
         {
             var userInfoEntity = DataOperationBLL.Current.QueryByID<UserInfoModel>(userId);
+            InitData(userInfoEntity);
+        }
 
+        public UserRelationWindow(UserInfoModel entity) : this()
+        {
+            InitData(entity);
         }
 
         private void InitData(UserInfoModel entity)
@@ -44,7 +51,6 @@ namespace WorkflowSetting.SettingForm
             LvUserGroupName.ItemsSource = ExistUserGroupList;
             ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserId(entity.ID);
             LvUserRole.ItemsSource = ExistRoleInfoList;
-
         }
 
         private void ClearDataBinding()
@@ -64,34 +70,12 @@ namespace WorkflowSetting.SettingForm
 
         private void ModifyUserGroupList()
         {
-            var userGroupList = LvUserGroupName.ItemsSource as List<UserGroupModel>;
-            if (userGroupList == null) return;
-            var entityList = userGroupList.Where(entity => ExistUserGroupList.Any(t => t.ID != entity.ID));
-            foreach (var entity in entityList)
-            {
-                UserOperationBLL.Current.AddUserInUserGroup(TxtUserId.Text, entity.ID);
-            }
-            var removeList = ExistUserGroupList.Where(entity => userGroupList.Any(t => t.ID != entity.ID));
-            foreach (var entity in removeList)
-            {
-                UserOperationBLL.Current.DeleteUserInUserGroup(TxtUserId.Text, entity.ID);
-            }
+            SettingHelp.MoidfyListByCondition(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, UserOperationBLL.Current.DeleteUserInUserGroup, ExistUserGroupList, TxtUserId.Text);
         }
 
         private void ModifyUserRoleList()
         {
-            var userRoleList = LvUserGroupName.ItemsSource as List<RoleInfoModel>;
-            if (userRoleList == null) return;
-            var entityList = userRoleList.Where(entity => ExistRoleInfoList.Any(t => t.ID != entity.ID));
-            foreach (var entity in entityList)
-            {
-                UserOperationBLL.Current.AddUserInUserGroup(TxtUserId.Text, entity.ID);
-            }
-            var removeList = ExistRoleInfoList.Where(entity => userRoleList.Any(t => t.ID != entity.ID));
-            foreach (var entity in removeList)
-            {
-                UserOperationBLL.Current.DeleteUserInUserGroup(TxtUserId.Text, entity.ID);
-            }
+            SettingHelp.MoidfyListByCondition(LvUserRole, UserOperationBLL.Current.AddUserRole, UserOperationBLL.Current.DeleteUserRole, ExistRoleInfoList,TxtUserId.Text);
         }
 
         private void BtnAddUserGroupClick(object sender, RoutedEventArgs e)
@@ -103,5 +87,23 @@ namespace WorkflowSetting.SettingForm
         {
 
         }
+
+        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        //Todo: need test when LvUserGroupName.ItemsSource modify.the ExistUserGroupList is modify or not.
+        private void BtnRemoveUserGroupClick(object sender, RoutedEventArgs e)
+        {
+            SettingHelp.RemoveItemByCondition<UserGroupModel>(LvUserGroupName, new List<string>());
+        }
+
+        private void BtnRemoveRoleClick(object sender, RoutedEventArgs e)
+        {
+            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole,new List<string>());
+        }
+
+ 
     }
 }

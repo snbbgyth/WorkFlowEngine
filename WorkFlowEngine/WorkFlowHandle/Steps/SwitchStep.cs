@@ -47,8 +47,8 @@ namespace WorkFlowHandle.Steps
         /// <returns>State of the workflow after executing the steps.</returns>
         public override string Run(WorkflowContext context, string stepId)
         {
-            var currentState = WorkFlowState.Done.ToString();
-
+            //var currentState = WorkFlowState.Done.ToString();
+            var currentState = string.Empty;
             foreach (WorkflowStep step in WorkflowSteps)
             {
                 // Go through each step in order until one is found with a valid condition.
