@@ -1,13 +1,11 @@
 ﻿/********************************************************************************
 ** Class Name:   TestStateWorkFlowTest
-** Author：      Spring Yang
-** Create date： 2013-2-19
-** Modify：      Spring Yang
-** Modify Date： 2013-2-19
-** Summary：     TestStateWorkFlowTest class
+** Author：      spring yang
+** Create date： 2013-3-13
+** Modify：      spring yang
+** Modify Date： 2012-3-13
+** Summary：     TestStateWorkFlowTest interface
 *********************************************************************************/
-
-using System.Threading;
 
 namespace TestCommunication.WorkflowService
 {
@@ -33,8 +31,8 @@ namespace TestCommunication.WorkflowService
                                     UserId = "001",
                                     CurrentState = "Common"
                                 };
-           var result= WfServiceInstance.NewWorkFlow(appEntity);
-           Assert.AreEqual(result, "Manage");  
+            var result = WfServiceInstance.NewWorkFlow(appEntity);
+            Assert.AreEqual(result, "Manage");
 
         }
 
@@ -62,7 +60,7 @@ namespace TestCommunication.WorkflowService
                                        CurrentState = "Manage"
                                    };
             var manageResult = WfServiceInstance.Execute(manageEntity);
-            Assert.AreEqual(manageResult,"Done");
+            Assert.AreEqual(manageResult, "Done");
         }
 
         [Test]
@@ -173,4 +171,3 @@ namespace TestCommunication.WorkflowService
     }
 }
 
-　

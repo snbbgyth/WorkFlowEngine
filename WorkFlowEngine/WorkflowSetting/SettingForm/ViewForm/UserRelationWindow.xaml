@@ -1,0 +1,56 @@
+﻿<Window x:Class="WorkflowSetting.SettingForm.ViewForm.UserRelationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UserRelationUserGroupWindow" Height="800" Width="500">
+    <Grid>
+        <Label Content="User Name:" HorizontalAlignment="Left" Margin="62,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.701,0.269"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtUserName" Height="23" Margin="162,55,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="3"/>
+        <Label Content="User Display Name:" HorizontalAlignment="Left" Margin="17,83,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtUserDisplayName" Height="23" Margin="162,83,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" IsReadOnly="True" Width="200" TabIndex="6"/>
+        <ListView HorizontalAlignment="Left" Name="LvUserGroupName" Height="100" Margin="162,112,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="Group Name" Width="200" DisplayMemberBinding="{Binding GroupName}"/>
+                    <GridViewColumn Header="GroupId">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" Visibility="Hidden" Name="TxtGroupId"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="User Group Name:" HorizontalAlignment="Left" Margin="22,112,0,0" VerticalAlignment="Top"/>
+        <Button Content="AddUserGroup" Name="BtnAddUserGroup" HorizontalAlignment="Left" Margin="162,217,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserGroupClick" TabIndex="9"/>
+        <Button  Content="Modify" Name ="BtnModify"  HorizontalAlignment="Left" Margin="52,391,0,0" VerticalAlignment="Top" Width="75" Click="BtnModifyClick" TabIndex="21"/>
+        <Label Content="User Role Name:" HorizontalAlignment="Left" Margin="33,247,0,0" VerticalAlignment="Top"/>
+        <ListView Name="LvUserRole" HorizontalAlignment="Left" Height="100" Margin="162,247,0,0" VerticalAlignment="Top" Width="200">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="Role Name" Width="200" DisplayMemberBinding="{Binding RoleName}"/>
+                    <GridViewColumn Header="RoleId">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" Visibility="Hidden" Name="TxtRoleId"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="AddRole" HorizontalAlignment="Left" Margin="162,352,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddRoleClick"   TabIndex="15"/>
+        <Label Content="User Information" HorizontalAlignment="Left" Margin="126,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Button Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="316,391,0,0" VerticalAlignment="Top" Width="75" Click="BtnCancelClick" TabIndex="24"/>
+        <Button Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="287,217,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserGroupClick" TabIndex="12"/>
+        <Button Name="BtnRemoveRole" Content="RemoveRole" HorizontalAlignment="Left" Margin="287,352,0,0" VerticalAlignment="Top" Width="100" Click="BtnRemoveRoleClick"   TabIndex="18"/>
+        <Button Name="BtnModifyPassword" Content="ModifyPassword" HorizontalAlignment="Left" Margin="162,391,0,0" VerticalAlignment="Top" Width="120" TabIndex="23" Click="BtnModifyPasswordClick"/>
+        <Label Name="LblMessage" Content="" HorizontalAlignment="Left" Margin="162,430,0,0" VerticalAlignment="Top"   Foreground="#FFF70606" RenderTransformOrigin="-1.033,0.231"/>
+        <Label Name="LblPassword"  Content="New Password:" HorizontalAlignment="Left" Margin="42,461,0,0" VerticalAlignment="Top"/>
+        <PasswordBox Name="PbPassword" HorizontalAlignment="Left" Margin="162,467,0,0" VerticalAlignment="Top" Width="200" TabIndex="27"/>
+        <Label Name="LblConfimPassword" Content="Confim Password:" HorizontalAlignment="Left" Margin="26,492,0,0" VerticalAlignment="Top"/>
+        <PasswordBox Name="PbConfimPassword" HorizontalAlignment="Left" Margin="162,498,0,0" VerticalAlignment="Top" Width="200" TabIndex="30"/>
+        <Button Name="BtnCancelModifyPassword" Content="CancelModifyPassword" HorizontalAlignment="Left" Margin="162,535,0,0" VerticalAlignment="Top" Width="150" Click="BtnCancelModifyPasswordClick"/>
+
+    </Grid>
+</Window>

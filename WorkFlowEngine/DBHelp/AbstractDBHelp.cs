@@ -392,9 +392,6 @@ namespace DBHelp
             set { _connectionString = value; }
         }
 
-
-
-
         /// <summary>
         /// Execute query by stored procedure and parameter list
         /// </summary>

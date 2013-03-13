@@ -30,7 +30,6 @@ namespace WorkflowSetting
         {
             var viewUserWindow = new ViewUserWindow();
             viewUserWindow.Show();
-            
         }
     }
 }

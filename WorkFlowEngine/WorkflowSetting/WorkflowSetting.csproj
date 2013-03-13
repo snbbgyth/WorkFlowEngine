@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\SettingHelp.cs" />
     <Compile Include="SettingForm\AddForm\AddUserGroupWindow.xaml.cs">
       <DependentUpon>AddUserGroupWindow.xaml</DependentUpon>
@@ -82,10 +83,7 @@
     <Compile Include="SettingForm\AddForm\AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\OperationUserWindow.xaml.cs">
-      <DependentUpon>OperationUserWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SettingForm\RoleRelationWindow.xaml.cs">
+    <Compile Include="SettingForm\ViewForm\RoleRelationWindow.xaml.cs">
       <DependentUpon>RoleRelationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\SelectRoleWindow.xaml.cs">
@@ -94,7 +92,7 @@
     <Compile Include="SettingForm\SelectUserGroupWindow.xaml.cs">
       <DependentUpon>SelectUserGroupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\UserRelationWindow.xaml.cs">
+    <Compile Include="SettingForm\ViewForm\UserRelationWindow.xaml.cs">
       <DependentUpon>UserRelationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\ViewRoleWindow.xaml.cs">
@@ -130,11 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingForm\OperationUserWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SettingForm\RoleRelationWindow.xaml">
+    <Page Include="SettingForm\ViewForm\RoleRelationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,7 +140,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingForm\UserRelationWindow.xaml">
+    <Page Include="SettingForm\ViewForm\UserRelationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

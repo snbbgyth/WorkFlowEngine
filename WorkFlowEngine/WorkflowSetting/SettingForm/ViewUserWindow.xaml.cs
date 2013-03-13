@@ -17,6 +17,7 @@ namespace WorkflowSetting.SettingForm
 
     using WorkFlowService.BLL;
     using WorkFlowService.Model;
+    using AddForm;
 
     /// <summary>
     /// Window1.xaml 的交互逻辑
@@ -40,7 +41,7 @@ namespace WorkflowSetting.SettingForm
         private void BtnAddUserClick(object sender, RoutedEventArgs e)
         {
 
-            var addUserWindow = new OperationUserWindow();
+            var addUserWindow = new AddUserWindow();
             addUserWindow.Show();
         }
 

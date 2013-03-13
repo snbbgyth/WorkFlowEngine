@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using WorkFlowService.BLL;
+using WorkFlowService.Model;
+using WorkflowSetting.Help;
 
-namespace WorkflowSetting.SettingForm
+namespace WorkflowSetting.SettingForm.ViewForm
 {
-    using WorkFlowService.BLL;
-    using WorkFlowService.Model;
-    using Help;
-
     /// <summary>
     /// RoleRelationWindow.xaml 的交互逻辑
     /// </summary>

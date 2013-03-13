@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WorkflowSetting.SettingForm.AddForm.AddUserWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddUserWindow" Height="500" Width="600">
+        Title="AddUserWindow" Height="800" Width="600">
     <Grid>
         <Label Content="User Name:" HorizontalAlignment="Left" Margin="85,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.25,2.346"/>
         <TextBox Name="TxtUserName" HorizontalAlignment="Left" Height="23" Margin="178,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TabIndex="0"/>
@@ -24,14 +24,31 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="BtnAddUserGroup" Content="AddUserGroup" HorizontalAlignment="Left" Margin="178,321,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserGroupClick" TabIndex="9"/>
-        <Button Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="297,321,0,0" VerticalAlignment="Top" Width="120" TabIndex="12" Click="BtnRemoveUserGroupClick"/>
-        <Button Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="87,368,0,0" VerticalAlignment="Top" Width="75" TabIndex="15" Click="BtnAddClick"/>
-        <Button Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="214,368,0,0" VerticalAlignment="Top" Width="75" TabIndex="18" Click="BtnCancelClick"/>
+        <Button Name="BtnAddUserGroup" Content="AddUserGroup" HorizontalAlignment="Left" Margin="178,301,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserGroupClick" TabIndex="9"/>
+        <Button Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="302,301,0,0" VerticalAlignment="Top" Width="120" TabIndex="12" Click="BtnRemoveUserGroupClick"/>
+        <Button Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="105,524,0,0" VerticalAlignment="Top" Width="75" TabIndex="15" Click="BtnAddClick"/>
+        <Button Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="232,524,0,0" VerticalAlignment="Top" Width="75" TabIndex="18" Click="BtnCancelClick"/>
         <Label Content="Confim password:" HorizontalAlignment="Left" Margin="49,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.7,0.538"/>
         <PasswordBox Name="PbConfimPassword" HorizontalAlignment="Left" Margin="178,152,0,0" VerticalAlignment="Top" Width="200" TabIndex="7"/>
         <Label Name="LblConfimPasswordError" Content="" HorizontalAlignment="Left" Margin="395,147,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Content="Add User Information" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Name="LblTitle" Content="Add User Information" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content="Relation Role:" HorizontalAlignment="Left" Margin="73,353,0,0" VerticalAlignment="Top"/>
+        <ListView Name="LvUserRole" HorizontalAlignment="Left" Height="100" Margin="178,353,0,0" VerticalAlignment="Top" Width="200">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="Role Name" Width="200" DisplayMemberBinding="{Binding RoleName}"/>
+                    <GridViewColumn Header="RoleId">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" Visibility="Hidden"  Name="TxtRoleId"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="BtnAddUserRole" Content="AddUserRole" HorizontalAlignment="Left" Margin="178,458,0,0" VerticalAlignment="Top" TabIndex="13" Width="100" Click="BtnAddUserRoleClick"/>
+        <Button Name="BtnRemoveUserRole" Content="RemoveUserRole" HorizontalAlignment="Left" Margin="302,458,0,0" VerticalAlignment="Top" Width="120" TabIndex="14" RenderTransformOrigin="0.44,-0.227" Click="BtnRemoveUserRoleClick"/>
 
     </Grid>
 </Window>

@@ -24,7 +24,7 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void BtnRemoveUserGroupClick(object sender, RoutedEventArgs e)
         {
-            SettingHelp.RemoveItemByCondition<UserInfoModel>(LvUserGroupName, new List<string>());
+            SettingHelp.RemoveItemByCondition<UserGroupModel>(LvUserGroupName, new List<string>());
         }
 
         private void BtnAddClick(object sender, RoutedEventArgs e)
@@ -65,6 +65,16 @@ namespace WorkflowSetting.SettingForm.AddForm
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void BtnAddUserRoleClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
+        {
+            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole, new List<string>());
         }
     }
 }

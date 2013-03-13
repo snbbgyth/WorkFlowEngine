@@ -301,6 +301,14 @@ namespace WorkFlowService.BLL
                        : null;
         }
 
+        public List<RoleInfoModel> QueryAllUserRoleByUserGroupId(string groupId)
+        {
+            var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(groupId, 2);
+            return relationList != null && relationList.Count > 0
+                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
+                       : null;
+        }
+
         public UserGroupModel QueryUserGroupByGroupName(string groupName)
         {
             return UserGroupDAL.Current.QueryByGroupName(groupName);
