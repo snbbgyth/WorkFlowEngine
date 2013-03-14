@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.LiWindows;
+using System.Windows;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
 using WorkFlowService.BLL;
 
 namespace WorkflowSetting.SettingForm.ViewForm
-{    /// AddUserGroupWindow.xaml 的交互逻辑
+{
+    /// <summary>
+    /// AddUserGroupWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class AddUserGroupWindow : WiUserGroupRelationWindow : Window
+    public partial class UserGroupRelationWindow : Window
     {
-        public UserGroupRelation      InitializeComponent();
+        public UserGroupRelationWindow()
+        {
+            InitializeComponent();
         }
 
-        public AddUserGroupWindow(UserGroupMoUserGroupRelationperationAction operationAction):this()
+        public UserGroupRelationWindow(UserGroupModel entity, OperationAction operationAction)
+            : this()
         {
             UserAction = operationAction;
             InitData(entity);
         }
 
-        public AddUserGroupWindow(string groupId, OUserGroupRelationon operationAction) : this()
+        public UserGroupRelationWindow(string groupId, OperationAction operationAction)
+            : this()
         {
             UserAction = operationAction;
             var entity = DataOperationBLL.Current.QueryByID<UserGroupModel>(groupId);
@@ -63,16 +69,15 @@ namespace WorkflowSetting.SettingForm.ViewForm
             BtnAddUser.IsEnabled = isEnable;
         }
 
-
-
         private void ClearItems()
         {
-            LvUserRole.Items.Clear            LvUserName.Items.Clear();
+            LvUserRole.Items.Clear();
+            LvUserName.Items.Clear();
         }
 
         private List<RoleInfoModel> ExistRoleInfoList { get; set; }
 
-        private List<UserInfoModel> ExistUserInfoList { get; set; } 
+        private List<UserInfoModel> ExistUserInfoList { get; set; }
 
         private void BtnAddRoleNameClick(object sender, RoutedEventArgs e)
         {
@@ -105,11 +110,11 @@ namespace WorkflowSetting.SettingForm.ViewForm
             {
                 AddEntity();
             }
-            else if(UserAction==OperationAction.Modify)
+            else if (UserAction == OperationAction.Modify)
             {
                 ModifyEntity();
             }
-            else 
+            else
             {
                 UserAction = OperationAction.Modify;
                 InitControl();
@@ -123,7 +128,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private bool IsDelete { get; set; }
 
         private string Id { get; set; }
-       
+
 
         private void ModifyEntity()
         {
@@ -151,24 +156,24 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             if (UserAction == OperationAction.Add)
                 return new UserGroupModel
-                           {
-                               CreateDateTime = DateTime.Now,
-                               GroupDisplayName = TxtGroupDisplayName.Text,
-                               GroupName = TxtGroupName.Text,
-                               LastUpdateDateTime = DateTime.Now,
-                           };
+                {
+                    CreateDateTime = DateTime.Now,
+                    GroupDisplayName = TxtGroupDisplayName.Text,
+                    GroupName = TxtGroupName.Text,
+                    LastUpdateDateTime = DateTime.Now,
+                };
 
             return new UserGroupModel
-                       {
-                           CreateDateTime = CreateDateTime,
-                           IsDelete = IsDelete,
-                           GroupDisplayName = TxtGroupDisplayName.Text,
-                           GroupName = TxtGroupName.Text,
-                           ID = Id,
-                           LastUpdateDateTime = DateTime.Now
-                       };
+            {
+                CreateDateTime = CreateDateTime,
+                IsDelete = IsDelete,
+                GroupDisplayName = TxtGroupDisplayName.Text,
+                GroupName = TxtGroupName.Text,
+                ID = Id,
+                LastUpdateDateTime = DateTime.Now
+            };
         }
 
-      
+
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Control;
+using System.Windows.Controls;
 using WorkFlowService.BLL;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
 
 namespace WorkflowSetting.SettingForm.ViewForm
-{
-   
 {
     /// <summary>
     /// RoleRelationWindow.xaml 的交互逻辑
@@ -39,15 +37,15 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             InitProperty(entity);
             TxtRoleName.Text = entity.RoleName;
-            TxtRoleDisplayName.Text = entity.RoleDisplayName;      ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByRoleId(entity.ID);
-      
-            ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByRoleId(entity.ID);      ExistActionInfoList = UserOperationBLL.Current.QueryAllActionInfoByRoleId(entity.ID);
-      
+            TxtRoleDisplayName.Text = entity.RoleDisplayName;
+            ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByRoleId(entity.ID);
+            ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByRoleId(entity.ID);
+            ExistActionInfoList = UserOperationBLL.Current.QueryAllActionInfoByRoleId(entity.ID);
             ClearBindData();
             LvUserGroupName.ItemsSource = ExistUserGroupList;
             LvUserName.ItemsSource = ExistUserInfoList;
-            LvActionName.ItemsSource = ExistActionInfoList;      LvWorkflowState.ItemsSource = UserOperationBLL.Current.QueryAllWorkflowStateByRoleId(entity.ID);
-      
+            LvActionName.ItemsSource = ExistActionInfoList;
+            LvWorkflowState.ItemsSource = UserOperationBLL.Current.QueryAllWorkflowStateByRoleId(entity.ID);
         }
 
         private void InitControl()
@@ -90,15 +88,18 @@ namespace WorkflowSetting.SettingForm.ViewForm
         }
 
         private void ModifyUserGroupList()
-        {      SettingHelp.MoidfyListByCondition(LvUserGroupName, UserOperationBLL.Current.AddUserGroupRole, UserOperationBLL.Current.DeleteUserGroupRole, ExistUserGroupList,null,Tx null, Id);
+        {
+            SettingHelp.MoidfyListByCondition(LvUserGroupName, UserOperationBLL.Current.AddUserGroupRole, UserOperationBLL.Current.DeleteUserGroupRole, ExistUserGroupList, null, Id);
         }
 
         private void ModifyUserInfoList()
-        {      SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserRole, UserOperationBLL.Current.DeleteUserRole, ExistUserInfoList, null, TxtRoleId);
+        {
+            SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserRole, UserOperationBLL.Current.DeleteUserRole, ExistUserInfoList, null, Id);
         }
 
         private void ModifyActionListList()
-        {      SettingHelp.MoidfyListByCondition(LvActionName, UserOperationBLL.Current.AddOperationActionInRole, UserOperationBLL.Current.DeleteOperationActionInRole, ExistActionInfoList, null, TxtRoleId);
+        {
+            SettingHelp.MoidfyListByCondition(LvActionName, UserOperationBLL.Current.AddOperationActionInRole, UserOperationBLL.Current.DeleteOperationActionInRole, ExistActionInfoList, null, Id);
         }
 
         private List<UserInfoModel> ExistUserInfoList { get; set; }
@@ -129,7 +130,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             if (UserAction == OperationAction.Modify)
                 Modify();
-            if(UserAction==OperationAction.Add)
+            if (UserAction == OperationAction.Add)
                 Add();
             if (UserAction == OperationAction.Read)
                 Read();
@@ -179,23 +180,23 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             if (UserAction == OperationAction.Add)
                 return new RoleInfoModel
-                           {
-                               CreateDateTime = DateTime.Now,
-                               LastUpdateDateTime = DateTime.Now,
-                               RoleDisplayName = TxtRoleDisplayName.Text,
-                               RoleName = TxtRoleName.Text
-                           };
+                {
+                    CreateDateTime = DateTime.Now,
+                    LastUpdateDateTime = DateTime.Now,
+                    RoleDisplayName = TxtRoleDisplayName.Text,
+                    RoleName = TxtRoleName.Text
+                };
             if (UserAction == OperationAction.Modify)
             {
                 return new RoleInfoModel
-                           {
-                               CreateDateTime = CreateDateTime,
-                               ID = Id,
-                               IsDelete = IsDelete,
-                               LastUpdateDateTime = DateTime.Now,
-                               RoleDisplayName = TxtRoleDisplayName.Text,
-                               RoleName = TxtRoleName.Text
-                           };
+                {
+                    CreateDateTime = CreateDateTime,
+                    ID = Id,
+                    IsDelete = IsDelete,
+                    LastUpdateDateTime = DateTime.Now,
+                    RoleDisplayName = TxtRoleDisplayName.Text,
+                    RoleName = TxtRoleName.Text
+                };
             }
             return new RoleInfoModel();
         }
@@ -209,18 +210,18 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             Close();
         }
-  private void BtnRemoveUserGroupClick(object sender, RoutedEventArgs e)
-      
+
+        private void BtnRemoveUserGroupClick(object sender, RoutedEventArgs e)
         {
             SettingHelp.RemoveItemByCondition<UserGroupModel>(LvUserGroupName, new List<string>());
         }
-  private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
-      
+
+        private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
         {
             SettingHelp.RemoveItemByCondition<UserInfoModel>(LvUserName, new List<string>());
         }
-  private void BtnRemoveActionClick(object sender, RoutedEventArgs e)
-      
+
+        private void BtnRemoveActionClick(object sender, RoutedEventArgs e)
         {
             SettingHelp.RemoveItemByCondition<OperationActionInfoModel>(LvActionName, new List<string>());
         }

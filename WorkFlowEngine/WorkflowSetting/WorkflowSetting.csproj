@@ -77,14 +77,14 @@
     </ApplicationDefinition>
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\SettingHelp.cs" />
-    <Compile Include="SettingForm\AddForm\AddUserGroupWindow.xaml.cs">
-      <DependentUpon>AddUserGroupWindow.xaml</DependeOperationActionWindow.xaml.cs">
-      <DependentUpon>AddOperationActRoleWindow.xaml.cs">
-      <DependentUpon>SelectRoleWindow.xaml</DependentUpon>
-  ViewForm\UserGroupRelationWindow.xaml.cs">
-      <DependentUpon>UserGroupelectRoleWindow.xaml.cs">
-      <DependentUpon>SelectRoleWindow.xaml</DependentUpon>
-  Upon>
+    <Compile Include="SettingForm\AddForm\AddOperationActionWindow.xaml.cs">
+      <DependentUpon>AddOperationActionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm\ViewForm\UserGroupRelationWindow.xaml.cs">
+      <DependentUpon>UserGroupRelationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm\AddForm\AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\ViewForm\RoleRelationWindow.xaml.cs">
       <DependentUpon>RoleRelationWindow.xaml</DependentUpon>
@@ -123,19 +123,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingForm\AddForm\AddUserGroupWindow.xaml">
+    <Page Include="SettingForm\AddForm\AddOperationActionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <PagOperationActioe>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="SettingForm\ViewForm\UserGroupRelationWindow.xaml">
       <SubType>Designer</SubType>
-    </PageSettingForm\ViewForm\UserGroupRelatioe>
-    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\AddForm\AddUserWindow.xaml">
       <SubType>Designer</SubType>
-    </PagePage>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingForm\ViewForm\RoleRelationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

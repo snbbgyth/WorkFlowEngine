@@ -58,21 +58,20 @@ namespace WorkflowSetting.SettingForm.ViewForm
             BtnCancelModifyPassword.Visibility = isVisable ? Visibility.Visible : Visibility.Hidden;
         }
 
-        private void EnableControl(bool isEnbale)
-        {
-            TxtUserDisplayName.IsReadOnly = able)
+        private void EnableControl(bool isEnable)
         {
             TxtUserDisplayName.IsReadOnly = !isEnable;
-            TxtUserName.IsReadOnly = !isEnabhildren<Button>(this))
+            TxtUserName.IsReadOnly = !isEnable;
+            foreach (var control in SettingHelp.FindVisualChildren<Button>(this))
             {
-                control.IsEnabled = isEnbale;
+                control.IsEnabled = isEnable;
             }
-            foreach (var control in SettingHelabFindVisualChildren<PasswordBox>(this))
+            foreach (var control in SettingHelp.FindVisualChildren<PasswordBox>(this))
             {
-                control.IsEnabled = isEnbale;
+                control.IsEnabled = isEnable;
             }
             BtnModify.IsEnabled = true;
-          abBtnCancel.IsEnabled = true;
+            BtnCancel.IsEnabled = true;
             BtnModifyPassword.IsEnabled = true;
         }
 
