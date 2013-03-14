@@ -28,15 +28,6 @@ namespace WorkFlowService.BLL
             get { return new WorkFlowEngine(); }
         }
 
-        //private IStateBase GetCurrentWorkFlowStateByWorkFlowState(WorkFlowState workFlowState)
-        //{
-        //    foreach (var iStateBase in StateMapping.Instance.StateBasesList)
-        //    {
-        //        if (iStateBase.GetCurrentState() == workFlowState) return iStateBase;
-        //    }
-        //    return new CommonState();
-        //}
-
         public string Execute(string workflowName, string currentState, string activityState)
         {
             return WorkflowHandle.Instance.Run(workflowName, currentState, activityState);
@@ -128,10 +119,11 @@ namespace WorkFlowService.BLL
             return UserOperationBLL.Current.QueryWorkflowStateInfoByCondition(workflowName, stateNodeName);
         }
 
-        public ActivityState GetActivityStateByConditon(string workflowName, string workFlowState)
+        public IEnumerable<string> GetActivityStateByConditon(string workflowName, string workFlowState)
         {
             var entityList = UserOperationBLL.Current.QueryOperationActionByCondition(workflowName, workFlowState);
-            return entityList.Aggregate(ActivityState.Read, (current, entity) => current | WFUntilHelp.GetActivityStateByName(entity.ActionName));
+            return entityList.Select(entity => entity.ActionName);
+            
 
         }
     }

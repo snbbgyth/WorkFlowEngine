@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="RoleRelationWindow" Height="1100" Width="600">
     <Grid>
-        <Label Content="Role Id:" HorizontalAlignment="Left" Margin="115,68,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="TxtRoleId" HorizontalAlignment="Left" Height="23" Margin="182,71,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="150"/>
         <Label Content="Role Name:" HorizontalAlignment="Left" Margin="92,99,0,0" VerticalAlignment="Top"/>
         <TextBox Name="TxtRoleName" HorizontalAlignment="Left" Height="23" Margin="182,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.467,-0.826"/>
         <Label Content="Role Display Name:" HorizontalAlignment="Left" Margin="46,127,0,0" VerticalAlignment="Top"/>
@@ -79,5 +77,6 @@
         <Button Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="332,260,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserGroupClick" TabIndex="2"/>
         <Button Name="BtnRemoveUserRole" Content="RemoveUserRole" HorizontalAlignment="Left" Margin="332,409,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserRoleClick"  TabIndex="4"/>
         <Button Name="BtnRemoveAction" Content="RemoveAction" HorizontalAlignment="Left" Margin="332,550,0,0" VerticalAlignment="Top" Width="100" Click="BtnRemoveActionClick" TabIndex="6"/>
+        <Label Name="LblMessage"  HorizontalAlignment="Left" Margin="132,854,0,0" VerticalAlignment="Top" Foreground="#FFF70202"/>
     </Grid>
 </Window>

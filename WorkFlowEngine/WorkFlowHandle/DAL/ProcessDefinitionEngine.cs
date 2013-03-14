@@ -50,7 +50,7 @@ namespace WorkFlowHandle.DAL
 
         private IDictionary<string, Dictionary<string, string>> _cachedVariables = new Dictionary<string, Dictionary<string, string>>();
 
-        private IDictionary<string, List<PartnerLinkModel>> _cachedPartnerLinks =new Dictionary<string, List<PartnerLinkModel>>(); 
+        private IDictionary<string, List<PartnerLinkModel>> _cachedPartnerLinks = new Dictionary<string, List<PartnerLinkModel>>();
 
         /// <summary> 
         /// contains string of folder containing BPEL files
@@ -174,14 +174,14 @@ namespace WorkFlowHandle.DAL
                 {
                     // Do the actual load
                     string cancelEventHandlerName = string.Empty;
-                    this.FillStepList(context,context.WorkflowStepList, 0, childList, ref cancelEventHandlerName);
+                    this.FillStepList(context, context.WorkflowStepList, 0, childList, ref cancelEventHandlerName);
                     context.CancelEventHandlerName = cancelEventHandlerName;
                     _cachedWorkflowSteps.Add(context.WorkflowName, context.WorkflowStepList);
                     _cachedFaultHandler.Add(context.WorkflowName, context.FaultHandlers);
                     _cachedMessageTimeoutHandler.Add(context.WorkflowName, context.MessageTimeoutEventHanlderDict);
                     _cachedCancelHandler.Add(context.WorkflowName, cancelEventHandlerName);
                     _cachedVariables.Add(context.WorkflowName, context.WorkflowVariables);
-                    _cachedPartnerLinks.Add(context.WorkflowName,context.PartnerLinkList);
+                    _cachedPartnerLinks.Add(context.WorkflowName, context.PartnerLinkList);
                 }
 
                 return true;
@@ -486,7 +486,7 @@ namespace WorkFlowHandle.DAL
                 {
                     // can't get tool to produce invoke without having it enclosed in a scope.
                     // just ignore scope for now but get the internals as if at the same level.
-                    FillStepList(workflowContext,workflowStepList, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, workflowStepList, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "receive")
                 {
@@ -517,36 +517,36 @@ namespace WorkFlowHandle.DAL
                     workflowStepList.Add(switchStep);
 
                     // Fill case/otherwise steps inside of switch step
-                    FillStepList(workflowContext,switchStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, switchStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "case")
                 {
                     var caseStep = new CaseStep(currentStep.Attributes, false);
                     workflowStepList.Add(caseStep);
-                    FillStepList(workflowContext,caseStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, caseStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "otherwise")
                 {
                     var caseStep = new CaseStep(currentStep.Attributes, true);
                     workflowStepList.Add(caseStep);
-                    FillStepList(workflowContext,caseStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, caseStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "while")
                 {
                     var whileStep = new WhileStep(currentStep.Attributes);
                     workflowStepList.Add(whileStep);
-                    FillStepList(workflowContext,whileStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, whileStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "pick")
                 {
                     var pickStep = new PickStep(currentStep.Attributes);
                     workflowStepList.Add(pickStep);
-                    FillStepList(workflowContext,pickStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, pickStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "eventHandlers")
                 {
                     //we will handle this section as same as handl scope
-                    FillStepList(workflowContext,workflowStepList, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, workflowStepList, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "onMessage")
                 {
@@ -572,14 +572,14 @@ namespace WorkFlowHandle.DAL
                         timeoutParameters.Add(messageName, timesetTime);
                     }
 
-                    FillStepList(workflowContext,messageStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, messageStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "onEvent")
                 {
                     var onEventStep = new OnEventStep(currentStep.Attributes);
                     workflowContext.MessageTimeoutEventHanlderDict.Add(onEventStep.EventKey, onEventStep.StepId);
                     workflowStepList.Add(onEventStep);
-                    FillStepList(workflowContext,onEventStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
+                    FillStepList(workflowContext, onEventStep.WorkflowSteps, 0, currentStep.ChildNodes, ref cancelEventHandlerName);
                 }
                 else if (currentStep.LocalName == "partnerLinks")
                 {
@@ -595,7 +595,7 @@ namespace WorkFlowHandle.DAL
                     {
                         var faultHandler = new FaultHandler(childNode);
                         workflowStepList.Add(faultHandler);
-                        FillStepList(workflowContext,faultHandler.WorkflowSteps, 0, childNode.ChildNodes, ref cancelEventHandlerName);
+                        FillStepList(workflowContext, faultHandler.WorkflowSteps, 0, childNode.ChildNodes, ref cancelEventHandlerName);
                     }
                 }
                 else
@@ -661,11 +661,11 @@ namespace WorkFlowHandle.DAL
                             {
                                 if (variableAttribute.LocalName == "name")
                                 {
-                                  partnerLinkEntity.Name = variableAttribute.Value;
+                                    partnerLinkEntity.Name = variableAttribute.Value;
                                 }
                                 else if (variableAttribute.LocalName == "partnerLinkType")
                                 {
-                                  partnerLinkEntity.PartnerLinkType = variableAttribute.Value;
+                                    partnerLinkEntity.PartnerLinkType = variableAttribute.Value;
                                 }
                                 else if (variableAttribute.LocalName == "myRole")
                                 {

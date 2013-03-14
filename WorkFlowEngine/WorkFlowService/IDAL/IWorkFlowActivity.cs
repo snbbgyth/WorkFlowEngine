@@ -18,7 +18,7 @@ namespace WorkFlowService.IDAL
         string Execute(AppInfoModel entity);
         string NewWorkFlow(AppInfoModel entity);
         IList<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId);
-        ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId, string userId);
+        IEnumerable<string> GetCurrentActivityStateByAppIdAndUserID(string appId, string userId);
     }
 }
  

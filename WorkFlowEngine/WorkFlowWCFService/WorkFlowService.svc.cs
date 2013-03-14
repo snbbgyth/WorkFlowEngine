@@ -50,7 +50,7 @@ namespace WorkFlowWCFService
         }
 
         [OperationContract]
-        public ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId, string userId)
+        public IEnumerable<string> GetCurrentActivityStateByAppIdAndUserID(string appId, string userId)
         {
             return WorkFlowEngineInstance.GetCurrentActivityStateByAppIdAndUserID(appId, userId);
         }

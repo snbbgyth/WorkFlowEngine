@@ -1,16 +1,15 @@
 ﻿/********************************************************************************
-** Class Name:   ITableModel 
+** Class Name:   Delegates 
 ** Author：      Spring Yang
 ** Create date： 2013-3-14
 ** Modify：      Spring Yang
 ** Modify Date： 2013-3-14
-** Summary：     ITableModel interface
+** Summary：     Delegates class
 *********************************************************************************/
 
 namespace CommonLibrary.IDAL
 {
-   public  interface ITableModel
-    {
-       string ID { get; set; }
-    }
+    using Model;
+
+    public delegate void NotifyErrorMessageHandle(LogMessage message);
 }

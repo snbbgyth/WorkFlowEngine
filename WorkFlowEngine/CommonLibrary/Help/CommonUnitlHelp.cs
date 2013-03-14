@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -26,6 +27,11 @@ namespace CommonLibrary.Help
            return (from sqlSourceType in Enum.GetNames(typeof(T))
                    where String.Compare(sqlSourceType, enumType, StringComparison.OrdinalIgnoreCase) == 0
                    select (T)Enum.Parse(typeof(T), sqlSourceType)).FirstOrDefault();
+       }
+
+       public static string LogPathTags
+       {
+           get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, CommonConstants.LogFolderNameTags); }
        }
     }
 }

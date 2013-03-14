@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -45,11 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\ThreadPoolManage.cs" />
+    <Compile Include="Help\CommonConstants.cs" />
     <Compile Include="Help\CommonUnitlHelp.cs" />
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\Extensions.cs" />
+    <Compile Include="Help\LogHelp.cs" />
+    <Compile Include="IDAL\Delegates.cs" />
     <Compile Include="IDAL\ITableModel.cs" />
     <Compile Include="Model\AppInfoModel.cs" />
+    <Compile Include="Model\LogMessage.cs" />
     <Compile Include="Model\WorkFlowActivityLogModel.cs" />
     <Compile Include="Model\WorkFlowActivityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

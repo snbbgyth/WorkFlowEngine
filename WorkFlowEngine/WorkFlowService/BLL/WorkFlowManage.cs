@@ -65,14 +65,14 @@ namespace WorkFlowService.BLL
             return WorkFlowActivityDAL.Current.QueryInProgressActivityByOperatorUserId(operatorUserId);
         }
 
-        public ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId, string userId)
+        public IEnumerable<string> GetCurrentActivityStateByAppIdAndUserID(string appId, string userId)
         {
             var activityEntity = WorkFlowActivityDAL.Current.QueryByAppId(appId);
             if (CompareIsContain(activityEntity.OperatorUserId, userId))
                 return WorkFlowEngine.Current.GetActivityStateByConditon(activityEntity.WorkflowName, activityEntity.CurrentWorkflowState);
             if (CompareIsContain(activityEntity.OperatorUserList, userId))
-                return ActivityState.Read;
-            return ActivityState.Read;
+                return new List<string>{ActivityState.Read.ToString()};
+            return null;
         }
 
         public ApplicationState GetApplicationStateByAppId(string appId)

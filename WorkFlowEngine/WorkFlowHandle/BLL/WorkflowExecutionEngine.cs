@@ -16,7 +16,6 @@ namespace WorkFlowHandle.BLL
 {
     public class WorkflowExecutionEngine
     {
-
         public static WorkflowExecutionEngine Current
         {
             get { return new WorkflowExecutionEngine(); }

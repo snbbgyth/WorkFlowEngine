@@ -60,18 +60,19 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void EnableControl(bool isEnbale)
         {
-            TxtUserDisplayName.IsReadOnly = !isEnbale;
-            TxtUserName.IsReadOnly = !isEnbale;
-            foreach (var control in SettingHelp.FindVisualChildren<Button>(this))
+            TxtUserDisplayName.IsReadOnly = able)
+        {
+            TxtUserDisplayName.IsReadOnly = !isEnable;
+            TxtUserName.IsReadOnly = !isEnabhildren<Button>(this))
             {
                 control.IsEnabled = isEnbale;
             }
-            foreach (var control in SettingHelp.FindVisualChildren<PasswordBox>(this))
+            foreach (var control in SettingHelabFindVisualChildren<PasswordBox>(this))
             {
                 control.IsEnabled = isEnbale;
             }
             BtnModify.IsEnabled = true;
-            BtnCancel.IsEnabled = true;
+          abBtnCancel.IsEnabled = true;
             BtnModifyPassword.IsEnabled = true;
         }
 

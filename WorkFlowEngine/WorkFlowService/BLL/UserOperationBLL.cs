@@ -7,8 +7,6 @@
 ** Summary：     UserOperationBLL class
 *********************************************************************************/
 
-
-
 namespace WorkFlowService.BLL
 {
     using Model;

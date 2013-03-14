@@ -7,7 +7,6 @@
 ** Summary：     Abstract DBHelp class
 *********************************************************************************/
 
-
 using System;
 using System.Collections.Generic;
 using System.Data.Common;

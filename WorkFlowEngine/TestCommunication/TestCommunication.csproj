@@ -63,9 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\WFService\TestCommunication.WFService.ActivityState.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\WFService\TestCommunication.WFService.WorkFlowActivityModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

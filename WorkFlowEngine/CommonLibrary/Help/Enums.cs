@@ -1,8 +1,9 @@
 ﻿/********************************************************************************
 ** Class Name:   Enums 
-** Author：      spSpring Yang
+** Author：      Spring Yang
 ** Create date： 2012-9-1
-** Modify：      Spring Y** Modify Date： 2012-9-25
+** Modify：      Spring Yang
+** Modify Date： 2012-9-25
 ** Summary：     Enums class
 *********************************************************************************/
 
@@ -68,5 +69,46 @@ namespace CommonLibrary.Help
         /// Cancel event
         /// </summary>
         Cancel = 4
+    }
+
+    /// <summary>
+    /// Log Message Type enum
+    /// </summary>
+    public enum MessageType
+    {
+        /// <summary>
+        /// unknown type 
+        /// </summary>
+        Unknown,
+
+        /// <summary>
+        /// information type
+        /// </summary>
+        Information,
+
+        /// <summary>
+        /// User operation type
+        /// </summary>
+        UserOperation,
+
+        /// <summary>
+        /// warning type
+        /// </summary>
+        Warning,
+
+        /// <summary>
+        /// error type
+        /// </summary>
+        Error,
+
+        /// <summary>
+        /// Process runing
+        /// </summary>
+        Runing,
+
+        /// <summary>
+        /// success type
+        /// </summary>
+        Success
     }
 }

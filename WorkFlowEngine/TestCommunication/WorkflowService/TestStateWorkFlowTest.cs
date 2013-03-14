@@ -25,8 +25,7 @@ namespace TestCommunication.WorkflowService
         {
             var appEntity = new AppInfoModel
                                 {
-                                    ActivityState = ActivityState.Submit.ToString(),
-                                    AppId = "001",
+                                    ActivityState = ActivityState.Submit.ToStri"Submit"            AppId = "001",
                                     WorkflowName = "TestStateWorkFlow",
                                     UserId = "001",
                                     CurrentState = "Common"
@@ -43,18 +42,17 @@ namespace TestCommunication.WorkflowService
             var appEntity = new AppInfoModel
             {
                 ActivityState = ActivityState.Submit.ToString(),
-                AppId = "002",
-                WorkflowName = "TestStateWorkFlow",
-                UserId = "002",
-                CurrentState = "Common"
-            };
+           "Submit",
+                AppId = "002;
+            var result = WfServiceInstance.NewWorkFlow(appEntity);
+            Asse         };
             var result = WfServiceInstance.NewWorkFlow(appEntity);
             Assert.AreEqual(result, "Manage");
 
             var manageEntity = new AppInfoModel
                                    {
                                        ActivityState = ActivityState.Approve.ToString(),
-                                       AppId = "002",
+                     "Approve"
                                        WorkflowName = "TestStateWorkFlow",
                                        UserId = "003",
                                        CurrentState = "Manage"
@@ -70,18 +68,18 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = ActivityState.Submit.ToString(),
                 AppId = "004",
-                WorkflowName = "TestStateWorkFlow",
-                UserId = "004",
-                CurrentState = "Common"
+      "Submit"w",
+                UserId = "005",
+                CurrentState = "Manage"
             };
+            var manageRes4        };
             var result = WfServiceInstance.NewWorkFlow(appEntity);
             Assert.AreEqual(result, "Manage");
 
             var manageEntity = new AppInfoModel
-            {
-                ActivityState = ActivityState.Reject.ToString(),
-                AppId = "004",
-                WorkflowName = "TestStateWorkFlow",
+                                   {
+                             {
+                ActivityState ="Reject"w",
                 UserId = "005",
                 CurrentState = "Manage"
             };
@@ -97,8 +95,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = ActivityState.Save.ToString(),
                 AppId = "006",
-                WorkflowName = "TestStateWorkFlow",
-                UserId = "006",
+                WorkflowName = "Te"Save"    UserId = "006",
                 CurrentState = "Common"
             };
             var result = WfServiceInstance.NewWorkFlow(appEntity);
@@ -113,46 +110,47 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = ActivityState.Submit.ToString(),
                 AppId = "007",
-                WorkflowName = "TestStateWorkFlow",
-                UserId = "007",
-                CurrentState = "Common"
-            };
-            var result = WfServiceInstance.NewWorkFlow(appEntity);
-            Assert.AreEqual(result, "Manage");
-
-            var commonEntity = new AppInfoModel
-            {
-                ActivityState = ActivityState.Revoke.ToString(),
-                AppId = "007",
-                WorkflowName = "TestStateWorkFlow",
-                UserId = "007",
-                CurrentState = "Common"
+                WorkflowName = "TestStateWorkFlo"Submit"ommon"
             };
             var revokeResult = WfServiceInstance.Execute(commonEntity);
             Assert.AreEqual(revokeResult, "Common");
-        }
+
+            var resubmitEntity = new AppInfoMode }
+
 
         [Test]
-        public void TestResubmitWorkflow()
+        public void TestRevokeWorkflow()
         {
-            var appEntity = new AppInfoModel
+            var         AppId = "007",
+                WorkflowName = "TestStateWorkFlow",
+                UserId = "007",
+ "Revoke"ommon"
+            };
+            var revokeResult = WfServiceInstance.Execute(commonEntity);
+            Assert.AreEqual(revokeResult, "Common");
+
+            var resubmitEntity = new AppInfoModel
             {
+                ActivityState = ActivityState.Resubmit.ToString(),
+                AppId = "0    {
                 ActivityState = ActivityState.Submit.ToString(),
                 AppId = "007",
                 WorkflowName = "TestStateWorkFlow",
-                UserId = "007",
-                CurrentState = "Common"
+                UserId "Submit"ommon"
             };
-            var result = WfServiceInstance.NewWorkFlow(appEntity);
-            Assert.AreEqual(result, "Manage");
+            var revokeResult = WfServiceInstance.Execute(commonEntity);
+            Assert.AreEqual(revokeResult, "Common");
 
-            var commonEntity = new AppInfoModel
-            {
-                ActivityState = ActivityState.Revoke.ToString(),
-                AppId = "007",
+            var resubmitEntity = new AppInfoMode }
+
+
+        [Test]
+        public void TestRevokeWorkflow()
+        {
+            var         AppId = "007",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "007",
-                CurrentState = "Common"
+  "Revoke"ommon"
             };
             var revokeResult = WfServiceInstance.Execute(commonEntity);
             Assert.AreEqual(revokeResult, "Common");
@@ -163,11 +161,9 @@ namespace TestCommunication.WorkflowService
                 AppId = "007",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "007",
-                CurrentState = "Common"
+           "Resubmit"ommon"
             };
-            var lastResult = WfServiceInstance.Execute(resubmitEntity);
-            Assert.AreEqual(lastResult, "Manage");
-        }
-    }
-}
+            var revokeResult = WfServiceInstance.Execute(commonEntity);
+            Assert.AreEqual(revokeResult, "Common");
 
+            var resubmitEntity = new AppInfoMo

@@ -1,40 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.LiWindows;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
+using WorkFlowService.BLL;
 
-namespace WorkflowSetting.SettingForm.AddForm
-{
-    using WorkFlowService.BLL;
-
-    /// <summary>
-    /// AddUserGroupWindow.xaml 的交互逻辑
+namespace WorkflowSetting.SettingForm.ViewForm
+{    /// AddUserGroupWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class AddUserGroupWindow : Window
+    public partial class AddUserGroupWindow : WiUserGroupRelationWindow : Window
     {
-        public AddUserGroupWindow()
-        {
-            InitializeComponent();
+        public UserGroupRelation      InitializeComponent();
         }
 
-        public AddUserGroupWindow(UserGroupModel entity,OperationAction operationAction):this()
+        public AddUserGroupWindow(UserGroupMoUserGroupRelationperationAction operationAction):this()
         {
             UserAction = operationAction;
             InitData(entity);
         }
 
-        public AddUserGroupWindow(string groupId, OperationAction operationAction) : this()
+        public AddUserGroupWindow(string groupId, OUserGroupRelationon operationAction) : this()
         {
             UserAction = operationAction;
             var entity = DataOperationBLL.Current.QueryByID<UserGroupModel>(groupId);
@@ -82,8 +67,7 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void ClearItems()
         {
-            LvUserRole.Items.Clear();
-            LvUserName.Items.Clear();
+            LvUserRole.Items.Clear            LvUserName.Items.Clear();
         }
 
         private List<RoleInfoModel> ExistRoleInfoList { get; set; }

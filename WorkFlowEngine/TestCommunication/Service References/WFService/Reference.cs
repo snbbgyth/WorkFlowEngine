@@ -147,10 +147,10 @@ namespace TestCommunication.WFService {
         private string CreateUserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CurrentWorkFlowStateField;
+        private string CurrentWorkflowStateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ForeWorkFlowStateField;
+        private string ForeWorkflowStateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IDField;
@@ -169,6 +169,9 @@ namespace TestCommunication.WFService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OperatorUserListField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WorkflowNameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -246,27 +249,27 @@ namespace TestCommunication.WFService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CurrentWorkFlowState {
+        public string CurrentWorkflowState {
             get {
-                return this.CurrentWorkFlowStateField;
+                return this.CurrentWorkflowStateField;
             }
             set {
-                if ((object.ReferenceEquals(this.CurrentWorkFlowStateField, value) != true)) {
-                    this.CurrentWorkFlowStateField = value;
-                    this.RaisePropertyChanged("CurrentWorkFlowState");
+                if ((object.ReferenceEquals(this.CurrentWorkflowStateField, value) != true)) {
+                    this.CurrentWorkflowStateField = value;
+                    this.RaisePropertyChanged("CurrentWorkflowState");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ForeWorkFlowState {
+        public string ForeWorkflowState {
             get {
-                return this.ForeWorkFlowStateField;
+                return this.ForeWorkflowStateField;
             }
             set {
-                if ((object.ReferenceEquals(this.ForeWorkFlowStateField, value) != true)) {
-                    this.ForeWorkFlowStateField = value;
-                    this.RaisePropertyChanged("ForeWorkFlowState");
+                if ((object.ReferenceEquals(this.ForeWorkflowStateField, value) != true)) {
+                    this.ForeWorkflowStateField = value;
+                    this.RaisePropertyChanged("ForeWorkflowState");
                 }
             }
         }
@@ -349,6 +352,19 @@ namespace TestCommunication.WFService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WorkflowName {
+            get {
+                return this.WorkflowNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WorkflowNameField, value) != true)) {
+                    this.WorkflowNameField = value;
+                    this.RaisePropertyChanged("WorkflowName");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -357,39 +373,6 @@ namespace TestCommunication.WFService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ActivityState", Namespace="http://schemas.datacontract.org/2004/07/CommonLibrary.Help")]
-    public enum ActivityState : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Save = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Edit = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Resubmit = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Submit = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Revoke = 16,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Approve = 32,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Reject = 64,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Read = 128,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 256,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -408,7 +391,7 @@ namespace TestCommunication.WFService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/GetCurrentActivityStateByAppIdAndUserID", ReplyAction="http://tempuri.org/WorkFlowService/GetCurrentActivityStateByAppIdAndUserIDRespons" +
             "e")]
-        TestCommunication.WFService.ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId, string userId);
+        string[] GetCurrentActivityStateByAppIdAndUserID(string appId, string userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -450,7 +433,7 @@ namespace TestCommunication.WFService {
             return base.Channel.QueryInProgressActivityListByOperatorUserId(operatorUserId);
         }
         
-        public TestCommunication.WFService.ActivityState GetCurrentActivityStateByAppIdAndUserID(string appId, string userId) {
+        public string[] GetCurrentActivityStateByAppIdAndUserID(string appId, string userId) {
             return base.Channel.GetCurrentActivityStateByAppIdAndUserID(appId, userId);
         }
     }
