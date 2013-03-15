@@ -36,13 +36,11 @@ namespace WorkFlowService.BLL
             return currentWorkFlowState;
         }
 
-
         public string NewWorkFlow(AppInfoModel entity)
         {
             var activityEntity = new WorkFlowActivityModel
             {
                 ForeWorkflowState = entity.CurrentState,
-                // new ActivityId
                 OperatorActivity = entity.ActivityState,
                 LastUpdateDateTime = DateTime.Now,
                 AppId = entity.AppId,

@@ -26,10 +26,10 @@
         </ListView>
         <Button Name="BtnAddUserGroup" Content="AddUserGroup" HorizontalAlignment="Left" Margin="178,301,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserGroupClick" TabIndex="9"/>
         <Button Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="302,301,0,0" VerticalAlignment="Top" Width="120" TabIndex="12" Click="BtnRemoveUserGroupClick"/>
-        <Button Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="105,524,0,0" VerticalAlignment="Top" Width="75" TabIndex="15" Click="BtnAddClick"/>
-        <Button Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="232,524,0,0" VerticalAlignment="Top" Width="75" TabIndex="18" Click="BtnCancelClick"/>
+        <Button Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Margin="105,547,0,0" VerticalAlignment="Top" Width="75" TabIndex="17" Click="BtnAddClick"/>
+        <Button Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="232,547,0,0" VerticalAlignment="Top" Width="75" TabIndex="18" Click="BtnCancelClick"/>
         <Label Content="Confim password:" HorizontalAlignment="Left" Margin="49,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.7,0.538"/>
-        <PasswordBox Name="PbConfimPassword" HorizontalAlignment="Left" Margin="178,152,0,0" VerticalAlignment="Top" Width="200" TabIndex="7"/>
+        <PasswordBox Name="PbConfimPassword" HorizontalAlignment="Left" Margin="178,158,0,0" VerticalAlignment="Top" Width="200" TabIndex="7"/>
         <Label Name="LblConfimPasswordError" Content="" HorizontalAlignment="Left" Margin="395,147,0,0" VerticalAlignment="Top" Width="150"/>
         <Label Name="LblTitle" Content="Add User Information" HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label Content="Relation Role:" HorizontalAlignment="Left" Margin="73,353,0,0" VerticalAlignment="Top"/>
@@ -49,6 +49,10 @@
         </ListView>
         <Button Name="BtnAddUserRole" Content="AddUserRole" HorizontalAlignment="Left" Margin="178,458,0,0" VerticalAlignment="Top" TabIndex="13" Width="100" Click="BtnAddUserRoleClick"/>
         <Button Name="BtnRemoveUserRole" Content="RemoveUserRole" HorizontalAlignment="Left" Margin="302,458,0,0" VerticalAlignment="Top" Width="120" TabIndex="14" RenderTransformOrigin="0.44,-0.227" Click="BtnRemoveUserRoleClick"/>
+        <Label  Name="LblMessage"  Content="" HorizontalAlignment="Left" Margin="110,574,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.45,-0.115" Foreground="#FFFD0404"/>
+        <Label Content="Report to user:" HorizontalAlignment="Left" Margin="67,500,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.65,0.192"/>
+        <TextBox Name="TxtReportToUserName" HorizontalAlignment="Left" Height="23" Margin="178,503,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" TabIndex="15"/>
+        <Button Name="BtnAddReportToUser" Content="AddReportToUser" HorizontalAlignment="Left" Margin="395,500,0,0" VerticalAlignment="Top" Width="120" Click="BtnAddReportToUserClick"/>
 
     </Grid>
 </Window>

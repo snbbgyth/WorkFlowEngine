@@ -236,6 +236,23 @@ namespace WorkFlowService.BLL
 
         #endregion
 
+        #region UserInfo relation ReportTo UserInfo Type enqual 6
+
+        public bool AddUserReportToUser(string userId, string reportUserId)
+        {
+            return
+                RelationDAL.Current.Insert(new RelationModel
+                                               {
+                                                   ChildNodeID = userId,
+                                                   CreateDateTime = DateTime.Now,
+                                                   LastUpdateDateTime = DateTime.Now,
+                                                   ParentNodeID = reportUserId,
+                                                   Type = 6
+                                               })>0;
+        }
+
+        #endregion
+
         #region Query operation
 
         public UserInfoModel QueryUserInfoByUserName(string userName)
@@ -299,6 +316,13 @@ namespace WorkFlowService.BLL
                        : null;
         }
 
+        public List<RoleInfoModel> QueryAllRoleByActionId(string operationActionId)
+        {
+            var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(operationActionId, 3);
+            return relationList != null && relationList.Count > 0
+                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
+                       : null;
+        }
         public List<RoleInfoModel> QueryAllUserRoleByUserGroupId(string groupId)
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(groupId, 2);
@@ -349,6 +373,14 @@ namespace WorkFlowService.BLL
         {
             var roleInfoEntity = QueryRoleInfoByWorkflowStateId(workflowStateId);
             return roleInfoEntity != null ? QueryOperationActionByRoleId(roleInfoEntity.ID) : null;
+        }
+
+        public UserInfoModel QueryReportUserInfoByUserId(string userId)
+        {
+            var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 6);
+            return relationList != null && relationList.Any()
+                       ? UserInfoDAL.Current.QueryByID(relationList.First().ParentNodeID)
+                       : null;
         }
 
         #endregion

@@ -30,11 +30,35 @@ namespace WorkflowSetting.SettingForm.AddForm
         private void BtnAddClick(object sender, RoutedEventArgs e)
         {
             if (!CheckInput()) return;
+            if (Add())
+            {
+                AddReportToUser();
+            }
+            LblMessage.Content = "Create successful!";
+            BtnAdd.IsEnabled = false;
+        }
+
+        private void AddReportToUser()
+        {
+            UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
+        }
+
+        private bool Add()
+        {
             var entity = GetEntity();
             var result = DataOperationBLL.Current.Insert(entity);
             if (result > 0)
-                SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, entity.ID);
+            {
+                Id = entity.ID;
+                SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName,UserOperationBLL.Current.AddUserInUserGroup,entity.ID);
+                return true;
+            }
+            return false;
         }
+
+        private string ReportToId { get; set; }
+
+        private string Id { get; set; }
 
         private bool CheckInput()
         {
@@ -47,8 +71,6 @@ namespace WorkflowSetting.SettingForm.AddForm
             return result;
 
         }
-
-
 
         private UserInfoModel GetEntity()
         {
@@ -75,6 +97,11 @@ namespace WorkflowSetting.SettingForm.AddForm
         private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
         {
             SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole, new List<string>());
+        }
+
+        private void BtnAddReportToUserClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

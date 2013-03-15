@@ -77,8 +77,8 @@
     </ApplicationDefinition>
     <Compile Include="Help\Enums.cs" />
     <Compile Include="Help\SettingHelp.cs" />
-    <Compile Include="SettingForm\AddForm\AddOperationActionWindow.xaml.cs">
-      <DependentUpon>AddOperationActionWindow.xaml</DependentUpon>
+    <Compile Include="SettingForm\ViewForm\OperationActionRelationWindow.xaml.cs">
+      <DependentUpon>OperationActionRelationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\ViewForm\UserGroupRelationWindow.xaml.cs">
       <DependentUpon>UserGroupRelationWindow.xaml</DependentUpon>
@@ -123,7 +123,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingForm\AddForm\AddOperationActionWindow.xaml">
+    <Page Include="SettingForm\ViewForm\OperationActionRelationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

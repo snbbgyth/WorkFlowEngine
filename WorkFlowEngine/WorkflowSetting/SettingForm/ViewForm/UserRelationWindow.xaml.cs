@@ -88,6 +88,13 @@ namespace WorkflowSetting.SettingForm.ViewForm
             LvUserGroupName.ItemsSource = ExistUserGroupList;
             ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserId(entity.ID);
             LvUserRole.ItemsSource = ExistRoleInfoList;
+            var reportToUserEntity = UserOperationBLL.Current.QueryReportUserInfoByUserId(entity.ID);
+            if (reportToUserEntity != null)
+            {
+                TxtReportUserName.Text = reportToUserEntity.UserDisplayName;
+                ReportToId = reportToUserEntity.ID;
+                ReportRelationId = reportToUserEntity.ID;
+            }
         }
 
         private void ClearDataBinding()
@@ -161,7 +168,12 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private bool IsDelete { get; set; }
 
+        private string ReportToId { get; set; }
+
         private string Id { get; set; }
+
+
+        private string ReportRelationId { get; set; }
 
         private bool ModifyEntity()
         {
@@ -169,12 +181,27 @@ namespace WorkflowSetting.SettingForm.ViewForm
             var entity = GetEntity();
             if (DataOperationBLL.Current.Modify(entity) > 1)
             {
+                 ModifyReportToUser();
                 LblMessage.Content = "Modify successful!";
                 return true;
             }
             LblMessage.Content = "Modify fail!";
             return false;
         }
+
+        private bool ModifyReportToUser()
+        {
+            if (string.IsNullOrEmpty(ReportToId)) return true;
+            if (string.IsNullOrEmpty(ReportRelationId))
+            {
+               return  UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
+            }
+            var entity = DataOperationBLL.Current.QueryByID<RelationModel>(ReportRelationId);
+            entity.ParentNodeID = ReportToId;
+            return DataOperationBLL.Current.Modify(entity) > 0;
+
+        }
+
         private bool CheckPassword()
         {
             if (!IsModfiyPassword) return true;
@@ -216,6 +243,11 @@ namespace WorkflowSetting.SettingForm.ViewForm
             IsModfiyPassword = false;
             BtnModifyPassword.IsEnabled = true;
             VisablePassword(false);
+        }
+
+        private void BtnAddReportUser(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

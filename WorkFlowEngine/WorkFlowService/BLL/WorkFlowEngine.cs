@@ -123,8 +123,6 @@ namespace WorkFlowService.BLL
         {
             var entityList = UserOperationBLL.Current.QueryOperationActionByCondition(workflowName, workFlowState);
             return entityList.Select(entity => entity.ActionName);
-            
-
         }
     }
 }
