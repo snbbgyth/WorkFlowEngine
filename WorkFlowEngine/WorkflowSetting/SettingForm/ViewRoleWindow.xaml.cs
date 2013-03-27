@@ -30,7 +30,7 @@ namespace WorkflowSetting.SettingForm
         private void InitRoleInfo()
         {
             DgRoleList.Items.Clear();
-            DgRoleList.ItemsSource = DataOperationBLL.Current.QueryAll<RoleInfoModel>();
+            DgRoleList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<RoleInfoModel>();
         }
     }
 }

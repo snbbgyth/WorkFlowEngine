@@ -23,7 +23,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             : this()
         {
             UserAction = operationAction;
-            var userInfoEntity = DataOperationBLL.Current.QueryByID<UserInfoModel>(userId);
+            var userInfoEntity = UserOperationBLL.Current.DataOperationInstance.QueryByID<UserInfoModel>(userId);
             InitData(userInfoEntity);
         }
 
@@ -179,7 +179,8 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             if (!CheckPassword()) return false;
             var entity = GetEntity();
-            if (DataOperationBLL.Current.Modify(entity) > 1)
+            
+            if (UserOperationBLL.Current.DataOperationInstancey) > 1)
             {
                  ModifyReportToUser();
                 LblMessage.Content = "Modify successful!";
@@ -196,11 +197,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
             {
                return  UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
             }
-            var entity = DataOperationBLL.Current.QueryByID<RelationModel>(ReportRelationId);
+            var entity = DataOperationBLL.CurreUserOperationBLL.Current.DataOperationInstanceel>(ReportRelationId);
             entity.ParentNodeID = ReportToId;
-            return DataOperationBLL.Current.Modify(entity) > 0;
-
-        }
+            return DataOperationBLL.CurrentUserOperationBLL.Current.DataOperationInstance      }
 
         private bool CheckPassword()
         {
@@ -213,7 +212,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
 
 
-        private UserInfoModel GetEntity()
+        private UserInfodel GetEntity()
         {
             var entity = new UserInfoModel
             {

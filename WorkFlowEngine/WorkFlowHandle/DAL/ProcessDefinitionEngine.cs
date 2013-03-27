@@ -281,7 +281,6 @@ namespace WorkFlowHandle.DAL
                     if (this.defaultWorkflows == null)
                     {
 
-
                         // load list of BPEL files into local collection
                         WorkflowHandlerSettingsConfigSection section = UnitlHelp.GetWorkflowHandlerSettingsConfigSection();
 

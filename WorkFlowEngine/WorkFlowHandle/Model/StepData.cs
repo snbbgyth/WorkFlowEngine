@@ -24,7 +24,6 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private readonly List<FaultHandler> _faultHandlers;
 
-
         /// <summary>
         /// This is a list of processing steps created from the BPEL file 
         /// or there may be cached version of the steps 
@@ -37,7 +36,6 @@ namespace WorkFlowHandle.Model
         /// and the value string is the variable type.
         /// </summary>
         private readonly Dictionary<string, string> _workflowVariables;
-
 
         /// <summary>
         /// Gets the workflow step id by event name from dict.
@@ -52,7 +50,6 @@ namespace WorkFlowHandle.Model
         /// It stores the step Id of the current workflow
         /// </summary>
         private string _cancelEventHandlerName = String.Empty;
-
 
         /// <summary>
         /// Initializes a new instance of the StepData class

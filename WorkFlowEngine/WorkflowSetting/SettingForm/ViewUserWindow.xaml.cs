@@ -33,14 +33,11 @@ namespace WorkflowSetting.SettingForm
         private void InitData()
         {
             //DgUserList.Items.Clear();
-
-            DgUserList.ItemsSource = DataOperationBLL.Current.QueryAll<UserInfoModel>();
-
+            DgUserList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserInfoModel>();
         }
 
         private void BtnAddUserClick(object sender, RoutedEventArgs e)
         {
-
             var addUserWindow = new AddUserWindow();
             addUserWindow.Show();
         }

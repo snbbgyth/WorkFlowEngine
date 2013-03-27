@@ -7,6 +7,8 @@
 ** Summary：     UserOperationBLL class
 *********************************************************************************/
 
+using WorkFlowService.IDAL;
+
 namespace WorkFlowService.BLL
 {
     using Model;
@@ -26,7 +28,25 @@ namespace WorkFlowService.BLL
 
         public UserOperationBLL()
         {
-            DataOperationBLL.Current.InitDataBase();
+            DataOperationInstance.InitDataBase();
+        }
+
+        private DataOperationBLL _dataOperationInstance;
+
+        private static readonly object SyncOperationObj = new object();
+
+        public IDataOperationDAL DataOperationInstance
+        {
+            get
+            {
+                lock (SyncOperationObj)
+                {
+                    if (_dataOperationInstance == null)
+                        _dataOperationInstance = new DataOperationBLL();
+                }
+
+                return _dataOperationInstance;
+            }
         }
 
         #endregion
@@ -384,5 +404,8 @@ namespace WorkFlowService.BLL
         }
 
         #endregion
+    }
+}
+
     }
 }

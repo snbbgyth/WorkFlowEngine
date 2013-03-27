@@ -80,7 +80,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             var entity = GetEntity();
             if (DataOperationBLL.Current.Insert(entity) > 0)
             {
-                InitProperty(entity);
+   UserOperationBLL.Current.DataOperationInstancey(entity);
           
                 LblMessage.Content = "Create successful!";
                 InitControl();
@@ -111,8 +111,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
        
         }
 
-        private void BtnRemoveRoleNameClick(object sender, RoutedEventArgs e)
-        {
+        private void BtnReUserOperationBLL.Current.DataOperationInstance.Modify(GetEntity());      {
             SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole,new List<string>());
         }
 
@@ -129,8 +128,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             var entity = GetEntity();
             if (DataOperationBLL.Current.Modify(entity) > 1)
                 LblMessage.Content = "Modify successful!";
-            else
-            {
+  UserOperationBLL.Current.DataOperationInstance   {
                 LblMessage.Content = "Modify fail!";
             }
         }
@@ -140,9 +138,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             var entity = GetEntity();
             if (DataOperationBLL.Current.Insert(entity) > 1)
                 LblMessage.Content = "Create successful!";
-            else
-            {
-                LblMessage.Content = "Create fail!";
+            eUserOperationBLL.Current.DataOperationInstance          LblMessage.Content = "Create fail!";
             }
         }
 

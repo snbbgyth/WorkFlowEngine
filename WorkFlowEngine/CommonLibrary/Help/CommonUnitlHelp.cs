@@ -20,13 +20,13 @@ namespace CommonLibrary.Help
        /// <summary>
        /// Get enum type by data base type 
        /// </summary>
-       /// <param name="enumType">Enum type</param>
+       /// <param name="enumName">Enum type</param>
        /// <returns>Enum type </returns>
-       public static T GetEnumTypeByDataBaseType<T>(string enumType) where T : struct
+       public static T GetEnumTypeByName<T>(string enumName) where T : struct
        {
-           return (from sqlSourceType in Enum.GetNames(typeof(T))
-                   where String.Compare(sqlSourceType, enumType, StringComparison.OrdinalIgnoreCase) == 0
-                   select (T)Enum.Parse(typeof(T), sqlSourceType)).FirstOrDefault();
+           return (from enumType in Enum.GetNames(typeof(T))
+                   where String.Compare(enumType, enumName, StringComparison.OrdinalIgnoreCase) == 0
+                   select (T)Enum.Parse(typeof(T), enumType)).FirstOrDefault();
        }
 
        public static string LogPathTags

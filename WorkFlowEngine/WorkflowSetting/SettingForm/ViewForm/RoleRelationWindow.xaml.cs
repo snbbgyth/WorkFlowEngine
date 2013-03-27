@@ -29,7 +29,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         public RoleRelationWindow(string roleId)
             : this()
         {
-            var entity = DataOperationBLL.Current.QueryByID<RoleInfoModel>(roleId);
+            var entity = UserOperationBLL.Current.DataOperationInstance.QueryByID<RoleInfoModel>(roleId);
             InitData(entity);
         }
 
@@ -146,7 +146,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void Add()
         {
             var entity = GetEntity();
-            if (DataOperationBLL.Current.Insert(entity) > 0)
+            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 0)
             {
                 InitProperty(entity);
                 ModifyUserGroupList();
@@ -170,7 +170,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void Modify()
         {
-            DataOperationBLL.Current.Modify(GetEntity());
+            UserOperationBLL.Current.DataOperationInstance.Modify(GetEntity());
             ModifyUserGroupList();
             ModifyUserInfoList();
             ModifyActionListList();

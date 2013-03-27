@@ -7,12 +7,12 @@ using WorkFlowHandle.Model;
 namespace WorkFlowHandle.Help
 {
     using System.Configuration;
-   public  class UnitlHelp
+    public class UnitlHelp
     {
-       public static WorkflowHandlerSettingsConfigSection GetWorkflowHandlerSettingsConfigSection()
-       {
-           var configSection = ConfigurationManager.GetSection("workflowHandlerSettings") as WorkflowHandlerSettingsConfigSection;
-           return configSection;
-       }
+        public static WorkflowHandlerSettingsConfigSection GetWorkflowHandlerSettingsConfigSection()
+        {
+            var configSection = ConfigurationManager.GetSection("workflowHandlerSettings") as WorkflowHandlerSettingsConfigSection;
+            return configSection;
+        }
     }
 }

@@ -142,8 +142,6 @@ namespace WorkFlowHandle.Model
         /// </summary>
         private readonly object _eventLock = new object();
 
-
-
         /// <summary>
         /// Gets or sets the Id of the current workflow step
         /// </summary>
@@ -800,9 +798,7 @@ namespace WorkFlowHandle.Model
         private void Initialize()
         {
             _stepData = new StepData();
-
             _workflowWaitlist = new List<string>();
-
             _lastStateChange = DateTime.Now;
             _hasSentCompletionNotification = false;
             _lockObject = new object();
@@ -821,7 +817,6 @@ namespace WorkFlowHandle.Model
         {
             if (Handler != null)
             {
-
                 IsWorkflowStepsLoaded = true;
             }
         }

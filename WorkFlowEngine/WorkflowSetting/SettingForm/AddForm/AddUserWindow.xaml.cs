@@ -46,7 +46,7 @@ namespace WorkflowSetting.SettingForm.AddForm
         private bool Add()
         {
             var entity = GetEntity();
-            var result = DataOperationBLL.Current.Insert(entity);
+            var result = DataOperatioUserOperationBLL.Current.DataOperationInstancety);
             if (result > 0)
             {
                 Id = entity.ID;

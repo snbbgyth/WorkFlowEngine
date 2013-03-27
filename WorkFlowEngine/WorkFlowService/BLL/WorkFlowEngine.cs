@@ -22,7 +22,6 @@ namespace WorkFlowService.BLL
 
     public class WorkFlowEngine
     {
-
         public static WorkFlowEngine Current
         {
             get { return new WorkFlowEngine(); }

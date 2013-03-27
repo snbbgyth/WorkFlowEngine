@@ -67,6 +67,7 @@
     <Compile Include="IDAL\IActivityState.cs" />
     <Compile Include="IDAL\ICreateDataTableActivity.cs" />
     <Compile Include="IDAL\IDataOperationActivity.cs" />
+    <Compile Include="IDAL\IDataOperationDAL.cs" />
     <Compile Include="IDAL\IUserOperationActivity.cs" />
     <Compile Include="IDAL\IWorkFlowActivity.cs" />
     <Compile Include="Model\OperationActionInfoModel.cs" />

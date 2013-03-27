@@ -29,7 +29,7 @@ namespace WorkflowSetting.SettingForm
 
         private void InitLvGroupInfoData()
         {
-            var entityList = DataOperationBLL.Current.QueryAll<UserGroupModel>();
+            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserGroupModel>();
             LvGroupInfo.Items.Clear();
             LvGroupInfo.ItemsSource = entityList;
         }

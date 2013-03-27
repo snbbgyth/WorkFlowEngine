@@ -15,6 +15,7 @@ using System.Data;
 using System.Configuration;
 using System.Threading;
 using CommonLibrary.DAL;
+using CommonLibrary.Help;
 
 namespace DBHelp
 {
@@ -115,6 +116,10 @@ namespace DBHelp
                                 command.CommandText = cmdText;
                                 command.Transaction = transaction;
                                 command.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                               LogHelp.Instance.Write(ex+cmdText,MessageType.Error, GetType(),MethodBase.GetCurrentMethod().Name);
                             }
                             finally
                             {

@@ -82,7 +82,6 @@ namespace WorkFlowService.DAL
         private string GetQueryByRoleNameSql(string roleName)
         {
             return string.Format(WFConstants.QueryRoleInfoByRoleNameSqlTags, roleName);
-
         }
 
         protected override string GetCreateTableSql()

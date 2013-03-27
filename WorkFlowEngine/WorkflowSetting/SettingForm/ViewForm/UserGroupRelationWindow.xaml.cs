@@ -28,7 +28,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             : this()
         {
             UserAction = operationAction;
-            var entity = DataOperationBLL.Current.QueryByID<UserGroupModel>(groupId);
+            var entity = UserOperationBLL.Current.DataOperationInstance.QueryByID<UserGroupModel>(groupId);
             InitData(entity);
         }
 
@@ -133,7 +133,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void ModifyEntity()
         {
             var entity = GetEntity();
-            if (DataOperationBLL.Current.Modify(entity) > 1)
+            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 1)
                 LblMessage.Content = "Modify successful!";
             else
             {
@@ -144,7 +144,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void AddEntity()
         {
             var entity = GetEntity();
-            if (DataOperationBLL.Current.Insert(entity) > 1)
+            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 1)
                 LblMessage.Content = "Create successful!";
             else
             {

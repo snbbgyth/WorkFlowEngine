@@ -25,13 +25,13 @@ namespace WorkflowSetting.SettingForm
         public SelectRoleWindow()
         {
             InitializeComponent();
-            InitRoleInoList();
+            InitRoleInofoList();
         }
 
-        private void InitRoleInoList()
+        private void InitRoleInfoList()
         {
             LvRoleInfo.Items.Clear();
-            LvRoleInfo.ItemsSource = DataOperationBLL.Current.QueryAll<RoleInfoModel>();
+            LvRoleInfo.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<RoleInfoModel>();
         }
     }
 }

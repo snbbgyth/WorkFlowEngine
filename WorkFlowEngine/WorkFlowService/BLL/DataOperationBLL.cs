@@ -18,7 +18,7 @@ using WorkFlowService.IDAL;
 
 namespace WorkFlowService.BLL
 {
-    public class DataOperationBLL
+   internal  class DataOperationBLL : IDataOperationDAL
     {
         private static bool _isInitDataBase;
 
@@ -34,6 +34,8 @@ namespace WorkFlowService.BLL
         {
             InitDataBase();
         }
+
+
 
         public void InitDataBase()
         {
