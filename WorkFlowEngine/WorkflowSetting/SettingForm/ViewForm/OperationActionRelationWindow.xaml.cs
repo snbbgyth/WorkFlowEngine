@@ -18,7 +18,8 @@ namespace WorkflowSetting.SettingForm.ViewForm
             InitControl();
         }
 
-        public OperationActionRelationWindow(OperationActionInfoModel entity, OperationAction operationAction) : this()
+        public OperationActionRelationWindow(OperationActionInfoModel entity, OperationAction operationAction)
+            : this()
         {
             UserAction = operationAction;
             InitData(entity);
@@ -78,10 +79,10 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void Add()
         {
             var entity = GetEntity();
-            if (DataOperationBLL.Current.Insert(entity) > 0)
+            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 0)
             {
-   UserOperationBLL.Current.DataOperationInstancey(entity);
-          
+                InitProperty(entity);
+
                 LblMessage.Content = "Create successful!";
                 InitControl();
             }
@@ -98,7 +99,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             IsDelete = IsDelete;
         }
 
-        private List<RoleInfoModel> ExistUserRoleList { get; set; } 
+        private List<RoleInfoModel> ExistUserRoleList { get; set; }
 
         private void ModifyOperationActionRole()
         {
@@ -107,12 +108,12 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void Modify()
         {
-            DataOperationBLL.Current.Modify(GetEntity());
-       
+            UserOperationBLL.Current.DataOperationInstance.Modify(GetEntity());
         }
 
-        private void BtnReUserOperationBLL.Current.DataOperationInstance.Modify(GetEntity());      {
-            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole,new List<string>());
+        private void BtnRemoveRoleNameClick(object sender, RoutedEventArgs e)
+        {
+            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole, new List<string>());
         }
 
         private OperationAction UserAction { get; set; }
@@ -126,9 +127,10 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void ModifyEntity()
         {
             var entity = GetEntity();
-            if (DataOperationBLL.Current.Modify(entity) > 1)
+            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 1)
                 LblMessage.Content = "Modify successful!";
-  UserOperationBLL.Current.DataOperationInstance   {
+            else
+            {
                 LblMessage.Content = "Modify fail!";
             }
         }
@@ -136,9 +138,11 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void AddEntity()
         {
             var entity = GetEntity();
-            if (DataOperationBLL.Current.Insert(entity) > 1)
+            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 1)
                 LblMessage.Content = "Create successful!";
-            eUserOperationBLL.Current.DataOperationInstance          LblMessage.Content = "Create fail!";
+            else
+            {
+                LblMessage.Content = "Create fail!";
             }
         }
 
@@ -149,7 +153,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
                 {
                     CreateDateTime = DateTime.Now,
                     ActionDisplayName = TxtActionName.Text,
-                    ActionName =TxtActionDisplayName.Text,
+                    ActionName = TxtActionDisplayName.Text,
                     LastUpdateDateTime = DateTime.Now,
                 };
 

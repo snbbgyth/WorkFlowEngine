@@ -46,11 +46,11 @@ namespace WorkflowSetting.SettingForm.AddForm
         private bool Add()
         {
             var entity = GetEntity();
-            var result = DataOperatioUserOperationBLL.Current.DataOperationInstancety);
+            var result = UserOperationBLL.Current.DataOperationInstance.Insert(entity);
             if (result > 0)
             {
                 Id = entity.ID;
-                SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName,UserOperationBLL.Current.AddUserInUserGroup,entity.ID);
+                SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, entity.ID);
                 return true;
             }
             return false;
@@ -75,13 +75,13 @@ namespace WorkflowSetting.SettingForm.AddForm
         private UserInfoModel GetEntity()
         {
             return new UserInfoModel
-                       {
-                           CreateDateTime = DateTime.Now,
-                           LastUpdateDateTime = DateTime.Now,
-                           UserName = TxtUserName.Text,
-                           Password = PbPassword.Password,
-                           UserDisplayName = TxtUserDisplayName.Text
-                       };
+            {
+                CreateDateTime = DateTime.Now,
+                LastUpdateDateTime = DateTime.Now,
+                UserName = TxtUserName.Text,
+                Password = PbPassword.Password,
+                UserDisplayName = TxtUserDisplayName.Text
+            };
         }
 
         private void BtnCancelClick(object sender, RoutedEventArgs e)

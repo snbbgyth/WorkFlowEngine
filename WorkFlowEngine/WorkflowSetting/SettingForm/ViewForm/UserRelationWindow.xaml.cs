@@ -179,10 +179,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             if (!CheckPassword()) return false;
             var entity = GetEntity();
-            
-            if (UserOperationBLL.Current.DataOperationInstancey) > 1)
+            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 1)
             {
-                 ModifyReportToUser();
+                ModifyReportToUser();
                 LblMessage.Content = "Modify successful!";
                 return true;
             }
@@ -195,11 +194,13 @@ namespace WorkflowSetting.SettingForm.ViewForm
             if (string.IsNullOrEmpty(ReportToId)) return true;
             if (string.IsNullOrEmpty(ReportRelationId))
             {
-               return  UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
+                return UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
             }
-            var entity = DataOperationBLL.CurreUserOperationBLL.Current.DataOperationInstanceel>(ReportRelationId);
+            var entity = UserOperationBLL.Current.DataOperationInstance.QueryByID<RelationModel>(ReportRelationId);
             entity.ParentNodeID = ReportToId;
-            return DataOperationBLL.CurrentUserOperationBLL.Current.DataOperationInstance      }
+            return UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0;
+
+        }
 
         private bool CheckPassword()
         {
@@ -210,9 +211,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             return false;
         }
 
-
-
-        private UserInfodel GetEntity()
+        private UserInfoModel GetEntity()
         {
             var entity = new UserInfoModel
             {
@@ -246,7 +245,6 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void BtnAddReportUser(object sender, RoutedEventArgs e)
         {
-
         }
 
     }

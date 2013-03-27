@@ -262,13 +262,13 @@ namespace WorkFlowService.BLL
         {
             return
                 RelationDAL.Current.Insert(new RelationModel
-                                               {
-                                                   ChildNodeID = userId,
-                                                   CreateDateTime = DateTime.Now,
-                                                   LastUpdateDateTime = DateTime.Now,
-                                                   ParentNodeID = reportUserId,
-                                                   Type = 6
-                                               })>0;
+                {
+                    ChildNodeID = userId,
+                    CreateDateTime = DateTime.Now,
+                    LastUpdateDateTime = DateTime.Now,
+                    ParentNodeID = reportUserId,
+                    Type = 6
+                }) > 0;
         }
 
         #endregion
@@ -308,7 +308,7 @@ namespace WorkFlowService.BLL
         {
             var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 5);
             return relationList != null && relationList.Count > 0
-                        ? relationList.Select(entity =>UserInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                        ? relationList.Select(entity => UserInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
                         : null;
         }
 
@@ -316,7 +316,7 @@ namespace WorkFlowService.BLL
         {
             var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 3);
             return relationList != null && relationList.Count > 0
-                        ? relationList.Select(entity =>OperationActionInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                        ? relationList.Select(entity => OperationActionInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
                         : null;
         }
 
@@ -324,7 +324,7 @@ namespace WorkFlowService.BLL
         {
             var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 4);
             return relationList != null && relationList.Count > 0
-                        ? relationList.Select(entity =>WorkflowStateInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
+                        ? relationList.Select(entity => WorkflowStateInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
                         : null;
         }
 
@@ -332,7 +332,7 @@ namespace WorkFlowService.BLL
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 5);
             return relationList != null && relationList.Count > 0
-                       ? relationList.Select(entity =>RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
+                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
                        : null;
         }
 
@@ -404,8 +404,5 @@ namespace WorkFlowService.BLL
         }
 
         #endregion
-    }
-}
-
     }
 }

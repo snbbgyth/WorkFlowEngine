@@ -25,7 +25,7 @@ namespace WorkflowSetting.SettingForm
         public SelectRoleWindow()
         {
             InitializeComponent();
-            InitRoleInofoList();
+            InitRoleInfoList();
         }
 
         private void InitRoleInfoList()
