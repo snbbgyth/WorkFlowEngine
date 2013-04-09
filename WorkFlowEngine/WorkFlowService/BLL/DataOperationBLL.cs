@@ -116,10 +116,7 @@ namespace WorkFlowService.BLL
                     }
                     catch (SQLiteException ex)
                     {
-                        if (ex.ErrorCode  == SQLiteErrorCode.Done)
-                        {
-
-                        }
+                
 
                     }
 
