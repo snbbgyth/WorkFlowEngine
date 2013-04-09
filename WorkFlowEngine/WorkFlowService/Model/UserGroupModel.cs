@@ -15,16 +15,16 @@ namespace WorkFlowService.Model
 {
     public class UserGroupModel : ITableModel
     {
-        public string ID { get; set; }
+        public virtual string Id { get; set; }
 
-        public string GroupName { get; set; }
+        public virtual string GroupName { get; set; }
 
-        public string GroupDisplayName { get; set; }
+        public virtual string GroupDisplayName { get; set; }
 
-        public DateTime? CreateDateTime { get; set; }
+        public virtual DateTime? CreateDateTime { get; set; }
 
-        public DateTime? LastUpdateDateTime { get; set; }
+        public virtual DateTime? LastUpdateDateTime { get; set; }
 
-        public bool IsDelete { get; set; }
+        public virtual bool IsDelete { get; set; }
     }
 }

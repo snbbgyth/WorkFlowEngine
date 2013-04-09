@@ -26,14 +26,14 @@ namespace WorkFlowService.DAL
 
         protected override string GetInsertByEntitySql(RoleInfoModel entity)
         {
-            entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
+            entity.Id = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertRoleInfoSqlTags, entity.Id, entity.RoleName, entity.RoleDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(RoleInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceRoleInfoSqlTags, entity.ID, entity.RoleName, entity.RoleDisplayName,
+            return string.Format(WFConstants.InsertOrReplaceRoleInfoSqlTags, entity.Id, entity.RoleName, entity.RoleDisplayName,
                            entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 

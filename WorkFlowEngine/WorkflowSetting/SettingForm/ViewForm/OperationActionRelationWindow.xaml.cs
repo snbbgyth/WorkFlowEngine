@@ -30,7 +30,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             TxtActionDisplayName.Text = entity.ActionDisplayName;
             TxtActionName.Text = entity.ActionName;
             InitProperty(entity);
-            ExistUserRoleList = UserOperationBLL.Current.QueryAllRoleByActionId(entity.ID);
+            ExistUserRoleList = UserOperationBLL.Current.QueryAllRoleByActionId(entity.Id);
             LvUserRole.Items.Clear();
             LvUserRole.ItemsSource = ExistUserRoleList;
         }
@@ -94,7 +94,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitProperty(OperationActionInfoModel entity)
         {
-            Id = entity.ID;
+            Id = entity.Id;
             CreateDateTime = entity.CreateDateTime;
             IsDelete = IsDelete;
         }
@@ -163,7 +163,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
                 IsDelete = IsDelete,
                 ActionDisplayName = TxtActionName.Text,
                 ActionName = TxtActionDisplayName.Text,
-                ID = Id,
+                Id = Id,
                 LastUpdateDateTime = DateTime.Now
             };
         }

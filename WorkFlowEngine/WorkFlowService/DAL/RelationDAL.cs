@@ -24,14 +24,14 @@ namespace WorkFlowService.DAL
 
         protected override string GetInsertByEntitySql(RelationModel entity)
         {
-            entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertRelationSqlTags, entity.ID, entity.ChildNodeID, entity.ParentNodeID, entity.Type,
+            entity.Id = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertRelationSqlTags, entity.Id, entity.ChildNodeID, entity.ParentNodeID, entity.Type,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(RelationModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceRelationSqlTags, entity.ID, entity.ChildNodeID, entity.ParentNodeID, entity.Type,
+            return string.Format(WFConstants.InsertOrReplaceRelationSqlTags, entity.Id, entity.ChildNodeID, entity.ParentNodeID, entity.Type,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 

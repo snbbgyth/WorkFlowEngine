@@ -17,7 +17,7 @@ namespace WorkflowSetting.Help
             var userRoleSource = lv.ItemsSource as List<T>;
             if (userRoleSource != null)
             {
-                userRoleSource.RemoveAll(entity => idList.Contains(entity.ID));
+                userRoleSource.RemoveAll(entity => idList.Contains(entity.Id));
                 lv.Items.Clear();
                 lv.ItemsSource = userRoleSource;
             }
@@ -28,21 +28,21 @@ namespace WorkflowSetting.Help
         {
             var entityList = lv.ItemsSource as List<T>;
             if (entityList == null) return;
-            var addList = entityList.Where(entity => existList.Any(t => t.ID != entity.ID));
+            var addList = entityList.Where(entity => existList.Any(t => t.Id != entity.Id));
             foreach (var entity in addList)
             {
                 if (!string.IsNullOrEmpty(leftItemId))
-                    addAction(leftItemId, entity.ID);
+                    addAction(leftItemId, entity.Id);
                 else if (!string.IsNullOrEmpty(rightItemId))
-                    addAction(entity.ID, rightItemId);
+                    addAction(entity.Id, rightItemId);
             }
-            var removeList = existList.Where(entity => entityList.Any(t => t.ID != entity.ID));
+            var removeList = existList.Where(entity => entityList.Any(t => t.Id != entity.Id));
             foreach (var entity in removeList)
             {
                 if (!string.IsNullOrEmpty(leftItemId))
-                    removeAction(leftItemId, entity.ID);
+                    removeAction(leftItemId, entity.Id);
                 else if (!string.IsNullOrEmpty(rightItemId))
-                    removeAction(entity.ID, rightItemId);
+                    removeAction(entity.Id, rightItemId);
             }
         }
 
@@ -50,7 +50,7 @@ namespace WorkflowSetting.Help
         {
             var entityList = lv.ItemsSource as List<T>;
             if (entityList == null || !entityList.Any()) return;
-            entityList.ForEach(entity => addAction(itemId, entity.ID));
+            entityList.ForEach(entity => addAction(itemId, entity.Id));
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject

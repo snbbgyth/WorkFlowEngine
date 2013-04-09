@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestCommunication</RootNamespace>
     <AssemblyName>TestCommunication</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -34,6 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\ShareDLL\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ShareDLL\nunit.framework.dll</HintPath>
@@ -49,6 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NhibernateTest\OperationActionInfoTest.cs" />
+    <Compile Include="NhibernateTest\RelationTest.cs" />
+    <Compile Include="NhibernateTest\RoleInfoTest.cs" />
+    <Compile Include="NhibernateTest\TestCase.cs" />
+    <Compile Include="NhibernateTest\TestConfigurationHelper.cs" />
+    <Compile Include="NhibernateTest\UserGroupTest.cs" />
+    <Compile Include="NhibernateTest\UserInfoTest.cs" />
+    <Compile Include="NhibernateTest\WorkFlowActivityLogTest.cs" />
+    <Compile Include="NhibernateTest\WorkFlowActivityTest.cs" />
+    <Compile Include="NhibernateTest\WorkflowStateInfoTest.cs" />
     <Compile Include="WorkflowService\TestStateWorkFlowTest.cs" />
     <Compile Include="Common\BaseActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\CommonLibrary.Model.WorkFlowActivityModel.datasource" />
     <None Include="Service References\WFService\TestCommunication.WFService.WorkFlowActivityModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -97,6 +111,24 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj">
+      <Project>{9e9aa8f6-1040-475e-80fb-4dc61995dff0}</Project>
+      <Name>CommonLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NHibernate.DomainModel\NHibernate.DomainModel.csproj">
+      <Project>{7d90712d-00e4-4861-9a95-69decd901b34}</Project>
+      <Name>NHibernate.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nhibernate\NHibernate.csproj">
+      <Project>{5909bfe7-93cf-4e5f-be22-6293368af01d}</Project>
+      <Name>NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkFlowService\WorkFlowService.csproj">
+      <Project>{75c3b8c2-7fb6-4cbd-90a9-56f8cf69679b}</Project>
+      <Name>WorkFlowService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

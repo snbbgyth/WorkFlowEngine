@@ -77,23 +77,23 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitData(UserInfoModel entity)
         {
-            Id = entity.ID;
+            Id = entity.Id;
             CreateDateTime = entity.CreateDateTime;
             IsDelete = entity.IsDelete;
             PbPassword.Password = entity.Password;
             TxtUserName.Text = entity.UserName;
             TxtUserDisplayName.Text = entity.UserDisplayName;
             ClearDataBinding();
-            ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByUserId(entity.ID);
+            ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByUserId(entity.Id);
             LvUserGroupName.ItemsSource = ExistUserGroupList;
-            ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserId(entity.ID);
+            ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserId(entity.Id);
             LvUserRole.ItemsSource = ExistRoleInfoList;
-            var reportToUserEntity = UserOperationBLL.Current.QueryReportUserInfoByUserId(entity.ID);
+            var reportToUserEntity = UserOperationBLL.Current.QueryReportUserInfoByUserId(entity.Id);
             if (reportToUserEntity != null)
             {
                 TxtReportUserName.Text = reportToUserEntity.UserDisplayName;
-                ReportToId = reportToUserEntity.ID;
-                ReportRelationId = reportToUserEntity.ID;
+                ReportToId = reportToUserEntity.Id;
+                ReportRelationId = reportToUserEntity.Id;
             }
         }
 
@@ -220,7 +220,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
                 UserName = TxtUserName.Text,
                 UserDisplayName = TxtUserDisplayName.Text,
                 Password = PbPassword.Password,
-                ID = Id,
+                Id = Id,
                 LastUpdateDateTime = DateTime.Now
             };
 

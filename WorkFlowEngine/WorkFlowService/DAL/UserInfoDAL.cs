@@ -24,14 +24,14 @@ namespace WorkFlowService.DAL
 
         protected override string GetInsertByEntitySql(UserInfoModel entity)
         {
-            entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertUserInfoSqlTags, entity.ID, entity.UserName, entity.UserDisplayName, entity.Password,
+            entity.Id = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertUserInfoSqlTags, entity.Id, entity.UserName, entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(UserInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceUserInfoSqlTags, entity.ID, entity.UserName, entity.UserDisplayName, entity.Password,
+            return string.Format(WFConstants.InsertOrReplaceUserInfoSqlTags, entity.Id, entity.UserName, entity.UserDisplayName, entity.Password,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
@@ -48,7 +48,7 @@ namespace WorkFlowService.DAL
         public string Login(string userName, string password)
         {
             var entityList = DBHelpInstance.ReadEntityList<UserInfoModel>(GetQueryByUserNameAndPasswordSql(userName, password));
-            return entityList != null && entityList.Count > 0 ? entityList[0].ID : null;
+            return entityList != null && entityList.Count > 0 ? entityList[0].Id : null;
         }
 
         private string GetQueryByUserNameAndPasswordSql(string userName, string password)

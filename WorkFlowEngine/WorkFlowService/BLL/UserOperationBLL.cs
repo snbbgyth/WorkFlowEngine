@@ -385,14 +385,14 @@ namespace WorkFlowService.BLL
         {
             var entity = QueryWorkflowStateInfoByCondition(workflowName, stateNodeName);
             if (entity != null)
-                return QueryOperationActionByWorkflowStateId(entity.ID);
+                return QueryOperationActionByWorkflowStateId(entity.Id);
             return null;
         }
 
         public IEnumerable<OperationActionInfoModel> QueryOperationActionByWorkflowStateId(string workflowStateId)
         {
             var roleInfoEntity = QueryRoleInfoByWorkflowStateId(workflowStateId);
-            return roleInfoEntity != null ? QueryOperationActionByRoleId(roleInfoEntity.ID) : null;
+            return roleInfoEntity != null ? QueryOperationActionByRoleId(roleInfoEntity.Id) : null;
         }
 
         public UserInfoModel QueryReportUserInfoByUserId(string userId)

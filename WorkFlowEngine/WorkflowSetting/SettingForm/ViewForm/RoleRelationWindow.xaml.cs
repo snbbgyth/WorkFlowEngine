@@ -38,14 +38,14 @@ namespace WorkflowSetting.SettingForm.ViewForm
             InitProperty(entity);
             TxtRoleName.Text = entity.RoleName;
             TxtRoleDisplayName.Text = entity.RoleDisplayName;
-            ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByRoleId(entity.ID);
-            ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByRoleId(entity.ID);
-            ExistActionInfoList = UserOperationBLL.Current.QueryAllActionInfoByRoleId(entity.ID);
+            ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByRoleId(entity.Id);
+            ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByRoleId(entity.Id);
+            ExistActionInfoList = UserOperationBLL.Current.QueryAllActionInfoByRoleId(entity.Id);
             ClearBindData();
             LvUserGroupName.ItemsSource = ExistUserGroupList;
             LvUserName.ItemsSource = ExistUserInfoList;
             LvActionName.ItemsSource = ExistActionInfoList;
-            LvWorkflowState.ItemsSource = UserOperationBLL.Current.QueryAllWorkflowStateByRoleId(entity.ID);
+            LvWorkflowState.ItemsSource = UserOperationBLL.Current.QueryAllWorkflowStateByRoleId(entity.Id);
         }
 
         private void InitControl()
@@ -97,7 +97,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserRole, UserOperationBLL.Current.DeleteUserRole, ExistUserInfoList, null, Id);
         }
 
-        private void ModifyActionListList()
+        private void ModifyActionList()
         {
             SettingHelp.MoidfyListByCondition(LvActionName, UserOperationBLL.Current.AddOperationActionInRole, UserOperationBLL.Current.DeleteOperationActionInRole, ExistActionInfoList, null, Id);
         }
@@ -151,7 +151,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
                 InitProperty(entity);
                 ModifyUserGroupList();
                 ModifyUserInfoList();
-                ModifyActionListList();
+                ModifyActionList();
                 LblMessage.Content = "Create successful!";
                 InitControl();
             }
@@ -163,7 +163,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitProperty(RoleInfoModel entity)
         {
-            Id = entity.ID;
+            Id = entity.Id;
             CreateDateTime = entity.CreateDateTime;
             IsDelete = IsDelete;
         }
@@ -173,7 +173,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             UserOperationBLL.Current.DataOperationInstance.Modify(GetEntity());
             ModifyUserGroupList();
             ModifyUserInfoList();
-            ModifyActionListList();
+            ModifyActionList();
         }
 
         private RoleInfoModel GetEntity()
@@ -191,7 +191,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
                 return new RoleInfoModel
                 {
                     CreateDateTime = CreateDateTime,
-                    ID = Id,
+                    Id = Id,
                     IsDelete = IsDelete,
                     LastUpdateDateTime = DateTime.Now,
                     RoleDisplayName = TxtRoleDisplayName.Text,

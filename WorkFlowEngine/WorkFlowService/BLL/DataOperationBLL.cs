@@ -13,6 +13,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using CommonLibrary.Help;
 using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
@@ -41,8 +42,17 @@ namespace WorkFlowService.BLL
         {
             if (!_isInitDataBase)
             {
-                InitDataBaseFile();
-                InitCreateTable();
+                try
+                {
+                    InitDataBaseFile();
+                    InitCreateTable();
+                }
+                catch (Exception ex)
+                {
+                    LogHelp.Instance.Write(ex,MessageType.Error, GetType(),MethodBase.GetCurrentMethod().Name);
+                    throw;
+                }
+              
                 _isInitDataBase = true;
             }
         }
@@ -106,7 +116,7 @@ namespace WorkFlowService.BLL
                     }
                     catch (SQLiteException ex)
                     {
-                        if (ex.ErrorCode == 1)
+                        if (ex.ErrorCode  == SQLiteErrorCode.Done)
                         {
 
                         }

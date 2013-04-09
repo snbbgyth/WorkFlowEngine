@@ -1,10 +1,10 @@
 ﻿/********************************************************************************
-** Class Name:   WorkflowStateInfoModel 
+** Class Name:   WorkflowStateInfoModelModel 
 ** Author：      Spring Yang
 ** Create date： 2013-2-21
 ** Modify：      Spring Yang
 ** Modify Date： 2013-2-21
-** Summary：     WorkflowStateInfoModel class
+** Summary：     WorkflowStateInfoModelModel class
 *********************************************************************************/
 
 using System;
@@ -18,20 +18,20 @@ namespace WorkFlowService.Model
 {
     public class WorkflowStateInfoModel : ITableModel
     {
-        public string ID { get; set; }
+        public virtual string Id { get; set; }
 
-        public string WorkflowName { get; set; }
+        public virtual string WorkflowName { get; set; }
 
-        public string WorkflowDisplayName { get; set; }
+        public virtual string WorkflowDisplayName { get; set; }
 
-        public string StateNodeName { get; set; }
+        public virtual string StateNodeName { get; set; }
 
-        public string StateNodeDisplayName { get; set; }
+        public virtual string StateNodeDisplayName { get; set; }
 
-        public DateTime? CreateDateTime { get; set; }
+        public virtual DateTime? CreateDateTime { get; set; }
 
-        public DateTime? LastUpdateDateTime { get; set; }
+        public virtual DateTime? LastUpdateDateTime { get; set; }
 
-        public bool IsDelete { get; set; }
+        public virtual bool IsDelete { get; set; }
     }
 }

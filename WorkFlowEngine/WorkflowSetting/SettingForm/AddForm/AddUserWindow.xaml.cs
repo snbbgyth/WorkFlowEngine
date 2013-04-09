@@ -49,8 +49,8 @@ namespace WorkflowSetting.SettingForm.AddForm
             var result = UserOperationBLL.Current.DataOperationInstance.Insert(entity);
             if (result > 0)
             {
-                Id = entity.ID;
-                SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, entity.ID);
+                Id = entity.Id;
+                SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, entity.Id);
                 return true;
             }
             return false;

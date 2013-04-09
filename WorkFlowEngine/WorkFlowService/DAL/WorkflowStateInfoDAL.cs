@@ -23,14 +23,14 @@ namespace WorkFlowService.DAL
 
         protected override string GetInsertByEntitySql(WorkflowStateInfoModel entity)
         {
-            entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertWorkflowStateInfoSqlTags, entity.ID, entity.WorkflowName, entity.WorkflowDisplayName, entity.StateNodeName, entity.StateNodeDisplayName,
+            entity.Id = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertWorkflowStateInfoSqlTags, entity.Id, entity.WorkflowName, entity.WorkflowDisplayName, entity.StateNodeName, entity.StateNodeDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(WorkflowStateInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceWorkflowStateInfoSqlTags, entity.ID, entity.WorkflowName, entity.WorkflowDisplayName, entity.StateNodeName, entity.StateNodeDisplayName,
+            return string.Format(WFConstants.InsertOrReplaceWorkflowStateInfoSqlTags, entity.Id, entity.WorkflowName, entity.WorkflowDisplayName, entity.StateNodeName, entity.StateNodeDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 

@@ -153,7 +153,7 @@ namespace TestCommunication.WFService {
         private string ForeWorkflowStateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IDField;
+        private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsDeleteField;
@@ -275,14 +275,14 @@ namespace TestCommunication.WFService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ID {
+        public string Id {
             get {
-                return this.IDField;
+                return this.IdField;
             }
             set {
-                if ((object.ReferenceEquals(this.IDField, value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -376,48 +376,49 @@ namespace TestCommunication.WFService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WFService.WorkFlowService")]
-    public interface WorkFlowService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WFService.BPELWorkFlowService")]
+    public interface BPELWorkFlowService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/Execute", ReplyAction="http://tempuri.org/WorkFlowService/ExecuteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/BPELWorkFlowService/Execute", ReplyAction="http://tempuri.org/BPELWorkFlowService/ExecuteResponse")]
         string Execute(TestCommunication.WFService.AppInfoModel entity);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/NewWorkFlow", ReplyAction="http://tempuri.org/WorkFlowService/NewWorkFlowResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/BPELWorkFlowService/NewWorkFlow", ReplyAction="http://tempuri.org/BPELWorkFlowService/NewWorkFlowResponse")]
         string NewWorkFlow(TestCommunication.WFService.AppInfoModel entity);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/QueryInProgressActivityListByOperatorUserId", ReplyAction="http://tempuri.org/WorkFlowService/QueryInProgressActivityListByOperatorUserIdRes" +
-            "ponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/BPELWorkFlowService/QueryInProgressActivityListByOperatorUserI" +
+            "d", ReplyAction="http://tempuri.org/BPELWorkFlowService/QueryInProgressActivityListByOperatorUserI" +
+            "dResponse")]
         TestCommunication.WFService.WorkFlowActivityModel[] QueryInProgressActivityListByOperatorUserId(string operatorUserId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WorkFlowService/GetCurrentActivityStateByAppIdAndUserID", ReplyAction="http://tempuri.org/WorkFlowService/GetCurrentActivityStateByAppIdAndUserIDRespons" +
-            "e")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserID", ReplyAction="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserIDRes" +
+            "ponse")]
         string[] GetCurrentActivityStateByAppIdAndUserID(string appId, string userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface WorkFlowServiceChannel : TestCommunication.WFService.WorkFlowService, System.ServiceModel.IClientChannel {
+    public interface BPELWorkFlowServiceChannel : TestCommunication.WFService.BPELWorkFlowService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WorkFlowServiceClient : System.ServiceModel.ClientBase<TestCommunication.WFService.WorkFlowService>, TestCommunication.WFService.WorkFlowService {
+    public partial class BPELWorkFlowServiceClient : System.ServiceModel.ClientBase<TestCommunication.WFService.BPELWorkFlowService>, TestCommunication.WFService.BPELWorkFlowService {
         
-        public WorkFlowServiceClient() {
+        public BPELWorkFlowServiceClient() {
         }
         
-        public WorkFlowServiceClient(string endpointConfigurationName) : 
+        public BPELWorkFlowServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public WorkFlowServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public BPELWorkFlowServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public WorkFlowServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public BPELWorkFlowServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public WorkFlowServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public BPELWorkFlowServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         

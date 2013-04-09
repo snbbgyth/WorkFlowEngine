@@ -37,9 +37,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
             TxtGroupName.Text = entity.GroupName;
             TxtGroupDisplayName.Text = entity.GroupDisplayName;
             ClearItems();
-            ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserGroupId(entity.ID);
-            ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByUserGroupId(entity.ID);
-            Id = entity.ID;
+            ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserGroupId(entity.Id);
+            ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByUserGroupId(entity.Id);
+            Id = entity.Id;
             CreateDateTime = entity.CreateDateTime;
             IsDelete = entity.IsDelete;
             InitControl();
@@ -169,7 +169,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
                 IsDelete = IsDelete,
                 GroupDisplayName = TxtGroupDisplayName.Text,
                 GroupName = TxtGroupName.Text,
-                ID = Id,
+                Id = Id,
                 LastUpdateDateTime = DateTime.Now
             };
         }

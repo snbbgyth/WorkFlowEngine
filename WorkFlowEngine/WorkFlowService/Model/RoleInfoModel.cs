@@ -15,17 +15,17 @@ namespace WorkFlowService.Model
 {
     public class RoleInfoModel : ITableModel
     {
-        public string ID { get; set; }
+        public virtual string Id { get; set; }
 
-        public string RoleName { get; set; }
+        public virtual string RoleName { get; set; }
 
-        public string RoleDisplayName { get; set; }
+        public virtual string RoleDisplayName { get; set; }
 
-        public DateTime? CreateDateTime { get; set; }
+        public virtual DateTime? CreateDateTime { get; set; }
 
-        public DateTime? LastUpdateDateTime { get; set; }
+        public virtual DateTime? LastUpdateDateTime { get; set; }
 
-        public bool IsDelete { get; set; }
+        public virtual bool IsDelete { get; set; }
 
     }
 }

@@ -18,7 +18,7 @@ namespace CommonLibrary.Help
    public  class CommonUnitlHelp
     {
        /// <summary>
-       /// Get enum type by data base type 
+       /// Get enum type by enum name
        /// </summary>
        /// <param name="enumName">Enum type</param>
        /// <returns>Enum type </returns>

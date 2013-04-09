@@ -115,6 +115,7 @@ namespace DBHelp
                             {
                                 command.CommandText = cmdText;
                                 command.Transaction = transaction;
+                                command.CommandTimeout = 30*1000;
                                 command.ExecuteNonQuery();
                             }
                             catch (Exception ex)
@@ -137,6 +138,61 @@ namespace DBHelp
                     {
                         transaction.Rollback();
                         return false;
+                    }
+                    finally
+                    {
+                        transaction.Dispose();
+                        conn.Dispose();
+                        conn.Close();
+                        cmdList.Clear();
+                    }
+                }
+            }
+
+        }
+
+        public int BatchExecuteNonQuery(List<KeyValuePair<string, List<DbParameter>>> cmdList)
+        {
+            int result = 0;
+            using (var conn = GetConnection(ConnectionString))
+            {
+                conn.Open();
+                using (var transaction = conn.BeginTransaction())
+                {
+                    foreach (var cmdText in cmdList)
+                    {
+                        if (string.IsNullOrEmpty(cmdText.Key)) continue;
+                        using (var command = conn.CreateCommand())
+                        {
+                            try
+                            {
+                                PrepareCommand(command, conn, cmdText.Key, cmdText.Value);
+                                command.Transaction = transaction;
+                                var executeCount = command.ExecuteNonQuery();
+                                result += executeCount > 0 ? executeCount : 0;
+                            }
+                            catch (Exception ex)
+                            {
+                                LogHelp.Instance.Write(ex.Message + cmdText, MessageType.Error, GetType(), MethodBase.GetCurrentMethod().Name);
+                            }
+                            finally
+                            {
+                                command.CommandText = null;
+                                command.Dispose();
+
+                            }
+                        }
+                    }
+                    try
+                    {
+                        transaction.Commit();
+                        return result;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                        // return false;
                     }
                     finally
                     {
@@ -344,7 +400,7 @@ namespace DBHelp
             cmd.CommandText = cmdText;
 
             cmd.CommandType = CommandType.Text;
-            cmd.CommandTimeout = 30;
+            cmd.CommandTimeout = 30*1000;
             if (parameters != null)
                 foreach (var parameter in parameters)
                 {

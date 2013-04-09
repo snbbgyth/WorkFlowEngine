@@ -23,8 +23,8 @@ namespace WorkFlowService.DAL
 
         protected override string GetInsertByEntitySql(WorkFlowActivityModel entity)
         {
-            entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertWorkFlowActivitySqlTags, entity.ID, entity.AppId, entity.WorkflowName,
+            entity.Id = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertWorkFlowActivitySqlTags, entity.Id, entity.AppId, entity.WorkflowName,
                                  entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkflowState,
                                  entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                                  entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));
@@ -33,7 +33,7 @@ namespace WorkFlowService.DAL
 
         protected override string GetModifyByEntitySql(WorkFlowActivityModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivitySqlTags, entity.ID, entity.AppId, entity.WorkflowName,
+            return string.Format(WFConstants.InsertOrReplaceWorkFlowActivitySqlTags, entity.Id, entity.AppId, entity.WorkflowName,
                               entity.ForeWorkflowState, entity.OperatorActivity, entity.CurrentWorkflowState,
                               entity.OperatorUserId, entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(),
                               entity.CreateUserId, entity.OperatorUserList, entity.ApplicationState, entity.AppName, Convert.ToInt32(entity.IsDelete));

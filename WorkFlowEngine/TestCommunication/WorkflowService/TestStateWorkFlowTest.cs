@@ -6,6 +6,7 @@
 ** Modify Date： 2012-3-13
 ** Summary：     TestStateWorkFlowTest interface
 *********************************************************************************/
+ 
 
 namespace TestCommunication.WorkflowService
 {
@@ -15,9 +16,9 @@ namespace TestCommunication.WorkflowService
 
     public class TestStateWorkFlowTest : BaseActivity
     {
-        private WorkFlowServiceClient WfServiceInstance
+        private BPELWorkFlowServiceClient WfServiceInstance
         {
-            get { return new WorkFlowServiceClient(); }
+            get { return new BPELWorkFlowServiceClient(); }
         }
 
         [Test]

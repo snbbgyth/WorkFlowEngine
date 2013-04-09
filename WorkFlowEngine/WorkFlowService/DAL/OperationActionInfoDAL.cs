@@ -23,14 +23,14 @@ namespace WorkFlowService.DAL
 
         protected override string GetInsertByEntitySql(OperationActionInfoModel entity)
         {
-            entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertOperationActionInfoSqlTags, entity.ID, entity.ActionName, entity.ActionDisplayName,
+            entity.Id = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertOperationActionInfoSqlTags, entity.Id, entity.ActionName, entity.ActionDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(OperationActionInfoModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceOperationActionInfoSqlTags, entity.ID, entity.ActionName, entity.ActionDisplayName,
+            return string.Format(WFConstants.InsertOrReplaceOperationActionInfoSqlTags, entity.Id, entity.ActionName, entity.ActionDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 

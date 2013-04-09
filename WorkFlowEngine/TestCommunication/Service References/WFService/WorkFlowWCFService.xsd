@@ -25,7 +25,7 @@
       <xs:element minOccurs="0" name="CreateUserId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CurrentWorkflowState" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ForeWorkflowState" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsDelete" type="xs:boolean" />
       <xs:element minOccurs="0" name="LastUpdateDateTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="OperatorActivity" nillable="true" type="xs:string" />

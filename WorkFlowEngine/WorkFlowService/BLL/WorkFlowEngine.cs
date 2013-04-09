@@ -56,7 +56,7 @@ namespace WorkFlowService.BLL
         public void AddStateRoleByCondition(string workflowName, string stateNodeName, PartnerLinkModel partnerLink)
         {
             var workflowStateEntity = GetWorkflowStateInfoByCondition(workflowName, stateNodeName);
-            var roleInfoEntity = UserOperationBLL.Current.QueryRoleInfoByWorkflowStateId(workflowStateEntity.ID);
+            var roleInfoEntity = UserOperationBLL.Current.QueryRoleInfoByWorkflowStateId(workflowStateEntity.Id);
             if (roleInfoEntity == null)
             {
                 roleInfoEntity = UserOperationBLL.Current.QueryRoleInfoByRoleName(partnerLink.MyRole);
@@ -78,7 +78,7 @@ namespace WorkFlowService.BLL
                     roleInfoEntity.LastUpdateDateTime = DateTime.Now;
                     DataOperationBLL.Current.Modify(roleInfoEntity);
                 }
-                UserOperationBLL.Current.AddWorkflowStateInRole(workflowStateEntity.ID, roleInfoEntity.ID);
+                UserOperationBLL.Current.AddWorkflowStateInRole(workflowStateEntity.Id, roleInfoEntity.Id);
             }
             else
             {
@@ -95,7 +95,7 @@ namespace WorkFlowService.BLL
             {
                 workflowStateEntity = new WorkflowStateInfoModel
                 {
-                    ID = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     CreateDateTime = DateTime.Now,
                     LastUpdateDateTime = DateTime.Now,
                     StateNodeName = workflowStep.StepId,

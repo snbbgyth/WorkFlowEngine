@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WorkFlowService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BPELWorkFlowService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -8,52 +8,52 @@
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="WorkFlowService_Execute_InputMessage">
+  <wsdl:message name="BPELWorkFlowService_Execute_InputMessage">
     <wsdl:part name="parameters" element="tns:Execute" />
   </wsdl:message>
-  <wsdl:message name="WorkFlowService_Execute_OutputMessage">
+  <wsdl:message name="BPELWorkFlowService_Execute_OutputMessage">
     <wsdl:part name="parameters" element="tns:ExecuteResponse" />
   </wsdl:message>
-  <wsdl:message name="WorkFlowService_NewWorkFlow_InputMessage">
+  <wsdl:message name="BPELWorkFlowService_NewWorkFlow_InputMessage">
     <wsdl:part name="parameters" element="tns:NewWorkFlow" />
   </wsdl:message>
-  <wsdl:message name="WorkFlowService_NewWorkFlow_OutputMessage">
+  <wsdl:message name="BPELWorkFlowService_NewWorkFlow_OutputMessage">
     <wsdl:part name="parameters" element="tns:NewWorkFlowResponse" />
   </wsdl:message>
-  <wsdl:message name="WorkFlowService_QueryInProgressActivityListByOperatorUserId_InputMessage">
+  <wsdl:message name="BPELWorkFlowService_QueryInProgressActivityListByOperatorUserId_InputMessage">
     <wsdl:part name="parameters" element="tns:QueryInProgressActivityListByOperatorUserId" />
   </wsdl:message>
-  <wsdl:message name="WorkFlowService_QueryInProgressActivityListByOperatorUserId_OutputMessage">
+  <wsdl:message name="BPELWorkFlowService_QueryInProgressActivityListByOperatorUserId_OutputMessage">
     <wsdl:part name="parameters" element="tns:QueryInProgressActivityListByOperatorUserIdResponse" />
   </wsdl:message>
-  <wsdl:message name="WorkFlowService_GetCurrentActivityStateByAppIdAndUserID_InputMessage">
+  <wsdl:message name="BPELWorkFlowService_GetCurrentActivityStateByAppIdAndUserID_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentActivityStateByAppIdAndUserID" />
   </wsdl:message>
-  <wsdl:message name="WorkFlowService_GetCurrentActivityStateByAppIdAndUserID_OutputMessage">
+  <wsdl:message name="BPELWorkFlowService_GetCurrentActivityStateByAppIdAndUserID_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentActivityStateByAppIdAndUserIDResponse" />
   </wsdl:message>
-  <wsdl:portType name="WorkFlowService">
+  <wsdl:portType name="BPELWorkFlowService">
     <wsdl:operation name="Execute">
-      <wsdl:input wsaw:Action="http://tempuri.org/WorkFlowService/Execute" message="tns:WorkFlowService_Execute_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/WorkFlowService/ExecuteResponse" message="tns:WorkFlowService_Execute_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/Execute" message="tns:BPELWorkFlowService_Execute_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/ExecuteResponse" message="tns:BPELWorkFlowService_Execute_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="NewWorkFlow">
-      <wsdl:input wsaw:Action="http://tempuri.org/WorkFlowService/NewWorkFlow" message="tns:WorkFlowService_NewWorkFlow_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/WorkFlowService/NewWorkFlowResponse" message="tns:WorkFlowService_NewWorkFlow_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/NewWorkFlow" message="tns:BPELWorkFlowService_NewWorkFlow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/NewWorkFlowResponse" message="tns:BPELWorkFlowService_NewWorkFlow_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="QueryInProgressActivityListByOperatorUserId">
-      <wsdl:input wsaw:Action="http://tempuri.org/WorkFlowService/QueryInProgressActivityListByOperatorUserId" message="tns:WorkFlowService_QueryInProgressActivityListByOperatorUserId_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/WorkFlowService/QueryInProgressActivityListByOperatorUserIdResponse" message="tns:WorkFlowService_QueryInProgressActivityListByOperatorUserId_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/QueryInProgressActivityListByOperatorUserId" message="tns:BPELWorkFlowService_QueryInProgressActivityListByOperatorUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/QueryInProgressActivityListByOperatorUserIdResponse" message="tns:BPELWorkFlowService_QueryInProgressActivityListByOperatorUserId_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetCurrentActivityStateByAppIdAndUserID">
-      <wsdl:input wsaw:Action="http://tempuri.org/WorkFlowService/GetCurrentActivityStateByAppIdAndUserID" message="tns:WorkFlowService_GetCurrentActivityStateByAppIdAndUserID_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/WorkFlowService/GetCurrentActivityStateByAppIdAndUserIDResponse" message="tns:WorkFlowService_GetCurrentActivityStateByAppIdAndUserID_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserID" message="tns:BPELWorkFlowService_GetCurrentActivityStateByAppIdAndUserID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserIDResponse" message="tns:BPELWorkFlowService_GetCurrentActivityStateByAppIdAndUserID_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="BasicHttpBinding_WorkFlowService" type="tns:WorkFlowService">
+  <wsdl:binding name="BasicHttpBinding_BPELWorkFlowService" type="tns:BPELWorkFlowService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Execute">
-      <soap:operation soapAction="http://tempuri.org/WorkFlowService/Execute" style="document" />
+      <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/Execute" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -62,7 +62,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="NewWorkFlow">
-      <soap:operation soapAction="http://tempuri.org/WorkFlowService/NewWorkFlow" style="document" />
+      <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/NewWorkFlow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -71,7 +71,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="QueryInProgressActivityListByOperatorUserId">
-      <soap:operation soapAction="http://tempuri.org/WorkFlowService/QueryInProgressActivityListByOperatorUserId" style="document" />
+      <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/QueryInProgressActivityListByOperatorUserId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -80,7 +80,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetCurrentActivityStateByAppIdAndUserID">
-      <soap:operation soapAction="http://tempuri.org/WorkFlowService/GetCurrentActivityStateByAppIdAndUserID" style="document" />
+      <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserID" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -89,8 +89,8 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="WorkFlowService">
-    <wsdl:port name="BasicHttpBinding_WorkFlowService" binding="tns:BasicHttpBinding_WorkFlowService">
+  <wsdl:service name="BPELWorkFlowService">
+    <wsdl:port name="BasicHttpBinding_BPELWorkFlowService" binding="tns:BasicHttpBinding_BPELWorkFlowService">
       <soap:address location="http://localhost:9090/WorkFlowWCFService" />
     </wsdl:port>
   </wsdl:service>

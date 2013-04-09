@@ -14,6 +14,7 @@ using System.ServiceModel;
 using System.Text;
 using WorkFlowWCFService;
 
+
 namespace ConsoleWorkFlow
 {
     internal class Program
@@ -26,7 +27,7 @@ namespace ConsoleWorkFlow
         private static void StartListener()
         {
             //WCF配置信息在App.Config中
-            using (var serviceHost = new ServiceHost(typeof(WorkFlowWCFService.WorkFlowService)))
+            using (var serviceHost = new ServiceHost(typeof(BPELWorkFlowService)))
             {
                 serviceHost.Open();
                 Console.WriteLine("The server is ready.");

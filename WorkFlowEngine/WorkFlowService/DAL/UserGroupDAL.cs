@@ -23,14 +23,14 @@ namespace WorkFlowService.DAL
 
         protected override string GetInsertByEntitySql(UserGroupModel entity)
         {
-            entity.ID = Guid.NewGuid().ToString();
-            return string.Format(WFConstants.InsertUserGroupSqlTags, entity.ID, entity.GroupName, entity.GroupDisplayName,
+            entity.Id = Guid.NewGuid().ToString();
+            return string.Format(WFConstants.InsertUserGroupSqlTags, entity.Id, entity.GroupName, entity.GroupDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 
         protected override string GetModifyByEntitySql(UserGroupModel entity)
         {
-            return string.Format(WFConstants.InsertOrReplaceUserGroupSqlTags, entity.ID, entity.GroupName, entity.GroupDisplayName,
+            return string.Format(WFConstants.InsertOrReplaceUserGroupSqlTags, entity.Id, entity.GroupName, entity.GroupDisplayName,
                                  entity.CreateDateTime.ConvertSqliteDateTime(), entity.LastUpdateDateTime.ConvertSqliteDateTime(), Convert.ToInt32(entity.IsDelete));
         }
 

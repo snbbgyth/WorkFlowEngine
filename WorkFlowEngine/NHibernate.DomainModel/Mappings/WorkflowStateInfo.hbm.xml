@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="WorkFlowService.Model" assembly="WorkFlowService">
+  <class name="WorkflowStateInfoModel" table="WorkflowStateInfo">
+    <id name="Id" column="Id"  type="AnsiString">
+      <generator  class="assigned"/>
+    </id>
+
+    <property name="WorkflowName"  column="WorkflowName" type="string" length="200"
+						  not-null="false"  />
+    <property name="WorkflowDisplayName"  column="WorkflowDisplayName" type="string" length="500"
+						  not-null="false"  />
+    <property name="StateNodeName"  column="StateNodeName" type="string" length="200"
+						  not-null="false"  />
+    <property name="StateNodeDisplayName"  column="StateNodeDisplayName" type="string" length="500"
+						  not-null="false"  />
+    <property name="CreateDateTime"  column="CreateDateTime" type="DateTime"
+						  not-null="false"   />
+    <property name="LastUpdateDateTime"  column="LastUpdateDateTime" type="DateTime"
+						  not-null="false"   />
+    <property name="IsDelete"  column="IsDelete" type="boolean"
+						  not-null="false"  />
+  </class>
+</hibernate-mapping>
+

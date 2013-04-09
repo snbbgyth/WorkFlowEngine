@@ -18,18 +18,18 @@ namespace WorkFlowService.Model
 {
     public class RelationModel : ITableModel
     {
-        public string ID { get; set; }
+        public virtual string Id { get; set; }
 
-        public string ChildNodeID { get; set; }
+        public virtual string ChildNodeID { get; set; }
 
-        public string ParentNodeID { get; set; }
+        public virtual string ParentNodeID { get; set; }
 
-        public int Type { get; set; }
+        public virtual int Type { get; set; }
 
-        public DateTime? CreateDateTime { get; set; }
+        public virtual DateTime? CreateDateTime { get; set; }
 
-        public DateTime? LastUpdateDateTime { get; set; }
+        public virtual DateTime? LastUpdateDateTime { get; set; }
 
-        public bool IsDelete { get; set; }
+        public virtual bool IsDelete { get; set; }
     }
 }

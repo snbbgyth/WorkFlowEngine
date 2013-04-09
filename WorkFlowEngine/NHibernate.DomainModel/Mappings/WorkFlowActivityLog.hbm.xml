@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="CommonLibrary.Model" assembly="CommonLibrary">
+  <class name="WorkFlowActivityLogModel" table="WorkFlowActivityLog">
+    <id name="Id" column="Id"  type="AnsiString">
+      <generator  class="assigned"/>
+    </id>
+    
+    <property name="OldID"  column="OldID" type="string" length="50"
+						  not-null="false"  />
+    <property name="AppId"  column="AppId" type="string" length="50"
+						  not-null="false"  />
+    <property name="WorkflowName"  column="WorkflowName" type="string" length="200"
+						  not-null="false"  />
+    <property name="ForeWorkFlowState"  column="ForeWorkFlowState" type="string" length="200"
+						  not-null="false"  />
+    <property name="OperatorActivity"  column="OperatorActivity" type="string" length="200"
+						  not-null="false"  />
+    <property name="CurrentWorkflowState"  column="CurrentWorkflowState" type="string" length="50"
+          not-null="false"  />
+    <property name="OperatorUserId"  column="OperatorUserId" type="string" length="2000"
+						  not-null="false"  />
+    <property name="CreateUserId"  column="CreateUserId" type="string" length="50"
+						  not-null="false"  />
+    <property name="OperatorUserList"  column="OperatorUserList" type="string" length="2000"
+						  not-null="false"  />
+    <property name="ApplicationState"  column="ApplicationState" type="string" length="200"
+          not-null="false"  />
+    <property name="AppName"  column="AppName" type="string" length="200"
+						  not-null="false"  />
+    <property name="CreateDateTime"  column="CreateDateTime" type="DateTime"
+						  not-null="false"   />
+    <property name="LastUpdateDateTime"  column="LastUpdateDateTime" type="DateTime"
+						  not-null="false"   />
+    <property name="IsDelete"  column="IsDelete" type="boolean"
+						  not-null="false"  />
+  </class>
+</hibernate-mapping>
+

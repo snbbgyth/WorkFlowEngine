@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="WorkFlowService.Model" assembly="WorkFlowService">
+  <class name="UserGroupModel" table="UserGroup">
+    <id name="Id" column="Id"  type="AnsiString">
+      <generator  class="assigned"/>
+    </id>
+
+    <property name="GroupName"  column="GroupName" type="string" length="200"
+						  not-null="false"  />
+    <property name="GroupDisplayName"  column="GroupDisplayName" type="string" length="500"
+						  not-null="false"  />
+    <property name="CreateDateTime"  column="CreateDateTime" type="DateTime"
+						  not-null="false"   />
+    <property name="LastUpdateDateTime"  column="LastUpdateDateTime" type="DateTime"
+						  not-null="false"   />
+    <property name="IsDelete"  column="IsDelete" type="boolean"
+						  not-null="false"  />
+  </class>
+</hibernate-mapping>

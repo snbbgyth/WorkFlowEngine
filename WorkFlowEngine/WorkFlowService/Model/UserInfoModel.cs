@@ -15,18 +15,18 @@ namespace WorkFlowService.Model
 {
     public class UserInfoModel : ITableModel
     {
-       public string ID { get; set; }
+        public virtual string Id { get; set; }
 
-       public string UserName { get; set; }
+        public virtual string UserName { get; set; }
 
-       public string UserDisplayName { get; set; }
+        public virtual string UserDisplayName { get; set; }
 
-       public string Password { get; set; }
+        public virtual string Password { get; set; }
 
-       public DateTime? CreateDateTime { get; set; }
+        public virtual DateTime? CreateDateTime { get; set; }
 
-       public DateTime? LastUpdateDateTime { get; set; }
+        public virtual DateTime? LastUpdateDateTime { get; set; }
 
-       public bool IsDelete { get; set; }
+        public virtual bool IsDelete { get; set; }
     }
 }
