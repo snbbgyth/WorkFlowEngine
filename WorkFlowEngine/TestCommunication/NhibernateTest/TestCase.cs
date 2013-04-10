@@ -240,48 +240,7 @@ namespace TestCommunication.NhibernateTest
             new SchemaUpdate(cfg).Execute(OutputDdl,true);
         }
 
-        private IConnectionHelper connectionHelper;
-
-        //todo: create table if not exist.
-        protected bool tableExists(String tableName)
-        {
-            Boolean result = false;
-
-            var dialect = Dialect.GetDialect(cfg.Properties);
-            IDictionary<string, string> props = new Dictionary<string, string>(dialect.DefaultProperties);
-            foreach (var prop in cfg.Properties)
-            {
-                props[prop.Key] = prop.Value;
-            }
-            connectionHelper = new ManagedProviderConnectionHelper(props);
-            var connection = connectionHelper.Connection;
-            var meta = new DatabaseMetadata(connection, dialect);
-          
-            //ITableMetadata tableInfo = meta.GetTableMetadata(
-            //            table.Name,
-            //            table.Schema ?? defaultSchema,
-            //            table.Catalog ?? defaultCatalog,
-            //            table.IsQuoted);
-            //if (tableInfo == null)
-            //    throw new HibernateException("Missing table: " + table.Name);
-            //else
-            //    table.ValidateColumns(dialect, mapping, tableInfo);
-            //if (connection != null)
-            //{
-            //    var tables = meta.GetTableMetadata();
-            //    while (tables.next())
-            //    {
-            //        String currentTableName = tables.getString("TABLE_NAME");
-            //        if (currentTableName.equals(tableName))
-            //        {
-            //            result = true;
-            //        }
-            //    }
-            //    tables.close();
-            //}  
-            return result;
-        }
-
+        
 
         public void ValidateSchema(Configuration config)
         {

@@ -52,20 +52,10 @@
     <Compile Include="BLL\UserOperationBLL.cs" />
     <Compile Include="BLL\WorkFlowEngine.cs" />
     <Compile Include="BLL\WorkFlowManage.cs" />
-    <Compile Include="DAL\DataOperationActivityBase.cs" />
-    <Compile Include="DAL\OperationActionInfoDAL.cs" />
-    <Compile Include="DAL\RelationDAL.cs" />
-    <Compile Include="DAL\UserGroupDAL.cs" />
-    <Compile Include="DAL\UserInfoDAL.cs" />
-    <Compile Include="DAL\RoleInfoDAL.cs" />
-    <Compile Include="DAL\WorkFlowActivityDAL.cs" />
-    <Compile Include="DAL\WorkFlowActivityLogDAL.cs" />
-    <Compile Include="DAL\WorkflowStateInfoDAL.cs" />
     <Compile Include="Help\TypeNameComparer.cs" />
     <Compile Include="Help\WFConstants.cs" />
     <Compile Include="Help\WFUntilHelp.cs" />
     <Compile Include="IDAL\IActivityState.cs" />
-    <Compile Include="IDAL\ICreateDataTableActivity.cs" />
     <Compile Include="IDAL\IDataOperationActivity.cs" />
     <Compile Include="IDAL\IDataOperationDAL.cs" />
     <Compile Include="IDAL\IUserOperationActivity.cs" />
@@ -76,6 +66,15 @@
     <Compile Include="Model\UserInfoModel.cs" />
     <Compile Include="Model\RoleInfoModel.cs" />
     <Compile Include="Model\WorkflowStateInfoModel.cs" />
+    <Compile Include="NHibernateDAL\DataOperationActivityBase.cs" />
+    <Compile Include="NHibernateDAL\OperationActionInfoDAL.cs" />
+    <Compile Include="NHibernateDAL\RelationDAL.cs" />
+    <Compile Include="NHibernateDAL\RoleInfoDAL.cs" />
+    <Compile Include="NHibernateDAL\UserGroupDAL.cs" />
+    <Compile Include="NHibernateDAL\UserInfoDAL.cs" />
+    <Compile Include="NHibernateDAL\WorkFlowActivityDAL.cs" />
+    <Compile Include="NHibernateDAL\WorkFlowActivityLogDAL.cs" />
+    <Compile Include="NHibernateDAL\WorkflowStateInfoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +85,14 @@
     <ProjectReference Include="..\DBHelp\DBHelp.csproj">
       <Project>{2722A42C-B518-4321-A788-B22A961BEFB3}</Project>
       <Name>DBHelp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NHibernate.DomainModel\NHibernate.DomainModel.csproj">
+      <Project>{7d90712d-00e4-4861-9a95-69decd901b34}</Project>
+      <Name>NHibernate.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nhibernate\NHibernate.csproj">
+      <Project>{5909bfe7-93cf-4e5f-be22-6293368af01d}</Project>
+      <Name>NHibernate</Name>
     </ProjectReference>
     <ProjectReference Include="..\WorkFlowHandle\WorkFlowHandle.csproj">
       <Project>{96BD9BBF-2CAD-4968-BAAA-789BABD4AD11}</Project>

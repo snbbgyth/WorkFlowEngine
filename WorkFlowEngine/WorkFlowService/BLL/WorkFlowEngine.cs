@@ -95,7 +95,7 @@ namespace WorkFlowService.BLL
             {
                 workflowStateEntity = new WorkflowStateInfoModel
                 {
-                    Id = Guid.NewGuid().ToString(),
+              
                     CreateDateTime = DateTime.Now,
                     LastUpdateDateTime = DateTime.Now,
                     StateNodeName = workflowStep.StepId,
@@ -103,14 +103,16 @@ namespace WorkFlowService.BLL
                     WorkflowName = workflowName,
                     WorkflowDisplayName = workflowName
                 };
+                DataOperationBLL.Current.Insert(workflowStateEntity);
             }
             else
             {
                 workflowStateEntity.WorkflowDisplayName = workflowName;
                 workflowStateEntity.StateNodeDisplayName = workflowStep.StepId;
                 //Todo: modify workflowStateInfo 
+                DataOperationBLL.Current.Modify(workflowStateEntity);
             }
-            DataOperationBLL.Current.Modify(workflowStateEntity);
+          
         }
 
         public WorkflowStateInfoModel GetWorkflowStateInfoByCondition(string workflowName, string stateNodeName)

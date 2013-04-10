@@ -12,7 +12,7 @@ using WorkFlowService.IDAL;
 namespace WorkFlowService.BLL
 {
     using Model;
-    using DAL;
+    using NHibernateDAL;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -28,7 +28,7 @@ namespace WorkFlowService.BLL
 
         public UserOperationBLL()
         {
-            DataOperationInstance.InitDataBase();
+    
         }
 
         private DataOperationBLL _dataOperationInstance;
@@ -102,7 +102,7 @@ namespace WorkFlowService.BLL
         public bool AddUserInUserGroup(string userId, string userGroupId)
         {
             return
-                RelationDAL.Current.Insert(new RelationModel
+                DataOperationInstance.Insert(new RelationModel
                 {
                     ChildNodeID = userId,
                     CreateDateTime = DateTime.Now,
@@ -136,7 +136,7 @@ namespace WorkFlowService.BLL
         public bool AddUserGroupRole(string userGroupId, string roleID)
         {
             return
-                DataOperationBLL.Current.Insert(new RelationModel
+               DataOperationInstance.Insert(new RelationModel
                 {
                     ChildNodeID = userGroupId,
                     ParentNodeID = roleID,
@@ -168,7 +168,7 @@ namespace WorkFlowService.BLL
 
         public bool AddOperationActionInRole(string operationActionId, string roleId)
         {
-            return RelationDAL.Current.Insert(new RelationModel
+            return DataOperationInstance.Insert(new RelationModel
             {
                 ChildNodeID = operationActionId,
                 ParentNodeID = roleId,
@@ -195,7 +195,7 @@ namespace WorkFlowService.BLL
         public bool AddWorkflowStateInRole(string workflowStateId, string roleId)
         {
             return
-                RelationDAL.Current.Insert(new RelationModel
+               DataOperationInstance.Insert(new RelationModel
                 {
                     ChildNodeID = workflowStateId,
                     ParentNodeID = roleId,
@@ -228,7 +228,7 @@ namespace WorkFlowService.BLL
         public bool AddUserRole(string userId, string roleId)
         {
             return
-                RelationDAL.Current.Insert(new RelationModel
+               DataOperationInstance.Insert(new RelationModel
                 {
                     ChildNodeID = userId,
                     ParentNodeID = roleId,
@@ -261,7 +261,7 @@ namespace WorkFlowService.BLL
         public bool AddUserReportToUser(string userId, string reportUserId)
         {
             return
-                RelationDAL.Current.Insert(new RelationModel
+                DataOperationInstance.Insert(new RelationModel
                 {
                     ChildNodeID = userId,
                     CreateDateTime = DateTime.Now,

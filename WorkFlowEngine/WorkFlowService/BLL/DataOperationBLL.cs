@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using CommonLibrary.Help;
+using CommonLibrary.IDAL;
 using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 
@@ -33,40 +34,15 @@ namespace WorkFlowService.BLL
 
         public DataOperationBLL()
         {
-            InitDataBase();
+ 
         }
 
 
 
-        public void InitDataBase()
-        {
-            if (!_isInitDataBase)
-            {
-                try
-                {
-                    InitDataBaseFile();
-                    InitCreateTable();
-                }
-                catch (Exception ex)
-                {
-                    LogHelp.Instance.Write(ex,MessageType.Error, GetType(),MethodBase.GetCurrentMethod().Name);
-                    throw;
-                }
-              
-                _isInitDataBase = true;
-            }
-        }
 
-        private void InitDataBaseFile()
+       public int Insert<T>(T entity) where T : ITableModel
         {
-            if (!File.Exists(WFUntilHelp.SqliteFilePath))
-            {
-                SQLiteConnection.CreateFile(WFUntilHelp.SqliteFilePath);
-            }
-        }
-
-        public int Insert<T>(T entity)
-        {
+            entity.Id = Guid.NewGuid().ToString();
             return GetActivityByType<T>().Insert(entity);
         }
 
@@ -100,28 +76,7 @@ namespace WorkFlowService.BLL
                 typeList.Select(eType => Activator.CreateInstance(eType) as IDataOperationActivity<T>).FirstOrDefault();
         }
 
-        private void InitCreateTable()
-        {
-            var types = GetExecutingTypes();
-            var typeList =
-                types.Where(t => new List<Type>(t.GetInterfaces()).Contains(typeof(ICreateDataTableActivity)) && !t.IsInterface && !t.IsAbstract).ToList();
-
-            typeList.ForEach(eType =>
-            {
-                var createDataTableActivity = Activator.CreateInstance(eType) as ICreateDataTableActivity;
-                if (createDataTableActivity != null)
-                    try
-                    {
-                        createDataTableActivity.CreateTable();
-                    }
-                    catch (SQLiteException ex)
-                    {
-                
-
-                    }
-
-            });
-        }
+ 
 
         private IEnumerable<Type> GetExecutingTypes()
         {

@@ -15,7 +15,7 @@ using CommonLibrary.Model;
 
 namespace WorkFlowService.IDAL
 {
-   public interface IDataOperationActivity<T>:ICreateDataTableActivity
+   public interface IDataOperationActivity<T> 
    {
        int Insert(T entity);
        int Modify(T entity);

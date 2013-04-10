@@ -18,7 +18,7 @@ namespace TestCommunication.WorkflowService
     {
         private BPELWorkFlowServiceClient WfServiceInstance
         {
-            get { return new BPELWorkFlowServiceClient(); }
+            get { return new BPELWorkFlowServiceClient(){}; }
         }
 
         [Test]

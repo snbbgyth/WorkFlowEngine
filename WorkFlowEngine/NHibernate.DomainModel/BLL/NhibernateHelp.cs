@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using NHibernate.Cfg;
+using NHibernate.Engine;
+using NHibernate.Tool.hbm2ddl;
 
 namespace NHibernate.DomainModel.BLL
 {
-    internal class NhibernateHelp
+    public class NhibernateHelp
     {
         private ISessionFactory _sessionFactory;
 
@@ -18,7 +21,7 @@ namespace NHibernate.DomainModel.BLL
 
         private static NhibernateHelp _instance;
         private static readonly object SyncObject = new object();
-
+        private const bool OutputDdl = true;
         public static NhibernateHelp Instance
         {
             get
@@ -32,15 +35,72 @@ namespace NHibernate.DomainModel.BLL
             }
         }
 
+        private Configuration _configuration;
+
         private ISessionFactory GetSessionFactory()
         {
-            return (new Configuration()).Configure().BuildSessionFactory();
+            return Cfg.BuildSessionFactory();
+        }
+
+        private static readonly object syncCfg = new object();
+
+        private Configuration Cfg
+        {
+            get
+            {
+                lock (syncCfg)
+                {
+                    if (_configuration == null)
+                    {
+                        _configuration = (new Configuration()).Configure();
+                        //CreateDatabaseSchema();
+
+                        Assembly assembly = Assembly.Load("NHibernate.DomainModel");
+                        _configuration.AddAssembly(assembly);
+                        UpdateSchema();
+                    }
+                }
+                return _configuration;
+            }
         }
 
         public ISession GetSession()
         {
             return _sessionFactory.OpenSession();
         }
+
+        public void CreateSchema()
+        {
+            new SchemaExport(Cfg).Create(OutputDdl, true);
+        }
+
+        protected void CreateDatabaseSchema()
+        {
+            new SchemaExport(Cfg).Execute(OutputDdl, true, false);
+ 
+        }
+
+        public void CreateTable<T>() where T : new()
+        {
+           // Cfg.AddAssembly(typeof (T).Assembly);
+            //configuration.BuildSessionFactory();
+        }
+
+
+        public void UpdateSchema()
+        {
+            new SchemaUpdate(Cfg).Execute(OutputDdl, true);
+        }
+
+
+        protected void DropSchema()
+        {
+            new SchemaExport(Cfg).Drop(OutputDdl, true);
+        }
+
+
+
+
 
     }
 }
