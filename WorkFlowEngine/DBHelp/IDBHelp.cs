@@ -138,7 +138,11 @@ namespace DBHelp
         /// <returns>execute true or not</returns>
         bool BatchExecuteNonQuery(List<string> cmdList);
 
+        /// <summary>
+        /// Batch execute ExecuteNonQuery by cmd and dbparameter list
+        /// </summary>
+        /// <param name="cmdList">cmd list</param>
+        /// <returns>int </returns>
         int BatchExecuteNonQuery(List<KeyValuePair<string, List<DbParameter>>> cmdList);
     }
-
 }

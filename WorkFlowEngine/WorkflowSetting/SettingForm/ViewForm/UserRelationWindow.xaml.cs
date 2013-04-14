@@ -172,7 +172,6 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private string Id { get; set; }
 
-
         private string ReportRelationId { get; set; }
 
         private bool ModifyEntity()

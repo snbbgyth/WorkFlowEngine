@@ -37,10 +37,7 @@ namespace WorkFlowService.BLL
  
         }
 
-
-
-
-       public int Insert<T>(T entity) where T : ITableModel
+        public int Insert<T>(T entity) where T : ITableModel
         {
             entity.Id = Guid.NewGuid().ToString();
             return GetActivityByType<T>().Insert(entity);

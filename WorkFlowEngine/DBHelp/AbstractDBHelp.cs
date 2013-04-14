@@ -7,18 +7,18 @@
 ** Summary：     Abstract DBHelp class
 *********************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Reflection;
-using System.Data;
-using System.Configuration;
-using System.Threading;
-using CommonLibrary.DAL;
-using CommonLibrary.Help;
-
 namespace DBHelp
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Common;
+    using System.Reflection;
+    using System.Data;
+    using System.Configuration;
+    using System.Threading;
+    using CommonLibrary.DAL;
+    using CommonLibrary.Help;
+
     public abstract class AbstractDBHelp : IDBHelp
     {
         #region Private Property
@@ -99,6 +99,11 @@ namespace DBHelp
             }
         }
 
+        /// <summary>
+        /// Batch Execute Non Query by cmd list
+        /// </summary>
+        /// <param name="cmdList">cmd list</param>
+        /// <returns></returns>
         public bool BatchExecuteNonQuery(List<string> cmdList)
         {
             using (var conn = GetConnection(ConnectionString))
@@ -179,7 +184,6 @@ namespace DBHelp
                             {
                                 command.CommandText = null;
                                 command.Dispose();
-
                             }
                         }
                     }

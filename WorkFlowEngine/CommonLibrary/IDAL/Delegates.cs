@@ -9,7 +9,9 @@
 
 namespace CommonLibrary.IDAL
 {
+
     using Model;
 
     public delegate void NotifyErrorMessageHandle(LogMessage message);
+
 }

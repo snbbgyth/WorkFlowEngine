@@ -21,12 +21,10 @@ namespace WorkFlowService.NHibernateDAL
     public abstract class DataOperationActivityBase<T> : IDataOperationActivity<T> where T : new()
     {
         #region Private Variable
- 
 
         #endregion
 
         #region Private Property
- 
 
         #endregion
 
@@ -80,11 +78,6 @@ namespace WorkFlowService.NHibernateDAL
             }
         }
  
-        public int CreateTable()
-        {
-           NhibernateHelp.Instance.CreateTable<T>();
-            return 1;
-        }
  
     }
 }
