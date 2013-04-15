@@ -172,7 +172,6 @@ namespace TestCommunication.NhibernateTest
         {
             if (lastOpenedSession != null && lastOpenedSession.IsOpen)
             {
-
                 lastOpenedSession.Close();
                 return false;
             }
@@ -198,7 +197,6 @@ namespace TestCommunication.NhibernateTest
 
             if (!empty)
             {
-
                 DropSchema();
                 CreateSchema();
             }
@@ -208,7 +206,6 @@ namespace TestCommunication.NhibernateTest
 
         private bool CheckConnectionsWereClosed()
         {
-
             return false;
         }
 
@@ -255,7 +252,6 @@ namespace TestCommunication.NhibernateTest
         protected virtual void BuildSessionFactory()
         {
             sessions = (ISessionFactoryImplementor)cfg.BuildSessionFactory();
-
         }
 
         private void Cleanup()

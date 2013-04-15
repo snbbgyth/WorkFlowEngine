@@ -53,7 +53,6 @@ namespace NHibernate.DomainModel.BLL
                     if (_configuration == null)
                     {
                         _configuration = (new Configuration()).Configure();
-                        //CreateDatabaseSchema();
 
                         Assembly assembly = Assembly.Load("NHibernate.DomainModel");
                         _configuration.AddAssembly(assembly);
@@ -80,13 +79,6 @@ namespace NHibernate.DomainModel.BLL
  
         }
 
-        public void CreateTable<T>() where T : new()
-        {
-           // Cfg.AddAssembly(typeof (T).Assembly);
-            //configuration.BuildSessionFactory();
-        }
-
-
         public void UpdateSchema()
         {
             new SchemaUpdate(Cfg).Execute(OutputDdl, true);
@@ -97,10 +89,6 @@ namespace NHibernate.DomainModel.BLL
         {
             new SchemaExport(Cfg).Drop(OutputDdl, true);
         }
-
-
-
-
 
     }
 }

@@ -94,7 +94,6 @@ namespace WorkFlowService.BLL
             return UserInfoDAL.Current.Login(userName, password);
         }
 
-
         #endregion
 
         #region User relation UserGroup Type enqual 1
