@@ -36,6 +36,7 @@ namespace WorkFlowService.BLL
         {
             var workflowContext = WorkflowHandle.Instance.GetWorkflowContextByWorkflowName(workflowName);
             var invokeStepList = GetInvokeStepFromContext(workflowContext);
+            if(invokeStepList!=null)
             foreach (var workflowStep in invokeStepList)
             {
                 AddWorkflowStateInfoByCondition(workflowName, workflowStep);

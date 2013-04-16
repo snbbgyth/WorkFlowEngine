@@ -1,0 +1,17 @@
+﻿<Window x:Class="WorkflowSetting.SettingForm.SelectForm.SelectUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SelectUserWindow" Height="800" Width="600">
+    <Grid>
+        <ListView Name="LvUserInfo" HorizontalAlignment="Left" Height="400" Margin="85,41,0,0"   VerticalAlignment="Top" >
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="UserId" Width="0" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="User Name" Width="200" DisplayMemberBinding="{Binding UserName}"/>
+                    <GridViewColumn Header="User Display Name" Width="200" DisplayMemberBinding="{Binding UserDisplayName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Select" Name="BtnSelect" HorizontalAlignment="Left" Margin="85,501,0,0" VerticalAlignment="Top" Width="75" Click="BtnSelectClick"/>
+    </Grid>
+</Window>

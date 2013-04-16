@@ -13,6 +13,7 @@ using CommonLibrary.IDAL;
 
 namespace CommonLibrary.Model
 {
+    [Serializable]
     [DataContract]
     public class WorkFlowActivityModel : ITableModel
     {

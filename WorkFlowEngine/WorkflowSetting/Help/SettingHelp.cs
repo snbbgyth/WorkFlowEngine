@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,12 +26,24 @@ namespace WorkflowSetting.Help
             }
         }
 
+        public static void RemoveItemByCondition<T>(ListView lv, List<T> entityList) where T : ITableModel
+        {
+            var userRoleSource = lv.ItemsSource as List<T>;
+            if (userRoleSource != null)
+            {
+               // userRoleSource.RemoveAll(entity=>entityList.Exists(item=>item.Id.Equals(entity.Id)));
+                lv.Items.Clear();
+                lv.ItemsSource = userRoleSource;
+            }
+        }
+
+
         public static void MoidfyListByCondition<T>(ListView lv, Func<string, string, bool> addAction,
                                        Func<string, string, bool> removeAction, IEnumerable<T> existList, string leftItemId = null, string rightItemId = null) where T : ITableModel
         {
             var entityList = lv.ItemsSource as List<T>;
             if (entityList == null) return;
-            var addList = entityList.Where(entity => existList.Any(t => t.Id != entity.Id));
+            var addList = entityList.Where(entity =>existList==null|| existList.All(t => t.Id != entity.Id));
             foreach (var entity in addList)
             {
                 if (!string.IsNullOrEmpty(leftItemId))
@@ -36,14 +51,18 @@ namespace WorkflowSetting.Help
                 else if (!string.IsNullOrEmpty(rightItemId))
                     addAction(entity.Id, rightItemId);
             }
-            var removeList = existList.Where(entity => entityList.Any(t => t.Id != entity.Id));
-            foreach (var entity in removeList)
+            if (existList != null)
             {
-                if (!string.IsNullOrEmpty(leftItemId))
-                    removeAction(leftItemId, entity.Id);
-                else if (!string.IsNullOrEmpty(rightItemId))
-                    removeAction(entity.Id, rightItemId);
+                var removeList = existList.Where(entity => !entityList.Exists(t => t.Id == entity.Id));
+                foreach (var entity in removeList)
+                {
+                    if (!string.IsNullOrEmpty(leftItemId))
+                        removeAction(leftItemId, entity.Id);
+                    else if (!string.IsNullOrEmpty(rightItemId))
+                        removeAction(entity.Id, rightItemId);
+                }
             }
+            existList = entityList;
         }
 
         public static void AddRelationByCondition<T>(ListView lv,Func<string,string,bool> addAction, string itemId)where T:ITableModel
@@ -70,6 +89,19 @@ namespace WorkflowSetting.Help
                         yield return childOfChild;
                     }
                 }
+            }
+        }
+
+        public static List<T> DeepCopy<T>(this List<T> entityList)
+        {
+            if (entityList == null || entityList.Count == 0) return new List<T>();
+            using (var memoryStream = new MemoryStream())
+            {
+               IFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(memoryStream, entityList);
+                memoryStream.Position = 0;
+                return binaryFormatter.Deserialize(memoryStream) as List<T>;
+ 
             }
         }
     }

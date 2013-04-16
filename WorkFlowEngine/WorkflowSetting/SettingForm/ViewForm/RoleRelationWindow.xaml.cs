@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using CommonLibrary.IDAL;
 using WorkFlowService.BLL;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
+using WorkflowSetting.SettingForm.SelectForm;
 
 namespace WorkflowSetting.SettingForm.ViewForm
 {
@@ -42,9 +44,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
             ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByRoleId(entity.Id);
             ExistActionInfoList = UserOperationBLL.Current.QueryAllActionInfoByRoleId(entity.Id);
             ClearBindData();
-            LvUserGroupName.ItemsSource = ExistUserGroupList;
-            LvUserName.ItemsSource = ExistUserInfoList;
-            LvActionName.ItemsSource = ExistActionInfoList;
+            LvUserGroupName.ItemsSource = ExistUserGroupList.DeepCopy();
+            LvUserName.ItemsSource = ExistUserInfoList.DeepCopy();
+            LvActionName.ItemsSource = ExistActionInfoList.DeepCopy();
             LvWorkflowState.ItemsSource = UserOperationBLL.Current.QueryAllWorkflowStateByRoleId(entity.Id);
         }
 
@@ -118,13 +120,42 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void BtnAddUserGroupClick(object sender, RoutedEventArgs e)
         {
-
+            var selectUserGroupWindow = new SelectUserGroupWindow();
+            selectUserGroupWindow.ShowDialog();
         }
 
         private void BtnAddUserClick(object sender, RoutedEventArgs e)
         {
+            var selectUserWindow = new SelectUserWindow();
+            if (selectUserWindow.ShowDialog() == false)
+            {
+                //if (selectUserWindow.SelectUserInfoList != null)
+                //{
+                //    List<UserInfoModel> entityList;
+                //    entityList = LvUserName.ItemsSource as List<UserInfoModel>;
+                //    if (entityList == null) entityList = new List<UserInfoModel>();
+                //    entityList.AddRange(entityList);
 
+                //    LvUserName.Items.Clear();
+                //    LvUserName.ItemsSource = selectUserWindow.SelectUserInfoList;
+                //}
+                AddEntityRange(LvUserName,selectUserWindow.SelectUserInfoList);
+            }
         }
+
+        private void AddEntityRange<T>(ListView lv, List<T> selectList)where T: ITableModel
+        {
+            if (selectList == null) return;
+            List<T> entityList;
+            entityList = lv.ItemsSource as List<T>;
+            if (entityList == null) entityList = new List<T>();
+            entityList.AddRange(selectList.FindAll(entity=>!entityList.Exists(item=>item.Id== entity.Id)));
+   
+
+            lv.ItemsSource = entityList;
+            lv.Items.Refresh();
+        }
+ 
 
         private void BtnModifyClick(object sender, RoutedEventArgs e)
         {
@@ -134,7 +165,6 @@ namespace WorkflowSetting.SettingForm.ViewForm
                 Add();
             if (UserAction == OperationAction.Read)
                 Read();
-
         }
 
         private void Read()
@@ -174,6 +204,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             ModifyUserGroupList();
             ModifyUserInfoList();
             ModifyActionList();
+            LblMessage.Content = "Modify successful.";
         }
 
         private RoleInfoModel GetEntity()
@@ -218,7 +249,14 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
         {
-            SettingHelp.RemoveItemByCondition<UserInfoModel>(LvUserName, new List<string>());
+            var entityList = LvUserName.ItemsSource as List<UserInfoModel>;
+            foreach (UserInfoModel item in LvUserName.SelectedItems)
+            {
+                if (entityList != null) entityList.Remove(item);
+            }
+            LvUserName.ItemsSource = entityList;
+            LvUserName.Items.Refresh();
+            // SettingHelp.RemoveItemByCondition<UserInfoModel>(LvUserName, LvUserName.SelectedItems as List<UserInfoModel>);
         }
 
         private void BtnRemoveActionClick(object sender, RoutedEventArgs e)

@@ -16,6 +16,7 @@ using WorkFlowService.IDAL;
 
 namespace WorkFlowService.Model
 {
+    [Serializable]
     public class OperationActionInfoModel:ITableModel
     {
         public virtual string Id { get; set; }

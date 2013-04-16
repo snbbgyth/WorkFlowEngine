@@ -12,7 +12,7 @@ namespace CommonLibrary.Model
     using System;
     using System.Runtime.Serialization;
     using IDAL;
-
+    [Serializable]
     public class WorkFlowActivityLogModel : ITableModel
     {
         [DataMember]

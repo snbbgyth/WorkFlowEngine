@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WorkflowSetting.Help;
+using WorkflowSetting.SettingForm.ViewForm;
 
 namespace WorkflowSetting.SettingForm
 {
@@ -32,20 +34,41 @@ namespace WorkflowSetting.SettingForm
 
         private void InitData()
         {
-            //DgUserList.Items.Clear();
+            DgUserList.Items.Clear();
             DgUserList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserInfoModel>();
+            DgUserList.SelectionChanged+=DgUserListSelectionChanged;
         }
 
-        private void BtnAddUserClick(object sender, RoutedEventArgs e)
+        private void DgUserListSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (UserInfoModel item in DgUserList.SelectedItems)
+            {
+                DgUserSelectEntity = item;
+                break;
+            }
+        }
+
+        private UserInfoModel DgUserSelectEntity { get; set; }
+
+        private void RowEditClick(object sender, RoutedEventArgs e)
+        {
+            if (DgUserSelectEntity == null) return;
+            var editRoleWindow = new UserRelationWindow(DgUserSelectEntity, OperationAction.Modify);
+            editRoleWindow.ShowDialog();
+        }
+
+        private void RowDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (DgUserSelectEntity == null) return;
+            //UserOperationBLL.Current.DataOperationInstance.Remove<RoleInfoModel>(DgUserSelectEntity.Id);
+        }
+
+        private void RowAddNewClick(object sender, RoutedEventArgs e)
         {
             var addUserWindow = new AddUserWindow();
             addUserWindow.Show();
         }
 
-        private void BtnRelationUserGroup(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+ 
     }
 }

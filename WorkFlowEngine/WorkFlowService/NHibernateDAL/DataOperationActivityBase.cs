@@ -65,7 +65,7 @@ namespace WorkFlowService.NHibernateDAL
         {
             using (var session = NhibernateHelp.Instance.GetSession())
             {
-                return session.CreateCriteria(typeof (OperationActionInfoModel)).List<T>().ToList();
+                return session.CreateCriteria(typeof (T)).List<T>().ToList();
             }
         }
  

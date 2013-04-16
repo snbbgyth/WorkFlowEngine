@@ -2,7 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="LoginWindow.xaml">
-    <Application.Resources>
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--  <ResourceDictionary.MergedDictionaries>-->
+                <!--The theme must be specified here to ensure all visual elements display in the designer-->
+                <!-- Use the Silver skin by default -->
+            <!--    <ResourceDictionary Source="Help\SettingResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries> -->
+        </ResourceDictionary>
     </Application.Resources>
+
 </Application>

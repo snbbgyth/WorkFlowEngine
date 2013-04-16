@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="800" Width="600">
     <Grid>
-        <Button Content="ShowViewUserWindow" Name ="BtnShowViewUser"  HorizontalAlignment="Left" Margin="32,122,0,0" VerticalAlignment="Top" Width="150" Height="29" Click="BtnShowViewUserClick"/>
+        <Button Content="ShowViewUserWindow" Name ="BtnShowViewUser"  HorizontalAlignment="Left" Margin="44,129,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnShowViewUserClick"/>
+        <Button Content="ShowViewRoleWindow" Name ="BtnShowViewRole"  HorizontalAlignment="Left" Margin="272,129,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnShowViewRoleClick"/>
+        <Button Content="InitWorkflow" Name="BtnInitWorkflow" HorizontalAlignment="Left" Margin="168,220,0,0" VerticalAlignment="Top" Width="150" Click="BtnInitWorkflowClick"/>
 
     </Grid>
 </Window>

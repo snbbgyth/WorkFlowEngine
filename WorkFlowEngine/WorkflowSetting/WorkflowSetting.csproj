@@ -94,7 +94,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Help\Enums.cs" />
+    <Compile Include="Help\ItemModel.cs" />
     <Compile Include="Help\SettingHelp.cs" />
+    <Compile Include="SettingForm\SelectForm\SelectUserWindow.xaml.cs">
+      <DependentUpon>SelectUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingForm\ViewForm\OperationActionRelationWindow.xaml.cs">
       <DependentUpon>OperationActionRelationWindow.xaml</DependentUpon>
     </Compile>
@@ -107,14 +111,17 @@
     <Compile Include="SettingForm\ViewForm\RoleRelationWindow.xaml.cs">
       <DependentUpon>RoleRelationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\SelectRoleWindow.xaml.cs">
+    <Compile Include="SettingForm\SelectForm\SelectRoleWindow.xaml.cs">
       <DependentUpon>SelectRoleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\SelectUserGroupWindow.xaml.cs">
+    <Compile Include="SettingForm\SelectForm\SelectUserGroupWindow.xaml.cs">
       <DependentUpon>SelectUserGroupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\ViewForm\UserRelationWindow.xaml.cs">
       <DependentUpon>UserRelationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingForm\ViewOperationActionWindow.xaml.cs">
+      <DependentUpon>ViewOperationActionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingForm\ViewRoleWindow.xaml.cs">
       <DependentUpon>ViewRoleWindow.xaml</DependentUpon>
@@ -141,6 +148,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Help\SettingResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\SelectForm\SelectUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingForm\ViewForm\OperationActionRelationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,15 +172,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingForm\SelectRoleWindow.xaml">
+    <Page Include="SettingForm\SelectForm\SelectRoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingForm\SelectUserGroupWindow.xaml">
+    <Page Include="SettingForm\SelectForm\SelectUserGroupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingForm\ViewForm\UserRelationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\ViewOperationActionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

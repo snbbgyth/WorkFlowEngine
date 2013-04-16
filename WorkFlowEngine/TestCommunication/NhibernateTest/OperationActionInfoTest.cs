@@ -12,6 +12,7 @@ namespace TestCommunication.NhibernateTest
 {
     using WorkFlowService.Model;
     using NHibernate.DomainModel.Entities;
+
     public  class OperationActionInfoTest:TestCase
     {
         protected override  IList Mappings
@@ -61,7 +62,6 @@ namespace TestCommunication.NhibernateTest
                 session.Save(insertEntity);
                 session.Flush();
                 ICriteria crit = session.CreateCriteria(typeof(OperationActionInfoModel));
-
                 var entity = crit.List<OperationActionInfoModel>().First();
                 session.Delete(entity);
                 session.Flush();
@@ -101,10 +101,8 @@ namespace TestCommunication.NhibernateTest
                     entity = resultList.FirstOrDefault();
                 ICriteria crit = session.CreateCriteria(typeof(OperationActionInfoModel)).Add(Restrictions.Eq("ActionName", entity.ActionName));
                 var result = crit.List<OperationActionInfoModel>().First();
-
                 Assert.AreEqual(result.ActionName, entity.ActionName);
             }
         }
-        
     }
 }

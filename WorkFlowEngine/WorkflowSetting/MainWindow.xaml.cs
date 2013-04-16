@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 namespace WorkflowSetting
 {
     using SettingForm;
+    using WorkFlowService.BLL;
+
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
@@ -30,6 +32,18 @@ namespace WorkflowSetting
         {
             var viewUserWindow = new ViewUserWindow();
             viewUserWindow.Show();
+        }
+
+        private void BtnShowViewRoleClick(object sender, RoutedEventArgs e)
+        {
+            var viewRoleWindow = new ViewRoleWindow();
+            viewRoleWindow.Show();
+        }
+
+        private void BtnInitWorkflowClick(object sender, RoutedEventArgs e)
+        {
+           
+            WorkFlowEngine.Current.InitWorkflowState("TestStateWorkFlow");
         }
     }
 }

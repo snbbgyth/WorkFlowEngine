@@ -15,7 +15,7 @@
                     <GridViewColumn Header="RoleId">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding ID}" Visibility="Hidden" Name="TxtRoleId"></TextBlock>
+                                <TextBlock Text="{Binding Id}" Visibility="Hidden" Name="TxtRoleId"></TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

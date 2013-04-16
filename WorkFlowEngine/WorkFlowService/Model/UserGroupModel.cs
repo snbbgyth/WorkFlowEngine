@@ -13,6 +13,7 @@ using WorkFlowService.IDAL;
 
 namespace WorkFlowService.Model
 {
+    [Serializable]
     public class UserGroupModel : ITableModel
     {
         public virtual string Id { get; set; }
