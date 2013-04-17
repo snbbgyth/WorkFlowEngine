@@ -1,7 +1,8 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using WorkFlowService.BLL;
 using WorkFlowService.Model;
-using WorkflowSetting.SettingForm.OperationForm;
+using WorkflowSetting.Helpusing WorkflowSetting.SettingForm.OperationForm;
 
 namespace WorkflowSetting.SettingForm.ViewForm
 {
@@ -18,13 +19,45 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitData()
         {
-           DgOperationActionList.Items.Clear();
-           DgOperationActionList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<OperationActionInfoModel>();
+           DgOperationActionLis DgOperationActionList.Items.Clear();
+ nActionList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<OperationActionInfoModel>();
         }
 
-        private void BtnAddOperationActionClick(object sender, RoutedEventArgs e)
-        {
-            var addOperationAction = new OperationActionRelationWindow();
+        private voi    DgOperationActionList.SelectionChanged += DgActionSelectionChanged;
         }
+
+        private void DgActionSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (OperationActionInfoModel item in DgOperationActionList.SelectedItems)
+            {
+                DgActionSelectEntity = item;
+                break;
+            }
+        }
+
+        private OperationActionInfoModel DgActionSelectEntity { get; set; }
+
+        private void RowEditClick(object sender, RoutedEventArgs e)
+        {
+            if (DgActionSelectEntity == null) return;
+            var editActionWindow = new OperationActionRelationWindow(DgActionSelectEntity, OperationAction.Modify);
+            editActionWindow.ShowDialog();
+        }
+
+        private void RowDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (DgActionSelectEntity == null) return;
+            //UserOperationBLL.Current.DataOperationInstance.Remove<RoleInfoModel>(DgUserSelectEntity.Id);
+        }
+
+        private void RowAddNewClick(object sender, RoutedEventArgs e)
+        {
+            var addActionWindow = new OperationActionRelationWindow();
+            addActionWindow.Show();
+        }
+
+ 
+
+
     }
 }

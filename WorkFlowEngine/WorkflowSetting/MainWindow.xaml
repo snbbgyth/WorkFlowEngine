@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="800" Width="600">
     <Grid>
-        <Button Content="ShowViewUserWindow" Name ="BtnShowViewUser"  HorizontalAlignment="Left" Margin="44,129,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnShowViewUserClick"/>
-        <Button Content="ShowViewRoleWindow" Name ="BtnShowViewRole"  HorizontalAlignment="Left" Margin="272,129,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnShowViewRoleClick"/>
-        <Button Content="InitWorkflow" Name="BtnInitWorkflow" HorizontalAlignment="Left" Margin="168,220,0,0" VerticalAlignment="Top" Width="150" Click="BtnInitWorkflowClick"/>
+        <Button Content="ShowViewUserWindow" Name ="BtnShowViewUser"  HorizontalAlignment="Left" Margin="44,139,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnShowViewUserClick"/>
+        <Button Content="ShowViewRoleWindow" Name ="BtnShowViewRole"  HorizontalAlignment="Left" Margin="272,139,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnShowViewRoleClick"/>
+        <Button Content="InitWorkflow" Name="BtnInitWorkflow" HorizontalAlignment="Left" Margin="44,102,0,0" VerticalAlignment="Top" Height="30" Width="150" Click="BtnInitWorkflowClick"/>
+        <Button Content="ShowViewUserGroupWindow" Name="BtnShowUserGroup" HorizontalAlignment="Left" Margin="44,174,0,0" VerticalAlignment="Top" Height="30" Width="180" Click="BtnShowUserGroupClick"/>
+        <Button Content="ShowViewWorkflowStateWindow" HorizontalAlignment="Left" Margin="272,174,0,0" VerticalAlignment="Top" Height="30" Width="200" Click="BtnShowViewWorkflowStateClick"/>
+        <Button Content="ShowViewActionWindow" Name="BtnShowViewAction" HorizontalAlignment="Left" Margin="272,102,0,0" VerticalAlignment="Top" Height="30" Width="150" Click="BtnShowViewActionClick"/>
 
     </Grid>
 </Window>

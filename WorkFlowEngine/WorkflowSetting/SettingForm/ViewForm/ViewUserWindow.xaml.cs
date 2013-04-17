@@ -40,9 +40,8 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void RowEditClick(object sender, RoutedEventArgs e)
         {
             if (DgUserSelectEntity == null) return;
-            var editRoleWindow = new UserRelationWindow(DgUserSelectEntity, OperationAction.Modify);
-            editRoleWindow.ShowDialog();
-        }
+            var editRoleWindow = new UserRelUserWindow = new UserRelationWindow(DgUserSelectEntity, OperationAction.Modify);
+            editUser    }
 
         private void RowDeleteClick(object sender, RoutedEventArgs e)
         {

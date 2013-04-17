@@ -8,7 +8,7 @@ namespace WorkflowSetting.Help
 {
     public enum OperationAction
     {
-        Add=1,
+        Add=0,
         Modify=2,
         Read=4
     }

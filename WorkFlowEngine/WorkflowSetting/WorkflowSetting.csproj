@@ -133,8 +133,14 @@
       <DependentUpon>ViewUserWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="LoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+    GroupWindow.xaml.cs">
+      <DependentUpon>ViewUserGroup     <DependentUpon>ViewOperationActionWindow.xaml</DependentUpon>
+    </Compile>
+    <CompiUserWindow.xaml.cs">
+      <DependentUpon>ViewUser     <DependentUpon>ViewOperationActionWindow.xaml</DependentUpon>
+    </Compile>
+    <CompiWorkflowStateWindow.xaml.cs">
+      <DependentUpon>ViewWorkflowStateMSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -206,10 +212,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
+      <SubType>CGrouprator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingForm\ViewForm\ViewRoleWindow.xaml">
+      <GeneUserle</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubTyWorkflowStaterator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingForm\Gen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>

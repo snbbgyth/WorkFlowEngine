@@ -46,5 +46,24 @@ namespace WorkflowSetting
            
             WorkFlowEngine.Current.InitWorkflowState("TestStateWorkFlow");
         }
+  
+
+        private void BtnShowViewActionClick(object sender, RoutedEventArgs e)
+        {
+            var viewActionWindow = new ViewOperationActionWindow();
+            viewActionWindow.Show();
+        }
+
+        private void BtnShowUserGroupClick(object sender, RoutedEventArgs e)
+        {
+            var viewUserGroupWindow = new ViewUserGroupWindow();
+            viewUserGroupWindow.Show();
+        }
+
+        private void BtnShowViewWorkflowStateClick(object sender, RoutedEventArgs e)
+        {
+            var viewWorkflowStateWindow = new ViewWorkflowStateWindow();
+            viewWorkflowStateWindow.Show();
+        }
     }
 }

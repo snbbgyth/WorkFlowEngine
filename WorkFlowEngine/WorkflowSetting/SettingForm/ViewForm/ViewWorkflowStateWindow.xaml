@@ -1,9 +1,9 @@
-﻿<Window x:Class="WorkflowSetting.SettingForm.ViewForm.ViewOperationActionWindow"
+﻿<Window x:Class="WorkflowSetting.SettingForm.ViewForm.ViewWorkflowStateWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ViewOperationWindow" Height="800" Width="600">
+        Title="ViewWorkflowStateWindow" Height="800" Width="800">
     <Grid>
-        <DataGrid Name="DgOperationActionList" HorizontalGridLinesBrush="#bdbdbd" VerticalGridLinesBrush="#bdbdbd" BorderBrush="White" HeadersVisibility="Column" Background="#dadada"   GridLinesVisibility="All"
+        <DataGrid Name="DgWorkflowState" HorizontalGridLinesBrush="#bdbdbd" VerticalGridLinesBrush="#bdbdbd" BorderBrush="White" HeadersVisibility="Column" Background="#dadada"   GridLinesVisibility="All"
                  SelectionUnit="FullRow" AutoGenerateColumns="False" IsReadOnly="True"  Grid.ColumnSpan="2"  >
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="ID" Width="70">
@@ -15,25 +15,43 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="ActionName" Width="100">
+                <DataGridTemplateColumn Header="WorkflowName" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding ActionName}"></TextBlock>
+                                <TextBlock Text="{Binding WorkflowName}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="ActionDisplayName" Width="130">
+                <DataGridTemplateColumn Header="WorkflowDisplayName" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding ActionDisplayName}"></TextBlock>
+                                <TextBlock Text="{Binding WorkflowDisplayName}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="CreateDateTime" Width="110">
+                <DataGridTemplateColumn Header="StateNodeName" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding StateNodeName}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="StateNodeDisplayName" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding StateNodeDisplayName}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="CreateDateTime" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -52,7 +70,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                </DataGrid.Columns>
+            </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="Add" Header="AddNew"  Click="RowAddNewClick"/>
