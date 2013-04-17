@@ -6,17 +6,12 @@
         <ListView Name="LvGroupInfo" HorizontalAlignment="Left" Height="400" Margin="85,41,0,0"   VerticalAlignment="Top" Width="600">
             <ListView.View>
                 <GridView >
-                       <GridViewColumn Header="GroupId"  Width="200">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Id}" Visibility="Hidden" Name="TxtGroupId"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Group Id" Width="0" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="Group Name" Width="200" DisplayMemberBinding="{Binding GroupName}"/>
                     <GridViewColumn Header="Group Display Name" Width="200" DisplayMemberBinding="{Binding GroupDisplayName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="Select" Name="BtnSelect" HorizontalAlignment="Left" Margin="85,475,0,0" VerticalAlignment="Top" Width="75" Click="BtnSelectClick"/>
     </Grid>
 </Window>

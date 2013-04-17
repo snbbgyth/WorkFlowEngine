@@ -12,11 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorkFlowService.BLL;
 using WorkFlowService.Model;
+using WorkflowSetting.SettingForm.OperationForm;
 
 namespace WorkflowSetting.SettingForm
 {
-    using ViewForm;
-
     /// <summary>
     /// ViewOperationWindow.xaml 的交互逻辑
     /// </summary>

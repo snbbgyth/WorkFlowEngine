@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorkflowSetting.Help;
-using WorkflowSetting.SettingForm.ViewForm;
+using WorkflowSetting.SettingForm.OperationForm;
 
 namespace WorkflowSetting.SettingForm
 {

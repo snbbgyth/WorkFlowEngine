@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
 using WorkFlowService.BLL;
 using WorkFlowService.Model;
 
@@ -12,13 +14,33 @@ namespace WorkflowSetting.SettingForm.SelectForm
         public SelectRoleWindow()
         {
             InitializeComponent();
-            InitRoleInfoList();
+            InitLvData();
         }
 
-        private void InitRoleInfoList()
+        private void InitLvData()
         {
+            SelectRoleInfoList = new List<RoleInfoModel>();
             LvRoleInfo.Items.Clear();
             LvRoleInfo.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<RoleInfoModel>();
+            LvRoleInfo.SelectionChanged += LvRoleInfoSelectionChanged;
         }
+
+        public List<RoleInfoModel> SelectRoleInfoList;
+
+        private void LvRoleInfoSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectRoleInfoList.Clear();
+            foreach (RoleInfoModel item in LvRoleInfo.SelectedItems)
+            {
+                SelectRoleInfoList.Add(item);
+            }
+        }
+
+        private void BtnSelectClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+ 
     }
 }

@@ -48,18 +48,8 @@ namespace WorkflowSetting.SettingForm.SelectForm
 
         private void BtnSelectClick(object sender, RoutedEventArgs e)
         {
-            OnSelectComplete();
             Close();
         }
 
-        public event EventHandler SelectComplete;
-
-        protected virtual void OnSelectComplete()
-        {
-            EventHandler handler = SelectComplete;
-            if (handler != null) handler(this, EventArgs.Empty);
-        }
-
-   
     }
 }

@@ -26,15 +26,15 @@ namespace WorkflowSetting.Help
             }
         }
 
-        public static void RemoveItemByCondition<T>(ListView lv, List<T> entityList) where T : ITableModel
+        public static void RemoveItemByCondition<T>(ListView lv ) where T : ITableModel
         {
-            var userRoleSource = lv.ItemsSource as List<T>;
-            if (userRoleSource != null)
+            var entityList = lv.ItemsSource as List<T>;
+            foreach (T item in lv.SelectedItems)
             {
-               // userRoleSource.RemoveAll(entity=>entityList.Exists(item=>item.Id.Equals(entity.Id)));
-                lv.Items.Clear();
-                lv.ItemsSource = userRoleSource;
+                if (entityList != null) entityList.Remove(item);
             }
+            lv.ItemsSource = entityList;
+            lv.Items.Refresh();
         }
 
 
@@ -103,6 +103,19 @@ namespace WorkflowSetting.Help
                 return binaryFormatter.Deserialize(memoryStream) as List<T>;
  
             }
+        }
+
+        public static void AddEntityRange<T>(ListView lv, List<T> selectList) where T : ITableModel
+        {
+            if (selectList == null) return;
+            List<T> entityList;
+            entityList = lv.ItemsSource as List<T>;
+            if (entityList == null) entityList = new List<T>();
+            entityList.AddRange(selectList.FindAll(entity => !entityList.Exists(item => item.Id == entity.Id)));
+
+
+            lv.ItemsSource = entityList;
+            lv.Items.Refresh();
         }
     }
 }
