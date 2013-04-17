@@ -1,0 +1,17 @@
+﻿<Window x:Class="WorkflowSetting.SettingForm.SelectForm.SelectActionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SelectActionWindow" Height="800" Width="600">
+    <Grid>
+        <ListView Name="LvOperationAction" HorizontalAlignment="Left" Height="400" Margin="85,41,0,0"   VerticalAlignment="Top" Width="400">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Header="Action Id" Width="0" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Action Name" Width="200" DisplayMemberBinding="{Binding ActionName}"/>
+                    <GridViewColumn Header="Action Display Name" Width="200" DisplayMemberBinding="{Binding ActionDisplayName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Select" Name="BtnSelect" HorizontalAlignment="Left" Margin="85,475,0,0" VerticalAlignment="Top" Width="75" Click="BtnSelectClick"/>
+    </Grid>
+</Window>
