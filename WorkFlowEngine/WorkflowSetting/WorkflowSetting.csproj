@@ -123,13 +123,13 @@
     <Compile Include="SettingForm\OperationForm\UserRelationWindow.xaml.cs">
       <DependentUpon>UserRelationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\ViewOperationActionWindow.xaml.cs">
+    <Compile Include="SettingForm\ViewForm\ViewOperationActionWindow.xaml.cs">
       <DependentUpon>ViewOperationActionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\ViewRoleWindow.xaml.cs">
+    <Compile Include="SettingForm\ViewForm\ViewRoleWindow.xaml.cs">
       <DependentUpon>ViewRoleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingForm\ViewUserWindow.xaml.cs">
+    <Compile Include="SettingForm\ViewForm\ViewUserWindow.xaml.cs">
       <DependentUpon>ViewUserWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="LoginWindow.xaml">
@@ -191,17 +191,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingForm\ViewOperationActionWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="SettingForm\ViewForm\ViewOperationActionWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingForm\ViewRoleWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="SettingForm\ViewForm\ViewRoleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="SettingForm\ViewUserWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="SettingForm\ViewForm\ViewUserWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +263,7 @@
       <Name>WorkFlowService</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
