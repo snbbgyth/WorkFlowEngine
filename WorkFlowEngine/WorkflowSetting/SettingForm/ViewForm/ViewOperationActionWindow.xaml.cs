@@ -2,7 +2,8 @@
 using System.Windows.Controls;
 using WorkFlowService.BLL;
 using WorkFlowService.Model;
-using WorkflowSetting.Helpusing WorkflowSetting.SettingForm.OperationForm;
+using WorkflowSetting.Help;
+using WorkflowSetting.SettingForm.OperationForm;
 
 namespace WorkflowSetting.SettingForm.ViewForm
 {
@@ -19,11 +20,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitData()
         {
-           DgOperationActionLis DgOperationActionList.Items.Clear();
- nActionList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<OperationActionInfoModel>();
-        }
-
-        private voi    DgOperationActionList.SelectionChanged += DgActionSelectionChanged;
+            DgOperationActionList.Items.Clear();
+            DgOperationActionList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<OperationActionInfoModel>();
+            DgOperationActionList.SelectionChanged += DgActionSelectionChanged;
         }
 
         private void DgActionSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,9 +54,6 @@ namespace WorkflowSetting.SettingForm.ViewForm
             var addActionWindow = new OperationActionRelationWindow();
             addActionWindow.Show();
         }
-
- 
-
 
     }
 }

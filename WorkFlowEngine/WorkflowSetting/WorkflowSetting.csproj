@@ -129,18 +129,18 @@
     <Compile Include="SettingForm\ViewForm\ViewRoleWindow.xaml.cs">
       <DependentUpon>ViewRoleWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingForm\ViewForm\ViewUserGroupWindow.xaml.cs">
+      <DependentUpon>ViewUserGroupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingForm\ViewForm\ViewUserWindow.xaml.cs">
       <DependentUpon>ViewUserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingForm\ViewForm\ViewWorkflowStateWindow.xaml.cs">
+      <DependentUpon>ViewWorkflowStateWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginWindow.xaml">
-    GroupWindow.xaml.cs">
-      <DependentUpon>ViewUserGroup     <DependentUpon>ViewOperationActionWindow.xaml</DependentUpon>
-    </Compile>
-    <CompiUserWindow.xaml.cs">
-      <DependentUpon>ViewUser     <DependentUpon>ViewOperationActionWindow.xaml</DependentUpon>
-    </Compile>
-    <CompiWorkflowStateWindow.xaml.cs">
-      <DependentUpon>ViewWorkflowStateMSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -205,27 +205,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SettingForm\ViewForm\ViewUserGroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingForm\ViewForm\ViewUserWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>CGrouprator>MSBuild:Compile</Generator>
+    <Page Include="SettingForm\ViewForm\ViewWorkflowStateWindow.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SettingForm\ViewForm\ViewRoleWindow.xaml">
-      <GeneUserle</Generator>
-      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
-      <SubTyWorkflowStaterator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SettingForm\Gen>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
