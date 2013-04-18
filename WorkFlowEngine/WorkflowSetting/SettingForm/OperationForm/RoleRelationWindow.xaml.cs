@@ -25,6 +25,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         {
             UserAction = operationAction;
             InitData(entity);
+            InitControl();
         }
 
         public RoleRelationWindow(string roleId)
@@ -39,6 +40,8 @@ namespace WorkflowSetting.SettingForm.OperationForm
             InitProperty(entity);
             TxtRoleName.Text = entity.RoleName;
             TxtRoleDisplayName.Text = entity.RoleDisplayName;
+            TxtWorkflowName.Text = entity.WorkflowName;
+            TxtWorkflowDisplayName.Text = entity.WorkflowDisplayName;
             ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByRoleId(entity.Id);
             ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByRoleId(entity.Id);
             ExistActionInfoList = UserOperationBLL.Current.QueryAllActionInfoByRoleId(entity.Id);
@@ -135,9 +138,6 @@ namespace WorkflowSetting.SettingForm.OperationForm
             }
         }
 
-
- 
-
         private void BtnModifyClick(object sender, RoutedEventArgs e)
         {
             if (UserAction == OperationAction.Modify)
@@ -160,9 +160,8 @@ namespace WorkflowSetting.SettingForm.OperationForm
             if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 0)
             {
                 InitProperty(entity);
-                ModifyUserGroupList();
-                ModifyUserInfoList();
-                ModifyActionList();
+                Id = entity.Id;
+                ModifyRelationList();
                 LblMessage.Content = "Create successful!";
                 InitControl();
             }
@@ -170,6 +169,13 @@ namespace WorkflowSetting.SettingForm.OperationForm
             {
                 LblMessage.Content = "Create fail";
             }
+        }
+
+        private void ModifyRelationList()
+        {
+            ModifyUserGroupList();
+            ModifyUserInfoList();
+            ModifyActionList(); 
         }
 
         private void InitProperty(RoleInfoModel entity)
@@ -181,11 +187,12 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void Modify()
         {
-            UserOperationBLL.Current.DataOperationInstance.Modify(GetEntity());
-            ModifyUserGroupList();
-            ModifyUserInfoList();
-            ModifyActionList();
-            LblMessage.Content = "Modify successful.";
+            if (UserOperationBLL.Current.DataOperationInstance.Modify(GetEntity()) > 0)
+            {
+                ModifyRelationList();
+                LblMessage.Content = "Modify successful.";
+            }
+            LblMessage.Content = "Modify fail.";
         }
 
         private RoleInfoModel GetEntity()
@@ -196,7 +203,9 @@ namespace WorkflowSetting.SettingForm.OperationForm
                     CreateDateTime = DateTime.Now,
                     LastUpdateDateTime = DateTime.Now,
                     RoleDisplayName = TxtRoleDisplayName.Text,
-                    RoleName = TxtRoleName.Text
+                    RoleName = TxtRoleName.Text,
+                    WorkflowName = TxtWorkflowName.Text,
+                    WorkflowDisplayName = TxtWorkflowDisplayName.Text
                 };
             if (UserAction == OperationAction.Modify)
             {
@@ -207,7 +216,9 @@ namespace WorkflowSetting.SettingForm.OperationForm
                     IsDelete = IsDelete,
                     LastUpdateDateTime = DateTime.Now,
                     RoleDisplayName = TxtRoleDisplayName.Text,
-                    RoleName = TxtRoleName.Text
+                    RoleName = TxtRoleName.Text,
+                    WorkflowName = TxtWorkflowName.Text,
+                    WorkflowDisplayName = TxtWorkflowDisplayName.Text
                 };
             }
             return new RoleInfoModel();
@@ -234,13 +245,6 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
         {
-            //var entityList = LvUserName.ItemsSource as List<UserInfoModel>;
-            //foreach (UserInfoModel item in LvUserName.SelectedItems)
-            //{
-            //    if (entityList != null) entityList.Remove(item);
-            //}
-            //LvUserName.ItemsSource = entityList;
-            //LvUserName.Items.Refresh();
             SettingHelp.RemoveItemByCondition<UserInfoModel>(LvUserName);
         }
 

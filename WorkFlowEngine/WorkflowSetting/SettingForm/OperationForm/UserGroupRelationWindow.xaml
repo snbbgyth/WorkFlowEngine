@@ -8,7 +8,7 @@
         <Label Content="Group display Name:" HorizontalAlignment="Left" Margin="54,90,0,0" VerticalAlignment="Top"/>
         <TextBox Name="TxtGroupDisplayName" HorizontalAlignment="Left" Height="23" Margin="201,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TabIndex="3"/>
         <Label Content="Relation Role:" HorizontalAlignment="Left" Margin="96,121,0,0" VerticalAlignment="Top"/>
-        <ListView Name="LvUserRole" HorizontalAlignment="Left" Height="100" Margin="201,123,0,0" VerticalAlignment="Top" Width="200">
+        <ListView Name="LvGroupRole" HorizontalAlignment="Left" Height="100" Margin="201,123,0,0" VerticalAlignment="Top" Width="200">
             <ListView.View>
                 <GridView >
                     <GridViewColumn Header="Role Name" Width="200" DisplayMemberBinding="{Binding RoleName}"/>

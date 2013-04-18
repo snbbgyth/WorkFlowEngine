@@ -1,22 +1,21 @@
 ﻿<Window x:Class="WorkflowSetting.SettingForm.ViewForm.ViewUserGroupWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ViewUserGroupWindow" Height="800" Width="600">
-    <Grid>
+        Title="ViewUserGroupWindow" Height="800Auto" SizeToContent="Width    <Grid>
 
         <DataGrid Name="DgUserGroup" HorizontalGridLinesBrush="#bdbdbd" VerticalGridLinesBrush="#bdbdbd" BorderBrush="White" HeadersVisibility="Column" Background="#dadada"   GridLinesVisibility="All"
                  SelectionUnit="FullRow" AutoGenerateColumns="False" IsReadOnly="True"  Grid.ColumnSpan="2"  >
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="ID" Width="70">
+                <DataGridTemplateColumn Header="ID" WidthMin="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Id}"></TextBlock>
+                                <TextBlock Text="{Binding Group</TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="GroupName" Width="100">
+                <DataGridTemplateColumn Header="GroupName" WidthMin="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -25,25 +24,24 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="GroupDisplayName" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="GroupDisplayName" WidthMinWidth="13                   <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding GroupDisplayName}"></TextBlock>
+                                <TextBlock Text="{Binding GroupName}Display"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="CreateDateTime" Width="150">
+                <DataGridTemplateColumn Header="GroupCreateDateTime" Min="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding CreateDateTime}"></TextBlock>
+                                <TextBlock Text="{Binding GroupCreateDateTimeTextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="LastUpdateDateTime"  Width="150">
+                <DataGridTemplateColumn Header="GroupLastUpdateDateTime"  Min="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -59,7 +57,7 @@
                     <MenuItem x:Name="Add" Header="AddNew"  Click="RowAddNewClick"/>
                     <MenuItem x:Name="Eidt" Header="Eidt"  Click="RowEditClick"/>
                     <MenuItem x:Name="Delete" Header="Delete"  Click="RowDeleteClick"/>
-                </ContextMenu>
+                </ContextM    <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefresh                </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
     </Grid>

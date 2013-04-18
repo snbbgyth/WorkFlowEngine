@@ -32,8 +32,8 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void InitData()
         {
             DgUserGroup.Items.Clear();
-            DgUserGroup.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserGroupModel>();
-            DgUserGroup.SelectionChanged += DgUserGroupSelectionChanged;
+            DgUserGroupDataOperationInstance.QueryAll<UserGroupModel>();
+            DgUserGroup.SelectionChanged += DgUserGroupSeleItems.RefreshionChanged += DgUserGroupSelectionChanged;
         }
 
         private void DgUserGroupSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -57,13 +57,20 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void RowDeleteClick(object sender, RoutedEventArgs e)
         {
             if (DgUserGroupSelectEntity == null) return;
-            //UserOperationBLL.Current.DataOperationInstance.Remove<RoleInfoModel>(DgUserSelectEntity.Id);
-        }
-
-        private void RowAddNewClick(object sender, RoutedEventArgs e)
+            //UserOperationBLL.Current.DataOperationInstance.Remove<RolUserOperationBLL.Current.DataOperationInstance.Remove<UserGroupModel>(DgUserGroupSelectEntity.Id);
+            UserOperationBLL.Current.DeleteUserGroupAllRoleRelation(DgUserGroupSelectEntity.Id);
+            UserOperationBLL.Current.DeleteUserGroupAllRoleRelation(DgUserGroupSelectEntity.Id);
+            InitData(nder, RoutedEventArgs e)
         {
             var addUserGroupWindow = new UserGroupRelationWindow();
             addUserGroupWindow.Show();
+        }
+    }
+}
+
+        private void RowRefreshClick(object sender, RoutedEventArgs e)
+        {
+            InitData();
         }
     }
 }

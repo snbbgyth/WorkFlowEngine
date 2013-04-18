@@ -26,10 +26,18 @@ namespace WorkflowSetting.SettingForm.SelectForm
             InitLvData();
         }
 
+        public SelectUserWindow(int selectCount)
+            : this()
+        {
+            SelectCount = selectCount;
+        }
+
+        private int SelectCount { get; set; }
+
         private void InitLvData()
         {
             SelectUserInfoList = new List<UserInfoModel>();
-             var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserInfoModel>();
+            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserInfoModel>();
             LvUserInfo.Items.Clear();
             LvUserInfo.ItemsSource = entityList;
             LvUserInfo.SelectionChanged += LvUserInfoSelectionChanged;
@@ -40,14 +48,32 @@ namespace WorkflowSetting.SettingForm.SelectForm
         private void LvUserInfoSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectUserInfoList.Clear();
+            if (!CheckSelectCount()) return;
             foreach (UserInfoModel item in LvUserInfo.SelectedItems)
             {
-               SelectUserInfoList.Add(item);
+                SelectUserInfoList.Add(item);
             }
+        }
+
+        private bool CheckSelectCount()
+        {
+            if (SelectCount > 0 && LvUserInfo.SelectedItems.Count > SelectCount)
+            {
+                LblMessage.Content = string.Format("Please select {0} user.", SelectCount);
+                return false;
+            }
+            LblMessage.Content = string.Empty;
+            return true;
         }
 
         private void BtnSelectClick(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
+
+        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        {
+            SelectUserInfoList = null;
             Close();
         }
 

@@ -37,7 +37,7 @@ namespace TestCommunication.NhibernateTest
         [Test]
         public void TestOperationActionInfoModify()
         {
-            var entity = new OperationActionInfoModel { ActionDisplayName = "Modify", ActionName = "Modify", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
+            var entity = new OperationActionInfoModel { ActionDisplayName = "Modify", ActionName = "Modify", WorkflowName = "WorkflowName", WorkflowDisplayName = "WorkflowDisplayName", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
             OperationActionInfoModel queryEntity;
             using (var session = sessions.OpenSession())
             {
@@ -55,7 +55,7 @@ namespace TestCommunication.NhibernateTest
         [Test]
         public void TestOperationActionInfoDelete()
         {
-            var insertEntity = new OperationActionInfoModel { ActionDisplayName = "Modify", ActionName = "Modify", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
+            var insertEntity = new OperationActionInfoModel { ActionDisplayName = "Modify", ActionName = "Modify", WorkflowName = "WorkflowName", WorkflowDisplayName = "WorkflowDisplayName", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
   
             using (var session = sessions.OpenSession())
             {
@@ -73,7 +73,7 @@ namespace TestCommunication.NhibernateTest
         [Test]
         public void TestOperationActionInfoQueryAll()
         {
-            var insertEntity = new OperationActionInfoModel { ActionDisplayName = "Modify", ActionName = "Modify", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
+            var insertEntity = new OperationActionInfoModel { ActionDisplayName = "Modify", ActionName = "Modify", WorkflowName = "WorkflowName", WorkflowDisplayName = "WorkflowDisplayName", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
 
             using (var session = sessions.OpenSession())
             {
@@ -89,7 +89,7 @@ namespace TestCommunication.NhibernateTest
         [Test]
         public void TestOperationActionInfoQueryByActionName()
         {
-            var insertEntity = new OperationActionInfoModel { ActionDisplayName = "ActionDisplayName", ActionName = "ActionDisplayName", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
+            var insertEntity = new OperationActionInfoModel { ActionDisplayName = "ActionDisplayName", ActionName = "ActionDisplayName", WorkflowName = "WorkflowName", WorkflowDisplayName = "WorkflowDisplayName", CreateDateTime = DateTime.Now, Id = Guid.NewGuid().ToString(), LastUpdateDateTime = DateTime.Now };
 
             using (var session = sessions.OpenSession())
             {

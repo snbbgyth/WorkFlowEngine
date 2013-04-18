@@ -1,82 +1,87 @@
-﻿<Window x:Class="WorkflowSetting.SettingForm.OperationForm.RoleRelationWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WorkflowSetting.SettingForm.OperationForm.RoleRelationWindow"
         Title="RoleRelationWindow" Height="800" Width="600"
         ScrollViewer.VerticalScrollBarVisibility="Auto">
-<ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid  >
-     
-        <Label Content="Role Name:" HorizontalAlignment="Left" Margin="92,41,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="TxtRoleName" HorizontalAlignment="Left" Height="23" Margin="182,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.467,-0.826"/>
-        <Label Content="Role Display Name:" HorizontalAlignment="Left" Margin="46,69,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="TxtRoleDisplayName" HorizontalAlignment="Left" Height="23" Margin="182,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-        <Label Content="Relation User Group:" HorizontalAlignment="Left" Margin="39,95,0,0" VerticalAlignment="Top"/>
-        <ListView HorizontalAlignment="Left" Name="LvUserGroupName" Height="100" Margin="182,97,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
-            <ListView.View>
-                <GridView >
-                    <GridViewColumn Header="Group Name" Width="200" DisplayMemberBinding="{Binding GroupName}"/>
-                    <GridViewColumn Header="GroupId">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Id}" Visibility="Hidden" Name="TxtGroupId"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Name="BtnAddUserGroup" Content="AddUserGroup" HorizontalAlignment="Left" Margin="182,202,0,0" VerticalAlignment="Top" Width="120" Click="BtnAddUserGroupClick" TabIndex="1"/>
-        <Label Content="Relation User:" HorizontalAlignment="Left" Margin="78,232,0,0" VerticalAlignment="Top"/>
-        <ListView HorizontalAlignment="Left" Name="LvUserName" Height="100" Margin="182,234,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
-            <ListView.View>
-                <GridView >
-                    <GridViewColumn Header="User Name" Width="200" DisplayMemberBinding="{Binding UserName}"/>
-                    <GridViewColumn Header="UserId" Width="0" DisplayMemberBinding="{Binding Id}"/>
-                  
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Label Content="Relation Action:" HorizontalAlignment="Left" Margin="67,369,0,0" VerticalAlignment="Top"/>
-        <Button Name="BtnAddUserRole" Content="AddUserRole" HorizontalAlignment="Left" Margin="182,339,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserClick"  TabIndex="3"/>
-        <ListView HorizontalAlignment="Left" Name="LvActionName" Height="100" Margin="182,369,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
-            <ListView.View>
-                <GridView >
-                    <GridViewColumn Header="Action Name" Width="200" DisplayMemberBinding="{Binding ActionName}"/>
-                    <GridViewColumn Header="ActionId">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Id}" Visibility="Hidden" Name="TxtActionId"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Name="BtnAddAction" Content="AddAction" HorizontalAlignment="Left" Margin="182,474,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddActionClick" TabIndex="5"/>
-        <Button Name="BtnModify" Content="Modify" HorizontalAlignment="Left" Margin="115,713,0,0" VerticalAlignment="Top" Width="75" Click="BtnModifyClick" TabIndex="7"/>
-        <Label Content="Relation Workflow State:" HorizontalAlignment="Left" Margin="15,505,0,0" VerticalAlignment="Top"/>
-        <ListView HorizontalAlignment="Left" Name="LvWorkflowState" Height="200" Margin="181,505,0,0" VerticalAlignment="Top" Width="300"  TabIndex="4">
-            <ListView.View>
-                <GridView >
-                    <GridViewColumn Header="Workflow Name" Width="150" DisplayMemberBinding="{Binding WorkflowName}"/>
-                    <GridViewColumn Header="State Name" Width="150" DisplayMemberBinding="{Binding StateNodeName}"/>
-                    <GridViewColumn Header="WorkflowStateId">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Id}" Visibility="Hidden" Name="TxtWorkflowStateId"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Label Content="Role Infomation" HorizontalAlignment="Left" Margin="131,6,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <Button Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="275,713,0,0" VerticalAlignment="Top" Width="75" TabIndex="8" Click="BtnCancelClick" />
-        <Button Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="332,202,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserGroupClick" TabIndex="2"/>
-        <Button Name="BtnRemoveUserRole" Content="RemoveUserRole" HorizontalAlignment="Left" Margin="332,339,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserRoleClick"  TabIndex="4"/>
-        <Button Name="BtnRemoveAction" Content="RemoveAction" HorizontalAlignment="Left" Margin="332,474,0,0" VerticalAlignment="Top" Width="100" Click="BtnRemoveActionClick" TabIndex="6"/>
-        <Label Name="LblMessage"  HorizontalAlignment="Left" Margin="115,752,0,0" VerticalAlignment="Top" Foreground="#FFF70202" RenderTransformOrigin="0.5,0.6"/>
-  
-        </Grid>
+
+            <Label Content="Role Name:" HorizontalAlignment="Left" Margin="92,41,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TxtRoleName" HorizontalAlignment="Left" Height="23" Margin="182,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TabIndex="1" RenderTransformOrigin="0.467,-0.826"/>
+            <Label Content="Role Display Name:" HorizontalAlignment="Left" Margin="46,69,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TxtRoleDisplayName" HorizontalAlignment="Left" Height="23" Margin="182,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" TabIndex="3"/>
+            <Label Content="Relation User Group:" HorizontalAlignment="Left" Margin="39,163,0,0" VerticalAlignment="Top"/>
+            <ListView HorizontalAlignment="Left" x:Name="LvUserGroupName" Height="100" Margin="181,165,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="Group Name" Width="200" DisplayMemberBinding="{Binding GroupName}"/>
+                        <GridViewColumn Header="GroupId">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}" Visibility="Hidden" x:Name="TxtGroupId"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button x:Name="BtnAddUserGroup" Content="AddUserGroup" HorizontalAlignment="Left" Margin="181,270,0,0" VerticalAlignment="Top" Width="120" Click="BtnAddUserGroupClick" TabIndex="12"/>
+            <Label Content="Relation User:" HorizontalAlignment="Left" Margin="77,300,0,0" VerticalAlignment="Top"/>
+            <ListView HorizontalAlignment="Left" x:Name="LvUserName" Height="100" Margin="181,302,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="User Name" Width="200" DisplayMemberBinding="{Binding UserName}"/>
+                        <GridViewColumn Header="UserId" Width="0" DisplayMemberBinding="{Binding Id}"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Content="Relation Action:" HorizontalAlignment="Left" Margin="66,437,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="BtnAddUserRole" Content="AddUserRole" HorizontalAlignment="Left" Margin="181,407,0,0" VerticalAlignment="Top" Width="100" Click="BtnAddUserClick"  TabIndex="18"/>
+            <ListView HorizontalAlignment="Left" x:Name="LvActionName" Height="100" Margin="181,437,0,0" VerticalAlignment="Top" Width="200"  TabIndex="4">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="Action Name" Width="200" DisplayMemberBinding="{Binding ActionName}"/>
+                        <GridViewColumn Header="ActionId">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}" Visibility="Hidden" x:Name="TxtActionId"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button x:Name="BtnAddAction" Content="AddAction" HorizontalAlignment="Left" Margin="181,542,0,0" VerticalAlignment="Top" Width="75" Click="BtnAddActionClick" TabIndex="24"/>
+            <Button x:Name="BtnModify" Content="Modify" HorizontalAlignment="Left" Margin="114,781,0,0" VerticalAlignment="Top" Width="75" Click="BtnModifyClick" TabIndex="30"/>
+            <Label Content="Relation Workflow State:" HorizontalAlignment="Left" Margin="14,573,0,0" VerticalAlignment="Top"/>
+            <ListView HorizontalAlignment="Left" x:Name="LvWorkflowState" Height="200" Margin="180,573,0,0" VerticalAlignment="Top" Width="300"  TabIndex="4">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="Workflow Name" Width="150" DisplayMemberBinding="{Binding WorkflowName}"/>
+                        <GridViewColumn Header="State Name" Width="150" DisplayMemberBinding="{Binding StateNodeName}"/>
+                        <GridViewColumn Header="WorkflowStateId">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}" Visibility="Hidden" x:Name="TxtWorkflowStateId"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Content="Role Infomation" HorizontalAlignment="Left" Margin="131,6,0,0" VerticalAlignment="Top" FontSize="18"/>
+            <Button x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="274,781,0,0" VerticalAlignment="Top" Width="75" TabIndex="33" Click="BtnCancelClick" />
+            <Button x:Name="BtnRemoveUserGroup" Content="RemoveUserGroup" HorizontalAlignment="Left" Margin="331,270,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserGroupClick" TabIndex="15"/>
+            <Button x:Name="BtnRemoveUserRole" Content="RemoveUserRole" HorizontalAlignment="Left" Margin="331,407,0,0" VerticalAlignment="Top" Width="120" Click="BtnRemoveUserRoleClick"  TabIndex="21"/>
+            <Button x:Name="BtnRemoveAction" Content="RemoveAction" HorizontalAlignment="Left" Margin="331,542,0,0" VerticalAlignment="Top" Width="100" Click="BtnRemoveActionClick" TabIndex="27"/>
+            <Label x:Name="LblMessage"  HorizontalAlignment="Left" Margin="114,820,0,0" VerticalAlignment="Top" Foreground="#FFF70202" RenderTransformOrigin="0.5,0.6"/>
+        <Label Content="Workflow Name:" HorizontalAlignment="Left" Margin="62,103,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtWorkflowName" HorizontalAlignment="Left" Height="23" Margin="182,103,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="200" TabIndex="6"/>
+        <Label Content="Workflow display name:" HorizontalAlignment="Left" Margin="20,134,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtWorkflowDisplayName" HorizontalAlignment="Left" Height="23" Margin="182,137,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="200" TabIndex="9"/>
+
+    </Grid>
     </ScrollViewer>
 </Window>

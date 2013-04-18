@@ -25,6 +25,12 @@ namespace WorkFlowService.Model
 
         public virtual string ActionDisplayName { get; set; }
 
+
+
+        public virtual string WorkflowName { get; set; }
+
+        public virtual string WorkflowDisplayName { get; set; }
+
         public virtual DateTime? CreateDateTime { get; set; }
 
         public virtual DateTime? LastUpdateDateTime { get; set; }

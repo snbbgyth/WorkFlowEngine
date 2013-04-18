@@ -13,5 +13,6 @@
             </ListView.View>
         </ListView>
         <Button Content="Select" Name="BtnSelect" HorizontalAlignment="Left" Margin="85,475,0,0" VerticalAlignment="Top" Width="75" Click="BtnSelectClick"/>
+        <Button Content="Cancel" Name="BtnCancel" HorizontalAlignment="Left" Margin="208,475,0,0" VerticalAlignment="Top" Width="75" Click="BtnCancelClick"/>
     </Grid>
 </Window>

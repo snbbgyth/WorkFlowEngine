@@ -29,13 +29,14 @@ namespace WorkFlowService.NHibernateDAL
 
         }
 
-        public RoleInfoModel QueryByRoleName(string roleName)
+        public RoleInfoModel QueryByCondition(string workflowName, string roleName)
         {
             using (var session = NhibernateHelp.Instance.GetSession())
             {
                 return
                     session.CreateCriteria(typeof(RoleInfoModel))
                            .Add(Restrictions.Eq("RoleName", roleName))
+                           .Add(Restrictions.Eq("WorkflowName", workflowName))
                            .List<RoleInfoModel>().FirstOrDefault();
             }
         }

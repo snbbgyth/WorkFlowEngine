@@ -9,6 +9,10 @@
 						  not-null="false"  />
     <property name="RoleDisplayName"  column="RoleDisplayName" type="string" length="500"
 						  not-null="false"  />
+    <property name="WorkflowName"  column="WorkflowName" type="string" length="200"
+          not-null="false"  />
+    <property name="WorkflowDisplayName"  column="WorkflowDisplayName" type="string" length="500"
+						  not-null="false"  />
     <property name="CreateDateTime"  column="CreateDateTime" type="DateTime"
 						  not-null="false"   />
     <property name="LastUpdateDateTime"  column="LastUpdateDateTime" type="DateTime"

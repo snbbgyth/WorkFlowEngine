@@ -41,6 +41,12 @@ namespace WorkflowSetting.SettingForm.SelectForm
             Close();
         }
 
+        private void BtnCancelClick(object sender, RoutedEventArgs e)
+        {
+            SelectRoleInfoList = null;
+            Close();
+        }
+
  
     }
 }

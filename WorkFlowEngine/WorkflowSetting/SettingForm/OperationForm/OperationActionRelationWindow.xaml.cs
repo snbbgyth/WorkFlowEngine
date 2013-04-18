@@ -24,12 +24,15 @@ namespace WorkflowSetting.SettingForm.OperationForm
         {
             UserAction = operationAction;
             InitData(entity);
+            InitControl();
         }
 
         private void InitData(OperationActionInfoModel entity)
         {
             TxtActionDisplayName.Text = entity.ActionDisplayName;
             TxtActionName.Text = entity.ActionName;
+            TxtWorkflowName.Text = entity.WorkflowName;
+            TxtWorkflowDisplayName.Text = entity.WorkflowDisplayName;
             InitProperty(entity);
             ExistUserRoleList = UserOperationBLL.Current.QueryAllRoleByActionId(entity.Id);
             LvUserRole.Items.Clear();
@@ -87,7 +90,8 @@ namespace WorkflowSetting.SettingForm.OperationForm
             if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 0)
             {
                 InitProperty(entity);
-
+                Id = entity.Id;
+                ModifyOperationActionRole();
                 LblMessage.Content = "Create successful!";
                 InitControl();
             }
@@ -132,8 +136,11 @@ namespace WorkflowSetting.SettingForm.OperationForm
         private void ModifyEntity()
         {
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 1)
+            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
+            {
                 LblMessage.Content = "Modify successful!";
+                ModifyOperationActionRole();
+            }
             else
             {
                 LblMessage.Content = "Modify fail!";
@@ -159,6 +166,8 @@ namespace WorkflowSetting.SettingForm.OperationForm
                     CreateDateTime = DateTime.Now,
                     ActionDisplayName = TxtActionName.Text,
                     ActionName = TxtActionDisplayName.Text,
+                    WorkflowName = TxtWorkflowName.Text,
+                    WorkflowDisplayName = TxtWorkflowDisplayName.Text,
                     LastUpdateDateTime = DateTime.Now,
                 };
 
@@ -168,6 +177,8 @@ namespace WorkflowSetting.SettingForm.OperationForm
                 IsDelete = IsDelete,
                 ActionDisplayName = TxtActionName.Text,
                 ActionName = TxtActionDisplayName.Text,
+                WorkflowName = TxtWorkflowName.Text,
+                WorkflowDisplayName = TxtWorkflowDisplayName.Text,
                 Id = Id,
                 LastUpdateDateTime = DateTime.Now
             };
@@ -178,12 +189,10 @@ namespace WorkflowSetting.SettingForm.OperationForm
             if (UserAction == OperationAction.Modify)
             {
                 Modify();
-                ModifyOperationActionRole();
             }
             if (UserAction == OperationAction.Add)
             {
                 Add();
-                ModifyOperationActionRole();
             }
             if (UserAction == OperationAction.Read)
                 Read();

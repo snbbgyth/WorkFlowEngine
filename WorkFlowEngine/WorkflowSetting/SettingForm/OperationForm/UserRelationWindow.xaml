@@ -11,13 +11,7 @@
             <ListView.View>
                 <GridView >
                     <GridViewColumn Header="Group Name" Width="200" DisplayMemberBinding="{Binding GroupName}"/>
-                    <GridViewColumn Header="GroupId">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Id}" Visibility="Hidden" Name="TxtGroupId"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Group Id" Width="200" DisplayMemberBinding="{Binding Id}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -29,13 +23,7 @@
             <ListView.View>
                 <GridView >
                     <GridViewColumn Header="Role Name" Width="200" DisplayMemberBinding="{Binding RoleName}"/>
-                    <GridViewColumn Header="RoleId">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Id}" Visibility="Hidden" Name="TxtRoleId"></TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Role Id" Width="0" DisplayMemberBinding="{Binding Id}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -37,7 +37,6 @@ namespace WorkFlowHandle.BLL
                         stepRunnerStep.WorkflowSteps.Find(
                             entity => entity.StepId.CompareEqualIgnoreCase(invokeStep.InvokeContext.PortType)))
                 .FirstOrDefault();
-  
         }
     }
 }

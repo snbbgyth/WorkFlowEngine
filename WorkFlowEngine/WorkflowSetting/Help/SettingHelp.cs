@@ -112,8 +112,6 @@ namespace WorkflowSetting.Help
             entityList = lv.ItemsSource as List<T>;
             if (entityList == null) entityList = new List<T>();
             entityList.AddRange(selectList.FindAll(entity => !entityList.Exists(item => item.Id == entity.Id)));
-
-
             lv.ItemsSource = entityList;
             lv.Items.Refresh();
         }

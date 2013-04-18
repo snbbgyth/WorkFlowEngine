@@ -83,8 +83,8 @@ namespace WorkFlowService.BLL
         public bool DeleteUserByUserID(string userId)
         {
             DataOperationBLL.Current.Remove<UserInfoModel>(userId);
-            DeleteUserAllUserGroup(userId);
-            DeleteUserAllRole(userId);
+            DeleteUserAllUserGroupRelation(userId);
+            DeleteUserAllRoleRelation(userId);
 
             return true;
         }
@@ -116,7 +116,7 @@ namespace WorkFlowService.BLL
             return RelationDAL.Current.DeleteByChildNodeIDAndParentNodeIDAndType(userId, userGroupId, 1) > 0;
         }
 
-        public int DeleteUserAllUserGroup(string userId)
+        public int DeleteUserAllUserGroupRelation(string userId)
         {
             return RelationDAL.Current.DeleteByChildNodeIDAndType(userId, 1);
         }
@@ -145,9 +145,14 @@ namespace WorkFlowService.BLL
                 }) > 0;
         }
 
-        public int DeleteUserGroupAllRole(string userGroupId)
+        public int DeleteUserGroupAllRoleRelation(string userGroupId)
         {
             return RelationDAL.Current.DeleteByChildNodeIDAndType(userGroupId, 2);
+        }
+
+        public int DeleteUserGroupAllUserRelation(string userGroupId)
+        {
+            return RelationDAL.Current.DeleteByParentNodeIDAndType(userGroupId, 1);
         }
 
         public bool DeleteUserGroupRole(string userGroupId, string roleId)
@@ -177,7 +182,7 @@ namespace WorkFlowService.BLL
             }) > 0;
         }
 
-        public int DeleteRoleAllOperationAction(string roleId)
+        public int DeleteRoleAllActionRelation(string roleId)
         {
             return RelationDAL.Current.DeleteByParentNodeIDAndType(roleId, 3);
         }
@@ -185,6 +190,11 @@ namespace WorkFlowService.BLL
         public bool DeleteOperationActionInRole(string operationActionId, string roleId)
         {
             return RelationDAL.Current.DeleteByChildNodeIDAndParentNodeIDAndType(operationActionId, roleId, 3) > 0;
+        }
+
+        public int DeleteActionAllRoleRelation(string operationActionId)
+        {
+            return RelationDAL.Current.DeleteByChildNodeIDAndType(operationActionId, 3);
         }
 
         #endregion
@@ -237,7 +247,7 @@ namespace WorkFlowService.BLL
                 }) > 0;
         }
 
-        public int DeleteUserAllRole(string userId)
+        public int DeleteUserAllRoleRelation(string userId)
         {
             return RelationDAL.Current.DeleteByChildNodeIDAndType(userId, 5);
         }
@@ -355,9 +365,9 @@ namespace WorkFlowService.BLL
             return UserGroupDAL.Current.QueryByGroupName(groupName);
         }
 
-        public RoleInfoModel QueryRoleInfoByRoleName(string roleName)
+        public RoleInfoModel QueryRoleInfoByCondition(string workflowName, string roleName)
         {
-            return RoleInfoDAL.Current.QueryByRoleName(roleName);
+            return RoleInfoDAL.Current.QueryByCondition(workflowName, roleName);
         }
 
         public WorkflowStateInfoModel QueryWorkflowStateInfoByCondition(string workflowName,
@@ -379,7 +389,7 @@ namespace WorkFlowService.BLL
             return relationEntity != null ? RoleInfoDAL.Current.QueryByID(relationEntity.ParentNodeID) : null;
         }
 
-        public IEnumerable<OperationActionInfoModel> QueryOperationActionByCondition(
+        public IEnumerable<OperationActionInfoModel> QueryOperationActionListByCondition(
             string workflowName, string stateNodeName)
         {
             var entity = QueryWorkflowStateInfoByCondition(workflowName, stateNodeName);
@@ -394,12 +404,22 @@ namespace WorkFlowService.BLL
             return roleInfoEntity != null ? QueryOperationActionByRoleId(roleInfoEntity.Id) : null;
         }
 
+        public OperationActionInfoModel QueryOperationActionByCondition(string workflowName, string actionName)
+        {
+            return OperationActionInfoDAL.Current. QueryByCondition(workflowName,  actionName);
+        }
+
         public UserInfoModel QueryReportUserInfoByUserId(string userId)
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 6);
-            return relationList != null && relationList.Any()
+            return relationList != null && relationList.Any() &&!string.IsNullOrEmpty(relationList.First().ParentNodeID)
                        ? UserInfoDAL.Current.QueryByID(relationList.First().ParentNodeID)
                        : null;
+        }
+
+        public RelationModel QueryReportRelationByCondition(string userId, string reportUserId)
+        {
+            return RelationDAL.Current.QueryByChildNodeIDAndParentNodeIDAndType(userId, reportUserId, 6);
         }
 
         #endregion

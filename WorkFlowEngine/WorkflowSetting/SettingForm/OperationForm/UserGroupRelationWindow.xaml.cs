@@ -16,6 +16,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         public UserGroupRelationWindow()
         {
             InitializeComponent();
+            InitControl();
         }
 
         public UserGroupRelationWindow(UserGroupModel entity, OperationAction operationAction)
@@ -23,6 +24,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         {
             UserAction = operationAction;
             InitData(entity);
+            InitControl();
         }
 
         public UserGroupRelationWindow(string groupId, OperationAction operationAction)
@@ -40,12 +42,12 @@ namespace WorkflowSetting.SettingForm.OperationForm
             ClearItems();
             ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserGroupId(entity.Id);
             ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByUserGroupId(entity.Id);
-            LvUserRole.ItemsSource = ExistRoleInfoList.DeepCopy();
+            LvGroupRole.ItemsSource = ExistRoleInfoList.DeepCopy();
             LvUserName.ItemsSource = ExistUserInfoList.DeepCopy();
             Id = entity.Id;
             CreateDateTime = entity.CreateDateTime;
             IsDelete = entity.IsDelete;
-            InitControl();
+           
         }
 
         private void InitControl()
@@ -74,7 +76,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void ClearItems()
         {
-            LvUserRole.Items.Clear();
+            LvGroupRole.Items.Clear();
             LvUserName.Items.Clear();
         }
 
@@ -87,13 +89,13 @@ namespace WorkflowSetting.SettingForm.OperationForm
             var selectRoleWindow = new SelectRoleWindow();
             if (selectRoleWindow.ShowDialog() == false)
             {
-                SettingHelp.AddEntityRange(LvUserRole, selectRoleWindow.SelectRoleInfoList);
+                SettingHelp.AddEntityRange(LvGroupRole, selectRoleWindow.SelectRoleInfoList);
             }
         }
 
         private void BtnRemoveRoleNameClick(object sender, RoutedEventArgs e)
         {
-            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole);
+            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvGroupRole);
         }
 
         private void BtnAddUserClick(object sender, RoutedEventArgs e)
@@ -113,6 +115,16 @@ namespace WorkflowSetting.SettingForm.OperationForm
         private void BtnCancelClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ModifyUserNameList()
+        {
+            SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserInUserGroup, UserOperationBLL.Current.DeleteUserInUserGroup, ExistUserInfoList,null, Id);
+        }
+
+        private void ModifyGroupRoleList()
+        {
+            SettingHelp.MoidfyListByCondition(LvGroupRole, UserOperationBLL.Current.AddUserGroupRole, UserOperationBLL.Current.DeleteUserGroupRole, ExistRoleInfoList, Id);
         }
 
         private void BtnAddClick(object sender, RoutedEventArgs e)
@@ -143,23 +155,33 @@ namespace WorkflowSetting.SettingForm.OperationForm
         private void ModifyEntity()
         {
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 1)
-                LblMessage.Content = "Modify successful!";
-            else
+            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
             {
-                LblMessage.Content = "Modify fail!";
+                ModifyUserNameList();
+                ModifyGroupRoleList();
+                LblMessage.Content = "Modify successful!";
             }
+            else
+                LblMessage.Content = "Modify fail!";
         }
 
         private void AddEntity()
         {
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 1)
-                LblMessage.Content = "Create successful!";
-            else
+            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 0)
             {
-                LblMessage.Content = "Create fail!";
+                Id = entity.Id;
+                ModifyRelationList();
+                LblMessage.Content = "Create successful!";
             }
+            else
+                LblMessage.Content = "Create fail!";
+        }
+
+        private void ModifyRelationList()
+        {
+            ModifyUserNameList();
+            ModifyGroupRoleList();
         }
 
         private UserGroupModel GetEntity()

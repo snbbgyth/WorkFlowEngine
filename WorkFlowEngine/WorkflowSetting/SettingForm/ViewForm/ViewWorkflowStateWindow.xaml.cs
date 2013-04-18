@@ -31,8 +31,8 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void InitData()
         {
             DgWorkflowState.Items.Clear();
-            DgWorkflowState.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<WorkflowStateInfoModel>();
-            DgWorkflowState.SelectionChanged += DgWorkflowStateSelectionChanged;
+            DgWorkflow.DataOperationInstance.QueryAll<WorkflowStateInfoModel>();
+            DgWorkflowState.SelectionChanged += DgWorkflowStatItems.RefreshelectionChanged += DgWorkflowStateSelectionChanged;
         }
 
         private void DgWorkflowStateSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -63,6 +63,13 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             //var addUserGroupWindow = new UserGroupRelationWindow();
             //addUserGroupWindow.Show();
+        }
+    }
+}
+
+        private void RowRefreshClick(object sender, RoutedEventArgs e)
+        {
+            InitData();
         }
     }
 }

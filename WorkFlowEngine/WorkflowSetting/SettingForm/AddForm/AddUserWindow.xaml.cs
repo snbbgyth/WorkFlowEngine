@@ -4,6 +4,7 @@ using System.Windows;
 using WorkflowSetting.Help;
 using WorkFlowService.Model;
 using WorkFlowService.BLL;
+using WorkflowSetting.SettingForm.SelectForm;
 
 namespace WorkflowSetting.SettingForm.AddForm
 {
@@ -19,12 +20,16 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void BtnAddUserGroupClick(object sender, RoutedEventArgs e)
         {
-
+            var selectUserGroupWindow = new SelectUserGroupWindow();
+            if (selectUserGroupWindow.ShowDialog() == false)
+            {
+                SettingHelp.AddEntityRange(LvUserGroupName, selectUserGroupWindow.SelectUserGroupList);
+            }
         }
 
         private void BtnRemoveUserGroupClick(object sender, RoutedEventArgs e)
         {
-            SettingHelp.RemoveItemByCondition<UserGroupModel>(LvUserGroupName, new List<string>());
+            SettingHelp.RemoveItemByCondition<UserGroupModel>(LvUserGroupName);
         }
 
         private void BtnAddClick(object sender, RoutedEventArgs e)
@@ -40,7 +45,8 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void AddReportToUser()
         {
-            UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
+            if (!string.IsNullOrEmpty(ReportToId))
+                UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
         }
 
         private bool Add()
@@ -50,10 +56,16 @@ namespace WorkflowSetting.SettingForm.AddForm
             if (result > 0)
             {
                 Id = entity.Id;
-                SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, entity.Id);
+                AddRelationList();
                 return true;
             }
             return false;
+        }
+
+        private void AddRelationList()
+        {
+            SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, Id);
+            SettingHelp.AddRelationByCondition<RoleInfoModel>(LvUserRole, UserOperationBLL.Current.AddUserRole, Id);
         }
 
         private string ReportToId { get; set; }
@@ -91,17 +103,29 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void BtnAddUserRoleClick(object sender, RoutedEventArgs e)
         {
-
+            var selectRoleWindow = new SelectRoleWindow();
+            if (selectRoleWindow.ShowDialog() == false)
+            {
+                SettingHelp.AddEntityRange(LvUserRole, selectRoleWindow.SelectRoleInfoList);
+            }
         }
 
         private void BtnRemoveUserRoleClick(object sender, RoutedEventArgs e)
         {
-            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole, new List<string>());
+            SettingHelp.RemoveItemByCondition<RoleInfoModel>(LvUserRole);
         }
 
         private void BtnAddReportToUserClick(object sender, RoutedEventArgs e)
         {
-
+            var selectUserWindow = new SelectUserWindow(1);
+            if (selectUserWindow.ShowDialog() == false)
+            {
+                var entityList = selectUserWindow.SelectUserInfoList;
+                if (entityList == null || entityList.Count == 0) return;
+                var entity = entityList[0];
+                ReportToId = entity.Id;
+                TxtReportToUserName.Text = entity.UserDisplayName;
+            }
         }
     }
 }

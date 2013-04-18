@@ -1,39 +1,51 @@
 ﻿<Window x:Class="WorkflowSetting.SettingForm.ViewForm.ViewOperationActionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ViewOperationWindow" Height="800" Width="600">
-    <Grid>
+        Title="ViewOperationWindow" Height="800Auto" SizeToContent="Width    <Grid>
         <DataGrid Name="DgOperationActionList" HorizontalGridLinesBrush="#bdbdbd" VerticalGridLinesBrush="#bdbdbd" BorderBrush="White" HeadersVisibility="Column" Background="#dadada"   GridLinesVisibility="All"
                  SelectionUnit="FullRow" AutoGenerateColumns="False" IsReadOnly="True"  Grid.ColumnSpan="2"  >
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="ID" Width="70">
-                    <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="ID" WidthMinWidth="10                   <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Id}"></TextBlock>
+                                <TextBlock Text="{Binding CreatIdTextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="ActionName" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="CreatActionName" MinWidth="10                   <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding ActionName}"></TextBlock>
+                                <TextBlock Text="{Binding CreatAction"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="ActionDisplayName" Width="130">
-                    <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="CreatActionDisplayName" MinWidth="13                   <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding ActionDisplayName}"></TextBlock>
+                                <TextBlock Text="{Binding CreatnDisplayName}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="CreateDateTime" Width="110">
+                <DataGridTemplateColumn Header="CreatWorkflowName" MinWidth="10                   <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding CreatWorkflow"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="CreatWorkflowDisplayName" MinWidth="13                   <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding CreatWorkflowayName}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="CreateDateTime" WidthMin="110">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -42,22 +54,21 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="LastUpdateDateTime"  Width="150">
-                    <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="LastUpdateDateTime"  WidthMinWidth="15                   <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding LastUpdateDateTime}"></TextBlock>
+                                <TextBlock Text="{Binding CreatLastUpdteTime}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                </DataGrid.Columns>
+                <</DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="Add" Header="AddNew"  Click="RowAddNewClick"/>
                     <MenuItem x:Name="Eidt" Header="Eidt"  Click="RowEditClick"/>
                     <MenuItem x:Name="Delete" Header="Delete"  Click="RowDeleteClick"/>
+                </Con    <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefreshClick"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

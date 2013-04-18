@@ -26,6 +26,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
             UserAction = operationAction;
             var userInfoEntity = UserOperationBLL.Current.DataOperationInstance.QueryByID<UserInfoModel>(userId);
             InitData(userInfoEntity);
+            InitControl();
         }
 
         public UserRelationWindow(UserInfoModel entity, OperationAction operationAction)
@@ -160,7 +161,6 @@ namespace WorkflowSetting.SettingForm.OperationForm
             Close();
         }
 
-
         private void BtnRemoveUserGroupClick(object sender, RoutedEventArgs e)
         {
             SettingHelp.RemoveItemByCondition<UserGroupModel>(LvUserGroupName);
@@ -187,7 +187,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         {
             if (!CheckPassword()) return false;
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 1)
+            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
             {
                 ModifyReportToUser();
                 LblMessage.Content = "Modify successful!";
@@ -204,7 +204,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
             {
                 return UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
             }
-            var entity = UserOperationBLL.Current.DataOperationInstance.QueryByID<RelationModel>(ReportRelationId);
+            var entity = UserOperationBLL.Current.QueryReportRelationByCondition(Id, ReportRelationId);
             entity.ParentNodeID = ReportToId;
             return UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0;
 
@@ -253,6 +253,15 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void BtnAddReportUser(object sender, RoutedEventArgs e)
         {
+            var selectUserWindow = new SelectUserWindow(1);
+            if (selectUserWindow.ShowDialog() == false)
+            {
+                var entityList = selectUserWindow.SelectUserInfoList;
+                if(entityList==null||entityList.Count==0) return;
+                var entity = entityList[0];
+                ReportToId = entity.Id;
+                TxtReportUserName.Text = entity.UserDisplayName;
+            }
         }
 
     }

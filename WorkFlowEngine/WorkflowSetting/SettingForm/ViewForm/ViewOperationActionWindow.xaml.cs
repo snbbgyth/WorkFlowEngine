@@ -20,8 +20,8 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitData()
         {
-            DgOperationActionList.Items.Clear();
             DgOperationActionList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<OperationActionInfoModel>();
+            DgOperationActionList.Items.Refresh();
             DgOperationActionList.SelectionChanged += DgActionSelectionChanged;
         }
 
@@ -46,7 +46,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void RowDeleteClick(object sender, RoutedEventArgs e)
         {
             if (DgActionSelectEntity == null) return;
-            //UserOperationBLL.Current.DataOperationInstance.Remove<RoleInfoModel>(DgUserSelectEntity.Id);
+            UserOperationBLL.Current.DataOperationInstance.Remove<OperationActionInfoModel>(DgActionSelectEntity.Id);
+            UserOperationBLL.Current.DeleteActionAllRoleRelation(DgActionSelectEntity.Id);
+            InitData();
         }
 
         private void RowAddNewClick(object sender, RoutedEventArgs e)
@@ -55,5 +57,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
             addActionWindow.Show();
         }
 
+        private void RowRefreshClick(object sender, RoutedEventArgs e)
+        {
+            InitData();
+        }
     }
 }

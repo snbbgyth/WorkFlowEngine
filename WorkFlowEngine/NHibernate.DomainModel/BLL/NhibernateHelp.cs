@@ -76,14 +76,12 @@ namespace NHibernate.DomainModel.BLL
         protected void CreateDatabaseSchema()
         {
             new SchemaExport(Cfg).Execute(OutputDdl, true, false);
- 
         }
 
         public void UpdateSchema()
         {
             new SchemaUpdate(Cfg).Execute(OutputDdl, true);
         }
-
 
         protected void DropSchema()
         {
