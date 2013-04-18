@@ -20,9 +20,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitRoleInfo()
         {
-            DgRoleList.Items.Clear();
-            LL.Current.DataOperationInstance.QueryAll<RoleInfoModel>();
-            DgRoleList.SelectionChanged += DgRoItems.Refreshist.SelectionChanged += DgRoleListSelectionChanged;
+            DgRoleList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<RoleInfoModel>();
+            DgRoleList.Items.Refresh();
+            DgRoleList.SelectionChanged += DgRoleListSelectionChanged;
         }
 
         private RoleInfoModel DgRoleSelectEnity { get; set; }
@@ -36,8 +36,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
             }
         }
 
-
-        private void RowEditClick(objt sender, RoutedEventArgs e)
+        private void RowEditClick(object sender, RoutedEventArgs e)
         {
             if (DgRoleSelectEnity == null) return;
             var editRoleWindow = new RoleRelationWindow(DgRoleSelectEnity, OperationAction.Modify);
@@ -48,7 +47,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         {
             if (DgRoleSelectEnity != null)
             {
-               // UserOperationBLL.Current.DataOperationInstance.Remove<RoleInfoModel>(DgRoleSelectEnity.Id);
+                // UserOperationBLL.Current.DataOperationInstance.Remove<RoleInfoModel>(DgRoleSelectEnity.Id);
             }
         }
 
@@ -57,8 +56,6 @@ namespace WorkflowSetting.SettingForm.ViewForm
             var addRoleWindow = new RoleRelationWindow();
             addRoleWindow.ShowDialog();
         }
-    }
-}
 
         private void RowRefreshClick(object sender, RoutedEventArgs e)
         {

@@ -1,6 +1,4 @@
-﻿
-
-<Window x:Class="WorkflowSetting.SettingForm.ViewForm.ViewRoleWindow"
+﻿<Window x:Class="WorkflowSetting.SettingForm.ViewForm.ViewRoleWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ViewRoleWindow" Height="Auto" SizeToContent="Width">
@@ -75,13 +73,13 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <!-uItem x:Name="Add" Header="AddNew"  Click="RowAddNewClick"/>
+                    <MenuItem x:Name="Add" Header="AddNew"  Click="RowAddNewClick"/>
                     <MenuItem x:Name="Eidt" Header="Eidt"  Click="RowEditClick"/>
                     <MenuItem x:Name="Delete" Header="Delete"  Click="RowDeleteClick"/>
-                    
-     <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefreshClick"/           </ContextMenu>
+                    <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefreshClick"/>
+                </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-        
+
     </Grid>
 </Window>

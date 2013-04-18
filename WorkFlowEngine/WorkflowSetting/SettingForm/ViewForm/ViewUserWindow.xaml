@@ -51,17 +51,17 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-              
+
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="Add" Header="AddNew"  Click="RowAddNewClick"/>
                     <MenuItem x:Name="Eidt" Header="Eidt"  Click="RowEditClick"/>
                     <MenuItem x:Name="Delete" Header="Delete"  Click="RowDeleteClick"/>
-                </Con    <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefreshk"/>
+                    <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefreshClick"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-      
+
     </Grid>
 </Window>

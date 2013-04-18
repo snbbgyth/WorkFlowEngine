@@ -1,37 +1,40 @@
 ﻿<Window x:Class="WorkflowSetting.SettingForm.ViewForm.ViewWorkflowStateWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ViewWorkflowStateWindow" Height="800Auto" SizeToContent="Width    <Grid>
+        Title="ViewWorkflowStateWindow" Height="Auto" SizeToContent="Width">
+    <Grid>
         <DataGrid Name="DgWorkflowState" HorizontalGridLinesBrush="#bdbdbd" VerticalGridLinesBrush="#bdbdbd" BorderBrush="White" HeadersVisibility="Column" Background="#dadada"   GridLinesVisibility="All"
                  SelectionUnit="FullRow" AutoGenerateColumns="False" IsReadOnly="True"  Grid.ColumnSpan="2"  >
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="ID" WidthMin="100">
+                <DataGridTemplateColumn Header="ID" MinWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding State</TextBlock>
+                                <TextBlock Text="{Binding Id}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="WorkflowName" WidthMin="100">
+                <DataGridTemplateColumn Header="WorkflowName" MinWidth="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding StateWorkflowNa</TextBlock>
+                                <TextBlock Text="{Binding WorkflowName}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="LastUWorkflowDisplayName" MinWidth="13                   <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="WorkflowDisplayName" MinWidth="130">
+                    <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding StateWorkflowDisplayNa</TextBlock>
+                                <TextBlock Text="{Binding WorkflowDisplayName}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="LastUStateNodeName" Width="11                   <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="StateNodeName" Width="110">
+                    <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <TextBlock Text="{Binding StateNodeName}"></TextBlock>
@@ -39,38 +42,42 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="StateNodeDisplayName" WidthMinWidth="15                   <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding StateNodeName}DisplayNa</TextBlock>
-                            </Border>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="LastUCreateDateTime" Min="100">
+                <DataGridTemplateColumn Header="StateNodeDisplayName" MinWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding StateeDateTime}"></TextBlock>
+                                <TextBlock Text="{Binding StateNodeDisplayName}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="LastUpdateDateTime"  WidthMinWidth="12                   <DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Header="CreateDateTime" MinWidth="100">
+                    <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding StateLastUpdteTime}"></TextBlock>
+                                <TextBlock Text="{Binding CreateDateTime}"></TextBlock>
                             </Border>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-             </DataGrid.Columns>
+                <DataGridTemplateColumn Header="LastUpdateDateTime"  MinWidth="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding LastUpdateDateTime}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="Add" Header="AddNew"  Click="RowAddNewClick"/>
                     <MenuItem x:Name="Eidt" Header="Eidt"  Click="RowEditClick"/>
                     <MenuItem x:Name="Delete" Header="Delete"  Click="RowDeleteClick"/>
-                </ContextM    <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefresh                </ContextMenu>
+                    <MenuItem x:Name="Refresh" Header="Refresh"  Click="RowRefreshClick"/>
+                </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
     </Grid>
