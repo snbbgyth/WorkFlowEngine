@@ -47,7 +47,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
             Id = entity.Id;
             CreateDateTime = entity.CreateDateTime;
             IsDelete = entity.IsDelete;
-           
+
         }
 
         private void InitControl()
@@ -119,7 +119,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void ModifyUserNameList()
         {
-            SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserInUserGroup, UserOperationBLL.Current.DeleteUserInUserGroup, ExistUserInfoList,null, Id);
+            SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserInUserGroup, UserOperationBLL.Current.DeleteUserInUserGroup, ExistUserInfoList, null, Id);
         }
 
         private void ModifyGroupRoleList()
@@ -157,8 +157,8 @@ namespace WorkflowSetting.SettingForm.OperationForm
             var entity = GetEntity();
             if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
             {
-                ModifyUserNameList();
-   Relation    LblMessage.Content = "Modify successful!";
+                ModifyRelationList();
+                LblMessage.Content = "Modify successful!";
             }
             else
                 LblMessage.Content = "Modify fail!";
@@ -171,8 +171,9 @@ namespace WorkflowSetting.SettingForm.OperationForm
             {
                 Id = entity.Id;
                 ModifyRelationList();
-                LblMessage.Content = "Create sUserAction=OperationAction.Modify;
-                InitControle.Content = "Create successful!";
+                UserAction = OperationAction.Modify;
+                InitControl();
+                LblMessage.Content = "Create successful!";
             }
             else
                 LblMessage.Content = "Create fail!";
@@ -183,6 +184,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
             ModifyUserNameList();
             ModifyGroupRoleList();
         }
+
 
         private UserGroupModel GetEntity()
         {

@@ -31,7 +31,7 @@ namespace WorkFlowService.BLL
 
         public UserOperationBLL()
         {
-    
+
         }
 
         private DataOperationBLL _dataOperationInstance;
@@ -139,13 +139,13 @@ namespace WorkFlowService.BLL
         {
             return
                DataOperationInstance.Insert(new RelationModel
-                {
-                    ChildNodeID = userGroupId,
-                    ParentNodeID = roleID,
-                    Type = 2,
-                    CreateDateTime = DateTime.Now,
-                    LastUpdateDateTime = DateTime.Now,
-                }) > 0;
+               {
+                   ChildNodeID = userGroupId,
+                   ParentNodeID = roleID,
+                   Type = 2,
+                   CreateDateTime = DateTime.Now,
+                   LastUpdateDateTime = DateTime.Now,
+               }) > 0;
         }
 
         public int DeleteUserGroupAllRoleRelation(string userGroupId)
@@ -208,13 +208,13 @@ namespace WorkFlowService.BLL
         {
             return
                DataOperationInstance.Insert(new RelationModel
-                {
-                    ChildNodeID = workflowStateId,
-                    ParentNodeID = roleId,
-                    Type = 4,
-                    CreateDateTime = DateTime.Now,
-                    LastUpdateDateTime = DateTime.Now
-                }) > 0;
+               {
+                   ChildNodeID = workflowStateId,
+                   ParentNodeID = roleId,
+                   Type = 4,
+                   CreateDateTime = DateTime.Now,
+                   LastUpdateDateTime = DateTime.Now
+               }) > 0;
         }
 
         /// <summary>
@@ -241,13 +241,13 @@ namespace WorkFlowService.BLL
         {
             return
                DataOperationInstance.Insert(new RelationModel
-                {
-                    ChildNodeID = userId,
-                    ParentNodeID = roleId,
-                    Type = 5,
-                    CreateDateTime = DateTime.Now,
-                    LastUpdateDateTime = DateTime.Now
-                }) > 0;
+               {
+                   ChildNodeID = userId,
+                   ParentNodeID = roleId,
+                   Type = 5,
+                   CreateDateTime = DateTime.Now,
+                   LastUpdateDateTime = DateTime.Now
+               }) > 0;
         }
 
         public int DeleteUserAllRoleRelation(string userId)
@@ -285,21 +285,19 @@ namespace WorkFlowService.BLL
 
         #endregion
 
-      
-
         #region Workflow activity operation
 
         public bool MoveToActivityLog(WorkFlowActivityModel entity)
         {
             try
             {
-               DataOperationInstance.Insert(ConvertToActivityLog(entity));
+                DataOperationInstance.Insert(ConvertToActivityLog(entity));
                 WorkFlowActivityDAL.Current.DeleteByID(entity.Id);
                 return true;
             }
             catch (Exception ex)
             {
-                LogHelp.Instance.Write(ex,MessageType.Error, GetType(),MethodBase.GetCurrentMethod().Name);
+                LogHelp.Instance.Write(ex, MessageType.Error, GetType(), MethodBase.GetCurrentMethod().Name);
                 return false;
             }
 
@@ -308,21 +306,21 @@ namespace WorkFlowService.BLL
         private WorkFlowActivityLogModel ConvertToActivityLog(WorkFlowActivityModel entity)
         {
             return new WorkFlowActivityLogModel
-                       {
-                           ApplicationState = entity.ApplicationState,
-                           AppName = entity.AppName,
-                           CreateDateTime = DateTime.Now,
-                           CreateUserId = entity.CreateUserId,
-                           CurrentWorkflowState = entity.CurrentWorkflowState,
-                           ForeWorkFlowState = entity.ForeWorkflowState,
-                           AppId = entity.AppId,
-                           LastUpdateDateTime = DateTime.Now,
-                           OldID = entity.Id,
-                           OperatorActivity = entity.OperatorActivity,
-                           OperatorUserId = entity.OperatorUserId,
-                           OperatorUserList = entity.OperatorUserList,
-                           WorkflowName = entity.WorkflowName
-                       };
+            {
+                ApplicationState = entity.ApplicationState,
+                AppName = entity.AppName,
+                CreateDateTime = DateTime.Now,
+                CreateUserId = entity.CreateUserId,
+                CurrentWorkflowState = entity.CurrentWorkflowState,
+                ForeWorkFlowState = entity.ForeWorkflowState,
+                AppId = entity.AppId,
+                LastUpdateDateTime = DateTime.Now,
+                OldID = entity.Id,
+                OperatorActivity = entity.OperatorActivity,
+                OperatorUserId = entity.OperatorUserId,
+                OperatorUserList = entity.OperatorUserList,
+                WorkflowName = entity.WorkflowName
+            };
         }
 
         public WorkFlowActivityLogModel QueryActivityLogByOldId(string oldId)
@@ -336,7 +334,7 @@ namespace WorkFlowService.BLL
                 LogHelp.Instance.Write(ex, MessageType.Error, GetType(), MethodBase.GetCurrentMethod().Name);
                 return null;
             }
-           
+
         }
 
         public WorkFlowActivityLogModel QueryActivityLogByAppId(string appId)
@@ -355,7 +353,8 @@ namespace WorkFlowService.BLL
         #endregion
 
         #region Query operation
- public UserInfoModel QueryUserInfoByUserName(string userName)
+
+        public UserInfoModel QueryUserInfoByUserName(string userName)
         {
             return UserInfoDAL.Current.QueryByUserName(userName);
         }
@@ -477,13 +476,13 @@ namespace WorkFlowService.BLL
 
         public OperationActionInfoModel QueryOperationActionByCondition(string workflowName, string actionName)
         {
-            return OperationActionInfoDAL.Current. QueryByCondition(workflowName,  actionName);
+            return OperationActionInfoDAL.Current.QueryByCondition(workflowName, actionName);
         }
 
         public UserInfoModel QueryReportUserInfoByUserId(string userId)
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 6);
-            return relationList != null && relationList.Any() &&!string.IsNullOrEmpty(relationList.First().ParentNodeID)
+            return relationList != null && relationList.Any() && !string.IsNullOrEmpty(relationList.First().ParentNodeID)
                        ? UserInfoDAL.Current.QueryByID(relationList.First().ParentNodeID)
                        : null;
         }
@@ -493,9 +492,7 @@ namespace WorkFlowService.BLL
             return RelationDAL.Current.QueryByChildNodeIDAndParentNodeIDAndType(userId, reportUserId, 6);
         }
 
-        #endregion
-    }
-public IList<WorkFlowActivityModel> QueryActivityByCondition(KeyValuePair<string, string> workflowParam,
+        public IList<WorkFlowActivityModel> QueryActivityByCondition(KeyValuePair<string, string> workflowParam,
                                                              KeyValuePair<string, object> conditionParam)
         {
             return WorkFlowActivityDAL.Current.QueryByCondition(workflowParam, conditionParam);

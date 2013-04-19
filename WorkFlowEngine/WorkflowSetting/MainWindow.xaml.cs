@@ -43,10 +43,9 @@ namespace WorkflowSetting
 
         private void BtnInitWorkflowClick(object sender, RoutedEventArgs e)
         {
-           
+
             WorkFlowEngine.Current.InitWorkflowState("TestStateWorkFlow");
         }
-  
 
         private void BtnShowViewActionClick(object sender, RoutedEventArgs e)
         {
@@ -65,13 +64,10 @@ namespace WorkflowSetting
             var viewWorkflowStateWindow = new ViewWorkflowStateWindow();
             viewWorkflowStateWindow.Show();
         }
-    }
-}
 
-
-        private void BtnShowViewActivityject sender, RoutedEventArgs e)
+        private void BtnShowViewActivityClick(object sender, RoutedEventArgs e)
         {
-            var viewUserGroupWActivityWindow = new ViewActivityWindow();
+            var viewActivityWindow = new ViewActivityWindow();
             viewActivityWindow.Show();
         }
     }
