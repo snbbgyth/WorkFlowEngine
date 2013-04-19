@@ -10,5 +10,8 @@
         <Button Content="ShowViewWorkflowStateWindow" HorizontalAlignment="Left" Margin="272,174,0,0" VerticalAlignment="Top" Height="30" Width="200" Click="BtnShowViewWorkflowStateClick"/>
         <Button Content="ShowViewActionWindow" Name="BtnShowViewAction" HorizontalAlignment="Left" Margin="272,102,0,0" VerticalAlignment="Top" Height="30" Width="150" Click="BtnShowViewActionClick"/>
 
+ 
+        <Button Content="ShowViewActivityWindow" Name="BtnShowViewActivity" HorizontalAlignment="Left" Margin="44,209,0,0" VerticalAlignment="Top" Height="30" Width="160" Click="BtnShowViewActivityClick"/>
+
     </Grid>
 </Window>

@@ -35,7 +35,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Run\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -123,6 +123,9 @@
     <Compile Include="SettingForm\OperationForm\UserRelationWindow.xaml.cs">
       <DependentUpon>UserRelationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingForm\ViewForm\ViewActivityWindow.xaml.cs">
+      <DependentUpon>ViewActivityWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingForm\ViewForm\ViewOperationActionWindow.xaml.cs">
       <DependentUpon>ViewOperationActionWindow.xaml</DependentUpon>
     </Compile>
@@ -194,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingForm\OperationForm\UserRelationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingForm\ViewForm\ViewActivityWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

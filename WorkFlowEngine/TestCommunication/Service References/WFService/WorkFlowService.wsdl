@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CommonLibrary.Model" />
       <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:9090/WorkFlowWCFService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/CommonLibrary.Help" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="BPELWorkFlowService_Execute_InputMessage">
@@ -32,6 +33,12 @@
   <wsdl:message name="BPELWorkFlowService_GetCurrentActivityStateByAppIdAndUserID_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentActivityStateByAppIdAndUserIDResponse" />
   </wsdl:message>
+  <wsdl:message name="BPELWorkFlowService_GetApplicationStateByAppId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetApplicationStateByAppId" />
+  </wsdl:message>
+  <wsdl:message name="BPELWorkFlowService_GetApplicationStateByAppId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetApplicationStateByAppIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="BPELWorkFlowService">
     <wsdl:operation name="Execute">
       <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/Execute" message="tns:BPELWorkFlowService_Execute_InputMessage" />
@@ -48,6 +55,10 @@
     <wsdl:operation name="GetCurrentActivityStateByAppIdAndUserID">
       <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserID" message="tns:BPELWorkFlowService_GetCurrentActivityStateByAppIdAndUserID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserIDResponse" message="tns:BPELWorkFlowService_GetCurrentActivityStateByAppIdAndUserID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationStateByAppId">
+      <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppId" message="tns:BPELWorkFlowService_GetApplicationStateByAppId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppIdResponse" message="tns:BPELWorkFlowService_GetApplicationStateByAppId_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_BPELWorkFlowService" type="tns:BPELWorkFlowService">
@@ -81,6 +92,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetCurrentActivityStateByAppIdAndUserID">
       <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/GetCurrentActivityStateByAppIdAndUserID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationStateByAppId">
+      <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

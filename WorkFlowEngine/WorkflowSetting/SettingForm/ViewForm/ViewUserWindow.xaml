@@ -6,7 +6,7 @@
         <DataGrid Name="DgUserList" HorizontalGridLinesBrush="#bdbdbd" VerticalGridLinesBrush="#bdbdbd" BorderBrush="White" HeadersVisibility="Column" Background="#dadada" 
                     AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left"   >
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="ID" MinWidth="100" >
+                <DataGridTemplateColumn Header="ID" MinWidth="100" MaxWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -15,7 +15,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="UserName" MinWidth="100">
+                <DataGridTemplateColumn Header="UserName" MinWidth="100" MaxWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -24,7 +24,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="UserDisplayName" MinWidth="130">
+                <DataGridTemplateColumn Header="UserDisplayName" MinWidth="130" MaxWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -33,7 +33,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="CreateDateTime" MinWidth="150">
+                <DataGridTemplateColumn Header="CreateDateTime" MinWidth="150" MaxWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -42,7 +42,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="LastUpdateDateTime"  MinWidth="150">
+                <DataGridTemplateColumn Header="LastUpdateDateTime"  MinWidth="150" MaxWidth="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Border HorizontalAlignment="Center" VerticalAlignment="Center">

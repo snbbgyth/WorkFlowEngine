@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using CommonLibrary.Help;
 using CommonLibrary.Model;
- 
+
 using WorkFlowService.Help;
 using WorkFlowService.IDAL;
 using WorkFlowService.NHibernateDAL;
@@ -34,7 +34,16 @@ namespace WorkFlowService.BLL
             activityEntity.ApplicationState = currentWorkFlowState;
             activityEntity.WorkflowName = entity.WorkflowName;
             DataOperationBLL.Current.Modify(activityEntity);
+            CheckApplicationState(activityEntity);
             return currentWorkFlowState;
+        }
+
+        private void CheckApplicationState(WorkFlowActivityModel entity)
+        {
+            if (GetApplicationStateByWorkFlowActivityEntity(entity) == ApplicationState.Complete)
+              {
+                  UserOperationBLL.Current.MoveToActivityLog(entity);
+              }
         }
 
         public string NewWorkFlow(AppInfoModel entity)
@@ -70,26 +79,27 @@ namespace WorkFlowService.BLL
             if (CompareIsContain(activityEntity.OperatorUserId, userId))
                 return WorkFlowEngine.Current.GetActivityStateByConditon(activityEntity.WorkflowName, activityEntity.CurrentWorkflowState);
             if (CompareIsContain(activityEntity.OperatorUserList, userId))
-                return new List<string>{ActivityState.Read.ToString()};
+                return new List<string> { ActivityState.Read.ToString() };
             return null;
         }
 
         public ApplicationState GetApplicationStateByAppId(string appId)
         {
             var activityEntity = WorkFlowActivityDAL.Current.QueryByAppId(appId);
+            if (activityEntity == null)
+            {
+                var activityLogEntity = UserOperationBLL.Current.QueryActivityLogByAppId(appId);
+                if (activityLogEntity == null)
+                    return ApplicationState.Draft;
+                return ApplicationState.Complete;
+            }
             return GetApplicationStateByWorkFlowActivityEntity(activityEntity);
         }
 
         private ApplicationState GetApplicationStateByWorkFlowActivityEntity(WorkFlowActivityModel entity)
         {
-            if (entity == null)
-                return ApplicationState.Draft;
-            //if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Done || WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Refuse)
-            //    return ApplicationState.Complete;
-            //if (WFUntilHelp.GetWorkFlowStateByName(entity.CurrentWorkflowState) == WorkFlowState.Common && WFUntilHelp.GetActivityStateByName(entity.OperatorActivity) == ActivityState.Revoke)
-            //    return ApplicationState.Draft;
-
-            return ApplicationState.InProgress;
+            
+            return WorkFlowEngine.Current.GetAppStateByCondition(entity.WorkflowName, entity.CurrentWorkflowState);
         }
 
         private bool CompareIsContain(string source, string value)

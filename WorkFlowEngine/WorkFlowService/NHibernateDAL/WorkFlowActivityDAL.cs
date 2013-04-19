@@ -22,10 +22,10 @@ namespace WorkFlowService.NHibernateDAL
         {
             using (var session = NhibernateHelp.Instance.GetSession())
             {
-              return 
-                    session.CreateCriteria(typeof(WorkFlowActivityModel))
-                           .Add(Restrictions.Eq("OperatorUserId", operatorUserId))
-                           .List<WorkFlowActivityModel>();
+                return
+                      session.CreateCriteria(typeof(WorkFlowActivityModel))
+                             .Add(Restrictions.Eq("OperatorUserId", operatorUserId))
+                             .List<WorkFlowActivityModel>();
             }
         }
 
@@ -37,6 +37,22 @@ namespace WorkFlowService.NHibernateDAL
                       session.CreateCriteria(typeof(WorkFlowActivityModel))
                              .Add(Restrictions.Eq("AppId", appId))
                              .List<WorkFlowActivityModel>().FirstOrDefault();
+            }
+        }
+
+        public IList<WorkFlowActivityModel> QueryByCondition(KeyValuePair<string, string> workflowParam, KeyValuePair<string, object> conditionParam)
+        {
+            using (var session = NhibernateHelp.Instance.GetSession())
+            {
+                var iCriteria =
+                     session.CreateCriteria(typeof(WorkFlowActivityModel));
+                if (!string.IsNullOrEmpty(workflowParam.Key) && !string.IsNullOrEmpty(workflowParam.Value))
+                {
+                    iCriteria.Add(Restrictions.Eq(workflowParam.Key, workflowParam.Value));
+                }
+                if (!string.IsNullOrEmpty(conditionParam.Key) && !string.IsNullOrEmpty(conditionParam.Value.ToString()))
+                    iCriteria.Add(Restrictions.Like(conditionParam.Key,string.Format("%{0}%", conditionParam.Value)));
+                return iCriteria.List<WorkFlowActivityModel>();
             }
         }
     }

@@ -67,3 +67,12 @@ namespace WorkflowSetting
         }
     }
 }
+
+
+        private void BtnShowViewActivityject sender, RoutedEventArgs e)
+        {
+            var viewUserGroupWActivityWindow = new ViewActivityWindow();
+            viewActivityWindow.Show();
+        }
+    }
+}

@@ -115,5 +115,19 @@ namespace WorkflowSetting.Help
             lv.ItemsSource = entityList;
             lv.Items.Refresh();
         }
+
+
+        public static List<string> ActivityQueryTypeList()
+        {
+            return new List<string>
+                       {
+                           "AppId",
+                           "OperatorActivity",
+                           "CurrentWorkflowState",
+                           "AppName",
+                           "ApplicationState",
+                           "CreateUserId"
+                       };
+        }
     }
 }

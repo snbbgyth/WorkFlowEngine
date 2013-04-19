@@ -78,7 +78,7 @@
             <Button x:Name="BtnRemoveAction" Content="RemoveAction" HorizontalAlignment="Left" Margin="331,542,0,0" VerticalAlignment="Top" Width="100" Click="BtnRemoveActionClick" TabIndex="27"/>
             <Label x:Name="LblMessage"  HorizontalAlignment="Left" Margin="114,820,0,0" VerticalAlignment="Top" Foreground="#FFF70202" RenderTransformOrigin="0.5,0.6"/>
         <Label Content="Workflow Name:" HorizontalAlignment="Left" Margin="62,103,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TxtWorkflowName" HorizontalAlignment="Left" Height="23" Margin="182,103,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="200" TabIndex="6"/>
+        <TextBox x:Name="TxtWorkflowName" HorizontalAlignment="Left" Height="23" Margin="182,103,0,0" TextWrapping="Wrap"   IsEnabled="False"VerticalAlignment="Top" Width="200" TabIndex="6"/>
         <Label Content="Workflow display name:" HorizontalAlignment="Left" Margin="20,134,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TxtWorkflowDisplayName" HorizontalAlignment="Left" Height="23" Margin="182,137,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="200" TabIndex="9"/>
 

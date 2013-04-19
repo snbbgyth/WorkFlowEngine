@@ -54,5 +54,11 @@ namespace WorkFlowWCFService
         {
             return WorkFlowEngineInstance.GetCurrentActivityStateByAppIdAndUserID(appId, userId);
         }
+
+        [OperationContract]
+        public ApplicationState GetApplicationStateByAppId(string appId)
+        {
+            return WorkFlowEngineInstance.GetApplicationStateByAppId(appId);
+        }
     }
 }

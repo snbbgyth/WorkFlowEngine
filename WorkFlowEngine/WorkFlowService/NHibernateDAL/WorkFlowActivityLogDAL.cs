@@ -39,5 +39,16 @@ namespace WorkFlowService.NHibernateDAL
             }
         }
 
+        public WorkFlowActivityLogModel QueryByOldId(string oldId)
+        {
+            using (var session = NhibernateHelp.Instance.GetSession())
+            {
+                return
+                      session.CreateCriteria(typeof(WorkFlowActivityLogModel))
+                             .Add(Restrictions.Eq("OldID", oldId))
+                             .List<WorkFlowActivityLogModel>().FirstOrDefault();
+            }
+        }
+
     }
 }

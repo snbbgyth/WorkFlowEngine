@@ -94,9 +94,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\DataSources\CommonLibrary.Model.WorkFlowActivityModel.datasource" />
-    <None Include="Service References\WFService\TestCommunication.WFService.WorkFlowActivityModel.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\WFService\WorkFlowService.wsdl" />
     <None Include="Service References\WFService\WorkFlowWCFService.xsd">
       <SubType>Designer</SubType>
@@ -108,6 +105,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\WFService\WorkFlowWCFService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WFService\WorkFlowWCFService4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

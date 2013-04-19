@@ -22,6 +22,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="WorkFlowWCFService.disco" MetadataType="Disco" ID="86b9fab5-0f37-407f-9817-e89f718183a3" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?disco" />
+    <MetadataFile FileName="WorkFlowWCFService4.xsd" MetadataType="Schema" ID="cb852c92-088f-4189-841d-e7f3ffff75e1" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd4" />
     <MetadataFile FileName="WorkFlowWCFService.xsd" MetadataType="Schema" ID="cfc59d81-7344-4423-8452-d7fa66e1b8a1" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd2" />
     <MetadataFile FileName="WorkFlowWCFService1.xsd" MetadataType="Schema" ID="9273e347-53d7-4202-acd8-2d40cacb986e" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd3" />
     <MetadataFile FileName="WorkFlowWCFService2.xsd" MetadataType="Schema" ID="388cf7c9-89a7-494a-b231-ac122ad56289" SourceId="1" SourceUrl="http://localhost:9090/WorkFlowWCFService?xsd=xsd0" />

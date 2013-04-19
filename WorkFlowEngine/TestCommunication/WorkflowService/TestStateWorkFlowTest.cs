@@ -6,7 +6,11 @@
 ** Modify Date： 2012-3-13
 ** Summary：     TestStateWorkFlowTest interface
 *********************************************************************************/
- 
+
+
+using System.Diagnostics;
+using CommonLibrary.Help;
+using CommonLibrary.Model;
 
 namespace TestCommunication.WorkflowService
 {
@@ -139,9 +143,9 @@ namespace TestCommunication.WorkflowService
             var appEntity = new AppInfoModel
             {
                 ActivityState = "Submit",
-                AppId = "007",
+                AppId = "008",
                 WorkflowName = "TestStateWorkFlow",
-                UserId = "007",
+                UserId = "008",
                 CurrentState = "Common"
             };
             var result = WfServiceInstance.NewWorkFlow(appEntity);
@@ -150,9 +154,9 @@ namespace TestCommunication.WorkflowService
             var commonEntity = new AppInfoModel
             {
                 ActivityState = "Revoke",
-                AppId = "007",
+                AppId = "008",
                 WorkflowName = "TestStateWorkFlow",
-                UserId = "007",
+                UserId = "008",
                 CurrentState = "Common"
             };
             var revokeResult = WfServiceInstance.Execute(commonEntity);
@@ -161,13 +165,46 @@ namespace TestCommunication.WorkflowService
             var resubmitEntity = new AppInfoModel
             {
                 ActivityState = "Resubmit",
-                AppId = "007",
+                AppId = "008",
                 WorkflowName = "TestStateWorkFlow",
-                UserId = "007",
+                UserId = "008",
                 CurrentState = "Common"
             };
             var lastResult = WfServiceInstance.Execute(resubmitEntity);
             Assert.AreEqual(lastResult, "Manage");
+        }
+
+        [Test]
+        public void TestWorkflowAppState()
+        {
+
+            var appEntity = new AppInfoModel
+            {
+                ActivityState = "Submit",
+                AppId = "009",
+                WorkflowName = "TestStateWorkFlow",
+                UserId = "009",
+                CurrentState = "Common"
+            };
+
+            var firstState = WfServiceInstance.GetApplicationStateByAppId(appEntity.AppId);
+            Assert.AreEqual(firstState,ApplicationState.Draft);
+            var result = WfServiceInstance.NewWorkFlow(appEntity);
+            Assert.AreEqual(result, "Manage");
+            var secondState = WfServiceInstance.GetApplicationStateByAppId(appEntity.AppId);
+            Assert.AreEqual(secondState, ApplicationState.InProgress);
+            var commonEntity = new AppInfoModel
+            {
+                ActivityState = "Approve",
+                AppId = "009",
+                WorkflowName = "TestStateWorkFlow",
+                UserId = "009",
+                CurrentState = "Manage"
+            };
+            var approveResult = WfServiceInstance.Execute(commonEntity);
+            Assert.AreEqual(approveResult, "Done");
+            var thirdState = WfServiceInstance.GetApplicationStateByAppId(appEntity.AppId);
+            Assert.AreEqual(thirdState, ApplicationState.Complete);
         }
     }
 }

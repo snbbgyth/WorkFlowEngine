@@ -27,7 +27,7 @@ namespace WorkFlowService.Model
 
 
 
-        public virtual string WorkflowName { get; set; }
+    public virtual string WorkflowName { get; set; }
 
         public virtual string WorkflowDisplayName { get; set; }
 

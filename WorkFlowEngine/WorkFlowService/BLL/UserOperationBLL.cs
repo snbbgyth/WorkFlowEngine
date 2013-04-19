@@ -7,6 +7,9 @@
 ** Summary：     UserOperationBLL class
 *********************************************************************************/
 
+using System.Reflection;
+using CommonLibrary.Help;
+using CommonLibrary.Model;
 using WorkFlowService.IDAL;
 
 namespace WorkFlowService.BLL
@@ -282,9 +285,77 @@ namespace WorkFlowService.BLL
 
         #endregion
 
-        #region Query operation
+      
 
-        public UserInfoModel QueryUserInfoByUserName(string userName)
+        #region Workflow activity operation
+
+        public bool MoveToActivityLog(WorkFlowActivityModel entity)
+        {
+            try
+            {
+               DataOperationInstance.Insert(ConvertToActivityLog(entity));
+                WorkFlowActivityDAL.Current.DeleteByID(entity.Id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogHelp.Instance.Write(ex,MessageType.Error, GetType(),MethodBase.GetCurrentMethod().Name);
+                return false;
+            }
+
+        }
+
+        private WorkFlowActivityLogModel ConvertToActivityLog(WorkFlowActivityModel entity)
+        {
+            return new WorkFlowActivityLogModel
+                       {
+                           ApplicationState = entity.ApplicationState,
+                           AppName = entity.AppName,
+                           CreateDateTime = DateTime.Now,
+                           CreateUserId = entity.CreateUserId,
+                           CurrentWorkflowState = entity.CurrentWorkflowState,
+                           ForeWorkFlowState = entity.ForeWorkflowState,
+                           AppId = entity.AppId,
+                           LastUpdateDateTime = DateTime.Now,
+                           OldID = entity.Id,
+                           OperatorActivity = entity.OperatorActivity,
+                           OperatorUserId = entity.OperatorUserId,
+                           OperatorUserList = entity.OperatorUserList,
+                           WorkflowName = entity.WorkflowName
+                       };
+        }
+
+        public WorkFlowActivityLogModel QueryActivityLogByOldId(string oldId)
+        {
+            try
+            {
+                return WorkFlowActivityLogDAL.Current.QueryByOldId(oldId);
+            }
+            catch (Exception ex)
+            {
+                LogHelp.Instance.Write(ex, MessageType.Error, GetType(), MethodBase.GetCurrentMethod().Name);
+                return null;
+            }
+           
+        }
+
+        public WorkFlowActivityLogModel QueryActivityLogByAppId(string appId)
+        {
+            try
+            {
+                return WorkFlowActivityLogDAL.Current.QueryByAppId(appId);
+            }
+            catch (Exception ex)
+            {
+                LogHelp.Instance.Write(ex, MessageType.Error, GetType(), MethodBase.GetCurrentMethod().Name);
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Query operation
+ public UserInfoModel QueryUserInfoByUserName(string userName)
         {
             return UserInfoDAL.Current.QueryByUserName(userName);
         }
@@ -420,6 +491,14 @@ namespace WorkFlowService.BLL
         public RelationModel QueryReportRelationByCondition(string userId, string reportUserId)
         {
             return RelationDAL.Current.QueryByChildNodeIDAndParentNodeIDAndType(userId, reportUserId, 6);
+        }
+
+        #endregion
+    }
+public IList<WorkFlowActivityModel> QueryActivityByCondition(KeyValuePair<string, string> workflowParam,
+                                                             KeyValuePair<string, object> conditionParam)
+        {
+            return WorkFlowActivityDAL.Current.QueryByCondition(workflowParam, conditionParam);
         }
 
         #endregion

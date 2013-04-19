@@ -16,8 +16,10 @@ namespace WorkFlowService.Help
         public const string SplitCharacterTag = "#";
 
         public const string SqliteFileNameTags = "mydatabase.sqlite";
- 
+
+        public const string WorkflowEndPortTypeTags = "None";
+
         #endregion
- 
+
     }
 }

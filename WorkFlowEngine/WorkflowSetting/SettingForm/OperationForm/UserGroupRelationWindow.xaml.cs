@@ -158,8 +158,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
             if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
             {
                 ModifyUserNameList();
-                ModifyGroupRoleList();
-                LblMessage.Content = "Modify successful!";
+   Relation    LblMessage.Content = "Modify successful!";
             }
             else
                 LblMessage.Content = "Modify fail!";
@@ -172,7 +171,8 @@ namespace WorkflowSetting.SettingForm.OperationForm
             {
                 Id = entity.Id;
                 ModifyRelationList();
-                LblMessage.Content = "Create successful!";
+                LblMessage.Content = "Create sUserAction=OperationAction.Modify;
+                InitControle.Content = "Create successful!";
             }
             else
                 LblMessage.Content = "Create fail!";
