@@ -39,6 +39,12 @@
   <wsdl:message name="BPELWorkFlowService_GetApplicationStateByAppId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetApplicationStateByAppIdResponse" />
   </wsdl:message>
+  <wsdl:message name="BPELWorkFlowService_ClearUnitTestData_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearUnitTestData" />
+  </wsdl:message>
+  <wsdl:message name="BPELWorkFlowService_ClearUnitTestData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearUnitTestDataResponse" />
+  </wsdl:message>
   <wsdl:portType name="BPELWorkFlowService">
     <wsdl:operation name="Execute">
       <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/Execute" message="tns:BPELWorkFlowService_Execute_InputMessage" />
@@ -59,6 +65,10 @@
     <wsdl:operation name="GetApplicationStateByAppId">
       <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppId" message="tns:BPELWorkFlowService_GetApplicationStateByAppId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppIdResponse" message="tns:BPELWorkFlowService_GetApplicationStateByAppId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearUnitTestData">
+      <wsdl:input wsaw:Action="http://tempuri.org/BPELWorkFlowService/ClearUnitTestData" message="tns:BPELWorkFlowService_ClearUnitTestData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/BPELWorkFlowService/ClearUnitTestDataResponse" message="tns:BPELWorkFlowService_ClearUnitTestData_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_BPELWorkFlowService" type="tns:BPELWorkFlowService">
@@ -101,6 +111,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetApplicationStateByAppId">
       <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearUnitTestData">
+      <soap:operation soapAction="http://tempuri.org/BPELWorkFlowService/ClearUnitTestData" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

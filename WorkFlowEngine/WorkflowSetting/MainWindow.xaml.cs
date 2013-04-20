@@ -70,5 +70,11 @@ namespace WorkflowSetting
             var viewActivityWindow = new ViewActivityWindow();
             viewActivityWindow.Show();
         }
+
+        private void BtnSowViewActivityLogClick(object sender, RoutedEventArgs e)
+        {
+            var viewActivityLogWindow = new ViewActivityLogWindow();
+            viewActivityLogWindow.Show();
+        }
     }
 }

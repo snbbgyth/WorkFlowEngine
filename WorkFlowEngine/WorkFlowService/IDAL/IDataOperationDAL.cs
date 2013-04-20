@@ -13,6 +13,7 @@ namespace WorkFlowService.IDAL
        int Insert<T>(T entity) where T : ITableModel;
        int Modify<T>(T entity);
        int Remove<T>(string id);
+       int RemoveAll<T>();
        T QueryByID<T>(string id);
        IList<T> QueryAll<T>();
    }

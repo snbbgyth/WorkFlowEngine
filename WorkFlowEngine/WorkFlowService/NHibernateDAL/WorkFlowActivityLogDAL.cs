@@ -50,5 +50,21 @@ namespace WorkFlowService.NHibernateDAL
             }
         }
 
+        public IList<WorkFlowActivityLogModel> QueryByCondition(KeyValuePair<string, string> workflowParam, KeyValuePair<string, object> conditionParam)
+        {
+            using (var session = NhibernateHelp.Instance.GetSession())
+            {
+                var iCriteria =
+                     session.CreateCriteria(typeof(WorkFlowActivityLogModel));
+                if (!string.IsNullOrEmpty(workflowParam.Key) && !string.IsNullOrEmpty(workflowParam.Value))
+                {
+                    iCriteria.Add(Restrictions.Eq(workflowParam.Key, workflowParam.Value));
+                }
+                if (!string.IsNullOrEmpty(conditionParam.Key) && !string.IsNullOrEmpty(conditionParam.Value.ToString()))
+                    iCriteria.Add(Restrictions.Like(conditionParam.Key, string.Format("%{0}%", conditionParam.Value)));
+                return iCriteria.List<WorkFlowActivityLogModel>();
+            }
+        }
+
     }
 }

@@ -22,6 +22,7 @@ namespace WorkFlowService.IDAL
        int DeleteByID(string id);
        List<T> QueryAll();
        T QueryByID(string id);
-
+       int DeleteAll();
+ 
    }
 }

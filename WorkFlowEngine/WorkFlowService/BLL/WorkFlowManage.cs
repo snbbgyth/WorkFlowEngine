@@ -31,8 +31,11 @@ namespace WorkFlowService.BLL
             activityEntity.OperatorUserId = entity.UserId;
             activityEntity.OperatorUserList += entity.UserId + WFConstants.SplitCharacterTag;
             activityEntity.LastUpdateDateTime = DateTime.Now;
-            activityEntity.ApplicationState = currentWorkFlowState;
+            activityEntity.ApplicationState = GetApplicationStateByWorkFlowActivityEntity(activityEntity).ToString();
+            activityEntity.OperatorActivity = entity.ActivityState;
             activityEntity.WorkflowName = entity.WorkflowName;
+            if(!string.IsNullOrEmpty(entity.AppName))
+            activityEntity.AppName = entity.AppName;
             DataOperationBLL.Current.Modify(activityEntity);
             CheckApplicationState(activityEntity);
             return currentWorkFlowState;
@@ -40,10 +43,10 @@ namespace WorkFlowService.BLL
 
         private void CheckApplicationState(WorkFlowActivityModel entity)
         {
-            if (GetApplicationStateByWorkFlowActivityEntity(entity) == ApplicationState.Complete)
-              {
-                  UserOperationBLL.Current.MoveToActivityLog(entity);
-              }
+            if (entity.ApplicationState == ApplicationState.Complete.ToString())
+            {
+                UserOperationBLL.Current.MoveToActivityLog(entity);
+            }
         }
 
         public string NewWorkFlow(AppInfoModel entity)
@@ -58,6 +61,7 @@ namespace WorkFlowService.BLL
                 CreateUserId = entity.UserId,
                 OperatorUserId = entity.UserId,
                 WorkflowName = entity.WorkflowName,
+                AppName = entity.AppName,
                 OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag,
             };
             WorkFlowEngine.Current.InitWorkflowState(entity.WorkflowName);
@@ -96,9 +100,14 @@ namespace WorkFlowService.BLL
             return GetApplicationStateByWorkFlowActivityEntity(activityEntity);
         }
 
+        public void ClearUnitTestData()
+        {
+            UserOperationBLL.Current.ClearUnitTestData();
+        }
+
         private ApplicationState GetApplicationStateByWorkFlowActivityEntity(WorkFlowActivityModel entity)
         {
-            
+
             return WorkFlowEngine.Current.GetAppStateByCondition(entity.WorkflowName, entity.CurrentWorkflowState);
         }
 

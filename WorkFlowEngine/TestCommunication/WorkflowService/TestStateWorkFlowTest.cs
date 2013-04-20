@@ -20,10 +20,7 @@ namespace TestCommunication.WorkflowService
 
     public class TestStateWorkFlowTest : BaseActivity
     {
-        private BPELWorkFlowServiceClient WfServiceInstance
-        {
-            get { return new BPELWorkFlowServiceClient(){}; }
-        }
+      
 
         [Test]
         public void TestNewWorkflow()
@@ -31,6 +28,7 @@ namespace TestCommunication.WorkflowService
             var appEntity = new AppInfoModel
             {
                 ActivityState = "Submit",
+                AppName = "TestApp",
                 AppId = "001",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "001",
@@ -49,6 +47,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Submit",
                 AppId = "002",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "002",
                 CurrentState = "Common"
@@ -60,6 +59,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Approve",
                 AppId = "002",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "003",
                 CurrentState = "Manage"
@@ -75,6 +75,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Submit",
                 AppId = "004",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "004",
                 CurrentState = "Common"
@@ -86,6 +87,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Reject",
                 AppId = "004",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "005",
                 CurrentState = "Manage"
@@ -102,6 +104,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Save",
                 AppId = "006",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "006",
                 CurrentState = "Common"
@@ -118,6 +121,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Submit",
                 AppId = "007",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "007",
                 CurrentState = "Common"
@@ -129,6 +133,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Revoke",
                 AppId = "007",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "007",
                 CurrentState = "Common"
@@ -144,6 +149,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Submit",
                 AppId = "008",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "008",
                 CurrentState = "Common"
@@ -155,6 +161,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Revoke",
                 AppId = "008",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "008",
                 CurrentState = "Common"
@@ -166,6 +173,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Resubmit",
                 AppId = "008",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "008",
                 CurrentState = "Common"
@@ -182,6 +190,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Submit",
                 AppId = "009",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "009",
                 CurrentState = "Common"
@@ -197,6 +206,7 @@ namespace TestCommunication.WorkflowService
             {
                 ActivityState = "Approve",
                 AppId = "009",
+                AppName = "TestApp",
                 WorkflowName = "TestStateWorkFlow",
                 UserId = "009",
                 CurrentState = "Manage"

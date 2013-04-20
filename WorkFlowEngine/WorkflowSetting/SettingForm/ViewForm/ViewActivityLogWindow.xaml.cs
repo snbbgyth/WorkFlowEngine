@@ -10,20 +10,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CommonLibrary.Model;
+using WorkFlowService.BLL;
+using WorkflowSetting.Help;
 
 namespace WorkflowSetting.SettingForm.ViewForm
 {
-    using WorkFlowService.BLL;
-    using WorkFlowService.Model;
-    using WorkflowSetting.Help;
-    using CommonLibrary.Model;
-
     /// <summary>
-    /// ViewActivityWindow.xaml 的交互逻辑
+    /// ViewActivityLogWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ViewActivityWindow : Window
+    public partial class ViewActivityLogWindow : Window
     {
-        public ViewActivityWindow()
+        public ViewActivityLogWindow()
         {
             InitializeComponent();
             InitData();
@@ -31,7 +29,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void InitData()
         {
-            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<WorkFlowActivityModel>();
+            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<WorkFlowActivityLogModel>();
             DgActivityList.ItemsSource = entityList;
             DgActivityList.Items.Refresh();
             CbWorkflowName.ItemsSource = entityList.Select(entity => entity.WorkflowName).Distinct();
@@ -43,9 +41,9 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void BtnQueryClick(object sender, RoutedEventArgs e)
         {
             DgActivityList.ItemsSource =
-                UserOperationBLL.Current.QueryActivityByCondition(
+                UserOperationBLL.Current.QueryActivityLogByCondition(
                 new KeyValuePair<string, string>("WorkflowName", CbWorkflowName.SelectedItem == null ? null : CbWorkflowName.SelectedItem.ToString()),
-                new KeyValuePair<string, object>(CbQueryType.SelectedValue==null?null: CbQueryType.SelectedValue.ToString(), TxtQueryValue.Text.Trim()));
+                new KeyValuePair<string, object>(CbQueryType.SelectedValue==null?null:CbQueryType.SelectedValue.ToString(), TxtQueryValue.Text.Trim()));
             DgActivityList.Items.Refresh();
         }
     }

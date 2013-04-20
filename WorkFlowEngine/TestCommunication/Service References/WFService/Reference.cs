@@ -32,6 +32,9 @@ namespace TestCommunication.WFService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppId", ReplyAction="http://tempuri.org/BPELWorkFlowService/GetApplicationStateByAppIdResponse")]
         CommonLibrary.Help.ApplicationState GetApplicationStateByAppId(string appId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/BPELWorkFlowService/ClearUnitTestData", ReplyAction="http://tempuri.org/BPELWorkFlowService/ClearUnitTestDataResponse")]
+        void ClearUnitTestData();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -79,6 +82,10 @@ namespace TestCommunication.WFService {
         
         public CommonLibrary.Help.ApplicationState GetApplicationStateByAppId(string appId) {
             return base.Channel.GetApplicationStateByAppId(appId);
+        }
+        
+        public void ClearUnitTestData() {
+            base.Channel.ClearUnitTestData();
         }
     }
 }

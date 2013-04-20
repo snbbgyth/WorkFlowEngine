@@ -73,12 +73,16 @@ namespace WorkFlowService.BLL
                 typeList.Select(eType => Activator.CreateInstance(eType) as IDataOperationActivity<T>).FirstOrDefault();
         }
 
- 
-
         private IEnumerable<Type> GetExecutingTypes()
         {
             var assembly = Assembly.GetExecutingAssembly();
             return assembly.GetTypes();
         }
+ 
+        public int RemoveAll<T>()
+        {
+            return GetActivityByType<T>().DeleteAll();
+        }
+
     }
 }

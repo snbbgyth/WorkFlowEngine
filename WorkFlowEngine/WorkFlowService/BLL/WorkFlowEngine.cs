@@ -99,12 +99,15 @@ namespace WorkFlowService.BLL
                         if (partnerLinkEntity != null)
                         {
                             var roleInfoEntity =
-                                UserOperationBLL.Current.QueryRoleInfoByCondition(workflowContext.WorkflowName,
-                                                                                  partnerLinkEntity.MyRole);
+                                UserOperationBLL.Current.QueryRoleInfoByCondition(workflowContext.WorkflowName,partnerLinkEntity.MyRole);
                             foreach (var actionEntity in switchStep.WorkflowSteps.OfType<CaseStep>().Select(caseStep => AddActionByCondition(workflowContext.WorkflowName, caseStep.CaseContext.Condition)))
                             {
                                 //UserOperationBLL.Current.QueryOperationActionByCondition(workflowContext.WorkflowName,
                                 //                                                         caseStep.CaseContext.Condition);
+                                var relationEntity =
+                                    UserOperationBLL.Current.QueryRelationByActionIdAndRoleId(actionEntity.Id,
+                                                                                              roleInfoEntity.Id);
+                                if (relationEntity == null)
                                 UserOperationBLL.Current.AddOperationActionInRole(actionEntity.Id, roleInfoEntity.Id);
                             }
                         }

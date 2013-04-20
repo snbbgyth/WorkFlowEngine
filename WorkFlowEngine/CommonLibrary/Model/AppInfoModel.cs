@@ -19,6 +19,8 @@ namespace CommonLibrary.Model
         [DataMember]
         public string UserId { get; set; }
         [DataMember]
+        public string AppName { get; set; }
+        [DataMember]
         public string WorkflowName { get; set; }
         [DataMember]
         public string ActivityState { get; set; }

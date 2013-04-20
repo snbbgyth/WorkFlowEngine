@@ -20,6 +20,10 @@ namespace WorkFlowService.IDAL
         IList<WorkFlowActivityModel> QueryInProgressActivityListByOperatorUserId(string operatorUserId);
         IEnumerable<string> GetCurrentActivityStateByAppIdAndUserID(string appId, string userId);
         ApplicationState GetApplicationStateByAppId(string appId);
+
+        #region Delete unit test data,just for test.
+        void ClearUnitTestData();
+        #endregion
     }
 }
  

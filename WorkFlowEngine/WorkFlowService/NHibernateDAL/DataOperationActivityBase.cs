@@ -78,5 +78,15 @@ namespace WorkFlowService.NHibernateDAL
             }
         }
 
+        public int DeleteAll()
+        {
+            using (var session = NhibernateHelp.Instance.GetSession())
+            {
+                var queryString = string.Format("from {0} ",typeof(T));
+                 var result= session.Delete(queryString);
+                session.Flush();
+                return result;
+            }
+        }
     }
 }

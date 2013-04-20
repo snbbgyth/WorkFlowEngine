@@ -74,4 +74,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ClearUnitTestData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClearUnitTestDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

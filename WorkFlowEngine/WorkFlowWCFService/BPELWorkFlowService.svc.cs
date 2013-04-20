@@ -60,5 +60,13 @@ namespace WorkFlowWCFService
         {
             return WorkFlowEngineInstance.GetApplicationStateByAppId(appId);
         }
+
+        #region just for  unit test
+        [OperationContract]
+        public void ClearUnitTestData()
+        {
+              WorkFlowEngineInstance.ClearUnitTestData();
+        }
+        #endregion
     }
 }

@@ -88,7 +88,6 @@ namespace WorkFlowService.BLL
             DataOperationBLL.Current.Remove<UserInfoModel>(userId);
             DeleteUserAllUserGroupRelation(userId);
             DeleteUserAllRoleRelation(userId);
-
             return true;
         }
 
@@ -183,6 +182,11 @@ namespace WorkFlowService.BLL
                 CreateDateTime = DateTime.Now,
                 LastUpdateDateTime = DateTime.Now
             }) > 0;
+        }
+
+        public RelationModel QueryRelationByActionIdAndRoleId(string operationActionId, string roleId)
+        {
+            return RelationDAL.Current.QueryByChildNodeIDAndParentNodeIDAndType(operationActionId, roleId, 3);
         }
 
         public int DeleteRoleAllActionRelation(string roleId)
@@ -395,39 +399,34 @@ namespace WorkFlowService.BLL
         {
             var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 3);
             return relationList != null && relationList.Count > 0
-                        ? relationList.Select(entity => OperationActionInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
-                        : null;
+                        ? relationList.Select(entity => OperationActionInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList(): null;
         }
 
         public List<WorkflowStateInfoModel> QueryAllWorkflowStateByRoleId(string roleId)
         {
             var relationList = RelationDAL.Current.QueryByParentNodeIDAndType(roleId, 4);
             return relationList != null && relationList.Count > 0
-                        ? relationList.Select(entity => WorkflowStateInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList()
-                        : null;
+                        ? relationList.Select(entity => WorkflowStateInfoDAL.Current.QueryByID(entity.ChildNodeID)).ToList(): null;
         }
 
         public List<RoleInfoModel> QueryAllUserRoleByUserId(string userId)
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 5);
             return relationList != null && relationList.Count > 0
-                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
-                       : null;
+                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList(): null;
         }
 
         public List<RoleInfoModel> QueryAllRoleByActionId(string operationActionId)
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(operationActionId, 3);
             return relationList != null && relationList.Count > 0
-                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
-                       : null;
+                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList(): null;
         }
         public List<RoleInfoModel> QueryAllUserRoleByUserGroupId(string groupId)
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(groupId, 2);
             return relationList != null && relationList.Count > 0
-                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList()
-                       : null;
+                       ? relationList.Select(entity => RoleInfoDAL.Current.QueryByID(entity.ParentNodeID)).ToList(): null;
         }
 
         public UserGroupModel QueryUserGroupByGroupName(string groupName)
@@ -483,8 +482,7 @@ namespace WorkFlowService.BLL
         {
             var relationList = RelationDAL.Current.QueryByChildNodeIDAndType(userId, 6);
             return relationList != null && relationList.Any() && !string.IsNullOrEmpty(relationList.First().ParentNodeID)
-                       ? UserInfoDAL.Current.QueryByID(relationList.First().ParentNodeID)
-                       : null;
+                       ? UserInfoDAL.Current.QueryByID(relationList.First().ParentNodeID): null;
         }
 
         public RelationModel QueryReportRelationByCondition(string userId, string reportUserId)
@@ -496,6 +494,22 @@ namespace WorkFlowService.BLL
                                                              KeyValuePair<string, object> conditionParam)
         {
             return WorkFlowActivityDAL.Current.QueryByCondition(workflowParam, conditionParam);
+        }
+
+        public IList<WorkFlowActivityLogModel> QueryActivityLogByCondition(KeyValuePair<string, string> workflowParam,
+                                                     KeyValuePair<string, object> conditionParam)
+        {
+            return WorkFlowActivityLogDAL.Current.QueryByCondition(workflowParam, conditionParam);
+        }
+
+        #endregion
+
+        #region Delete unit test data
+
+        public void ClearUnitTestData()
+        {
+            DataOperationInstance.RemoveAll<WorkFlowActivityModel>();
+            DataOperationInstance.RemoveAll<WorkFlowActivityLogModel>();
         }
 
         #endregion
