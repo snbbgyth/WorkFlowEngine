@@ -9,8 +9,6 @@
         <Button Content="ShowViewUserGroupWindow" Name="BtnShowUserGroup" HorizontalAlignment="Left" Margin="44,174,0,0" VerticalAlignment="Top" Height="30" Width="180" Click="BtnShowUserGroupClick"/>
         <Button Content="ShowViewWorkflowStateWindow" HorizontalAlignment="Left" Margin="272,174,0,0" VerticalAlignment="Top" Height="30" Width="200" Click="BtnShowViewWorkflowStateClick"/>
         <Button Content="ShowViewActionWindow" Name="BtnShowViewAction" HorizontalAlignment="Left" Margin="272,102,0,0" VerticalAlignment="Top" Height="30" Width="150" Click="BtnShowViewActionClick"/>
-
- 
         <Button Content="ShowViewActivityWindow" Name="BtnShowViewActivity" HorizontalAlignment="Left" Margin="44,209,0,0" VerticalAlignment="Top" Height="30" Width="160" Click="BtnShowViewActivityClick"/>
         <Button Content="ShowViewActivityLogWindow" Name="BtnSowViewActivityLog" HorizontalAlignment="Left" Margin="272,213,0,0" VerticalAlignment="Top" Height="30" Width="180" Click="BtnSowViewActivityLogClick"/>
 
