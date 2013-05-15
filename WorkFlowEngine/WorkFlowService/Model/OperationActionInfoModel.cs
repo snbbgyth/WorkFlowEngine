@@ -17,7 +17,7 @@ using WorkFlowService.IDAL;
 namespace WorkFlowService.Model
 {
     [Serializable]
-    public class OperationActionInfoModel:ITableModel
+    public class OperationActionInfoModel : ITableModel
     {
         public virtual string Id { get; set; }
 
@@ -25,9 +25,7 @@ namespace WorkFlowService.Model
 
         public virtual string ActionDisplayName { get; set; }
 
-
-
-    public virtual string WorkflowName { get; set; }
+        public virtual string WorkflowName { get; set; }
 
         public virtual string WorkflowDisplayName { get; set; }
 
