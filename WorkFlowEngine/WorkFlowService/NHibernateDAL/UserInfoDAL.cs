@@ -8,7 +8,8 @@ using WorkFlowService.Model;
 
 namespace WorkFlowService.NHibernateDAL
 {
-    public class UserInfoDAL : DataOperationActivityBase<UserInfoModel>
+    using IDAL;
+    public class UserInfoDAL : DataOperationActivityBase<UserInfoModel>,IUserInfoDAL
     {
         public static UserInfoDAL Current
         {

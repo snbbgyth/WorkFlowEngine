@@ -9,19 +9,20 @@
 
 using System.Linq;
 using CommonLibrary.Help;
+using WorkFlowHandle.IDAL;
 using WorkFlowHandle.Model;
 using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.BLL
 {
-    public class WorkflowExecutionEngine
+    public class WorkflowExecutionEngine : IWorkflowExecutionEngine
     {
         public static WorkflowExecutionEngine Current
         {
             get { return new WorkflowExecutionEngine(); }
         }
 
-        public WorkflowStep ExecuteWorkflowByCurrentState(WorkflowContext context, string currentState)
+        public IWorkflowStep ExecuteWorkflowByCurrentState(WorkflowContext context, string currentState)
         {
             if (string.IsNullOrEmpty(currentState))
                 currentState = (from stepRunnerStep in context.WorkflowStepList.OfType<StepRunnerStep>()

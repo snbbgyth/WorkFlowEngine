@@ -22,14 +22,16 @@ using WorkFlowService.Help;
 
 namespace WorkFlowWCFService
 {
-
+    using AutofacContainer;
     [ServiceContract]
     public class BPELWorkFlowService : IWorkFlowActivity
     {
-        private IWorkFlowActivity WorkFlowEngineInstance
+        public BPELWorkFlowService()
         {
-            get { return new WorkFlowManage(); }
+            WorkFlowEngineInstance = Container.Resolve<IWorkFlowActivity>();
         }
+
+        private IWorkFlowActivity WorkFlowEngineInstance { get; set; }
 
         [OperationContract]
         public string Execute(AppInfoModel entity)

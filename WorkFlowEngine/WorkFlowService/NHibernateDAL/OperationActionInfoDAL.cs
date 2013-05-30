@@ -6,11 +6,12 @@ using CommonLibrary.Help;
 using NHibernate.Criterion;
 using NHibernate.DomainModel.BLL;
 using WorkFlowService.Help;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 
 namespace WorkFlowService.NHibernateDAL
 {
-    public class OperationActionInfoDAL : DataOperationActivityBase<OperationActionInfoModel>
+    public class OperationActionInfoDAL : DataOperationActivityBase<OperationActionInfoModel>, IOperationActionInfoDAL
     {
         public static  OperationActionInfoDAL Current
         {

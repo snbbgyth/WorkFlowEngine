@@ -10,7 +10,7 @@ namespace WorkFlowHandle.IDAL
    public interface IWorkflowHandle
    {
        string Run(string workflowName, string currentState, string actionName);
-       List<WorkflowStep> GetInvokeStepByWorkflowName(string workflowName);
+       List<IWorkflowStep> GetInvokeStepByWorkflowName(string workflowName);
        WorkflowContext GetWorkflowContextByWorkflowName(string workflowName);
    }
 }

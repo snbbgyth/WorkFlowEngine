@@ -20,11 +20,21 @@ namespace WorkFlowService.BLL
 {
     public class WorkFlowManage : IWorkFlowActivity
     {
+        public WorkFlowManage(IWorkFlowEngine workFlowEngine,IUserOperationDAL userOperationDAL)
+        {
+            WfeInstance = workFlowEngine;
+            UserOperationDAL = userOperationDAL;
+        }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
+
+        private IWorkFlowEngine WfeInstance { get; set; }
+
         public string Execute(AppInfoModel entity)
         {
             var activityEntity = WorkFlowActivityDAL.Current.QueryByAppId(entity.AppId);
             var currentWorkFlowState =
-                WorkFlowEngine.Current.Execute(entity.WorkflowName, entity.CurrentState,
+                WfeInstance.Execute(entity.WorkflowName, entity.CurrentState,
                                                entity.ActivityState);
             activityEntity.ForeWorkflowState = activityEntity.CurrentWorkflowState;
             activityEntity.CurrentWorkflowState = currentWorkFlowState;
@@ -45,7 +55,7 @@ namespace WorkFlowService.BLL
         {
             if (entity.ApplicationState == ApplicationState.Complete.ToString())
             {
-                UserOperationBLL.Current.MoveToActivityLog(entity);
+                UserOperationDAL.MoveToActivityLog(entity);
             }
         }
 
@@ -64,8 +74,8 @@ namespace WorkFlowService.BLL
                 AppName = entity.AppName,
                 OperatorUserList = entity.UserId + WFConstants.SplitCharacterTag,
             };
-            WorkFlowEngine.Current.InitWorkflowState(entity.WorkflowName);
-            var currentWorkFlowState = WorkFlowEngine.Current.Execute(entity.WorkflowName, string.Empty, entity.ActivityState);
+            WfeInstance.InitWorkflowState(entity.WorkflowName);
+            var currentWorkFlowState = WfeInstance.Execute(entity.WorkflowName, string.Empty, entity.ActivityState);
             activityEntity.CurrentWorkflowState = currentWorkFlowState;
             activityEntity.ApplicationState = currentWorkFlowState;
             DataOperationBLL.Current.Insert(activityEntity);
@@ -81,7 +91,7 @@ namespace WorkFlowService.BLL
         {
             var activityEntity = WorkFlowActivityDAL.Current.QueryByAppId(appId);
             if (CompareIsContain(activityEntity.OperatorUserId, userId))
-                return WorkFlowEngine.Current.GetActivityStateByConditon(activityEntity.WorkflowName, activityEntity.CurrentWorkflowState);
+                return WfeInstance.GetActivityStateByConditon(activityEntity.WorkflowName, activityEntity.CurrentWorkflowState);
             if (CompareIsContain(activityEntity.OperatorUserList, userId))
                 return new List<string> { ActivityState.Read.ToString() };
             return null;
@@ -92,7 +102,7 @@ namespace WorkFlowService.BLL
             var activityEntity = WorkFlowActivityDAL.Current.QueryByAppId(appId);
             if (activityEntity == null)
             {
-                var activityLogEntity = UserOperationBLL.Current.QueryActivityLogByAppId(appId);
+                var activityLogEntity = UserOperationDAL.QueryActivityLogByAppId(appId);
                 if (activityLogEntity == null)
                     return ApplicationState.Draft;
                 return ApplicationState.Complete;
@@ -102,13 +112,12 @@ namespace WorkFlowService.BLL
 
         public void ClearUnitTestData()
         {
-            UserOperationBLL.Current.ClearUnitTestData();
+            UserOperationDAL.ClearUnitTestData();
         }
 
         private ApplicationState GetApplicationStateByWorkFlowActivityEntity(WorkFlowActivityModel entity)
         {
-
-            return WorkFlowEngine.Current.GetAppStateByCondition(entity.WorkflowName, entity.CurrentWorkflowState);
+            return WfeInstance.GetAppStateByCondition(entity.WorkflowName, entity.CurrentWorkflowState);
         }
 
         private bool CompareIsContain(string source, string value)

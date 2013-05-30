@@ -16,7 +16,8 @@ using WorkFlowHandle.Model;
 
 namespace WorkFlowHandle.Steps
 {
-    public abstract class WorkflowStep
+    using IDAL;
+    public abstract class WorkflowStep:IWorkflowStep
     {
 
         public string StepId { get; set; }
@@ -39,7 +40,7 @@ namespace WorkFlowHandle.Steps
         /// <returns>true if this step or any of the enclosed steps
         /// in the local WorkflowSteps list matches the 
         /// specified stepId.  false, otherwise</returns>
-        internal virtual bool HasStep(string stepId)
+        public virtual bool HasStep(string stepId)
         {
             if (StepId == stepId)
             {

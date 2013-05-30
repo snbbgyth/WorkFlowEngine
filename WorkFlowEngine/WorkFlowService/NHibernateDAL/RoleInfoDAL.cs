@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using NHibernate.Criterion;
 using NHibernate.DomainModel.BLL;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 
 namespace WorkFlowService.NHibernateDAL
 {
 
-    public class RoleInfoDAL : DataOperationActivityBase<RoleInfoModel>
+    public class RoleInfoDAL : DataOperationActivityBase<RoleInfoModel>, IRoleInfoDAL
     {
         public static RoleInfoDAL Current
         {

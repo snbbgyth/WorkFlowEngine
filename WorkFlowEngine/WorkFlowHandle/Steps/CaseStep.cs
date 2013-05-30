@@ -13,12 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
+using WorkFlowHandle.IDAL;
 
 namespace WorkFlowHandle.Steps
 {
     using Model;
 
-    public class CaseStep : StepRunnerStep
+    public class CaseStep : StepRunnerStep, ICaseStep
     {
         public CaseContextModel CaseContext { get; set; }
 

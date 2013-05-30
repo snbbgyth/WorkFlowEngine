@@ -7,11 +7,12 @@ using CommonLibrary.Model;
 using NHibernate.Criterion;
 using NHibernate.DomainModel.BLL;
 using WorkFlowService.Help;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 
 namespace WorkFlowService.NHibernateDAL
 {
-    public class WorkflowStateInfoDAL : DataOperationActivityBase<WorkflowStateInfoModel>
+    public class WorkflowStateInfoDAL : DataOperationActivityBase<WorkflowStateInfoModel>, IWorkflowStateInfoDAL
     {
         public static WorkflowStateInfoDAL Current
         {

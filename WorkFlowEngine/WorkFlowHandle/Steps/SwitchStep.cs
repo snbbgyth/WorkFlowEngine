@@ -13,11 +13,12 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using CommonLibrary.Help;
+using WorkFlowHandle.IDAL;
 
 namespace WorkFlowHandle.Steps
 {
     using Model;
-    public class SwitchStep : StepRunnerStep
+    public class SwitchStep : StepRunnerStep,ISwitchStep
     {
         public SwitchContextModel SwitchContext { get; set; }
 
@@ -52,7 +53,7 @@ namespace WorkFlowHandle.Steps
             foreach (WorkflowStep step in WorkflowSteps)
             {
                 // Go through each step in order until one is found with a valid condition.
-                CaseStep caseStep = step as CaseStep;
+                var caseStep = step as ICaseStep;
                 if (caseStep != null)
                 {
                     if (!String.IsNullOrEmpty(stepId))
@@ -90,7 +91,7 @@ namespace WorkFlowHandle.Steps
         /// non null when a workflow has previously run and is restarteing.  The stepId
         /// is used to determine where to restart execution.</param>
         /// <returns>The WorkflowState after execution of the CaseStep.</returns>
-        private string RunCase(CaseStep caseStep, ref WorkflowContext context, string stepId)
+        private string RunCase(ICaseStep caseStep, ref WorkflowContext context, string stepId)
         {
             var currentState = caseStep.Run(context, stepId);
             return currentState;

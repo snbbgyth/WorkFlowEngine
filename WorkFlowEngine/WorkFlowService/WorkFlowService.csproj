@@ -51,6 +51,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ShareDLL\Autofac\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
@@ -69,14 +73,25 @@
     <Compile Include="BLL\UserOperationBLL.cs" />
     <Compile Include="BLL\WorkFlowEngine.cs" />
     <Compile Include="BLL\WorkFlowManage.cs" />
+    <Compile Include="BLL\WorkflowServiceModule.cs" />
     <Compile Include="Help\TypeNameComparer.cs" />
     <Compile Include="Help\WFConstants.cs" />
     <Compile Include="Help\WFUntilHelp.cs" />
     <Compile Include="IDAL\IActivityState.cs" />
     <Compile Include="IDAL\IDataOperationActivity.cs" />
     <Compile Include="IDAL\IDataOperationDAL.cs" />
+    <Compile Include="IDAL\IOperationActionInfoDAL.cs" />
+    <Compile Include="IDAL\IRelationDAL.cs" />
+    <Compile Include="IDAL\IRoleInfoDAL.cs" />
+    <Compile Include="IDAL\IUserGroupDAL.cs" />
+    <Compile Include="IDAL\IUserInfoDAL.cs" />
     <Compile Include="IDAL\IUserOperationActivity.cs" />
+    <Compile Include="IDAL\IUserOperationDAL.cs" />
     <Compile Include="IDAL\IWorkFlowActivity.cs" />
+    <Compile Include="IDAL\IWorkFlowActivityDAL.cs" />
+    <Compile Include="IDAL\IWorkFlowActivityLogDAL.cs" />
+    <Compile Include="IDAL\IWorkFlowEngine.cs" />
+    <Compile Include="IDAL\IWorkflowStateInfoDAL.cs" />
     <Compile Include="Model\OperationActionInfoModel.cs" />
     <Compile Include="Model\RelationModel.cs" />
     <Compile Include="Model\UserGroupModel.cs" />

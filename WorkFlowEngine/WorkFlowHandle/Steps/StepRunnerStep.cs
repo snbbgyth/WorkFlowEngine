@@ -16,13 +16,14 @@ using WorkFlowHandle.Model;
 
 namespace WorkFlowHandle.Steps
 {
-    public abstract class StepRunnerStep : WorkflowStep
+    using IDAL;
+    public abstract class StepRunnerStep : WorkflowStep,IStepRunnerStep
     {
-        private List<WorkflowStep> _workflowSteps;
+        private List<IWorkflowStep> _workflowSteps;
 
         protected StepRunnerStep()
         {
-            _workflowSteps = new List<WorkflowStep>();
+            _workflowSteps = new List<IWorkflowStep>();
         }
 
         public override string Run(WorkflowContext context, string stepId)
@@ -39,7 +40,7 @@ namespace WorkFlowHandle.Steps
         /// <summary>
         /// Gets a set of steps defined within this step
         /// </summary>
-        public List<WorkflowStep> WorkflowSteps
+        public List<IWorkflowStep> WorkflowSteps
         {
             get { return _workflowSteps; }
             set { _workflowSteps = value; }

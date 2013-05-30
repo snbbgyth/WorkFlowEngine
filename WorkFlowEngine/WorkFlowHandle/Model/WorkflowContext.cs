@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using CommonLibrary.Help;
 using WorkFlowHandle.BLL;
+using WorkFlowHandle.IDAL;
 using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.Model
@@ -514,7 +515,7 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Gets the WorkflowSteps from the BPEL file
         /// </summary>
-        public virtual List<WorkflowStep> WorkflowStepList
+        public virtual List<IWorkflowStep> WorkflowStepList
         {
             get
             {

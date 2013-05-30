@@ -51,6 +51,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\ShareDLL\Autofac\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -61,10 +64,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\WorkflowHandleModule.cs" />
     <Compile Include="DAL\ProcessDefinitionEngine.cs" />
     <Compile Include="Help\Constants.cs" />
     <Compile Include="Help\UnitlHelp.cs" />
+    <Compile Include="IDAL\ICaseStep.cs" />
+    <Compile Include="IDAL\IInvokeStep.cs" />
+    <Compile Include="IDAL\IStepRunnerStep.cs" />
+    <Compile Include="IDAL\ISwitchStep.cs" />
+    <Compile Include="IDAL\IWorkflowExecutionEngine.cs" />
     <Compile Include="IDAL\IWorkflowHandle.cs" />
+    <Compile Include="IDAL\IWorkflowStep.cs" />
     <Compile Include="Model\CaseContextModel.cs" />
     <Compile Include="Model\InvokeContextModel.cs" />
     <Compile Include="Model\PartnerLinkModel.cs" />

@@ -8,6 +8,8 @@
 *********************************************************************************/
 
 using System.Collections.Generic;
+using WorkFlowHandle.IDAL;
+using WorkFlowService.IDAL;
 
 namespace WorkFlowService.BLL
 {
@@ -15,28 +17,89 @@ namespace WorkFlowService.BLL
     using System;
     using System.Linq;
     using CommonLibrary.Help;
-    using WorkFlowHandle.Steps;
     using Help;
-    using WorkFlowHandle.BLL;
     using Model;
 
-    public class WorkFlowEngine
+    public class WorkFlowEngine : IWorkFlowEngine
     {
-        public static WorkFlowEngine Current
+        //public static WorkFlowEngine Current
+        //{
+        //    get { return new WorkFlowEngine(); }
+        //}
+
+        public WorkFlowEngine(IWorkflowHandle workflowHandle,IUserOperationDAL userOperationDAL)
         {
-            get { return new WorkFlowEngine(); }
+            WorkflowInstance = workflowHandle;
+            UserOperationDAL = userOperationDAL;
         }
+
+        private IWorkflowHandle WorkflowInstance { get; set; }
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         public string Execute(string workflowName, string currentState, string activityState)
         {
-            return WorkflowHandle.Instance.Run(workflowName, currentState, activityState);
+            return WorkflowInstance.Run(workflowName, currentState, activityState);
         }
 
         public void InitWorkflowState(string workflowName)
         {
-            var workflowContext = WorkflowHandle.Instance.GetWorkflowContextByWorkflowName(workflowName);
+            var workflowContext = WorkflowInstance.GetWorkflowContextByWorkflowName(workflowName);
             AddInvokeStepRelation(workflowContext);
             AddRoleActionRelation(workflowContext);
+        }
+
+
+        public void AddStateRoleByCondition(string workflowName, string stateNodeName, PartnerLinkModel partnerLink)
+        {
+            var workflowStateEntity = GetWorkflowStateInfoByCondition(workflowName, stateNodeName);
+            var roleInfoEntity = UserOperationDAL.QueryRoleInfoByWorkflowStateId(workflowStateEntity.Id);
+            if (roleInfoEntity == null)
+            {
+                roleInfoEntity = UserOperationDAL.QueryRoleInfoByCondition(workflowName, partnerLink.MyRole);
+                if (roleInfoEntity == null)
+                {
+                    roleInfoEntity = new RoleInfoModel
+                    {
+                        CreateDateTime = DateTime.Now,
+                        LastUpdateDateTime = DateTime.Now,
+                        RoleDisplayName = partnerLink.MyRole,
+                        RoleName = partnerLink.MyRole,
+                        WorkflowName = workflowName,
+                        WorkflowDisplayName = workflowName,
+                    };
+                    DataOperationBLL.Current.Insert(roleInfoEntity);
+
+                }
+                else
+                {
+                    roleInfoEntity.RoleDisplayName = partnerLink.MyRole;
+                    roleInfoEntity.WorkflowDisplayName = workflowName;
+                    roleInfoEntity.LastUpdateDateTime = DateTime.Now;
+                    DataOperationBLL.Current.Modify(roleInfoEntity);
+                }
+                UserOperationDAL.AddWorkflowStateInRole(workflowStateEntity.Id, roleInfoEntity.Id);
+            }
+            else
+            {
+                roleInfoEntity.RoleName = partnerLink.MyRole;
+                roleInfoEntity.WorkflowName = workflowName;
+                roleInfoEntity.RoleDisplayName = partnerLink.MyRole;
+                roleInfoEntity.WorkflowDisplayName = workflowName;
+                roleInfoEntity.LastUpdateDateTime = DateTime.Now;
+                DataOperationBLL.Current.Modify(roleInfoEntity);
+            }
+        }
+
+
+        public WorkflowStateInfoModel GetWorkflowStateInfoByCondition(string workflowName, string stateNodeName)
+        {
+            return UserOperationDAL.QueryWorkflowStateInfoByCondition(workflowName, stateNodeName);
+        }
+
+        public IEnumerable<string> GetActivityStateByConditon(string workflowName, string workFlowState)
+        {
+            var entityList = UserOperationDAL.QueryOperationActionListByCondition(workflowName, workFlowState);
+            return entityList.Select(entity => entity.ActionName);
         }
 
         private void AddInvokeStepRelation(WorkflowContext workflowContext)
@@ -55,15 +118,15 @@ namespace WorkFlowService.BLL
                 }
         }
 
-        private IEnumerable<InvokeStep> GetInvokeStepFromContext(WorkflowContext workflowContext)
+        private IEnumerable<IInvokeStep> GetInvokeStepFromContext(WorkflowContext workflowContext)
         {
-            return workflowContext.WorkflowStepList.OfType<StepRunnerStep>().Select(stepRunnerStep => (from invokeStep in stepRunnerStep.WorkflowSteps.OfType<InvokeStep>() select invokeStep)).FirstOrDefault();
+            return workflowContext.WorkflowStepList.OfType<IStepRunnerStep>().Select(stepRunnerStep => (from invokeStep in stepRunnerStep.WorkflowSteps.OfType<IInvokeStep>() select invokeStep)).FirstOrDefault();
         }
 
         public ApplicationState GetAppStateByCondition(string workflowName, string workflowState)
         {
-            var workflowContext = WorkflowHandle.Instance.GetWorkflowContextByWorkflowName(workflowName);
-            var currentStepList = workflowContext.WorkflowStepList.OfType<StepRunnerStep>().Select(stepRunnerStep => (from invokeStep in stepRunnerStep.WorkflowSteps.OfType<InvokeStep>() where invokeStep.InvokeContext.Name.CompareEqualIgnoreCase(workflowState) select invokeStep)).FirstOrDefault();
+            var workflowContext = WorkflowInstance.GetWorkflowContextByWorkflowName(workflowName);
+            var currentStepList = workflowContext.WorkflowStepList.OfType<IStepRunnerStep>().Select(stepRunnerStep => (from invokeStep in stepRunnerStep.WorkflowSteps.OfType<IInvokeStep>() where invokeStep.InvokeContext.Name.CompareEqualIgnoreCase(workflowState) select invokeStep)).FirstOrDefault();
             var currentStep = currentStepList.Count() > 0 ? currentStepList.First() : null;
             if (currentStep != null && currentStep.InvokeContext.PortType.CompareEqualIgnoreCase(WFConstants.WorkflowEndPortTypeTags))
                 return ApplicationState.Complete;
@@ -99,16 +162,16 @@ namespace WorkFlowService.BLL
                         if (partnerLinkEntity != null)
                         {
                             var roleInfoEntity =
-                                UserOperationBLL.Current.QueryRoleInfoByCondition(workflowContext.WorkflowName,partnerLinkEntity.MyRole);
-                            foreach (var actionEntity in switchStep.WorkflowSteps.OfType<CaseStep>().Select(caseStep => AddActionByCondition(workflowContext.WorkflowName, caseStep.CaseContext.Condition)))
+                                UserOperationDAL.QueryRoleInfoByCondition(workflowContext.WorkflowName,partnerLinkEntity.MyRole);
+                            foreach (var actionEntity in switchStep.WorkflowSteps.OfType<ICaseStep>().Select(caseStep => AddActionByCondition(workflowContext.WorkflowName, caseStep.CaseContext.Condition)))
                             {
-                                //UserOperationBLL.Current.QueryOperationActionByCondition(workflowContext.WorkflowName,
+                                //UserOperationDAL.QueryOperationActionByCondition(workflowContext.WorkflowName,
                                 //                                                         caseStep.CaseContext.Condition);
                                 var relationEntity =
-                                    UserOperationBLL.Current.QueryRelationByActionIdAndRoleId(actionEntity.Id,
+                                    UserOperationDAL.QueryRelationByActionIdAndRoleId(actionEntity.Id,
                                                                                               roleInfoEntity.Id);
                                 if (relationEntity == null)
-                                UserOperationBLL.Current.AddOperationActionInRole(actionEntity.Id, roleInfoEntity.Id);
+                                UserOperationDAL.AddOperationActionInRole(actionEntity.Id, roleInfoEntity.Id);
                             }
                         }
                     }
@@ -119,7 +182,7 @@ namespace WorkFlowService.BLL
 
         private OperationActionInfoModel AddActionByCondition(string workflowName, string actionName)
         {
-            var entity = UserOperationBLL.Current.QueryOperationActionByCondition(workflowName, actionName);
+            var entity = UserOperationDAL.QueryOperationActionByCondition(workflowName, actionName);
             if (entity == null)
             {
                 entity = new OperationActionInfoModel
@@ -131,7 +194,7 @@ namespace WorkFlowService.BLL
                     WorkflowName = workflowName,
                     WorkflowDisplayName = workflowName
                 };
-                UserOperationBLL.Current.DataOperationInstance.Insert(entity);
+                UserOperationDAL.DataOperationInstance.Insert(entity);
             }
             else
             {
@@ -139,29 +202,29 @@ namespace WorkFlowService.BLL
                 entity.IsDelete = false;
                 entity.WorkflowDisplayName = workflowName;
                 entity.ActionDisplayName = actionName;
-                UserOperationBLL.Current.DataOperationInstance.Modify(entity);
+                UserOperationDAL.DataOperationInstance.Modify(entity);
             }
             return entity;
         }
 
-        private IEnumerable<SwitchStep> GetSwitchStepFromContext(WorkflowContext workflowContext)
+        private IEnumerable<ISwitchStep> GetSwitchStepFromContext(WorkflowContext workflowContext)
         {
-            foreach (var stepRunnerStep in workflowContext.WorkflowStepList.OfType<StepRunnerStep>())
+            foreach (var stepRunnerStep in workflowContext.WorkflowStepList.OfType<IStepRunnerStep>())
             {
-                foreach (var switchStep in stepRunnerStep.WorkflowSteps.OfType<SwitchStep>())
+                foreach (var switchStep in stepRunnerStep.WorkflowSteps.OfType<ISwitchStep>())
                 {
                     yield return switchStep;
                 }
             }
         }
 
-        private IEnumerable<CaseStep> GetCaseStepFromContext(WorkflowContext workflowContext)
+        private IEnumerable<ICaseStep> GetCaseStepFromContext(WorkflowContext workflowContext)
         {
-            foreach (var stepRunnerStep in workflowContext.WorkflowStepList.OfType<StepRunnerStep>())
+            foreach (var stepRunnerStep in workflowContext.WorkflowStepList.OfType<IStepRunnerStep>())
             {
-                foreach (var switchStep in stepRunnerStep.WorkflowSteps.OfType<SwitchStep>())
+                foreach (var switchStep in stepRunnerStep.WorkflowSteps.OfType<ISwitchStep>())
                 {
-                    foreach (var caseStep in switchStep.WorkflowSteps.OfType<CaseStep>())
+                    foreach (var caseStep in switchStep.WorkflowSteps.OfType<ICaseStep>())
                     {
                         yield return caseStep;
                     }
@@ -169,48 +232,7 @@ namespace WorkFlowService.BLL
             }
         }
 
-        public void AddStateRoleByCondition(string workflowName, string stateNodeName, PartnerLinkModel partnerLink)
-        {
-            var workflowStateEntity = GetWorkflowStateInfoByCondition(workflowName, stateNodeName);
-            var roleInfoEntity = UserOperationBLL.Current.QueryRoleInfoByWorkflowStateId(workflowStateEntity.Id);
-            if (roleInfoEntity == null)
-            {
-                roleInfoEntity = UserOperationBLL.Current.QueryRoleInfoByCondition(workflowName, partnerLink.MyRole);
-                if (roleInfoEntity == null)
-                {
-                    roleInfoEntity = new RoleInfoModel
-                    {
-                        CreateDateTime = DateTime.Now,
-                        LastUpdateDateTime = DateTime.Now,
-                        RoleDisplayName = partnerLink.MyRole,
-                        RoleName = partnerLink.MyRole,
-                        WorkflowName = workflowName,
-                        WorkflowDisplayName = workflowName,
-                    };
-                    DataOperationBLL.Current.Insert(roleInfoEntity);
-
-                }
-                else
-                {
-                    roleInfoEntity.RoleDisplayName = partnerLink.MyRole;
-                    roleInfoEntity.WorkflowDisplayName = workflowName;
-                    roleInfoEntity.LastUpdateDateTime = DateTime.Now;
-                    DataOperationBLL.Current.Modify(roleInfoEntity);
-                }
-                UserOperationBLL.Current.AddWorkflowStateInRole(workflowStateEntity.Id, roleInfoEntity.Id);
-            }
-            else
-            {
-                roleInfoEntity.RoleName = partnerLink.MyRole;
-                roleInfoEntity.WorkflowName = workflowName;
-                roleInfoEntity.RoleDisplayName = partnerLink.MyRole;
-                roleInfoEntity.WorkflowDisplayName = workflowName;
-                roleInfoEntity.LastUpdateDateTime = DateTime.Now;
-                DataOperationBLL.Current.Modify(roleInfoEntity);
-            }
-        }
-
-        private void AddWorkflowStateInfoByCondition(string workflowName, WorkflowStep workflowStep)
+        private void AddWorkflowStateInfoByCondition(string workflowName, IWorkflowStep workflowStep)
         {
             var workflowStateEntity = GetWorkflowStateInfoByCondition(workflowName, workflowStep.StepId);
             if (workflowStateEntity == null)
@@ -237,15 +259,5 @@ namespace WorkFlowService.BLL
 
         }
 
-        public WorkflowStateInfoModel GetWorkflowStateInfoByCondition(string workflowName, string stateNodeName)
-        {
-            return UserOperationBLL.Current.QueryWorkflowStateInfoByCondition(workflowName, stateNodeName);
-        }
-
-        public IEnumerable<string> GetActivityStateByConditon(string workflowName, string workFlowState)
-        {
-            var entityList = UserOperationBLL.Current.QueryOperationActionListByCondition(workflowName, workFlowState);
-            return entityList.Select(entity => entity.ActionName);
-        }
     }
 }

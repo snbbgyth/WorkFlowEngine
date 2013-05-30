@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using WorkFlowHandle.IDAL;
 using WorkFlowHandle.Model;
 using WorkFlowHandle.Steps;
 
@@ -31,7 +32,7 @@ namespace WorkFlowHandle.DAL
         /// <summary>
         /// Cache the WorkflowStep to improve performace.
         /// </summary>
-        private IDictionary<string, ICollection<WorkflowStep>> _cachedWorkflowSteps = new Dictionary<string, ICollection<WorkflowStep>>();
+        private IDictionary<string, ICollection<IWorkflowStep>> _cachedWorkflowSteps = new Dictionary<string, ICollection<IWorkflowStep>>();
 
         /// <summary>
         /// Cache the FaultHandler to improve performace.
@@ -454,7 +455,7 @@ namespace WorkFlowHandle.DAL
         /// <param name="startElement">Integer value representing the starting element in the nodeList.</param>
         /// <param name="nodeList">XmlNodeList containing the BPEL data from the BPEL file</param>
         /// <param name="cancelEventHandlerName">cancelEventHandlerName</param>
-        private void FillStepList(WorkflowContext workflowContext, List<WorkflowStep> workflowStepList, int startElement, XmlNodeList nodeList, ref string cancelEventHandlerName)
+        private void FillStepList(WorkflowContext workflowContext, List<IWorkflowStep> workflowStepList, int startElement, XmlNodeList nodeList, ref string cancelEventHandlerName)
         {
             for (int i = startElement; i < nodeList.Count; i++)
             {

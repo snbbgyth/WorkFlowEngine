@@ -21,32 +21,35 @@ namespace WorkFlowHandle.BLL
     {
         private static ProcessDefinitionEngine _workflowProcessDefinition;
 
-        public WorkflowHandle()
+        public WorkflowHandle(IWorkflowExecutionEngine workflowExecutionEngine)
         {
             _workflowProcessDefinition = new ProcessDefinitionEngine();
+            WfeeInstance = workflowExecutionEngine;
         }
 
+        public IWorkflowExecutionEngine WfeeInstance { get; set; }
+ 
         private static WorkflowHandle _workflowHandle;
 
         private static readonly object SyncObj = new object();
 
-        public static IWorkflowHandle Instance
-        {
-            get
-            {
-                lock (SyncObj)
-                {
-                    if (_workflowHandle == null)
-                        _workflowHandle = new WorkflowHandle();
-                }
-                return _workflowHandle;
-            }
-        }
+        //public static IWorkflowHandle Instance
+        //{
+        //    get
+        //    {
+        //        lock (SyncObj)
+        //        {
+        //            if (_workflowHandle == null)
+        //                _workflowHandle = new WorkflowHandle();
+        //        }
+        //        return _workflowHandle;
+        //    }
+        //}
 
         public string Run(string workflowName, string currentState, string actionName)
         {
             var onContext = GetWorkflowContextByWorkflowName(workflowName);
-            var workflowStep = WorkflowExecutionEngine.Current.ExecuteWorkflowByCurrentState(onContext, currentState);
+            var workflowStep =WfeeInstance.ExecuteWorkflowByCurrentState(onContext, currentState);
             return workflowStep == null ? string.Empty : workflowStep.Run(onContext, actionName);
         }
 
@@ -58,7 +61,7 @@ namespace WorkFlowHandle.BLL
             return onContext;
         }
 
-        public List<WorkflowStep> GetInvokeStepByWorkflowName(string workflowName)
+        public List<IWorkflowStep> GetInvokeStepByWorkflowName(string workflowName)
         {
             var onContext = GetWorkflowContextByWorkflowName(workflowName);
             return onContext.WorkflowStepList.FindAll(entity => entity is InvokeStep);

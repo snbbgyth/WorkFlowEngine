@@ -17,7 +17,8 @@ using CommonLibrary.Help;
 namespace WorkFlowHandle.Steps
 {
     using Model;
-    public class InvokeStep : WorkflowStep
+    using IDAL;
+    public class InvokeStep : WorkflowStep,IInvokeStep
     {
         public InvokeContextModel InvokeContext { get; set; }
 
@@ -74,5 +75,7 @@ namespace WorkFlowHandle.Steps
 
 
 
+
+       
     }
 }

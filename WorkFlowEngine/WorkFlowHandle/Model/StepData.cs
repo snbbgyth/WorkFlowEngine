@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using WorkFlowHandle.IDAL;
 using WorkFlowHandle.Steps;
 
 namespace WorkFlowHandle.Model
@@ -28,7 +29,7 @@ namespace WorkFlowHandle.Model
         /// This is a list of processing steps created from the BPEL file 
         /// or there may be cached version of the steps 
         /// </summary>
-        private readonly List<WorkflowStep> _workflowSteps;
+        private readonly List<IWorkflowStep> _workflowSteps;
 
         /// <summary>
         /// This dictionary  is created from the variables declared in a 
@@ -57,7 +58,7 @@ namespace WorkFlowHandle.Model
         public StepData()
         {
             _workflowVariables = new Dictionary<string, string>();
-            _workflowSteps = new List<WorkflowStep>();
+            _workflowSteps = new List<IWorkflowStep>();
             _faultHandlers = new List<FaultHandler>();
             _messageTimeoutEventHanlderDict = new Dictionary<string, string>();
         }
@@ -73,7 +74,7 @@ namespace WorkFlowHandle.Model
         /// <summary>
         /// Gets the list of Steps from the BPEL file
         /// </summary>
-        public List<WorkflowStep> WorkflowSteps
+        public List<IWorkflowStep> WorkflowSteps
         {
             get { return _workflowSteps; }
         }

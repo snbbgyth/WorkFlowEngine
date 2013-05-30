@@ -7,11 +7,12 @@ using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.DomainModel.BLL;
 using WorkFlowService.Help;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 
 namespace WorkFlowService.NHibernateDAL
 {
-    public class RelationDAL : DataOperationActivityBase<RelationModel>
+    public class RelationDAL : DataOperationActivityBase<RelationModel>, IRelationDAL
     {
         public static RelationDAL Current
         {

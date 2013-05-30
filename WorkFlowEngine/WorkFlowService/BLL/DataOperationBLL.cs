@@ -67,7 +67,7 @@ namespace WorkFlowService.BLL
         {
             var types = GetExecutingTypes();
             var typeList =
-                types.Where(t => new List<Type>(t.GetInterfaces()).Contains(typeof(IDataOperationActivity<T>))).ToList();
+                types.Where(t => t.IsClass&&t.GetInterfaces().Contains(typeof(IDataOperationActivity<T>))).ToList();
             typeList.Sort(new TypeNameComparer());
             return
                 typeList.Select(eType => Activator.CreateInstance(eType) as IDataOperationActivity<T>).FirstOrDefault();
