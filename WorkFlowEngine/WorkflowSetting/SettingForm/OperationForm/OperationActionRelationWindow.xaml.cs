@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using WorkFlowService.BLL;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
 using WorkflowSetting.SettingForm.SelectForm;
@@ -13,14 +14,18 @@ namespace WorkflowSetting.SettingForm.OperationForm
     /// </summary>
     public partial class OperationActionRelationWindow : Window
     {
-        public OperationActionRelationWindow()
+        public OperationActionRelationWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitControl();
+           
         }
 
-        public OperationActionRelationWindow(OperationActionInfoModel entity, OperationAction operationAction)
-            : this()
+       private IUserOperationDAL UserOperationDAL { get; set; }
+
+        public OperationActionRelationWindow(OperationActionInfoModel entity, OperationAction operationAction,IUserOperationDAL userOperationDAL)
+           : this(userOperationDAL)
         {
             UserAction = operationAction;
             InitData(entity);
@@ -34,7 +39,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
             TxtWorkflowName.Text = entity.WorkflowName;
             TxtWorkflowDisplayName.Text = entity.WorkflowDisplayName;
             InitProperty(entity);
-            ExistUserRoleList = UserOperationBLL.Current.QueryAllRoleByActionId(entity.Id);
+            ExistUserRoleList = UserOperationDAL.QueryAllRoleByActionId(entity.Id);
             LvUserRole.Items.Clear();
             LvUserRole.ItemsSource = ExistUserRoleList;
         }
@@ -71,7 +76,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void BtnAddRoleNameClick(object sender, RoutedEventArgs e)
         {
-            var selectRoleWindow = new SelectRoleWindow();
+            var selectRoleWindow = new SelectRoleWindow(UserOperationDAL);
             if (selectRoleWindow.ShowDialog() == false)
             {
                 SettingHelp.AddEntityRange(LvUserRole, selectRoleWindow.SelectRoleInfoList);
@@ -87,7 +92,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         private void Add()
         {
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 0)
+            if (UserOperationDAL.DataOperationInstance.Insert(entity) > 0)
             {
                 InitProperty(entity);
                 Id = entity.Id;
@@ -112,7 +117,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void ModifyOperationActionRole()
         {
-            SettingHelp.MoidfyListByCondition(LvUserRole, UserOperationBLL.Current.AddUserGroupRole, UserOperationBLL.Current.DeleteUserGroupRole, ExistUserRoleList, null, Id);
+            SettingHelp.MoidfyListByCondition(LvUserRole, UserOperationDAL.AddUserGroupRole, UserOperationDAL.DeleteUserGroupRole, ExistUserRoleList, null, Id);
         }
 
         private void Modify()
@@ -136,7 +141,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         private void ModifyEntity()
         {
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
+            if (UserOperationDAL.DataOperationInstance.Modify(entity) > 0)
             {
                 LblMessage.Content = "Modify successful!";
                 ModifyOperationActionRole();
@@ -150,7 +155,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         //private void AddEntity()
         //{
         //    var entity = GetEntity();
-        //    if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 1)
+        //    if (UserOperationDAL.DataOperationInstance.Insert(entity) > 1)
         //        LblMessage.Content = "Create successful!";
         //    else
         //    {

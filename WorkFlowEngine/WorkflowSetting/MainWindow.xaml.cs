@@ -18,62 +18,68 @@ namespace WorkflowSetting
 {
     using SettingForm;
     using WorkFlowService.BLL;
-
+    using WorkFlowService.IDAL;
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(IWorkFlowEngine workFlowEngine,IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            WfeInstance = workFlowEngine;
+            UserOperationDAL = userOperationDAL;
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
+
+        private IWorkFlowEngine WfeInstance { get; set; }
 
         private void BtnShowViewUserClick(object sender, RoutedEventArgs e)
         {
-            var viewUserWindow = new ViewUserWindow();
+            var viewUserWindow = new ViewUserWindow(UserOperationDAL);
             viewUserWindow.Show();
         }
 
         private void BtnShowViewRoleClick(object sender, RoutedEventArgs e)
         {
-            var viewRoleWindow = new ViewRoleWindow();
+            var viewRoleWindow = new ViewRoleWindow(UserOperationDAL);
             viewRoleWindow.Show();
         }
 
         private void BtnInitWorkflowClick(object sender, RoutedEventArgs e)
         {
 
-            WorkFlowEngine.Current.InitWorkflowState("TestStateWorkFlow");
+            WfeInstance.InitWorkflowState("TestStateWorkFlow");
         }
 
         private void BtnShowViewActionClick(object sender, RoutedEventArgs e)
         {
-            var viewActionWindow = new ViewOperationActionWindow();
+            var viewActionWindow = new ViewOperationActionWindow(UserOperationDAL);
             viewActionWindow.Show();
         }
 
         private void BtnShowUserGroupClick(object sender, RoutedEventArgs e)
         {
-            var viewUserGroupWindow = new ViewUserGroupWindow();
+            var viewUserGroupWindow = new ViewUserGroupWindow(UserOperationDAL);
             viewUserGroupWindow.Show();
         }
 
         private void BtnShowViewWorkflowStateClick(object sender, RoutedEventArgs e)
         {
-            var viewWorkflowStateWindow = new ViewWorkflowStateWindow();
+            var viewWorkflowStateWindow = new ViewWorkflowStateWindow(UserOperationDAL);
             viewWorkflowStateWindow.Show();
         }
 
         private void BtnShowViewActivityClick(object sender, RoutedEventArgs e)
         {
-            var viewActivityWindow = new ViewActivityWindow();
+            var viewActivityWindow = new ViewActivityWindow(UserOperationDAL);
             viewActivityWindow.Show();
         }
 
         private void BtnSowViewActivityLogClick(object sender, RoutedEventArgs e)
         {
-            var viewActivityLogWindow = new ViewActivityLogWindow();
+            var viewActivityLogWindow = new ViewActivityLogWindow(UserOperationDAL);
             viewActivityLogWindow.Show();
         }
     }

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using WorkFlowService.BLL;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 
 namespace WorkflowSetting.SettingForm.SelectForm
@@ -11,19 +12,23 @@ namespace WorkflowSetting.SettingForm.SelectForm
     /// </summary>
     public partial class SelectRoleWindow : Window
     {
-        public SelectRoleWindow()
+        public SelectRoleWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitLvData();
+           
         }
 
         private void InitLvData()
         {
             SelectRoleInfoList = new List<RoleInfoModel>();
             LvRoleInfo.Items.Clear();
-            LvRoleInfo.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<RoleInfoModel>();
+            LvRoleInfo.ItemsSource = UserOperationDAL.DataOperationInstance.QueryAll<RoleInfoModel>();
             LvRoleInfo.SelectionChanged += LvRoleInfoSelectionChanged;
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         public List<RoleInfoModel> SelectRoleInfoList;
 

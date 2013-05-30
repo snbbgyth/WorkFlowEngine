@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using WorkFlowService.IDAL;
 using WorkflowSetting.Help;
 using WorkflowSetting.SettingForm.OperationForm;
 using WorkFlowService.BLL;
@@ -12,15 +13,19 @@ namespace WorkflowSetting.SettingForm.ViewForm
     /// </summary>
     public partial class ViewRoleWindow : Window
     {
-        public ViewRoleWindow()
+        public ViewRoleWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitRoleInfo();
+            
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void InitRoleInfo()
         {
-            DgRoleList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<RoleInfoModel>();
+            DgRoleList.ItemsSource = UserOperationDAL.DataOperationInstance.QueryAll<RoleInfoModel>();
             DgRoleList.Items.Refresh();
             DgRoleList.SelectionChanged += DgRoleListSelectionChanged;
         }
@@ -39,7 +44,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void RowEditClick(object sender, RoutedEventArgs e)
         {
             if (DgRoleSelectEnity == null) return;
-            var editRoleWindow = new RoleRelationWindow(DgRoleSelectEnity, OperationAction.Modify);
+            var editRoleWindow = new RoleRelationWindow(DgRoleSelectEnity, OperationAction.Modify, UserOperationDAL);
             editRoleWindow.ShowDialog();
         }
 
@@ -53,7 +58,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
 
         private void RowAddNewClick(object sender, RoutedEventArgs e)
         {
-            var addRoleWindow = new RoleRelationWindow();
+            var addRoleWindow = new RoleRelationWindow(UserOperationDAL);
             addRoleWindow.ShowDialog();
         }
 

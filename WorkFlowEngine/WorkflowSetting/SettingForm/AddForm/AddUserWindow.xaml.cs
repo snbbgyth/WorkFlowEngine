@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using WorkFlowService.IDAL;
 using WorkflowSetting.Help;
 using WorkFlowService.Model;
 using WorkFlowService.BLL;
@@ -13,14 +14,18 @@ namespace WorkflowSetting.SettingForm.AddForm
     /// </summary>
     public partial class AddUserWindow : Window
     {
-        public AddUserWindow()
+        public AddUserWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
         }
+
+     
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void BtnAddUserGroupClick(object sender, RoutedEventArgs e)
         {
-            var selectUserGroupWindow = new SelectUserGroupWindow();
+            var selectUserGroupWindow = new SelectUserGroupWindow(UserOperationDAL);
             if (selectUserGroupWindow.ShowDialog() == false)
             {
                 SettingHelp.AddEntityRange(LvUserGroupName, selectUserGroupWindow.SelectUserGroupList);
@@ -46,13 +51,13 @@ namespace WorkflowSetting.SettingForm.AddForm
         private void AddReportToUser()
         {
             if (!string.IsNullOrEmpty(ReportToId))
-                UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
+                UserOperationDAL.AddUserReportToUser(Id, ReportToId);
         }
 
         private bool Add()
         {
             var entity = GetEntity();
-            var result = UserOperationBLL.Current.DataOperationInstance.Insert(entity);
+            var result = UserOperationDAL.DataOperationInstance.Insert(entity);
             if (result > 0)
             {
                 Id = entity.Id;
@@ -64,8 +69,8 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void AddRelationList()
         {
-            SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, Id);
-            SettingHelp.AddRelationByCondition<RoleInfoModel>(LvUserRole, UserOperationBLL.Current.AddUserRole, Id);
+            SettingHelp.AddRelationByCondition<UserGroupModel>(LvUserGroupName, UserOperationDAL.AddUserInUserGroup, Id);
+            SettingHelp.AddRelationByCondition<RoleInfoModel>(LvUserRole, UserOperationDAL.AddUserRole, Id);
         }
 
         private string ReportToId { get; set; }
@@ -103,7 +108,7 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void BtnAddUserRoleClick(object sender, RoutedEventArgs e)
         {
-            var selectRoleWindow = new SelectRoleWindow();
+            var selectRoleWindow = new SelectRoleWindow(UserOperationDAL);
             if (selectRoleWindow.ShowDialog() == false)
             {
                 SettingHelp.AddEntityRange(LvUserRole, selectRoleWindow.SelectRoleInfoList);
@@ -117,7 +122,7 @@ namespace WorkflowSetting.SettingForm.AddForm
 
         private void BtnAddReportToUserClick(object sender, RoutedEventArgs e)
         {
-            var selectUserWindow = new SelectUserWindow(1);
+            var selectUserWindow = new SelectUserWindow(1, UserOperationDAL);
             if (selectUserWindow.ShowDialog() == false)
             {
                 var entityList = selectUserWindow.SelectUserInfoList;

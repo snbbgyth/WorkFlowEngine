@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CommonLibrary.Model;
 using WorkFlowService.BLL;
+using WorkFlowService.IDAL;
 using WorkflowSetting.Help;
 
 namespace WorkflowSetting.SettingForm.ViewForm
@@ -21,15 +22,19 @@ namespace WorkflowSetting.SettingForm.ViewForm
     /// </summary>
     public partial class ViewActivityLogWindow : Window
     {
-        public ViewActivityLogWindow()
+        public ViewActivityLogWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitData();
+            
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void InitData()
         {
-            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<WorkFlowActivityLogModel>();
+            var entityList = UserOperationDAL.DataOperationInstance.QueryAll<WorkFlowActivityLogModel>();
             DgActivityList.ItemsSource = entityList;
             DgActivityList.Items.Refresh();
             CbWorkflowName.ItemsSource = entityList.Select(entity => entity.WorkflowName).Distinct();
@@ -41,7 +46,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void BtnQueryClick(object sender, RoutedEventArgs e)
         {
             DgActivityList.ItemsSource =
-                UserOperationBLL.Current.QueryActivityLogByCondition(
+                UserOperationDAL.QueryActivityLogByCondition(
                 new KeyValuePair<string, string>("WorkflowName", CbWorkflowName.SelectedItem == null ? null : CbWorkflowName.SelectedItem.ToString()),
                 new KeyValuePair<string, object>(CbQueryType.SelectedValue==null?null:CbQueryType.SelectedValue.ToString(), TxtQueryValue.Text.Trim()));
             DgActivityList.Items.Refresh();

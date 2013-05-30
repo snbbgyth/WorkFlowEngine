@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WorkFlowService.IDAL;
 
 namespace WorkflowSetting.SettingForm.ViewForm
 {
@@ -23,15 +24,19 @@ namespace WorkflowSetting.SettingForm.ViewForm
     /// </summary>
     public partial class ViewActivityWindow : Window
     {
-        public ViewActivityWindow()
+        public ViewActivityWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitData();
+           
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void InitData()
         {
-            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<WorkFlowActivityModel>();
+            var entityList = UserOperationDAL.DataOperationInstance.QueryAll<WorkFlowActivityModel>();
             DgActivityList.ItemsSource = entityList;
             DgActivityList.Items.Refresh();
             CbWorkflowName.ItemsSource = entityList.Select(entity => entity.WorkflowName).Distinct();
@@ -43,7 +48,7 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void BtnQueryClick(object sender, RoutedEventArgs e)
         {
             DgActivityList.ItemsSource =
-                UserOperationBLL.Current.QueryActivityByCondition(
+                UserOperationDAL.QueryActivityByCondition(
                 new KeyValuePair<string, string>("WorkflowName", CbWorkflowName.SelectedItem == null ? null : CbWorkflowName.SelectedItem.ToString()),
                 new KeyValuePair<string, object>(CbQueryType.SelectedValue==null?null: CbQueryType.SelectedValue.ToString(), TxtQueryValue.Text.Trim()));
             DgActivityList.Items.Refresh();

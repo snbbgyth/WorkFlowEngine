@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using WorkFlowService.IDAL;
 using WorkflowSetting.Help;
 using WorkflowSetting.SettingForm.OperationForm;
 using WorkFlowService.BLL;
@@ -13,15 +14,19 @@ namespace WorkflowSetting.SettingForm.ViewForm
     /// </summary>
     public partial class ViewUserWindow : Window
     {
-        public ViewUserWindow()
+        public ViewUserWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitData();
+            
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void InitData()
         {
-            DgUserList.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserInfoModel>();
+            DgUserList.ItemsSource = UserOperationDAL.DataOperationInstance.QueryAll<UserInfoModel>();
             DgUserList.SelectionChanged += DgUserListSelectionChanged;
             DgUserList.Items.Refresh();
         }
@@ -40,22 +45,22 @@ namespace WorkflowSetting.SettingForm.ViewForm
         private void RowEditClick(object sender, RoutedEventArgs e)
         {
             if (DgUserSelectEntity == null) return;
-            var editUserWindow = new UserRelationWindow(DgUserSelectEntity, OperationAction.Modify);
+            var editUserWindow = new UserRelationWindow(DgUserSelectEntity, OperationAction.Modify, UserOperationDAL);
             editUserWindow.ShowDialog();
         }
 
         private void RowDeleteClick(object sender, RoutedEventArgs e)
         {
             if (DgUserSelectEntity == null) return;
-            UserOperationBLL.Current.DataOperationInstance.Remove<UserInfoModel>(DgUserSelectEntity.Id);
-            UserOperationBLL.Current.DeleteUserAllRoleRelation(DgUserSelectEntity.Id);
-            UserOperationBLL.Current.DeleteUserAllUserGroupRelation(DgUserSelectEntity.Id);
+            UserOperationDAL.DataOperationInstance.Remove<UserInfoModel>(DgUserSelectEntity.Id);
+            UserOperationDAL.DeleteUserAllRoleRelation(DgUserSelectEntity.Id);
+            UserOperationDAL.DeleteUserAllUserGroupRelation(DgUserSelectEntity.Id);
             InitData();
         }
 
         private void RowAddNewClick(object sender, RoutedEventArgs e)
         {
-            var addUserWindow = new AddUserWindow();
+            var addUserWindow = new AddUserWindow(UserOperationDAL);
             addUserWindow.Show();
         }
 

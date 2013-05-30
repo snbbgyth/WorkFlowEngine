@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorkFlowService.BLL;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 
 namespace WorkflowSetting.SettingForm.SelectForm
@@ -20,24 +21,28 @@ namespace WorkflowSetting.SettingForm.SelectForm
     /// </summary>
     public partial class SelectUserWindow : Window
     {
-        public SelectUserWindow()
+        public SelectUserWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitLvData();
+            
         }
 
-        public SelectUserWindow(int selectCount)
-            : this()
+        public SelectUserWindow(int selectCount, IUserOperationDAL userOperationDAL)
+            : this(userOperationDAL)
         {
             SelectCount = selectCount;
         }
 
         private int SelectCount { get; set; }
 
+        private IUserOperationDAL UserOperationDAL { get; set; }
+
         private void InitLvData()
         {
             SelectUserInfoList = new List<UserInfoModel>();
-            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserInfoModel>();
+            var entityList = UserOperationDAL.DataOperationInstance.QueryAll<UserInfoModel>();
             LvUserInfo.Items.Clear();
             LvUserInfo.ItemsSource = entityList;
             LvUserInfo.SelectionChanged += LvUserInfoSelectionChanged;

@@ -17,6 +17,8 @@ namespace WorkflowSetting
     using WorkFlowService.BLL;
     using WorkFlowService.Model;
     using WorkFlowService.Help;
+    using AutofacContainer;
+    using WorkFlowService.IDAL;
     /// <summary>
     /// LoginWindow.xaml 的交互逻辑
     /// </summary>
@@ -25,7 +27,9 @@ namespace WorkflowSetting
         public LoginWindow()
         {
             InitializeComponent();
+            UserOperationDAL = Container.Resolve<IUserOperationDAL>();
             InitData();
+            
         }
 
         private void InitData()
@@ -42,15 +46,17 @@ namespace WorkflowSetting
 
         private string ExistPassword { get; set; }
 
+        private IUserOperationDAL UserOperationDAL { get; set; }
+
         private void BtnOkClick(object sender, RoutedEventArgs e)
         {
             if (!CheckInput()) return;
-            var userId = UserOperationBLL.Current.LoginIn(TxtUserName.Text.Trim(), TxtPassword.Text.Trim());
+            var userId = UserOperationDAL.LoginIn(TxtUserName.Text.Trim(), TxtPassword.Text.Trim());
             if (!string.IsNullOrEmpty(userId))
                 WFUntilHelp.UserId = userId;
             else
                 LblErrorMessage.Content = "User name or password error.";
-            var mainWindow = new MainWindow();
+            var mainWindow = new MainWindow(Container.Resolve<IWorkFlowEngine>(), UserOperationDAL);
             mainWindow.Show();
             Close();
         }

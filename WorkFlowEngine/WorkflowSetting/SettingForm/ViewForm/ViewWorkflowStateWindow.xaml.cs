@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WorkFlowService.BLL;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
 using WorkflowSetting.SettingForm.OperationForm;
@@ -22,15 +23,19 @@ namespace WorkflowSetting.SettingForm.ViewForm
     /// </summary>
     public partial class ViewWorkflowStateWindow : Window
     {
-        public ViewWorkflowStateWindow()
+        public ViewWorkflowStateWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitData();
+            
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void InitData()
         {
-            DgWorkflowState.ItemsSource = UserOperationBLL.Current.DataOperationInstance.QueryAll<WorkflowStateInfoModel>();
+            DgWorkflowState.ItemsSource = UserOperationDAL.DataOperationInstance.QueryAll<WorkflowStateInfoModel>();
             DgWorkflowState.Items.Refresh();
             DgWorkflowState.SelectionChanged += DgWorkflowStateSelectionChanged;
         }

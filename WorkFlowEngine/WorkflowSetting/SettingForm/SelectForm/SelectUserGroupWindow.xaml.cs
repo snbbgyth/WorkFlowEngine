@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using WorkFlowService.BLL;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 
 namespace WorkflowSetting.SettingForm.SelectForm
@@ -11,10 +12,12 @@ namespace WorkflowSetting.SettingForm.SelectForm
     /// </summary>
     public partial class SelectUserGroupWindow : Window
     {
-        public SelectUserGroupWindow()
+        public SelectUserGroupWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitData();
+            
         }
 
         private void InitData()
@@ -23,9 +26,11 @@ namespace WorkflowSetting.SettingForm.SelectForm
             SelectUserGroupList = new List<UserGroupModel>();
         }
 
+        private IUserOperationDAL UserOperationDAL { get; set; }
+
         private void InitLvGroupInfoData()
         {
-            var entityList = UserOperationBLL.Current.DataOperationInstance.QueryAll<UserGroupModel>();
+            var entityList = UserOperationDAL.DataOperationInstance.QueryAll<UserGroupModel>();
             LvGroupInfo.Items.Clear();
             LvGroupInfo.ItemsSource = entityList;
             LvGroupInfo.SelectionChanged+=LvGroupInfoSelectionChanged;

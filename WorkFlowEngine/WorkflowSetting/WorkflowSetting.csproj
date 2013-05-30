@@ -282,6 +282,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutofacContainer\AutofacContainer.csproj">
+      <Project>{d346266d-9822-4466-9289-a9957be6c628}</Project>
+      <Name>AutofacContainer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj">
       <Project>{9e9aa8f6-1040-475e-80fb-4dc61995dff0}</Project>
       <Name>CommonLibrary</Name>

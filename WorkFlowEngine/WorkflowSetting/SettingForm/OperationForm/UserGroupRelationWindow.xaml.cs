@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
 using WorkFlowService.BLL;
@@ -13,35 +14,39 @@ namespace WorkflowSetting.SettingForm.OperationForm
     /// </summary>
     public partial class UserGroupRelationWindow : Window
     {
-        public UserGroupRelationWindow()
+        public UserGroupRelationWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
             InitControl();
+            
         }
 
-        public UserGroupRelationWindow(UserGroupModel entity, OperationAction operationAction)
-            : this()
+        public UserGroupRelationWindow(UserGroupModel entity, OperationAction operationAction, IUserOperationDAL userOperationDAL)
+            : this(userOperationDAL)
         {
             UserAction = operationAction;
             InitData(entity);
             InitControl();
         }
 
-        public UserGroupRelationWindow(string groupId, OperationAction operationAction)
-            : this()
+        public UserGroupRelationWindow(string groupId, OperationAction operationAction,IUserOperationDAL userOperationDAL)
+            : this(userOperationDAL)
         {
             UserAction = operationAction;
-            var entity = UserOperationBLL.Current.DataOperationInstance.QueryByID<UserGroupModel>(groupId);
+            var entity = UserOperationDAL.DataOperationInstance.QueryByID<UserGroupModel>(groupId);
             InitData(entity);
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void InitData(UserGroupModel entity)
         {
             TxtGroupName.Text = entity.GroupName;
             TxtGroupDisplayName.Text = entity.GroupDisplayName;
             ClearItems();
-            ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserGroupId(entity.Id);
-            ExistUserInfoList = UserOperationBLL.Current.QueryAllUserInfoByUserGroupId(entity.Id);
+            ExistRoleInfoList = UserOperationDAL.QueryAllUserRoleByUserGroupId(entity.Id);
+            ExistUserInfoList = UserOperationDAL.QueryAllUserInfoByUserGroupId(entity.Id);
             LvGroupRole.ItemsSource = ExistRoleInfoList.DeepCopy();
             LvUserName.ItemsSource = ExistUserInfoList.DeepCopy();
             Id = entity.Id;
@@ -86,7 +91,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void BtnAddRoleNameClick(object sender, RoutedEventArgs e)
         {
-            var selectRoleWindow = new SelectRoleWindow();
+            var selectRoleWindow = new SelectRoleWindow(UserOperationDAL);
             if (selectRoleWindow.ShowDialog() == false)
             {
                 SettingHelp.AddEntityRange(LvGroupRole, selectRoleWindow.SelectRoleInfoList);
@@ -100,7 +105,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void BtnAddUserClick(object sender, RoutedEventArgs e)
         {
-            var selectUserWindow = new SelectUserWindow();
+            var selectUserWindow = new SelectUserWindow(UserOperationDAL);
             if (selectUserWindow.ShowDialog() == false)
             {
                 SettingHelp.AddEntityRange(LvUserName, selectUserWindow.SelectUserInfoList);
@@ -119,12 +124,12 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void ModifyUserNameList()
         {
-            SettingHelp.MoidfyListByCondition(LvUserName, UserOperationBLL.Current.AddUserInUserGroup, UserOperationBLL.Current.DeleteUserInUserGroup, ExistUserInfoList, null, Id);
+            SettingHelp.MoidfyListByCondition(LvUserName, UserOperationDAL.AddUserInUserGroup, UserOperationDAL.DeleteUserInUserGroup, ExistUserInfoList, null, Id);
         }
 
         private void ModifyGroupRoleList()
         {
-            SettingHelp.MoidfyListByCondition(LvGroupRole, UserOperationBLL.Current.AddUserGroupRole, UserOperationBLL.Current.DeleteUserGroupRole, ExistRoleInfoList, Id);
+            SettingHelp.MoidfyListByCondition(LvGroupRole, UserOperationDAL.AddUserGroupRole, UserOperationDAL.DeleteUserGroupRole, ExistRoleInfoList, Id);
         }
 
         private void BtnAddClick(object sender, RoutedEventArgs e)
@@ -155,7 +160,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         private void ModifyEntity()
         {
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
+            if (UserOperationDAL.DataOperationInstance.Modify(entity) > 0)
             {
                 ModifyRelationList();
                 LblMessage.Content = "Modify successful!";
@@ -167,7 +172,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         private void AddEntity()
         {
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Insert(entity) > 0)
+            if (UserOperationDAL.DataOperationInstance.Insert(entity) > 0)
             {
                 Id = entity.Id;
                 ModifyRelationList();

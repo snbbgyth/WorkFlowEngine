@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using WorkFlowService.BLL;
+using WorkFlowService.IDAL;
 using WorkFlowService.Model;
 using WorkflowSetting.Help;
 using WorkflowSetting.SettingForm.SelectForm;
@@ -15,27 +16,30 @@ namespace WorkflowSetting.SettingForm.OperationForm
     /// </summary>
     public partial class UserRelationWindow : Window
     {
-        public UserRelationWindow()
+        public UserRelationWindow(IUserOperationDAL userOperationDAL)
         {
             InitializeComponent();
+            UserOperationDAL = userOperationDAL;
         }
 
-        public UserRelationWindow(string userId, OperationAction operationAction)
-            : this()
+        public UserRelationWindow(string userId, OperationAction operationAction, IUserOperationDAL userOperationDAL)
+            : this(userOperationDAL)
         {
             UserAction = operationAction;
-            var userInfoEntity = UserOperationBLL.Current.DataOperationInstance.QueryByID<UserInfoModel>(userId);
+            var userInfoEntity = UserOperationDAL.DataOperationInstance.QueryByID<UserInfoModel>(userId);
             InitData(userInfoEntity);
             InitControl();
         }
 
-        public UserRelationWindow(UserInfoModel entity, OperationAction operationAction)
-            : this()
+        public UserRelationWindow(UserInfoModel entity, OperationAction operationAction, IUserOperationDAL userOperationDAL)
+            : this(userOperationDAL)
         {
             UserAction = operationAction;
             InitData(entity);
             InitControl();
         }
+
+        private IUserOperationDAL UserOperationDAL { get; set; }
 
         private void InitControl()
         {
@@ -86,11 +90,11 @@ namespace WorkflowSetting.SettingForm.OperationForm
             TxtUserName.Text = entity.UserName;
             TxtUserDisplayName.Text = entity.UserDisplayName;
             ClearDataBinding();
-            ExistUserGroupList = UserOperationBLL.Current.QueryAllUserGroupByUserId(entity.Id);
+            ExistUserGroupList = UserOperationDAL.QueryAllUserGroupByUserId(entity.Id);
             LvUserGroupName.ItemsSource = ExistUserGroupList.DeepCopy();
-            ExistRoleInfoList = UserOperationBLL.Current.QueryAllUserRoleByUserId(entity.Id);
+            ExistRoleInfoList = UserOperationDAL.QueryAllUserRoleByUserId(entity.Id);
             LvUserRole.ItemsSource = ExistRoleInfoList.DeepCopy();
-            var reportToUserEntity = UserOperationBLL.Current.QueryReportUserInfoByUserId(entity.Id);
+            var reportToUserEntity = UserOperationDAL.QueryReportUserInfoByUserId(entity.Id);
             if (reportToUserEntity != null)
             {
                 TxtReportUserName.Text = reportToUserEntity.UserDisplayName;
@@ -130,17 +134,17 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void ModifyUserGroupList()
         {
-            SettingHelp.MoidfyListByCondition(LvUserGroupName, UserOperationBLL.Current.AddUserInUserGroup, UserOperationBLL.Current.DeleteUserInUserGroup, ExistUserGroupList, Id);
+            SettingHelp.MoidfyListByCondition(LvUserGroupName, UserOperationDAL.AddUserInUserGroup, UserOperationDAL.DeleteUserInUserGroup, ExistUserGroupList, Id);
         }
 
         private void ModifyUserRoleList()
         {
-            SettingHelp.MoidfyListByCondition(LvUserRole, UserOperationBLL.Current.AddUserRole, UserOperationBLL.Current.DeleteUserRole, ExistRoleInfoList, Id);
+            SettingHelp.MoidfyListByCondition(LvUserRole, UserOperationDAL.AddUserRole, UserOperationDAL.DeleteUserRole, ExistRoleInfoList, Id);
         }
 
         private void BtnAddUserGroupClick(object sender, RoutedEventArgs e)
         {
-            var selectUserGroupWindow = new SelectUserGroupWindow();
+            var selectUserGroupWindow = new SelectUserGroupWindow(UserOperationDAL);
             if (selectUserGroupWindow.ShowDialog() == false)
             {
                 SettingHelp.AddEntityRange(LvUserGroupName, selectUserGroupWindow.SelectUserGroupList);
@@ -149,7 +153,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void BtnAddRoleClick(object sender, RoutedEventArgs e)
         {
-            var selectRoleWindow = new SelectRoleWindow();
+            var selectRoleWindow = new SelectRoleWindow(UserOperationDAL);
             if (selectRoleWindow.ShowDialog() == false)
             {
                 SettingHelp.AddEntityRange(LvUserRole, selectRoleWindow.SelectRoleInfoList);
@@ -187,7 +191,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
         {
             if (!CheckPassword()) return false;
             var entity = GetEntity();
-            if (UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0)
+            if (UserOperationDAL.DataOperationInstance.Modify(entity) > 0)
             {
                 ModifyReportToUser();
                 LblMessage.Content = "Modify successful!";
@@ -202,11 +206,11 @@ namespace WorkflowSetting.SettingForm.OperationForm
             if (string.IsNullOrEmpty(ReportToId)) return true;
             if (string.IsNullOrEmpty(ReportRelationId))
             {
-                return UserOperationBLL.Current.AddUserReportToUser(Id, ReportToId);
+                return UserOperationDAL.AddUserReportToUser(Id, ReportToId);
             }
-            var entity = UserOperationBLL.Current.QueryReportRelationByCondition(Id, ReportRelationId);
+            var entity = UserOperationDAL.QueryReportRelationByCondition(Id, ReportRelationId);
             entity.ParentNodeID = ReportToId;
-            return UserOperationBLL.Current.DataOperationInstance.Modify(entity) > 0;
+            return UserOperationDAL.DataOperationInstance.Modify(entity) > 0;
 
         }
 
@@ -253,7 +257,7 @@ namespace WorkflowSetting.SettingForm.OperationForm
 
         private void BtnAddReportUser(object sender, RoutedEventArgs e)
         {
-            var selectUserWindow = new SelectUserWindow(1);
+            var selectUserWindow = new SelectUserWindow(1, UserOperationDAL);
             if (selectUserWindow.ShowDialog() == false)
             {
                 var entityList = selectUserWindow.SelectUserInfoList;
